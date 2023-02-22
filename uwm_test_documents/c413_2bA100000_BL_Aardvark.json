@@ -1,0 +1,46 @@
+{
+  "dct_title_s": "Survey of Israel 1:100,000 1999",
+  "dct_description_sm": [
+    "This polygon data layer represents an Index Map for the Survey of Israel 1:100,000 1999 series of maps held by the American Geographical Society Library. "
+  ],
+  "dct_language_sm": [
+    "eng"
+  ],
+  "dct_creator_sm": [
+    "American Geographical Society Library - UWM Libraries (GIS Staff, University of Wisconsin-Milwaukee)"
+  ],
+  "schema_provider_s": "American Geographical Society Library - UWM Libraries",
+  "gbl_resourceClass_sm": [
+    "Datasets"
+  ],
+  "gbl_resourceType_sm": [
+    "Polygon data"
+  ],
+  "dcat_theme_sm": [
+    "Boundaries",
+    "Elevation",
+    "Military",
+    "Property"
+  ],
+  "dct_temporal_sm": [
+    "1999"
+  ],
+  "dct_issued_s": "1999",
+  "gbl_indexYear_im": [
+    1999
+  ],
+  "dct_spatial_sm": [
+    "Israel"
+  ],
+  "locn_geometry": "ENVELOPE(35.96167, 34.05167, 33.38334, 29.32583)",
+  "dcat_bbox": "ENVELOPE(34.05167, 35.96167, 33.38334, 29.32583)",
+  "dct_rights_sm": [],
+  "dct_accessRights_s": "Public",
+  "dct_format_s": "GeoJSON",
+  "gbl_wxsIdentifier_s": "druid:624AFBF2-D54D-4DDB-A23E-F3F9FE9CD60D",
+  "dct_references_s": "{\"https://openindexmaps.org\": \"https://raw.githubusercontent.com/OpenIndexMaps/edu.uwm/main/413_2bA100000.geojson\"}",
+  "id": "624AFBF2-D54D-4DDB-A23E-F3F9FE9CD60D",
+  "gbl_mdModified_dt": "2023-02-14T20:08:00.0152167Z",
+  "gbl_mdVersion_s": "Aardvark",
+  "gbl_suppressed_b": false
+}
