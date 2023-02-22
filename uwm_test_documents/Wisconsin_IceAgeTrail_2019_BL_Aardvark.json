@@ -1,0 +1,45 @@
+{
+  "dct_title_s": "Ice Age Trail Wisconsin 2019",
+  "dct_description_sm": [
+    "This line data layer represents the Ice Age Trail for Wisconsin in 2019. The dataset was originally published by the Ice Age Trail Alliance on May 14, 2012 and later updated on September 25, 2019.[This vector line dataset represents the Ice Age National Scenic Trail and select other trails in the vicinity of the Ice Age Trail in Wisconsin.]"
+  ],
+  "dct_language_sm": [
+    "eng"
+  ],
+  "dct_creator_sm": [
+    "Ice Age Trail Alliance"
+  ],
+  "gbl_resourceClass_sm": [
+    "Datasets"
+  ],
+  "gbl_resourceType_sm": [
+    "Line data"
+  ],
+  "dcat_theme_sm": [
+    "Society"
+  ],
+  "dct_temporal_sm": [
+    "2019-09-25"
+  ],
+  "dct_issued_s": "2012",
+  "gbl_indexYear_im": [
+    2019
+  ],
+  "dct_spatial_sm": [
+    "Wisconsin"
+  ],
+  "locn_geometry": "ENVELOPE(-87.340745, -92.662235, 45.699848, 42.643999)",
+  "dcat_bbox": "ENVELOPE(-92.662235, -87.340745, 45.699848, 42.643999)",
+  "dct_rights_sm": [
+    "<a href=\"https://uwm.edu/libraries/digital-collections/copyright-digcoll/\">Please see the UWM Libraries statement on Copyright and Digital Collections</a>.[The Ice Age Trail Alliance (IATA) and National Park Service (NPS) shall not be held liable for improper or incorrect use of the data described and/or contained herein. These data and related graphics, if available, are not legal documents and are not intended to be used as such. These data are not of survey quality and not intended to be used for survey purposes. The information contained in these data is dynamic and may change over time. The data are not better than the original sources from which they were derived. It is the responsibility of the data user to use the data appropriately and consistent within the limitations of geospatial data in general and these data in particular. The related graphics are intended to aid the data user in acquiring relevant data; it is not appropriate to use the related graphics as data. The IATA and NPS give no warranty, expressed or implied, as to the accuracy, reliability, or completeness of these data. It is strongly recommended that these data be directly acquired from an IATA or NPS source and not indirectly through other sources, which may have changed the data in some way. Although these data have been processed successfully on a computer system at the IATA, no warranty expressed or implied is made regarding the utility of the data on another system or for general or scientific purposes, nor shall the act of distribution constitute any such warranty. This disclaimer applies both to individual use of the data and aggregate use with other data.]",
+    "Although this data is being distributed by the American Geographical Society Library at the University of Wisconsin-Milwaukee Libraries, no warranty expressed or implied is made by the University as to the accuracy of the data and related materials. The act of distribution shall not constitute any such warranty, and no responsibility is assumed by the University in the use of this data, or related materials.<br/><br/>[Data should not be used beyond 1:24,000-scale.  Acknowledgement of the Ice Age Trail Alliance when using the data set as a source.]"
+  ],
+  "dct_accessRights_s": "Public",
+  "dct_format_s": "Shapefile",
+  "gbl_wxsIdentifier_s": "druid:10172E23-72C2-4F45-AC7F-38E564C4E0F1",
+  "dct_references_s": "{\"http://schema.org/url\":\"http://purl.uwm.edu/10172E23-72C2-4F45-AC7F-38E564C4E0F1\",\"http://schema.org/downloadUrl\":\"http://stacks.uwm.edu/file/druid:10172E23-72C2-4F45-AC7F-38E564C4E0F1/data.zip\"}",
+  "id": "10172E23-72C2-4F45-AC7F-38E564C4E0F1",
+  "gbl_mdModified_dt": "2023-01-26T21:41:53.8461956Z",
+  "gbl_mdVersion_s": "Aardvark",
+  "gbl_suppressed_b": false
+}
