@@ -17,15 +17,14 @@ from enum import Enum
 RIGHTS = ['public', 'restricted-uw-system', 'restricted-uwm']
 
 APPLICATION_URL = 'https://geodiscovery.uwm.edu/'
-APPLICATION_URL_DEV = 'https://geodiscovery-dev.uwm.edu/'
 FILE_SERVER_URL = 'https://geodata.uwm.edu/'
-#NOID_URL_DEV = 'https://digilib-dev.uwm.edu/noidu_gmgs?'
-#NOID_URL = NOID_URL_DEV
-NOID_URL = 'https://digilib-admin.uwm.edu/noidu_gmgs?'
-#FILE_SERVER_PATH_DEV = Path(r"C:\Users\srappel\Desktop\DEV_geoblacklight")
-#FILE_SERVER_PATH = FILE_SERVER_PATH_DEV
-FILE_SERVER_PATH = Path(r"S:\GeoBlacklight\web")
-
+REDIRECT_URL = 'https://digilib.uwm.edu'
+NOID_URL_DEV = 'https://digilib-dev.uwm.edu/noidu_gmgs?'
+NOID_URL = NOID_URL_DEV
+#NOID_URL = 'https://digilib-admin.uwm.edu/noidu_gmgs?'
+FILE_SERVER_PATH_DEV = Path(r"C:\Users\srappel\Desktop\DEV_geoblacklight")
+FILE_SERVER_PATH = FILE_SERVER_PATH_DEV
+#FILE_SERVER_PATH = Path(r"S:\GeoBlacklight\web")
 
 ARK_REGEX = r"(\d{5})\/(\w{11})"
 
@@ -230,7 +229,7 @@ class AGSLMetadata:
         self.identifier: Identifier = new_identifier
 
         # Generate the text strings
-        ark_URI: str = APPLICATION_URL + 'ark:-' + self.identifier.arkid.replace('/','-')
+        ark_URI: str = REDIRECT_URL + '/ark:/' + self.identifier.arkid
         download_URI: str = f'{FILE_SERVER_URL}{self.rights}/{self.identifier.assignedName}/{self.altTitle}.zip'
         
         def check_if_existing_identifier(root, find_string) -> bool:
@@ -341,6 +340,8 @@ class AGSLMetadata:
             
             metadata_URL = f"{FILE_SERVER_URL}metadata/{self.identifier.assignedName}_ISO.xml"
 
+            application_URL = f"{APPLICATION_URL}catalog/ark:-{self.identifier.arkid.replace('/','-')}"
+
             try:
                 tmBegin = root_Element.find('.//tmBegin').text
                 tmEnd = root_Element.find('.//tmEnd').text
@@ -354,7 +355,7 @@ class AGSLMetadata:
                 "who": f'{metadata.md_object.credits}',
                 "what": f'{metadata.md_object.title}',
                 "when": f'{date_when}',
-                "where": f'{ark_URI}',
+                "where": f'{application_URL}',
                 "meta-who": "University of Wisconsin-Milwaukee Libraries",
                 "meta-when": f'{time_now}',
                 "meta-uri": f'{metadata_URL}',
@@ -423,7 +424,7 @@ def main() -> None:
     """Main function."""
 
     # Test creating the Dataset and AGSL Metadata objects:
-    dataset = Dataset(r"C:\Users\srappel\Desktop\Test Fixture Data\DoorCounty_Lighthouses_2010_UW")
+    dataset = Dataset(r"S:\GeoBlacklight\project-files\Test_Fixture\MilwaukeeCounty_Cadastral_2020")
     print(f"The class of dataset is {dataset.__class__}")
     print(f'\nThe dataset path is: {dataset.path}')
     print(f"The dataset within the path is: {dataset.data}\n")
@@ -452,7 +453,7 @@ def main() -> None:
     print("\n")
     
     # Test the binder:
-    print(f"The ancitipated NOID URL is: https://digilib-dev.uwm.edu/noidu_gmgs?get+{dataset_metadata.identifier.arkid}" + "\n")
+    print(f"The ancitipated NOID URL is: {NOID_URL}get+{dataset_metadata.identifier.arkid}" + "\n")
     
     print("The bind request sent to NOID:")
     r = AGSLMetadata.bind(dataset_metadata, "restricted-uw-system")
