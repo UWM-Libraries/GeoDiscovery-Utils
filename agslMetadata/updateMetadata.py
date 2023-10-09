@@ -14,8 +14,6 @@ from datetime import datetime
 from pathlib import Path
 from enum import Enum
 
-RIGHTS = ['public', 'restricted-uw-system', 'restricted-uwm']
-
 APPLICATION_URL = 'https://geodiscovery.uwm.edu/'
 FILE_SERVER_URL = 'https://geodata.uwm.edu/'
 REDIRECT_URL = 'https://digilib.uwm.edu'
@@ -198,6 +196,7 @@ class AGSLMetadata:
         self.rootElement: ET.Element = dataset_metadata_tuple[2]
         self.altTitle: str = self.get_alt_title()
         self.rights: str = self.rights_test()
+        self.identifier: Identifier = None
             
     def save(self):
         self.md_object.xml = ET.tostring(self.rootElement)
@@ -221,8 +220,56 @@ class AGSLMetadata:
         else:
             return "public"
 
-    def create_and_write_identifiers(self) -> None:
+    def get_existing_identifier(self):
         
+        rootElement = self.rootElement
+
+        def check_bind(check_id):
+            get_request = requests.get(NOID_URL + f"+get+{check_id}")
+
+            if get_request.status_code != 200:
+                raise Exception("No response from the Noid admin.")
+                return
+
+            if "no elements bound under" in get_request.text:
+                return False
+            elif get_request.text == "":
+                return False
+            else:
+                return True
+
+        if not self.identifier is None:
+            # There's already an Identifier object.
+            arkid = self.identifier.arkid
+            if check_bind(arkid) == True:
+                return self.identifier
+            else:
+                raise Exception("There is an Identifier Object but it is not bound!")
+
+        elif len(rootElement.findall(SEARCH_STRING_DICT["metadataFileID"])) > 0:
+            # There isn't an identifer object, but there might be a mdFileID
+            regex = re.compile(ARK_REGEX)
+            regex_result = regex.search(rootElement.find(SEARCH_STRING_DICT["metadataFileID"]).text)
+            if not regex_result is None:
+                existing_identifier = Identifier()
+                existing_identifier.arkid = regex_result[0]
+                existing_identifier.nameAuthorityNumber = regex_result[1]
+                existing_identifier.assignedName = regex_result[2]
+
+                if check_bind(existing_identifier.arkid) == True:
+                    print("There is an existing identifier and it IS bound.")
+                else:
+                    print("There is an existing identifier and it IS NOT bound!")
+
+                return existing_identifier
+            else:
+                raise Exception(f"There is a metadata file ID, but it did not match the regex: {ARK_REGEX}")
+                return
+        else:
+            raise Exception(f"There is no existing Identifier object or a Metadata File ID.")
+            return
+  
+    def create_and_write_identifiers(self) -> None:
         # mint a new arkid:
         new_identifier = Identifier()
         new_identifier.mint()
@@ -393,6 +440,10 @@ class AGSLMetadata:
   
 class Identifier:
 
+    arkid: str
+    nameAuthorityNumber: str
+    assignedName: str
+    
     def mint(self) -> requests.models.Response:
 
         minter = NOID_URL + 'mint+1'
@@ -423,20 +474,25 @@ class Identifier:
 def main() -> None:
     """Main function."""
 
-    # Test creating the Dataset and AGSL Metadata objects:
-    dataset = Dataset(r"S:\GeoBlacklight\project-files\Test_Fixture\MilwaukeeCounty_Cadastral_2020")
+    # Test creating the Dataset object:
+    dataset = Dataset(r"S:\GeoBlacklight\project-files\Test_Fixture\MilwaukeeCounty_MCTSStops_2018")
     print(f"The class of dataset is {dataset.__class__}")
     print(f'\nThe dataset path is: {dataset.path}')
     print(f"The dataset within the path is: {dataset.data}\n")
 
+    # Test creating the Metadata object:
     dataset_metadata = dataset.metadata
     print(f"The class of dataset_metadata is {dataset_metadata.__class__}")
     print(f"The dataset's alt title is {dataset_metadata.altTitle}")
     print(f"The rights string for the dataset is: {dataset.metadata.rights}\n")
 
-    # Test writing the identifiers:
+    # Test fetching existing identifiers:
+    existing_identifier = dataset_metadata.get_existing_identifier()
+    print(f"The class of existing_identifier is {existing_identifier.__class__}")
+    print(f"The existing identifier's Arkid is {existing_identifier.arkid}")
+    
+    # Test creating and writing the identifiers:
     dataset_metadata.create_and_write_identifiers()
-
     print(f"The Metadata File ID is: {ET.fromstring(dataset_metadata.xml_text).find(SEARCH_STRING_DICT['metadataFileID']).text}")
     print(f"The Citation ID is: {ET.fromstring(dataset_metadata.xml_text).find(SEARCH_STRING_DICT['identCode']).text}")
     print(f"The Dataset URI is: {ET.fromstring(dataset_metadata.xml_text).find(SEARCH_STRING_DICT['datasetURI']).text}\n")
