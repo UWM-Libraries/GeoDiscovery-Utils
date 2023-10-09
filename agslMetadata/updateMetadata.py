@@ -244,10 +244,10 @@ class AGSLMetadata:
             if check_bind(arkid) == True:
                 return self.identifier
             else:
-                raise Exception("There is an Identifier Object but it is not bound!")
-
+                raise Exception("There is an Identifier object but it is not bound!")
+                return
         elif len(rootElement.findall(SEARCH_STRING_DICT["metadataFileID"])) > 0:
-            # There isn't an identifer object, but there might be a mdFileID
+            # There isn't an Identifer object, but there might be a mdFileID
             regex = re.compile(ARK_REGEX)
             regex_result = regex.search(rootElement.find(SEARCH_STRING_DICT["metadataFileID"]).text)
             if not regex_result is None:
@@ -258,9 +258,13 @@ class AGSLMetadata:
 
                 if check_bind(existing_identifier.arkid) == True:
                     print("There is an existing identifier and it IS bound.")
+                    # In this case, we just want to fetcht he existing identifier and call it a day!
+                    self.identifier = existing_identifier
                 else:
                     print("There is an existing identifier and it IS NOT bound!")
-
+                    # In this case, we we want to toss the existing identifier and mint a new one!
+                    
+                
                 return existing_identifier
             else:
                 raise Exception(f"There is a metadata file ID, but it did not match the regex: {ARK_REGEX}")
@@ -269,11 +273,13 @@ class AGSLMetadata:
             raise Exception(f"There is no existing Identifier object or a Metadata File ID.")
             return
   
-    def create_and_write_identifiers(self) -> None:
-        # mint a new arkid:
-        new_identifier = Identifier()
-        new_identifier.mint()
-        self.identifier: Identifier = new_identifier
+    def write_identifiers(self, identifer) -> None:
+        # Check to make sure identifier is an instance of Identifier:
+        if not isinstance(identifer, Identifier):
+            raise Exception("identifier passed to write_identifiers() is not an instance of Identifier.")
+            return
+
+        self.identifier: Identifier = identifer
 
         # Generate the text strings
         ark_URI: str = REDIRECT_URL + '/ark:/' + self.identifier.arkid
