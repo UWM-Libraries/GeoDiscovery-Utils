@@ -1,3 +1,3 @@
-# GeoDiscovery Utilities
+# agslMetadata
 
-This repository contains middleware applications and scripts developed for the AGSL GeoDiscovery portal (currently in development).
+A package for working with AGSL Geospatial Metadata.
