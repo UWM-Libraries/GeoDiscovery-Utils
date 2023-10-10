@@ -6,6 +6,7 @@ import arcpy
 import requests
 import re
 import zipfile
+import os
 
 import xml.etree.ElementTree as ET
 
@@ -14,15 +15,19 @@ from datetime import datetime
 from pathlib import Path
 from enum import Enum
 
-APPLICATION_URL = 'https://geodiscovery.uwm.edu/'
-FILE_SERVER_URL = 'https://geodata.uwm.edu/'
-REDIRECT_URL = 'https://digilib.uwm.edu'
-NOID_URL_DEV = 'https://digilib-dev.uwm.edu/noidu_gmgs?'
-NOID_URL = NOID_URL_DEV
-#NOID_URL = 'https://digilib-admin.uwm.edu/noidu_gmgs?'
-FILE_SERVER_PATH_DEV = Path(r"C:\Users\srappel\Desktop\DEV_geoblacklight")
-FILE_SERVER_PATH = FILE_SERVER_PATH_DEV
-#FILE_SERVER_PATH = Path(r"S:\GeoBlacklight\web")
+from dotenv import load_dotenv
+load_dotenv('')
+
+APPLICATION_URL = os.getenv("APPLICATION_URL")
+FILE_SERVER_URL = os.getenv("FILE_SERVER_URL")
+REDIRECT_URL = os.getenv("REDIRECT_URL")
+NOID_URL = os.getenv("NOID_URL")
+FILE_SERVER_PATH = os.getenv("FILE_SERVER_PATH")
+print(f"Application URL: {APPLICATION_URL}")
+print(f"File Server URL: {FILE_SERVER_URL}")
+print(f"Redirect URL: {REDIRECT_URL}")
+print(f"NOID URL: {NOID_URL}")
+print(f"File Server Path: {FILE_SERVER_PATH}")
 
 ARK_REGEX = r"(\d{5})\/(\w{11})"
 
@@ -152,7 +157,8 @@ class Dataset:
             print(f"{spacer}+ {path.name}")
         
     def ingest(self):
-        fileserver_dir = FILE_SERVER_PATH / self.metadata.rights / self.metadata.identifier.assignedName
+        file_server_path = Path(FILE_SERVER_PATH)
+        fileserver_dir = file_server_path / self.metadata.rights / self.metadata.identifier.assignedName
         fileserver_dir.mkdir()
         self.fileserver_dir = fileserver_dir       
         zipPath = fileserver_dir / f"{self.metadata.altTitle}.zip"
@@ -225,6 +231,7 @@ class AGSLMetadata:
         rootElement = self.rootElement
 
         def check_bind(check_id):
+            print(NOID_URL)
             get_request = requests.get(NOID_URL + f"+get+{check_id}")
 
             if get_request.status_code != 200:
