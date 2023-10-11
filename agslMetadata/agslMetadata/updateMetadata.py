@@ -16,18 +16,13 @@ from pathlib import Path
 from enum import Enum
 
 from dotenv import load_dotenv
-load_dotenv('')
+load_dotenv()
 
 APPLICATION_URL = os.getenv("APPLICATION_URL")
 FILE_SERVER_URL = os.getenv("FILE_SERVER_URL")
 REDIRECT_URL = os.getenv("REDIRECT_URL")
 NOID_URL = os.getenv("NOID_URL")
 FILE_SERVER_PATH = os.getenv("FILE_SERVER_PATH")
-print(f"Application URL: {APPLICATION_URL}")
-print(f"File Server URL: {FILE_SERVER_URL}")
-print(f"Redirect URL: {REDIRECT_URL}")
-print(f"NOID URL: {NOID_URL}")
-print(f"File Server Path: {FILE_SERVER_PATH}")
 
 ARK_REGEX = r"(\d{5})\/(\w{11})"
 
@@ -185,8 +180,9 @@ class Dataset:
             ISO_Metadata_text = ISO_Metadata.read_text()
         else:
             raise Exception("ISO Metadata does not exist!")
-        
-        Fileserver_ISO_Metadata = FILE_SERVER_PATH / "metadata" / f"{self.metadata.identifier.assignedName}_ISO.xml"
+            
+        file_server_path = Path(FILE_SERVER_PATH)
+        Fileserver_ISO_Metadata = file_server_path / "metadata" / f"{self.metadata.identifier.assignedName}_ISO.xml"
         Fileserver_ISO_Metadata.touch()
         Fileserver_ISO_Metadata.write_text(ISO_Metadata_text)
         self.fileserver_metadata = Fileserver_ISO_Metadata
@@ -487,6 +483,12 @@ class Identifier:
 def main() -> None:
     """Main function."""
 
+    print(f"Application URL: {APPLICATION_URL}")
+    print(f"File Server URL: {FILE_SERVER_URL}")
+    print(f"Redirect URL: {REDIRECT_URL}")
+    print(f"NOID URL: {NOID_URL}")
+    print(f"File Server Path: {FILE_SERVER_PATH}")
+
     # Test creating the Dataset object:
     dataset = Dataset(r"S:\GeoBlacklight\project-files\Test_Fixture\MilwaukeeCounty_MCTSStops_2018")
     print(f"The class of dataset is {dataset.__class__}")
@@ -505,7 +507,7 @@ def main() -> None:
     print(f"The existing identifier's Arkid is {existing_identifier.arkid}")
     
     # Test creating and writing the identifiers:
-    dataset_metadata.create_and_write_identifiers()
+    dataset_metadata.write_identifiers(existing_identifier)
     print(f"The Metadata File ID is: {ET.fromstring(dataset_metadata.xml_text).find(SEARCH_STRING_DICT['metadataFileID']).text}")
     print(f"The Citation ID is: {ET.fromstring(dataset_metadata.xml_text).find(SEARCH_STRING_DICT['identCode']).text}")
     print(f"The Dataset URI is: {ET.fromstring(dataset_metadata.xml_text).find(SEARCH_STRING_DICT['datasetURI']).text}\n")
