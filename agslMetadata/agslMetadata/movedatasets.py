@@ -1,3 +1,7 @@
+"""
+Move datasets according to a csv of dataset directory paths
+"""
+
 from pathlib import Path
 import csv
 

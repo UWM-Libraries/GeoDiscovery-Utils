@@ -18,6 +18,7 @@ from enum import Enum
 from dotenv import load_dotenv
 load_dotenv()
 
+# .env settings
 APPLICATION_URL = os.getenv("APPLICATION_URL")
 FILE_SERVER_URL = os.getenv("FILE_SERVER_URL")
 REDIRECT_URL = os.getenv("REDIRECT_URL")

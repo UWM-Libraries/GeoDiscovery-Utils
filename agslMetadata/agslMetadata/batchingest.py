@@ -1,9 +1,14 @@
-import updateMetadata
+import updatemetadata
 import csv
+import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+load_dotenv()
+
 warnings = []
-CSV_OUTPUT = Path(r"C:\Users\srappel\Desktop\GeoDiscovery_Log.csv")
+
+CSV_OUTPUT = Path(os.getenv("LOG_PATH"))
 
 # Take as an argument a directory containing a bunch of datasets (in dirs)
 target_directory = Path(r"S:\_R_GML_Archival_AGSL\GIS_Data\GeoBlacklight\public")

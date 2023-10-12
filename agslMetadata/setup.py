@@ -1,9 +1,9 @@
 from setuptools import setup, find_packages 
 
-setup(name='agslMetadata', 
+setup(name='geometadataedit', 
       version='1.0', 
 
-description='agslMetadata', 
+description='geometadataedit', 
       author='Stephen Appel', 
       author_email='srappel@uwm.edu', 
       license='Apache2.0', 
