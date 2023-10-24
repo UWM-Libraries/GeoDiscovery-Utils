@@ -199,7 +199,7 @@ class AGSLMetadata:
         self.rootElement: ET.Element = dataset_metadata_tuple[2]
         self.altTitle: str = self.get_alt_title()
         self.rights: str = self.rights_test()
-        self.identifier: Identifier = None
+        self.identifier: Identifier = Identifier()
             
     def save(self):
         self.md_object.xml = ET.tostring(self.rootElement)
@@ -213,6 +213,8 @@ class AGSLMetadata:
         altTitle_Element = rootElement.find(SEARCH_STRING_DICT["altTitle"])
         if not altTitle_Element is None:
             return altTitle_Element.text
+        else:
+            raise Exception("Failed to get alt title element text.")
         
     def rights_test(self) -> str:
         rights_list = self.rootElement.findall(SEARCH_STRING_DICT["rights"]) # Returns a list
@@ -223,7 +225,7 @@ class AGSLMetadata:
         else:
             return "public"
 
-    def get_existing_identifier(self):
+    def get_existing_identifier_or_mint(self): # Returns self.identifier
         
         rootElement = self.rootElement
 
@@ -242,30 +244,24 @@ class AGSLMetadata:
             else:
                 return True
 
-        if not self.identifier is None:
-            # There's already an Identifier object.
-            arkid = self.identifier.arkid
-            if check_bind(arkid) == True:
-                return self.identifier
-            else:
-                raise Exception("There is an Identifier object but it is not bound!")
-                return
-        elif len(rootElement.findall(SEARCH_STRING_DICT["metadataFileID"])) > 0:
-            # There isn't an Identifer object, but there might be a mdFileID
+        if len(rootElement.findall(SEARCH_STRING_DICT["metadataFileID"])) > 0:
             regex = re.compile(ARK_REGEX)
             regex_result = regex.search(rootElement.find(SEARCH_STRING_DICT["metadataFileID"]).text)
-            if not regex_result is None:
+
+            if not regex_result is None: # The regex DID find an arkid
                 existing_identifier = Identifier()
                 existing_identifier.arkid = regex_result[0]
-                existing_identifier.nameAuthorityNumber = regex_result[1]
-                existing_identifier.assignedName = regex_result[2]
 
-                if check_bind(existing_identifier.arkid) == True:
-                    print("There is an existing identifier and it IS bound.")
-                    # In this case, we just want to fetcht he existing identifier and call it a day!
+                if check_bind(existing_identifier.arkid) == True: # The arkid is bound
+                    # These only need to be set if we're using an already-bound arkid
+                    existing_identifier.nameAuthorityNumber = regex_result[1]
+                    existing_identifier.assignedName = regex_result[2]
+
                     self.identifier = existing_identifier
                 else:
                     print("There is an existing identifier and it IS NOT bound!")
+                    new_identifier = Identifier.mint()
+                    
                     # In this case, we we want to toss the existing identifier and mint a new one!
                     
                 
@@ -288,7 +284,7 @@ class AGSLMetadata:
         # Generate the text strings
         ark_URI: str = REDIRECT_URL + '/ark:/' + self.identifier.arkid
         download_URI: str = f'{FILE_SERVER_URL}{self.rights}/{self.identifier.assignedName}/{self.altTitle}.zip'
-        
+
         def check_if_existing_identifier(root, find_string) -> bool:
             if len(root.findall(find_string)) > 0:
                 return True
@@ -389,10 +385,6 @@ class AGSLMetadata:
         def create_bind_params(metadata) -> dict:
             root_Element = ET.fromstring(metadata.xml_text)
 
-            mdfileid = root_Element.find(SEARCH_STRING_DICT["metadataFileID"]).text
-
-            ark_URI = root_Element.find(SEARCH_STRING_DICT["identCode"]).text
-            
             download_URI = root_Element.find(SEARCH_STRING_DICT["datasetURI"]).text
             
             metadata_URL = f"{FILE_SERVER_URL}metadata/{self.identifier.assignedName}_ISO.xml"
