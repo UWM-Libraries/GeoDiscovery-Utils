@@ -244,7 +244,12 @@ class AGSLMetadata:
             else:
                 return True
 
-        if len(rootElement.findall(SEARCH_STRING_DICT["metadataFileID"])) > 0:
+        def new_identifier(): # Returns a new Identifier object that has been minted
+            new_identifier = Identifier()
+            new_identifier.mint() # This returns a response code, but we don't need it here.
+            return new_identifier
+            
+        if len(rootElement.findall(SEARCH_STRING_DICT["metadataFileID"])) > 0: # There is a MDFILEID
             regex = re.compile(ARK_REGEX)
             regex_result = regex.search(rootElement.find(SEARCH_STRING_DICT["metadataFileID"]).text)
 
@@ -258,20 +263,14 @@ class AGSLMetadata:
                     existing_identifier.assignedName = regex_result[2]
 
                     self.identifier = existing_identifier
-                else:
-                    print("There is an existing identifier and it IS NOT bound!")
-                    new_identifier = Identifier.mint()
-                    
-                    # In this case, we we want to toss the existing identifier and mint a new one!
-                    
-                
-                return existing_identifier
-            else:
-                raise Exception(f"There is a metadata file ID, but it did not match the regex: {ARK_REGEX}")
-                return
-        else:
-            raise Exception(f"There is no existing Identifier object or a Metadata File ID.")
-            return
+                else: # the arkid is not bound
+                    self.identifier = new_identifier()
+            else: # the identifier is not an arkid
+                self.identifier = new_identifier()
+        else: # There is not an MDFILEID
+           self.identifier = new_identifier()
+
+        return self.identifier
   
     def write_identifiers(self, identifer) -> None:
         # Check to make sure identifier is an instance of Identifier:
@@ -457,7 +456,7 @@ class Identifier:
             return
 
         if mint_request.status_code != 200:
-            print(f"mint request status code = {mint_request.status_code}")
+            raise Exception(f"mint request status code = {mint_request.status_code}")
             return mint_request
         else:
             regex = re.compile(ARK_REGEX)
