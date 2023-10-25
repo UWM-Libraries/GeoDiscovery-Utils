@@ -54,7 +54,7 @@ class Dataset:
         if self.datatype == 0:
             raise Exception("Not able to fetch the data from the directory provided")
             return
-        elif self.datatype == 4:
+        elif self.datatype == 5:
             raise Exception("There are multiple data types in the directory provided")
             return
         
@@ -68,34 +68,46 @@ class Dataset:
                 - 1: Shapefile
                 - 2: FileGeodatabase
                 - 3: ArcGRID Raster
-                - 4: Other/Mutliple
+                - 4: TIFF
+                - 5: Other/Mutliple
             '''    
             rootdir = Path(rootdir)
 
             gdb_count = 0
             shp_count = 0
             raster_count = 0
+            tiff_count = 0
 
             for path in Path(rootdir).rglob("*"):
-                if path.suffix == ".gdb":
+                if path.suffix.lower() == ".gdb":
                     gdb_count += 1
-                    continue
-                elif path.suffix == ".shp":
+                elif path.suffix.lower() == ".shp":
                     shp_count += 1
-                elif path.suffix == ".adf":
+                elif path.suffix.lower() == ".adf":
                     raster_count += 1
+                elif path.suffix.lower() == ".tif":
+                    tiff_count += 1
+                else:
+                    continue
 
-            if gdb_count == 0 and shp_count == 0 and raster_count == 0:
+            print(f"Shapefile count: {shp_count}")
+            print(f"GDB count: {gdb_count}")
+            print(f"Raster count: {raster_count}")
+            print(f"TIFF count: {tiff_count}")        
+
+            if gdb_count == 0 and shp_count == 0 and raster_count == 0 and tiff_count == 0:
                 return 0
-            elif gdb_count == 0 and shp_count == 1 and raster_count == 0:
+            elif gdb_count == 0 and shp_count == 1 and raster_count == 0 and tiff_count == 0:
                 return 1
-            elif gdb_count == 1 and shp_count == 0 and raster_count == 0:
+            elif gdb_count == 1 and shp_count == 0 and raster_count == 0 and tiff_count == 0:
                 return 2
-            elif gdb_count == 0 and shp_count == 0 and raster_count >= 1:
+            elif gdb_count == 0 and shp_count == 0 and raster_count >= 1 and tiff_count == 0:
                 # Note that there might be more than one .adf file!
                 return 3
-            elif (gdb_count + shp_count + raster_count) >= 1:
+            elif gdb_count == 0 and shp_count == 0 and raster_count == 0 and tiff_count == 1:
                 return 4
+            elif (gdb_count + shp_count + raster_count + tiff_count) > 1:
+                return 5
             else:
                 return 0
         
@@ -118,19 +130,27 @@ class Dataset:
                 if not len(raster_dataset_list) > 1:
                     dataset = self.path / raster_dataset_list[0]
                 else:
-                    return  
-            elif dataset_type == 4:
-                return        
+                    return
+            elif dataset_type == 4: # Tiff dataset
+                arcpy.env.workspace = str(self.path) # This can't be a Path, it has to be a path as string.
+                tiff_dataset_list = arcpy.ListRasters("*")
+                if not len(tiff_dataset_list) > 1:
+                    dataset = self.path / tiff_dataset_list[0]
+                else:
+                    raise Exception("Too many tiff files!")
+                    return
+            elif dataset_type == 5:
+                raise Exception("There are multiple datasets in the directory") 
+                return      
         else:
-            print("No data found in the provided dataset path. (1)")
+            raise Exception("No data found in the provided dataset path. (1)")
             return
 
         if md.Metadata(dataset).__class__ == arcpy.metadata.Metadata:
             return Path(dataset), dataset_type
         else:
-            print("No data found in the provided dataset path. (2)")
+            raise Exception("No data found in the provided dataset path. (2)")
             return
-        
         
     def get_dataset_metadata(self) -> tuple[str,md.Metadata,ET.Element]:
         dataset_Metadata_object = md.Metadata(self.data)
@@ -152,10 +172,15 @@ class Dataset:
             spacer = "    " * depth
             print(f"{spacer}+ {path.name}")
         
-    def ingest(self):
+    def ingest(self) -> tuple[Path, Path, Path]:
         file_server_path = Path(FILE_SERVER_PATH)
         fileserver_dir = file_server_path / self.metadata.rights / self.metadata.identifier.assignedName
         fileserver_dir.mkdir()
+
+        if fileserver_dir.exists() == False:
+            raise Exception("Unable to make the directory on the fileserver.")
+            return
+
         self.fileserver_dir = fileserver_dir       
         zipPath = fileserver_dir / f"{self.metadata.altTitle}.zip"
         self.fileserver_zip = zipPath
@@ -169,27 +194,43 @@ class Dataset:
                     print()
                     continue
         archive.close()
-        
+
         newzipfile = zipfile.ZipFile(zipPath)
         print(f"\nContents of deliverable zipfile `{str(zipPath)}`")
         newzipfile.printdir()
         newzipfile.close()
 
+        if zipPath.exists() == False:
+            raise Exception("Unable to create the zip file.")
+
         # Copy the ISO metadata to the metadata directory:
         ISO_Metadata = self.path / f"{self.metadata.altTitle}_ISO.xml"
+
         if ISO_Metadata.exists():
             ISO_Metadata_text = ISO_Metadata.read_text()
         else:
             raise Exception("ISO Metadata does not exist!")
+            return
             
         file_server_path = Path(FILE_SERVER_PATH)
         Fileserver_ISO_Metadata = file_server_path / "metadata" / f"{self.metadata.identifier.assignedName}_ISO.xml"
         Fileserver_ISO_Metadata.touch()
         Fileserver_ISO_Metadata.write_text(ISO_Metadata_text)
+        
+        if Fileserver_ISO_Metadata.exists() == False:
+            raise Exception("The ISO metadata was not created on the server")
+            return
+
+        print(Fileserver_ISO_Metadata)
+
         self.fileserver_metadata = Fileserver_ISO_Metadata
         print(Fileserver_ISO_Metadata.absolute)
         print("\n")
-        return 
+        print("Does the metdata exist on the fileserver?")
+        result = Fileserver_ISO_Metadata.exists()
+        print(result)
+
+        return self.fileserver_dir, self.fileserver_zip, self.fileserver_metadata
 
 class AGSLMetadata:
 
@@ -241,7 +282,7 @@ class AGSLMetadata:
                 return False
             elif get_request.text == "":
                 return False
-            else:
+            else: # The identifier is bound
                 return True
 
         def new_identifier(): # Returns a new Identifier object that has been minted

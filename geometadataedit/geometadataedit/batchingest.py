@@ -8,7 +8,7 @@ load_dotenv()
 
 warnings = []
 
-CSV_OUTPUT = Path(r'S:\GeoBlacklight\project-files\fileProcessing\logs\LOG20231023.csv')
+CSV_OUTPUT = Path(r'S:\GeoBlacklight\project-files\fileProcessing\logs\LOG20231025_2.csv')
 
 # Take as an argument a directory containing a bunch of datasets (in dirs)
 target_directory = Path(r"S:\GeoBlacklight\project-files\fileProcessing\ready_to_process")
@@ -77,7 +77,6 @@ def main():
                 warnings.append(error)
                 status = "failing"
                 logwriter.writerow([dataset_directory[0], status, "none assigned", warning, error])
-                purge()
                 continue # Will go to the next Dataset.
 
             try:
@@ -90,9 +89,8 @@ def main():
                 warnings.append(error)
                 status = "failing"
                 logwriter.writerow([dataset_directory[0], status, "none assigned", warning, error])
-                purge()
+                #purge() No need to purge
                 continue # Will go to the next Dataset.
-
             try:
                 dataset.metadata.write_identifiers(existing_identifier)
             except Exception as error:
@@ -146,7 +144,7 @@ def main():
                 continue
 
             try:
-                dataset.ingest()
+                fsdir, fszip, fsmetadata = dataset.ingest()
             except Exception as error:
                 warning = f"Failed to ingest {str(dataset_directory[0])}\n"
                 print(warning)
@@ -159,9 +157,14 @@ def main():
                 continue
                 
     ### Testing/Logging
-            print(f"Successfully updated and ingested {str(dataset_directory[0])}!\n")
+            if fsdir.exists() and fszip.exists() and fsmetadata.exists():
+                print(f"Successfully updated and ingested {str(dataset_directory[0])}!\n")
+                print(f"The file server directory is {fsdir}")
+                print(f"The file server zip file is {fszip}")
+                print(f"The fileserver metadata is {fsmetadata}")
             status = "passing"
             logwriter.writerow([dataset_directory[0], status, dataset.metadata.identifier.assignedName,"",""])
+            dataset = None #This will make sure we aren't passing the existing dataset to further steps once complete.
 
     # if it is successful:
     # write to log the path on the webserver
