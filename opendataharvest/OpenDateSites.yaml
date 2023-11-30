@@ -21,7 +21,7 @@ Sites:
 # Wisconsin State Agencies #
 ############################
 
- DHS_OpenData:
+  DHS_OpenData:
    CreatedBy: "Wisconsin Department of Health Services"
    SiteURL: "https://data.dhsgis.wi.gov/data.json"
    SiteName: "DHS"
