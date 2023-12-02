@@ -10,7 +10,7 @@ import json
 import pprint
 
 # Make the HTTP request.
-packge_list_response = requests.get('https://data.milwaukee.gov/api/3/action/package_list')
+packge_list_response = requests.get('https://data.milwaukee.gov/api/3/action/package_search?fq=groups:maps')
 assert packge_list_response.status_code == 200
 
 # Use the json module to load CKAN's response into a dictionary.
@@ -18,6 +18,6 @@ response_dict = json.loads(packge_list_response.content)
 
 # Check the contents of the response.
 assert response_dict['success'] is True
-result: list = response_dict['result']
-pprint.pprint(result)
-
+result = response_dict['result']
+for dataset in result["results"]:
+    print(dataset["name"])
