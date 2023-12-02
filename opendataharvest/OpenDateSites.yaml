@@ -15,7 +15,21 @@
   #     - UUID: "a-particular-dataset" 
   #     - UUID: "a-different-dataset"
 
-Sites:
+TestSites:
+  MilwaukeeCounty_OpenData:
+    CreatedBy: "Milwaukee County"
+    SiteURL: "http://gis-mclio.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "MilwaukeeCounty"
+    SkipList: ""  
+
+CKAN_Sites:
+  Milwaukee_OpenData:
+    CreatedBy: "City of Milwaukee"
+    SiteURL: "https://data.milwaukee.gov/api/3/action/package_list"
+    SiteName: "Milwaukee"
+    SkipList: ""
+
+ArcGIS_Sites:
 
 ############################
 # Wisconsin State Agencies #
