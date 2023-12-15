@@ -19,5 +19,23 @@ response_dict = json.loads(packge_list_response.content)
 # Check the contents of the response.
 assert response_dict['success'] is True
 result = response_dict['result']
+dataset_list = []
 for dataset in result["results"]:
-    print(dataset["name"])
+    dataset_list.append(dataset["name"])
+
+print(dataset_list)
+
+### Let's assume we will be working off a dataset list defined in the YAML
+### for now, we can use dataset_list
+
+for dataset in dataset_list:
+    # make an api call for that record:
+    dataset_response = requests.get(f'https://data.milwaukee.gov/api/3/action/package_show?id={dataset}')
+    assert dataset_response.status_code == 200
+    print(f"{dataset}:")
+
+    dataset_dict = json.loads(dataset_response.content)
+    
+    for resource in dataset_dict["result"]["resources"]: # -> dict
+        
+        pprint.pprint(resource["format"])
