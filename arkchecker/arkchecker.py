@@ -49,10 +49,8 @@ def NOIDfetch(arkid) -> str:
     # TODO: Handle a non 200 status code
     assert fetch_r.status_code == 200
 
-    print(fetch_r.text)
+    return fetch_r.text
 
-
-# fetch_result = NOIDfetch(searchForID(test_text)[0])
 
 # Until Karl is able to get a cert for the digitlib-admin domain, we can use this return text for testing:
 fetch_result = """
@@ -69,5 +67,18 @@ where: https://geodiscovery.uwm.edu/catalog/ark:-77981-gmgs0c4sj3x
 who: Legislative Technology Services Bureau
 """
 
+def whereEditor(arkid) -> str:
+    # Example: https://digilib-admin.uwm.edu/noidu_gmgs?set+77981/gmgs0c4sj3x+where+https://geodiscovery.uwm.edu/catalog/ark:-77981-gmgs0c4sj3
+    editURL = NOID_PROD + f"?bind+set+{arkid[0]}+where+https://geodiscovery.uwm.edu/catalog/ark:-{arkid[1]}-{arkid[2]}"
+    #edit_r = requests.get(editURL)
+    
+    #TODO: Handle a non 200 status code
+    #assert edit_r.status_code == 200
+    
+    return editURL
+
 if __name__ == "__main__":
-    print(listMetadata(AARDVARK_DIR))
+    arkid = searchForID(fetch_result)
+    editURL = whereEditor(arkid)
+    print(editURL)
+    
