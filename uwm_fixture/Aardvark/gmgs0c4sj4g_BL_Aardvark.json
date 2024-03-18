@@ -1,0 +1,49 @@
+{
+    "dcat_bbox": "ENVELOPE(-88.982163, -88.483689, 45.118069, 44.855286)",
+    "dcat_theme_sm": [
+        "Boundaries"
+    ],
+    "dct_accessRights_s": "Public",
+    "dct_creator_sm": [
+        "Legislative Technology Services Bureau"
+    ],
+    "dct_description_sm": [
+        "This polygon data layer represents voting wards for Menominee County, Wisconsin in 2002. The dataset was originally published by the Legislative Technology Services Bureau on May 30, 2002."
+    ],
+    "dct_format_s": "Shapefile",
+    "dct_identifier_sm": [
+        "ark:/77981/gmgs0c4sj4g"
+    ],
+    "dct_issued_s": "2002",
+    "dct_language_sm": [
+        "eng"
+    ],
+    "dct_references_s": "{\"http://schema.org/url\":\"https://digilib.uwm.edu/ark:/77981/gmgs0c4sj4g\",\"http://schema.org/downloadUrl\":\"https://geodata.uwm.edu/public/gmgs0c4sj4g/MenomineeCounty_VotingWards_2002.zip\",\"http://www.isotc211.org/schemas/2005/gmd\":\"https://geodata.uwm.edu/metadata/gmgs0c4sj4g_ISO.xml\"}",
+    "dct_rights_sm": [
+        "<a href=\"https://uwm.edu/libraries/digital-collections/copyright-digcoll/\">Please see the UWM Libraries statement on Copyright and Digital Collections</a>.",
+        "Although this data is being distributed by the American Geographical Society Library at the University of Wisconsin-Milwaukee Libraries, no warranty expressed or implied is made by the University as to the accuracy of the data and related materials. The act of distribution shall not constitute any such warranty, and no responsibility is assumed by the University in the use of this data, or related materials."
+    ],
+    "dct_spatial_sm": [
+        "Menominee County",
+        "Wisconsin"
+    ],
+    "dct_temporal_sm": [
+        "2002"
+    ],
+    "dct_title_s": "Voting Wards Menominee County, Wisconsin 2002",
+    "gbl_indexYear_im": [
+        2002
+    ],
+    "gbl_mdModified_dt": "2023-10-25T19:46:04.7134582Z",
+    "gbl_mdVersion_s": "Aardvark",
+    "gbl_resourceClass_sm": [
+        "Datasets"
+    ],
+    "gbl_resourceType_sm": [
+        "Polygon data"
+    ],
+    "gbl_suppressed_b": false,
+    "id": "ark:-77981-gmgs0c4sj4g",
+    "locn_geometry": "ENVELOPE(-88.483689, -88.982163, 45.118069, 44.855286)",
+    "schema_provider_s": "American Geographical Society Library – UWM Libraries"
+}
