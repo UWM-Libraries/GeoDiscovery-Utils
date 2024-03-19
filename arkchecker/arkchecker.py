@@ -7,14 +7,13 @@ import re
 
 from pathlib import Path
 
+# Constants
 AARDVARK_DIR = "uwm_fixture/Aardvark"
-
 NOID_PROD = r"https://digilib-admin.uwm.edu/noidu_gmgs"
-NOID_DEV = r"https://digilib-dev.uwm.edu/noidu_gmgs"
 
-# Loop through the files in the dir
-dir = Path(AARDVARK_DIR)
-assert dir.is_dir()
+# Assertions
+# assert requests.get(NOID_PROD).status_code == 200
+assert Path(AARDVARK_DIR).is_dir()
 
 
 def searchForID(text) -> list:
@@ -29,11 +28,12 @@ def searchForID(text) -> list:
 def listMetadata(dir) -> list[str]:
     dir = Path(dir)  # ensure is Path object
     mdlist = []
-    for mdfilePath in dir.rglob("*"):
+    for mdfilePath in dir.rglob("*.json"):
         with open(mdfilePath, "r", encoding="utf8") as mdfile:
             md = json.load(mdfile)
 
             assert md.__class__ == dict
+            assert len(md) > 0
 
             mdlist.append(searchForID(md["dct_identifier_sm"][0])[0])
 
@@ -67,18 +67,23 @@ where: https://geodiscovery.uwm.edu/catalog/ark:-77981-gmgs0c4sj3x
 who: Legislative Technology Services Bureau
 """
 
+
 def whereEditor(arkid) -> str:
-    # Example: https://digilib-admin.uwm.edu/noidu_gmgs?set+77981/gmgs0c4sj3x+where+https://geodiscovery.uwm.edu/catalog/ark:-77981-gmgs0c4sj3
-    editURL = NOID_PROD + f"?bind+set+{arkid[0]}+where+https://geodiscovery.uwm.edu/catalog/ark:-{arkid[1]}-{arkid[2]}"
-    #edit_r = requests.get(editURL)
-    
-    #TODO: Handle a non 200 status code
-    #assert edit_r.status_code == 200
-    
+    # Example: https://digilib-admin.uwm.edu/noidu_gmgs?bind+set+77981/gmgs0c4sj3x+where+https://geodiscovery.uwm.edu/catalog/ark:-77981-gmgs0c4sj3
+    editURL = (
+        NOID_PROD
+        + f"?bind+set+{arkid[0]}+where+https://geodiscovery.uwm.edu/catalog/ark:-{arkid[1]}-{arkid[2]}"
+    )
+    # edit_r = requests.get(editURL)
+
+    # TODO: Handle a non 200 status code
+    # assert edit_r.status_code == 200
+
     return editURL
 
+
 if __name__ == "__main__":
+    print(listMetadata(AARDVARK_DIR))
     arkid = searchForID(fetch_result)
     editURL = whereEditor(arkid)
     print(editURL)
-    
