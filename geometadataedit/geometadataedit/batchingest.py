@@ -4,19 +4,25 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 warnings = []
 
-CSV_OUTPUT = Path(r'S:\GeoBlacklight\project-files\fileProcessing\logs\LOG20231025_2.csv')
+CSV_OUTPUT = Path(
+    r"S:\GeoBlacklight\project-files\fileProcessing\logs\LOG20231025_2.csv"
+)
 
 # Take as an argument a directory containing a bunch of datasets (in dirs)
-target_directory = Path(r"S:\GeoBlacklight\project-files\fileProcessing\ready_to_process")
+target_directory = Path(
+    r"S:\GeoBlacklight\project-files\fileProcessing\ready_to_process"
+)
 
 ### Add it to a CSV file so we have a log of all these!
-csvfile = open(CSV_OUTPUT, 'w', newline='')
+csvfile = open(CSV_OUTPUT, "w", newline="")
 logwriter = csv.writer(csvfile)
 logwriter.writerow(["INPATH", "STATUS", "ARKID", "WARNING", "ERROR"])
+
 
 def main():
     ### Purge BIND if status is failing:
@@ -28,7 +34,7 @@ def main():
                 print(error)
                 warnings.append(error)
             print()
-            print('###PURGE###')
+            print("###PURGE###")
             print()
             # Delete the zipfile:
             try:
@@ -52,8 +58,8 @@ def main():
                 print(error)
                 warnings.append(error)
 
-    # Loop through each directory in the parent folder 
-    def list_all_dirs(rootdir) -> list[tuple[Path,int]]:
+    # Loop through each directory in the parent folder
+    def list_all_dirs(rootdir) -> list[tuple[Path, int]]:
         rootdir = Path(rootdir)
         all_directories = []
         for path in sorted(rootdir.rglob("*")):
@@ -65,19 +71,23 @@ def main():
 
     for dataset_directory in list_all_dirs(target_directory):
         status = "passing"
-        if dataset_directory[1] == 1: # Only children of root
+        if dataset_directory[1] == 1:  # Only children of root
 
             try:
                 dataset = updatemetadata.Dataset(Path(dataset_directory[0]))
             except Exception as error:
-                warning = f"Failed to create Dataset object for {str(dataset_directory[0])}\n"
+                warning = (
+                    f"Failed to create Dataset object for {str(dataset_directory[0])}\n"
+                )
                 print(warning)
                 print(error)
                 warnings.append(warning)
                 warnings.append(error)
                 status = "failing"
-                logwriter.writerow([dataset_directory[0], status, "none assigned", warning, error])
-                continue # Will go to the next Dataset.
+                logwriter.writerow(
+                    [dataset_directory[0], status, "none assigned", warning, error]
+                )
+                continue  # Will go to the next Dataset.
 
             try:
                 existing_identifier = dataset.metadata.get_existing_identifier_or_mint()
@@ -88,9 +98,11 @@ def main():
                 warnings.append(warning)
                 warnings.append(error)
                 status = "failing"
-                logwriter.writerow([dataset_directory[0], status, "none assigned", warning, error])
-                #purge() No need to purge
-                continue # Will go to the next Dataset.
+                logwriter.writerow(
+                    [dataset_directory[0], status, "none assigned", warning, error]
+                )
+                # purge() No need to purge
+                continue  # Will go to the next Dataset.
             try:
                 dataset.metadata.write_identifiers(existing_identifier)
             except Exception as error:
@@ -100,20 +112,38 @@ def main():
                 warnings.append(warning)
                 warnings.append(error)
                 status = "failing"
-                logwriter.writerow([dataset_directory[0], status, dataset.metadata.identifier.assignedName, warning, error])
+                logwriter.writerow(
+                    [
+                        dataset_directory[0],
+                        status,
+                        dataset.metadata.identifier.assignedName,
+                        warning,
+                        error,
+                    ]
+                )
                 purge()
                 continue
 
             try:
                 dataset.metadata.update_agsl_hours()
             except Exception as error:
-                warning = f"Failed to update AGSL hours for {str(dataset_directory[0])}\n"
+                warning = (
+                    f"Failed to update AGSL hours for {str(dataset_directory[0])}\n"
+                )
                 print(warning)
                 print(error)
                 warnings.append(warning)
                 warnings.append(error)
                 status = "failing"
-                logwriter.writerow([dataset_directory[0], status, dataset.metadata.identifier.assignedName, warning, error])
+                logwriter.writerow(
+                    [
+                        dataset_directory[0],
+                        status,
+                        dataset.metadata.identifier.assignedName,
+                        warning,
+                        error,
+                    ]
+                )
                 purge()
                 continue
 
@@ -126,7 +156,15 @@ def main():
                 warnings.append(warning)
                 warnings.append(error)
                 status = "failing"
-                logwriter.writerow([dataset_directory[0], status, dataset.metadata.identifier.assignedName, warning, error])
+                logwriter.writerow(
+                    [
+                        dataset_directory[0],
+                        status,
+                        dataset.metadata.identifier.assignedName,
+                        warning,
+                        error,
+                    ]
+                )
                 purge()
                 continue
 
@@ -139,7 +177,15 @@ def main():
                 warnings.append(warning)
                 warnings.append(error)
                 status = "failing"
-                logwriter.writerow([dataset_directory[0], status, dataset.metadata.identifier.assignedName, warning, error])
+                logwriter.writerow(
+                    [
+                        dataset_directory[0],
+                        status,
+                        dataset.metadata.identifier.assignedName,
+                        warning,
+                        error,
+                    ]
+                )
                 purge()
                 continue
 
@@ -152,19 +198,37 @@ def main():
                 warnings.append(warning)
                 warnings.append(error)
                 status = "failing"
-                logwriter.writerow([dataset_directory[0], status, dataset.metadata.identifier.assignedName, warning, error])
+                logwriter.writerow(
+                    [
+                        dataset_directory[0],
+                        status,
+                        dataset.metadata.identifier.assignedName,
+                        warning,
+                        error,
+                    ]
+                )
                 purge()
                 continue
-                
-    ### Testing/Logging
+
+            ### Testing/Logging
             if fsdir.exists() and fszip.exists() and fsmetadata.exists():
-                print(f"Successfully updated and ingested {str(dataset_directory[0])}!\n")
+                print(
+                    f"Successfully updated and ingested {str(dataset_directory[0])}!\n"
+                )
                 print(f"The file server directory is {fsdir}")
                 print(f"The file server zip file is {fszip}")
                 print(f"The fileserver metadata is {fsmetadata}")
             status = "passing"
-            logwriter.writerow([dataset_directory[0], status, dataset.metadata.identifier.assignedName,"",""])
-            dataset = None #This will make sure we aren't passing the existing dataset to further steps once complete.
+            logwriter.writerow(
+                [
+                    dataset_directory[0],
+                    status,
+                    dataset.metadata.identifier.assignedName,
+                    "",
+                    "",
+                ]
+            )
+            dataset = None  # This will make sure we aren't passing the existing dataset to further steps once complete.
 
     # if it is successful:
     # write to log the path on the webserver
@@ -177,6 +241,7 @@ def main():
         print("Finished with no errors!")
 
     csvfile.close()
+
 
 if __name__ == "__main__":
     try:

@@ -10,15 +10,17 @@ import json
 import pprint
 
 # Make the HTTP request.
-packge_list_response = requests.get('https://data.milwaukee.gov/api/3/action/package_search?fq=groups:maps')
+packge_list_response = requests.get(
+    "https://data.milwaukee.gov/api/3/action/package_search?fq=groups:maps"
+)
 assert packge_list_response.status_code == 200
 
 # Use the json module to load CKAN's response into a dictionary.
 response_dict = json.loads(packge_list_response.content)
 
 # Check the contents of the response.
-assert response_dict['success'] is True
-result = response_dict['result']
+assert response_dict["success"] is True
+result = response_dict["result"]
 dataset_list = []
 for dataset in result["results"]:
     dataset_list.append(dataset["name"])
@@ -30,12 +32,14 @@ print(dataset_list)
 
 for dataset in dataset_list:
     # make an api call for that record:
-    dataset_response = requests.get(f'https://data.milwaukee.gov/api/3/action/package_show?id={dataset}')
+    dataset_response = requests.get(
+        f"https://data.milwaukee.gov/api/3/action/package_show?id={dataset}"
+    )
     assert dataset_response.status_code == 200
     print(f"{dataset}:")
 
     dataset_dict = json.loads(dataset_response.content)
-    
-    for resource in dataset_dict["result"]["resources"]: # -> dict
-        
+
+    for resource in dataset_dict["result"]["resources"]:  # -> dict
+
         pprint.pprint(resource["format"])

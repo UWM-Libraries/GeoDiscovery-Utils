@@ -21,10 +21,7 @@ for site in x["TestSites"].keys():
 
         catalog_list.append(catalog_json)
         print(len(catalog_list))
-        
+
 for catalog in catalog_list:
     for dataset in catalog["dataset"]:
         print(dataset["title"])
-        
-           
-
