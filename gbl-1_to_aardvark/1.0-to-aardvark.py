@@ -13,16 +13,19 @@ dir_crosswalk = Path(
 )
 # add directory of JSON files in the 1.0 schema
 dir_old_schema = Path(
-    r"C:\Users\srappel\Documents\GitHub\GeoDiscovery-Utils\gbl-1_to_aardvark\1.0"
+    r"C:\Users\srappel\Desktop\opengeometadata\princeton-1.0"
 )
 # add directory for new JSON files in the Aardvark schema
 dir_new_schema = Path(
-    r"C:\Users\srappel\Documents\GitHub\GeoDiscovery-Utils\gbl-1_to_aardvark\aardvark"
+    r"C:\Users\srappel\Desktop\opengeometadata\princeton"
 )
 
 # Default values
 RESOURCE_CLASS_DEFAULT = "Maps"
 PLACE_DEFAULT = None
+
+assert dir_old_schema.is_dir()
+assert dir_new_schema.is_dir()
 
 # Load the crosswalk.csv and make it a dictionary
 crosswalk = {}
