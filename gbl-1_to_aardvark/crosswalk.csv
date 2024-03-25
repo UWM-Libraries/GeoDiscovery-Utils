@@ -20,5 +20,4 @@ dct_references_s,dct_references_s
 layer_slug_s,id
 dc_identifier_s,dct_identifier_sm
 layer_modified_dt,gbl_mdModified_dt
-geoblacklight_version,gbl_mdVersion_s
 suppressed_b,gbl_suppressed_b
