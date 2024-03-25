@@ -8,11 +8,11 @@ from pathlib import Path
 # Manual changes before run
 
 # Path to crosswalk definition
-dir_crosswalk = Path('crosswalk.csv')
+dir_crosswalk = Path(r'C:\Users\srappel\Documents\GitHub\GeoDiscovery-Utils\gbl-1_to_aardvark\crosswalk.csv')
 # add directory of JSON files in the 1.0 schema
-dir_old_schema = Path(r"S:\GeoBlacklight\project-files\opengeometadata_GBL-1\opengeometadata\edu.princeton")
+dir_old_schema = Path(r'C:\Users\srappel\Documents\GitHub\GeoDiscovery-Utils\gbl-1_to_aardvark\1.0')
 #add directory for new JSON files in the Aardvark schema
-dir_new_schema = Path('aardvark/princeton/')
+dir_new_schema = Path(r'C:\Users\srappel\Documents\GitHub\GeoDiscovery-Utils\gbl-1_to_aardvark\aardvark')
 
 #Default values
 RESOURCE_CLASS_DEFAULT = "Maps"
