@@ -17,7 +17,7 @@ dir_old_schema = Path(
 )
 # add directory for new JSON files in the Aardvark schema
 dir_new_schema = Path(
-    r"C:\Users\srappel\Desktop\opengeometadata\stanford"
+    r"C:\Users\srappel\Desktop\opengeometadata\stanford-aardvark"
 )
 
 # Default values
@@ -58,6 +58,7 @@ def check_required(data_dict):
         "gbl_resourceClass_sm",
         "id",
         "gbl_mdModified_dt",
+        "gbl_resourceType_sm",
     ]
 
     for req in requirements:
@@ -105,6 +106,21 @@ def check_required(data_dict):
                     print(
                         f"Replaced dct_publisher_sm:Null with dct_publisher_sm:{data_dict['dct_creator_sm']}"
                     )
+                else:
+                    continue
+
+            elif req == "gbl_resourceType_sm":
+                if "dct_source_sm" in data_dict:
+                    if "stanford-ch237ht4777" in data_dict["dct_source_sm"]:
+                        print("This is an Index Map!")
+                        data_dict["gbl_resourceType_sm"] = "Index maps"
+                        data_dict["gbl_resourceClass_sm"] = "Maps"
+                    elif data_dict["id"] == "stanford-ch237ht4777":
+                        print("This is the Stanford Index Map parent!")
+                        data_dict["gbl_resourceType_sm"] = "Index maps"
+                        data_dict["gbl_resourceClass_sm"] = "Maps"
+                    else:
+                        continue
                 else:
                     continue
             else:
