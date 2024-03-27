@@ -48,9 +48,6 @@ def string2array(data_dict):
                 data_dict[key] = [val]
     return data_dict
 
-def format_to_class(data_dict):
-    if 
-
 def check_required(data_dict):
     # Check if required fields are present
     requirements = [
@@ -68,32 +65,17 @@ def check_required(data_dict):
             print(f"Requirement {req} is not present...")
 
             if req == "gbl_resourceClass_sm":
-                if "dc_type_s" not in data_dict:
-                    print(f"No dc_type_s information found.")
-                    if "dct_format_s" in data_dict:
+                # Modified for Stanford Branch
+                if "dct_format_s" in data_dict:
                         print(f"Crosswalking gbl_resourceClass_sm from dct_format_s")
                         # Use dct_format_s to fill.
-                        format_to_class(data_dict)
+                        format = data_dict["dct_format_s"]
+                        if format in ["Shapefile", "ArcGrid", "GeoDatabase"]:
+                            data_dict["gbl_resourceClass_sm"] = "Datasets"
+                        elif format in 
+                            
                     else:
                         data_dict["gbl_resourceClass_sm"] = [RESOURCE_CLASS_DEFAULT]
-
-                elif data_dict["dc_type_s"] == "Dataset":
-                    data_dict["gbl_resourceClass_sm"] = ["Datasets"]
-                    print(
-                        f"Replaced dc_type_s:Dataset with gbl_resourceClass_sm:Datasets"
-                    )
-                elif data_dict["dc_type_s"] == "Image":
-                    data_dict["gbl_resourceClass_sm"] = ["Imagery"]
-                    print(
-                        f"Replaced dc_type_s:Dataset with gbl_resourceClass_sm:Imagery"
-                    )
-                else:
-                    data_dict["gbl_resourceClass_sm"] = [
-                        RESOURCE_CLASS_DEFAULT
-                    ]  # change if needed!
-                    print(
-                        f"Replaced dc_type_s:Null with gbl_resourceClass_sm:{RESOURCE_CLASS_DEFAULT}"
-                    )
 
             elif req == "dct_spatial_sm":
                 if not PLACE_DEFAULT is None:
