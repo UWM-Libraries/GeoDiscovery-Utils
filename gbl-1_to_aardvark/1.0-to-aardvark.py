@@ -21,7 +21,7 @@ dir_new_schema = Path(
 )
 
 # Default values
-RESOURCE_CLASS_DEFAULT = "Maps"
+RESOURCE_CLASS_DEFAULT = "Other"
 PLACE_DEFAULT = None
 
 assert dir_old_schema.is_dir()
@@ -72,10 +72,14 @@ def check_required(data_dict):
                         format = data_dict["dct_format_s"]
                         if format in ["Shapefile", "ArcGrid", "GeoDatabase"]:
                             data_dict["gbl_resourceClass_sm"] = "Datasets"
-                        elif format in 
-                            
-                    else:
-                        data_dict["gbl_resourceClass_sm"] = [RESOURCE_CLASS_DEFAULT]
+                        elif format == "GeoTIFF":
+                            # Check if "georeferenced" appears in dct_description_sm
+                            if "georeferenced" in data_dict["dct_description_sm"]:
+                                data_dict["gbl_resourceClass_sm"] = "Maps"
+                            else:
+                                data_dict["gbl_resourceClass_sm"] = "Datasets" 
+                else:
+                    data_dict["gbl_resourceClass_sm"] = [RESOURCE_CLASS_DEFAULT]
 
             elif req == "dct_spatial_sm":
                 if not PLACE_DEFAULT is None:
