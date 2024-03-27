@@ -48,6 +48,8 @@ def string2array(data_dict):
                 data_dict[key] = [val]
     return data_dict
 
+def format_to_class(data_dict):
+    if 
 
 def check_required(data_dict):
     # Check if required fields are present
@@ -68,7 +70,13 @@ def check_required(data_dict):
             if req == "gbl_resourceClass_sm":
                 if "dc_type_s" not in data_dict:
                     print(f"No dc_type_s information found.")
-                    data_dict["gbl_resourceClass_sm"] = [RESOURCE_CLASS_DEFAULT]
+                    if "dct_format_s" in data_dict:
+                        print(f"Crosswalking gbl_resourceClass_sm from dct_format_s")
+                        # Use dct_format_s to fill.
+                        format_to_class(data_dict)
+                    else:
+                        data_dict["gbl_resourceClass_sm"] = [RESOURCE_CLASS_DEFAULT]
+
                 elif data_dict["dc_type_s"] == "Dataset":
                     data_dict["gbl_resourceClass_sm"] = ["Datasets"]
                     print(
@@ -113,6 +121,8 @@ def check_required(data_dict):
                     )
                 else:
                     continue
+            else:
+                continue
     return
 
 
@@ -132,7 +142,6 @@ def remove_deprecated(data_dict):
             print(f"Removed the deprecated {field} field.")
 
     return
-
 
 # Function to update the metadata schema
 def schema_update(filepath):
