@@ -145,6 +145,17 @@ def remove_deprecated(data_dict):
 
     return
 
+def stanford_place(data_dict):
+    spatial = data_dict["dct_spatial_sm"]
+    if len(spatial) > 1:
+        if "Wisconsin" in spatial and "United States" in spatial:
+            print("Fixing the Wisconsin issue in US coverage")
+            data_dict["dct_spatial_sm"] = ["United States"]
+        else:
+            return
+    else:
+        return
+
 # Function to update the metadata schema
 def schema_update(filepath):
     # Open the JSON file with schema GBL 1.0
@@ -172,6 +183,10 @@ def schema_update(filepath):
 
         # Remove deprecated fields
         remove_deprecated(data)
+
+        #Stanford Place Fix
+        if "dct_spatial_sm" in data:
+            stanford_place(data)
 
     # check for multi-valued fields - if so, convert its value to an array
     data = string2array(data)
