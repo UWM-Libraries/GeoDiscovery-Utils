@@ -13,11 +13,11 @@ dir_crosswalk = Path(
 )
 # add directory of JSON files in the 1.0 schema
 dir_old_schema = Path(
-    r"C:\Users\srappel\Desktop\opengeometadata\princeton-1.0"
+    r"C:\Users\srappel\Desktop\opengeometadata\stanford-1.0"
 )
 # add directory for new JSON files in the Aardvark schema
 dir_new_schema = Path(
-    r"C:\Users\srappel\Desktop\opengeometadata\princeton"
+    r"C:\Users\srappel\Desktop\opengeometadata\stanford"
 )
 
 # Default values
