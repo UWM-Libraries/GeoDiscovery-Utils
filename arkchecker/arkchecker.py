@@ -37,6 +37,7 @@ def listMetadata(dir) -> list[str]:
 
             assert md.__class__ == dict
             assert len(md) > 0
+            assert "dct_identifier_sm" in md
 
             mdlist.append(searchForID(md["dct_identifier_sm"][0])[0])
 
