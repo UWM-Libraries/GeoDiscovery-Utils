@@ -8,7 +8,7 @@ from pathlib import Path
 
 # Constants
 AARDVARK_DIR = (
-    r"C:\Users\srappel\Documents\GitHub\opengeometadata.edu.uwm\metadata-aardvark"
+    r"C:\Users\srappel\Documents\GitHub\GeoDiscovery-Utils\uwm_fixture\Aardvark"
 )
 NOID_PROD = r"https://digilib-admin.uwm.edu/noidu_gmgs"
 
