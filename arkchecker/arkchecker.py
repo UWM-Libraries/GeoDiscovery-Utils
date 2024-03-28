@@ -7,7 +7,7 @@ import re
 from pathlib import Path
 
 # Constants
-AARDVARK_DIR = r"C:\Users\srappel\Documents\GitHub\GeoDiscovery-Utils\uwm_fixture\Aardvark"
+AARDVARK_DIR = r"C:\Users\srappel\Documents\GitHub\opengeometadata.edu.uwm\metadata-aardvark"
 NOID_PROD = r"https://digilib-admin.uwm.edu/noidu_gmgs"
 
 # Assertions
@@ -37,9 +37,20 @@ def listMetadata(dir) -> list[str]:
 
             assert md.__class__ == dict
             assert len(md) > 0
+
+            # TODO, what if it doesnt have an identifier at all?
             assert "dct_identifier_sm" in md
 
-            mdlist.append(searchForID(md["dct_identifier_sm"][0])[0])
+            if len(md["dct_identifier_sm"]) > 1:
+                for identifier in md["dct_identifier_sm"]:
+                    match = searchForID(identifier)
+                    if match is not None:
+                        print(f"found a matching arkid in: {mdfilePath}")
+                        mdlist.append(match[0])
+                    else:
+                        print(f"did not find a matching arkid in: {mdfilePath}")
+            else:
+                mdlist.append(searchForID(md["dct_identifier_sm"][0])[0])
 
     return mdlist
 
@@ -93,5 +104,7 @@ if __name__ == "__main__":
         # Fetch the ID
         arkid = searchForID(NOIDfetch(md_id))
         editURL = whereEditor(arkid)
+        print(f"{md_id} complete!")
         print(editURL)
         print("-----------------------")
+        
