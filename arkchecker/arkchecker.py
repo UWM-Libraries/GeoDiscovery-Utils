@@ -7,7 +7,9 @@ import re
 from pathlib import Path
 
 # Constants
-AARDVARK_DIR = r"C:\Users\srappel\Documents\GitHub\opengeometadata.edu.uwm\metadata-aardvark"
+AARDVARK_DIR = (
+    r"C:\Users\srappel\Documents\GitHub\opengeometadata.edu.uwm\metadata-aardvark"
+)
 NOID_PROD = r"https://digilib-admin.uwm.edu/noidu_gmgs"
 
 # Assertions
@@ -107,4 +109,3 @@ if __name__ == "__main__":
         print(f"{md_id} complete!")
         print(editURL)
         print("-----------------------")
-        
