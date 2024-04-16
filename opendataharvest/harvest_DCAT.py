@@ -1,8 +1,9 @@
 import yaml
 import json
 import requests
+from pprint import pp
 
-x = yaml.safe_load(open("opendataharvest/OpenDateSites.yaml", "r"))
+x = yaml.safe_load(open("opendataharvest/OpenDataSites.yaml", "r"))
 
 # print(x["Sites"].keys())
 
@@ -20,8 +21,8 @@ for site in x["TestSites"].keys():
             continue
 
         catalog_list.append(catalog_json)
-        print(len(catalog_list))
 
 for catalog in catalog_list:
     for dataset in catalog["dataset"]:
-        print(dataset["title"])
+        pp(dataset)
+        print()
