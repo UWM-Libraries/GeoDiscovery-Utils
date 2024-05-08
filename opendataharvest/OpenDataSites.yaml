@@ -46,6 +46,7 @@ ArcGIS_Sites:
    CreatedBy: "Wisconsin Department of Health Services"
    SiteURL: "https://data.dhsgis.wi.gov/data.json"
    SiteName: "DHS"
+   Spatial: ["Wisconsin", "United States"]
    SkipList: 
      - UUID: "ca921d70bdd84ae8bc84cd09abd822d7" # link to census geography website 
      - UUID: "00883495714c42a9be53b76b24300c8e" # GIS data disclaimer 
@@ -55,6 +56,7 @@ ArcGIS_Sites:
     CreatedBy: "Wisconsin Department of Transportation"
     SiteURL: "https://data-wisdot.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "DOT"
+    Spatial: ["Wisconsin", "United States"]
     SkipList: "" 
 
   LTSB_OpenData: 
@@ -65,6 +67,7 @@ ArcGIS_Sites:
     SiteURL: "https://data-ltsb.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "WILTSB"
     DatasetPrefix: ""
+    Spatial: ["Wisconsin", "United States"]
     DatasetPostfix: ", WI LTSB"
     SkipList: ""  
     
@@ -72,6 +75,7 @@ ArcGIS_Sites:
     CreatedBy: "Wisconsin Department of Natural Resources"
     SiteURL: "http://data-wi-dnr.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "WIDNR"
+    Spatial: ["Wisconsin", "United States"]
     SkipList: 
       - UUID: "wi-dnr-buy-licenses-and-permits-online-at-go-wild" 
       - UUID: "wi-dnr-census-gov-geography-program"
@@ -87,12 +91,14 @@ ArcGIS_Sites:
     CreatedBy: "Wisconsin Emergency Management"
     SiteURL: "http://data-wem.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "WEM"
+    Spatial: ["Wisconsin", "United States"]
     SkipList: ""
 
   DPI_OpenData:
     CreatedBy: "Wisconsin Department of Public Instruction"
     SiteURL: "https://data-wi-dpi.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "DPI"
+    Spatial: ["Wisconsin", "United States"]
     SkipList: 
       - UUID: "WI-DPI-dpi-open-data"
       - UUID: "WI-DPI-test-layer"
@@ -105,6 +111,7 @@ ArcGIS_Sites:
     CreatedBy: "City of Fitchburg"
     SiteURL: "https://opendata-fitchburgwi.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "CityOfFitchburg"
+    Spatial: ["Fitchburg", "Wisconsin", "United States"]
     SkipList: 
        - UUID: "FitchburgWI-open-data-hub"
        - UUID: "FitchburgWI-city-of-fitchburg-police-department"
@@ -116,6 +123,7 @@ ArcGIS_Sites:
     CreatedBy: "City of Madison"
     SiteURL: "http://data-cityofmadison.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "CityOfMadison"
+    Spatial: ["Madison", "Wisconsin", "United States"]
     SkipList: 
       - UUID: "cityofmadison-city-calendar-of-events"  
 
@@ -134,6 +142,7 @@ ArcGIS_Sites:
     CreatedBy: "City of Wisconsin Rapids"
     SiteURL: "http://rapidsdata-wisconsinrapids.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "CityOfWisconsinRapids"
+    Spatial: ["Wisconsin Rapids", "Wisconsin", "United States"]
     SkipList: ""
 
 # Sun Prairie site does not seem fully-functional as of 1/14/2022
@@ -155,6 +164,7 @@ ArcGIS_Sites:
     CreatedBy: "Capital Area Regional Planning Commission"
     SiteURL: "https://data-carpc.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "CARPC"
+    Spatial: ["Wisconsin", "United States"]
     SkipList: 
       - UUID: "esri-usa-topo-maps-1"   
       - UUID: "wi-dnr-303d-impaired-rivers-and-streams-listed"    
@@ -201,6 +211,7 @@ ArcGIS_Sites:
     CreatedBy: "East Central Wisconsin Regional Planning Commission"
     SiteURL: "http://data-ecwrpc.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "ECWRPC"
+    Spatial: ["Wisconsin", "United States"]
     DatasetPrefix: ""
     DatasetPostfix: ", ECWRPC"
     SkipList: ""  
@@ -213,12 +224,14 @@ ArcGIS_Sites:
     CreatedBy: "Ashland County"
     SiteURL: "https://data-ashlandcountywi.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "AshlandCounty"
+    Spatial: ["Ashland County", "Wisconsin", "United States"]
     SkipList: ""    
   
   ColumbiaCounty_OpenData:
     CreatedBy: "Columbia County"
     SiteURL: "http://opendata-cclid.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "ColumbiaCounty"
+    Spatial: ["Columbia County", "Wisconsin", "United States"]
     SkipList: 
       - UUID: "25869b8718c0419db87dad07de5b02d8"
       - UUID: "48b8cec7ebf04b5fbdcaf70d09daff21"
@@ -234,6 +247,7 @@ ArcGIS_Sites:
     CreatedBy: "Dane County"
     SiteURL: "https://gis-countyofdane.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "DaneCounty"
+    Spatial: ["Dane County", "Wisconsin", "United States"]
     SkipList: 
       - UUID: "countyofdane-parceltest1117"  
 
@@ -241,6 +255,7 @@ ArcGIS_Sites:
     CreatedBy: "Eau Claire County"
     SiteURL: "https://hub-eccounty.hub.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "EauClaireCounty"
+    Spatial: ["Eau Claire County", "Wisconsin", "United States"]
     SkipList: 
       - UUID: "termsofuse"
       - UUID: "open-data"
@@ -254,6 +269,7 @@ ArcGIS_Sites:
     CreatedBy: "Kenosha County"
     SiteURL: "https://dataportal.kenoshacounty.org/api/feed/dcat-us/1.1.json"
     SiteName: "Kenosha County"
+    Spatial: ["Kenosha County", "Wisconsin", "United States"]
     SkipList:
       - UUID: "kenoshacounty-citizenreportsrprtr-new"
       - UUID: "kenoshacounty-public-notification"  
@@ -262,23 +278,31 @@ ArcGIS_Sites:
     CreatedBy: "Milwaukee County"
     SiteURL: "http://gis-mclio.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "MilwaukeeCounty"
-    SkipList: ""    
+    Spatial: ["Milwaukee County", "Wisconsin", "United States"]
+    SkipList: 
+      - UUID: "d7f707071cd24b83ab3b9adb8a7d10ce"
+      - UUID: "bce9201dd312445b9b4567ee14d8032a" 
+      - UUID: "84c7b8d95af04cdda6b0c2ae26590531"
+      - UUID: "7a1d3d055d4b4457845c721088c132f0"   
 
   OutagamieCounty_OpenData:
     CreatedBy: "Outagamie County"
     SiteURL: "http://data-ocgis.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "OutagamieCounty"
+    Spatial: ["Outagamie County", "Wisconsin", "United States"]
     SkipList: ""    
 
   PierceCounty_OpenData:
     CreatedBy: "Pierce County"
     SiteURL: "https://data-piercecounty-wi.hub.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "PierceCounty"
+    Spatial: ["Pierce County", "Wisconsin", "United States"]
     SkipList: ""   
 
   RacineCounty_OpenData:
     CreatedBy: "Racine County"
     SiteURL: "http://data-racinecounty.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    Spatial: ["Racine County", "Wisconsin", "United States"]
     SiteName: "RacineCounty"
     SkipList: ""
 
@@ -286,18 +310,21 @@ ArcGIS_Sites:
     CreatedBy: "Sheboygan County"
     SiteURL: "https://data-shebco.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "SheboyganCounty"
+    Spatial: ["Sheboygan County", "Wisconsin", "United States"]
     SkipList: ""    
 
   StCroixCounty_OpenData:
     CreatedBy: "St. Croix County"
     SiteURL: "https://gis-scccdd.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "StCroixCounty"
+    Spatial: ["St. Croix County", "Wisconsin", "United States"]
     SkipList: ""   
 
   SaukCounty_OpenData:
     CreatedBy: "Sauk County"
     SiteURL: "https://data-saukgis.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "SaukCounty"
+    Spatial: ["Sauk County", "Wisconsin", "United States"]
     DatasetPrefix: ""
     DatasetPostfix: ", Sauk County"
     SkipList:
@@ -307,12 +334,14 @@ ArcGIS_Sites:
     CreatedBy: "Trempealeau County"
     SiteURL: "https://trempealeau-county-information-trempco.hub.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "TrempealeauCounty"
+    Spatial: ["Trempealeau County", "Wisconsin", "United States"]
     SkipList: ""
 
   VilasCounty_OpenData:
     CreatedBy: "Vilas County"
     SiteURL: "https://data-vilas.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "VilasCounty"
+    Spatial: ["Vilas County", "Wisconsin", "United States"]
     SkipList: 
       - UUID: "vilas-usda-nrcs-geospatial-data-gateway"
       - UUID: "vilas-sco-wi-aerial-photography-catalog"
@@ -322,6 +351,7 @@ ArcGIS_Sites:
     CreatedBy: "Walworth County"
     SiteURL: "https://open-walco.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "WalworthCounty"
+    Spatial: ["Walworth County", "Wisconsin", "United States"]
     SkipList: 
       - UUID: "walco-wdnr-surface-water-data-viewer"
       - UUID: "walco-world-topo-map-collector"
@@ -343,24 +373,28 @@ ArcGIS_Sites:
     CreatedBy: "Waukesha County"
     SiteURL: "http://data-waukeshacounty.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "WaukeshaCounty"
+    Spatial: ["Waukesha County", "Wisconsin", "United States"]
     SkipList: ""
 
   WaupacaCounty_OpenData:
     CreatedBy: "Waupaca County"
     SiteURL: "https://data2017-04-05t135915451z-waupacacounty.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "WaupacaCounty"
+    Spatial: ["Waupaca County", "Wisconsin", "United States"]
     SkipList: ""
 
   WausharaCounty_OpenData:
     CreatedBy: "Waushara County"
     SiteURL: "http://data-waushara.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "WausharaCounty"
+    Spatial: ["Waushara County", "Wisconsin", "United States"]
     SkipList: ""
 
   WoodCounty_OpenData:
     CreatedBy: "Wood County"
     SiteURL: "https://opendata.woodcogis.com/api/feed/dcat-us/1.1.json"
     SiteName: "WoodCounty"
+    Spatial: ["Wood County", "Wisconsin", "United States"]
     SkipList: ""
 
 CKAN_Sites:
