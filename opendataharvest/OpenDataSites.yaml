@@ -18,9 +18,14 @@
 TestSites:
   MilwaukeeCounty_OpenData:
     CreatedBy: "Milwaukee County"
-    SiteURL: "http://gis-mclio.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteURL: "https://data-mclio.hub.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "MilwaukeeCounty"
-    SkipList: ""  
+    SkipList: 
+      - UUID: "d7f707071cd24b83ab3b9adb8a7d10ce"
+      - UUID: "bce9201dd312445b9b4567ee14d8032a" 
+      - UUID: "84c7b8d95af04cdda6b0c2ae26590531"
+      - UUID: "7a1d3d055d4b4457845c721088c132f0" 
+    Spatial: ["Milwaukee County", "United States"]
 
 CKAN_Sites:
   Milwaukee_OpenData:
