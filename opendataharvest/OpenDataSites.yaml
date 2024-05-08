@@ -26,153 +26,14 @@ TestSites:
       - UUID: "84c7b8d95af04cdda6b0c2ae26590531"
       - UUID: "7a1d3d055d4b4457845c721088c132f0" 
     Spatial: ["Milwaukee County", "United States"]
-
-CKAN_Sites:
-  Milwaukee_OpenData:
-    CreatedBy: "City of Milwaukee"
-    SiteURL: "https://data.milwaukee.gov"
-    SiteName: "Milwaukee"
-    Datasets:
-      liquorlicenses:
-        title: "Active Liquor Licenses Milwaukee, Wisconsin"
-        themes: ["Society", "Economy"]
-        spatial: [-88.069979,-87.825193,43.192568,42.842004] # Default from CSV for Milwaukee, but maybe omit if default?
-      zoning:
-        title: "Zoning Milwaukee, Wisconsin"
-        themes: ["Property"]
-      aldermanic-districts:
-        title: "Alder Districts Milwaukee, Wisconsin"
-        themes: ["Boundaries"]
-      streets:
-        title: "Streets Milwaukee, Wisconsin"
-        themes: ["Transportation"]
-      residential-assessment-neighborhoods:
-        title: "Residential Assessment Neighborhoods Milwaukee, Wisconsin"
-        themes: ["Society", "Economy"]
-      firehouse-locations:
-        title: "Firehouse Locations Milwaukee, Wisconsin"
-        themes: ["Location", "Structures"]
-      voting-wards:
-        title: "Voting Wards Milwaukee, Wisconsin"
-        themes: ["Boundaries", "Society"]
-      libraries:
-        title: "Libraries Milwaukee, Wisconsin"
-        themes: ["Location", "Society"]
-      quarter-sections:
-        title: "PLSS Quarter Sections Milwaukee, Wisconsin"
-        themes: ["Location", "Boundaries"]
-      streetcar-route:
-        title: "Streetcar Route Milwaukee, Wisconsin"
-        themes: ["Transportation"]
-      street-car-stops:
-        title: "Streetcar Stops Milwaukee, Wisconsin"
-        themes: ["Transportation"]
-      milwaukee-public-school-board-districts:
-        title: "Milwaukee Public School Board Districts Milwaukee, Wisconsin"
-        themes: ["Society"]
-      neighborhoods:
-        title: "Neighborhoods Milwaukee, Wisconsin"
-        themes: ["Boundaries", "Society"]
-      neighborhood-strategic-planning-areas-nsp:
-        title: "Neighborhood Strategic Planning Areas Milwaukee, Wisconsin"
-        themes: ["Society"]
-      opportunity-zones:
-        title: "Opportunity Zones Milwaukee, Wisconsin"
-        themes: ["Society", "Economy"]
-      corporate-boundary:
-        title: "Corporate Boundary Milwaukee, Wisconsin"
-        themes: ["Boundaries"]
-      mmsd-geography:
-        title: "Milwaukee Metropolitan Sewerage District Geography Milwaukee, Wisconsin "
-        themes: ["Utilities"]
-        spatial: [-88.0772,-87.859534,42.919571,43.194858] # extends beyond City (and County?) of Milwaukee
-      library-service-areas:
-        title: "Library Service Areas Milwaukee, Wisconsin"
-        themes: ["Society"]
-      milwaukee-police-department-squad-areas:
-        title: "Police Department Squad Areas Milwaukee, Wisconsin"
-        themes: ["Society", "Boundaries"]
-      milwaukee-police-department-reporting-districts:
-        title: "Police Department Reporting Districts Milwaukee, Wisconsin"
-        themes: ["Society", "Boundaries"]
-      milwaukee-police-district:
-        title:  "Police Districts Milwaukee, Wisconsin"
-        themes: ["Society", "Boundaries"]
-      mpd-stations:
-        title: "Police Stations Milwaukee, Wisconsin"
-        themes: ["Society", "Structures", "Location"]
-      sixteenth-sections:
-        title: "PLSS Sixteenth Sections Milwaukee, Wisconsin"
-        themes: ["Location","Boundaries"]
-      dpw-parking:
-        title: "Parking Meters Milwaukee, Wisconsin"
-        themes: ["Transportation"]
-      neighborhood-improvement-districts:
-        title: "Neighborhood Improvement Districts Milwaukee, Wisconsin"
-        themes: ["Society"]
-      community-based-residential-facilities-within-city-of-milwaukee:
-        title: "Community Based Residential Facilities Milwaukee, Wisconsin"
-        themes: ["Society"]
-      neighborhood-revitalization-strategy-areas-nrsa:
-        title: "Neighborhood Revitalization Strategy Areas Milwaukee, Wisconsin"
-        themes: ["Society"]
-      targeted-investment-neighborhoods:
-        title: "Targeted Investment Neighborhoods Milwaukee, Wisconsin"
-        themes: ["Society", "Economy"]
-      tax-incremental-districts-tid:
-        title: "Tax Incremental Districts Milwaukee, Wisconsin"
-        themes: ["Society", "Economy"]
-      business-improvement-districts-bid:
-        title: "Business Improvement Districts Milwaukee, Wisconsin"
-        themes: ["Society", "Economy"]
-      votingward: 
-        title: "Polling Locations Milwaukee, Wisconsin"
-        themes: ["Society"]
-    SpecialDatasets:
-      garbage-recycling-collection:
-        note: "14 rest services by subject"
-        title:
-        themes:
-      dpw-operations:
-        note: "6 rest services by subject"
-        title:
-        themes:
-      dpw-forestry:
-        note: "2 rest services by subject"
-        title:
-        themes:
-      community-living-arrangement-facilities:
-        note: "5 rest services by subject"
-        title:
-        themes:
-      paving-projects:
-        note: "4 rest services by year"
-        title:
-        themes:
-      parcel-outlines:
-        note: "The service has MPROP, the rest of the shapefiles are by year and probably don't need frequent update"
-        title: 
-        themes:  
-      master-address-index-mai-points-mpd:
-        note: "This one is weird. I think MAI is updated more often, but this is 3 years old. Why MPD? see mai"
-      mprop:
-        note: "CSV, JSON, XML"
-      mai:
-        note: "current MAI updated daily. CSV, JSON, XML"
-      legaldescriptions:
-        note: "CSV, JSON, XML"
-      environmentaldcd:
-        note: "CSV, JSON, XML"
-        title: "Tax Delinquent Brownfields Milwaukee, Wisconsin"
-      accelavacantbuilding:
-        note: "CSV, JSON, XML"
-        title: "Vacant Buildings Milwaukee, Wisconsin"
-      delinquent-real-estate-tax-accounts:
-        title: "Delinquent Real Estate Tax Accounts"
-        note: "excel only, includes taxkey and addresses"
-      
-
-
+  DHS_OpenData:
+   CreatedBy: "Wisconsin Department of Health Services"
+   SiteURL: "https://data.dhsgis.wi.gov/data.json"
+   SiteName: "DHS"
+   SkipList: 
+     - UUID: "ca921d70bdd84ae8bc84cd09abd822d7" # link to census geography website 
+     - UUID: "00883495714c42a9be53b76b24300c8e" # GIS data disclaimer 
+     - UUID: "200036084844418bb3119d963cd7d98c" # OSDP Help?
 
 ArcGIS_Sites:
 
@@ -501,5 +362,148 @@ ArcGIS_Sites:
     SiteName: "WoodCounty"
     SkipList: ""
 
+CKAN_Sites:
+  Milwaukee_OpenData:
+    CreatedBy: "City of Milwaukee"
+    SiteURL: "https://data.milwaukee.gov"
+    SiteName: "Milwaukee"
+    Datasets:
+      liquorlicenses:
+        title: "Active Liquor Licenses Milwaukee, Wisconsin"
+        themes: ["Society", "Economy"]
+        spatial: [-88.069979,-87.825193,43.192568,42.842004] # Default from CSV for Milwaukee, but maybe omit if default?
+      zoning:
+        title: "Zoning Milwaukee, Wisconsin"
+        themes: ["Property"]
+      aldermanic-districts:
+        title: "Alder Districts Milwaukee, Wisconsin"
+        themes: ["Boundaries"]
+      streets:
+        title: "Streets Milwaukee, Wisconsin"
+        themes: ["Transportation"]
+      residential-assessment-neighborhoods:
+        title: "Residential Assessment Neighborhoods Milwaukee, Wisconsin"
+        themes: ["Society", "Economy"]
+      firehouse-locations:
+        title: "Firehouse Locations Milwaukee, Wisconsin"
+        themes: ["Location", "Structures"]
+      voting-wards:
+        title: "Voting Wards Milwaukee, Wisconsin"
+        themes: ["Boundaries", "Society"]
+      libraries:
+        title: "Libraries Milwaukee, Wisconsin"
+        themes: ["Location", "Society"]
+      quarter-sections:
+        title: "PLSS Quarter Sections Milwaukee, Wisconsin"
+        themes: ["Location", "Boundaries"]
+      streetcar-route:
+        title: "Streetcar Route Milwaukee, Wisconsin"
+        themes: ["Transportation"]
+      street-car-stops:
+        title: "Streetcar Stops Milwaukee, Wisconsin"
+        themes: ["Transportation"]
+      milwaukee-public-school-board-districts:
+        title: "Milwaukee Public School Board Districts Milwaukee, Wisconsin"
+        themes: ["Society"]
+      neighborhoods:
+        title: "Neighborhoods Milwaukee, Wisconsin"
+        themes: ["Boundaries", "Society"]
+      neighborhood-strategic-planning-areas-nsp:
+        title: "Neighborhood Strategic Planning Areas Milwaukee, Wisconsin"
+        themes: ["Society"]
+      opportunity-zones:
+        title: "Opportunity Zones Milwaukee, Wisconsin"
+        themes: ["Society", "Economy"]
+      corporate-boundary:
+        title: "Corporate Boundary Milwaukee, Wisconsin"
+        themes: ["Boundaries"]
+      mmsd-geography:
+        title: "Milwaukee Metropolitan Sewerage District Geography Milwaukee, Wisconsin "
+        themes: ["Utilities"]
+        spatial: [-88.0772,-87.859534,42.919571,43.194858] # extends beyond City (and County?) of Milwaukee
+      library-service-areas:
+        title: "Library Service Areas Milwaukee, Wisconsin"
+        themes: ["Society"]
+      milwaukee-police-department-squad-areas:
+        title: "Police Department Squad Areas Milwaukee, Wisconsin"
+        themes: ["Society", "Boundaries"]
+      milwaukee-police-department-reporting-districts:
+        title: "Police Department Reporting Districts Milwaukee, Wisconsin"
+        themes: ["Society", "Boundaries"]
+      milwaukee-police-district:
+        title:  "Police Districts Milwaukee, Wisconsin"
+        themes: ["Society", "Boundaries"]
+      mpd-stations:
+        title: "Police Stations Milwaukee, Wisconsin"
+        themes: ["Society", "Structures", "Location"]
+      sixteenth-sections:
+        title: "PLSS Sixteenth Sections Milwaukee, Wisconsin"
+        themes: ["Location","Boundaries"]
+      dpw-parking:
+        title: "Parking Meters Milwaukee, Wisconsin"
+        themes: ["Transportation"]
+      neighborhood-improvement-districts:
+        title: "Neighborhood Improvement Districts Milwaukee, Wisconsin"
+        themes: ["Society"]
+      community-based-residential-facilities-within-city-of-milwaukee:
+        title: "Community Based Residential Facilities Milwaukee, Wisconsin"
+        themes: ["Society"]
+      neighborhood-revitalization-strategy-areas-nrsa:
+        title: "Neighborhood Revitalization Strategy Areas Milwaukee, Wisconsin"
+        themes: ["Society"]
+      targeted-investment-neighborhoods:
+        title: "Targeted Investment Neighborhoods Milwaukee, Wisconsin"
+        themes: ["Society", "Economy"]
+      tax-incremental-districts-tid:
+        title: "Tax Incremental Districts Milwaukee, Wisconsin"
+        themes: ["Society", "Economy"]
+      business-improvement-districts-bid:
+        title: "Business Improvement Districts Milwaukee, Wisconsin"
+        themes: ["Society", "Economy"]
+      votingward: 
+        title: "Polling Locations Milwaukee, Wisconsin"
+        themes: ["Society"]
+    SpecialDatasets:
+      garbage-recycling-collection:
+        note: "14 rest services by subject"
+        title:
+        themes:
+      dpw-operations:
+        note: "6 rest services by subject"
+        title:
+        themes:
+      dpw-forestry:
+        note: "2 rest services by subject"
+        title:
+        themes:
+      community-living-arrangement-facilities:
+        note: "5 rest services by subject"
+        title:
+        themes:
+      paving-projects:
+        note: "4 rest services by year"
+        title:
+        themes:
+      parcel-outlines:
+        note: "The service has MPROP, the rest of the shapefiles are by year and probably don't need frequent update"
+        title: 
+        themes:  
+      master-address-index-mai-points-mpd:
+        note: "This one is weird. I think MAI is updated more often, but this is 3 years old. Why MPD? see mai"
+      mprop:
+        note: "CSV, JSON, XML"
+      mai:
+        note: "current MAI updated daily. CSV, JSON, XML"
+      legaldescriptions:
+        note: "CSV, JSON, XML"
+      environmentaldcd:
+        note: "CSV, JSON, XML"
+        title: "Tax Delinquent Brownfields Milwaukee, Wisconsin"
+      accelavacantbuilding:
+        note: "CSV, JSON, XML"
+        title: "Vacant Buildings Milwaukee, Wisconsin"
+      delinquent-real-estate-tax-accounts:
+        title: "Delinquent Real Estate Tax Accounts"
+        note: "excel only, includes taxkey and addresses"
 
   
