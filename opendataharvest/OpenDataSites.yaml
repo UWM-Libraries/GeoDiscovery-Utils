@@ -47,6 +47,11 @@ ArcGIS_Sites:
    SiteURL: "https://data.dhsgis.wi.gov/data.json"
    SiteName: "DHS"
    Spatial: ["Wisconsin", "United States"]
+   AppList:
+     - UUID: "29c62b7a834944ef8196573c123d7a9d" # Wisconsin Environmental Public Health Tracking
+     - UUID: "e1ca38bf16f54fb8ac879b386dbce422" # Flood Risk Assessment Tool
+     - UUID: "861fc902539e436ebef7a86a10e9337b" # immunization Map
+     - UUID: "43ed2d88cf1348608230572166d76697" # Radon map
    SkipList: 
      - UUID: "ca921d70bdd84ae8bc84cd09abd822d7" # link to census geography website 
      - UUID: "00883495714c42a9be53b76b24300c8e" # GIS data disclaimer 
@@ -57,7 +62,10 @@ ArcGIS_Sites:
     SiteURL: "https://data-wisdot.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "DOT"
     Spatial: ["Wisconsin", "United States"]
-    SkipList: "" 
+    AppList:
+      - UUID: "e5b648476a8b487b8d778f41fef0936d" # Community Maps
+      - UUID: "d1bd22f9e369402d9b665017d77b0125" # Culvert Inventory
+    SkipList: ""
 
   LTSB_OpenData: 
     Collections:
@@ -69,37 +77,63 @@ ArcGIS_Sites:
     DatasetPrefix: ""
     Spatial: ["Wisconsin", "United States"]
     DatasetPostfix: ", WI LTSB"
-    SkipList: ""  
-    
+    AppList: ""
+    SkipList:
+      - UUID: "766f969721fd42e38bd543a73b00983a"
+      - UUID: "064f4faea3fb44e887fc14093538174c"
+      - UUID: "fd0ff01a007b49cd8a1ccdd35283f2ec"
+      - UUID: "5a68df5711084d0fbcc2f2fb9ab5bf11"
+      - UUID: "b50132e87b7f4b8cb728ffdf44bb1a1f"
+
   WiDNR_OpenData: 
     CreatedBy: "Wisconsin Department of Natural Resources"
     SiteURL: "http://data-wi-dnr.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "WIDNR"
     Spatial: ["Wisconsin", "United States"]
     SpatialTip: "{{extent:computeSpatialProperty}} is used in the spatial field when it's a non-spatial dataset"
+    AppList:
+      - UUID: "f34ca451d5d14e23a588e8a93dc9417e" # Wetland Monitoring Gallery
+      - UUID: "200c06fc04074ef7ae24c0b74737b187" # Wetland Geodatabase
+      - UUID: "4da3c08881cb4bd880bf9f695840b29b" # Land Patents
     SkipList: 
-      - UUID: "wi-dnr-buy-licenses-and-permits-online-at-go-wild" 
-      - UUID: "wi-dnr-census-gov-geography-program"
-      - UUID: "wi-dnr-gcsm-full-report-october-1987" 
-      - UUID: "wi-dnr-gcsm-usage-documentation" 
-      - UUID: "wi-dnr-plss-landnet-technical-documentation" 
-      - UUID: "wi-dnr-usgs-national-map" 
-      - UUID: "wi-dnr-wiscland-2-user-guide" 
-      - UUID: "wi-dnr-wisconsinview"
-      - UUID: "wi-dnr-wisconsinview"   
+      - UUID: "0542ce7130144fe69705848f8d319ae7"
+      - UUID: "438c9dbdf5374faeba3339253e0c231c"
+      - UUID: "bf33290f978e43d5ab1665d78fab34e0"
+      - UUID: "8d68ad46853d48dcb492318de5c9ebd0"
+      - UUID: "9cff1d04434740dcb468941ae0a70d90"
+      - UUID: "2e5ab17c6ecb443fafa8ac0b1ecc5829"
+      - UUID: "d933fe7d39f04f4bb388e1d1c76e83f3"
+      - UUID: "4506324090d7496da868c4a025c56cf6"
+      - UUID: "96787e926ca34e07b1df3db6e320b340"
+      - UUID: "b5d58851193f4d5188acf643e00c4372"
 
   WEM_OpenData:
     CreatedBy: "Wisconsin Emergency Management"
     SiteURL: "http://data-wem.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "WEM"
     Spatial: ["Wisconsin", "United States"]
-    SkipList: ""
+    AppList: ""
+    SkipList:
+      - UUID: "4cb259688c6e47d1af82c617069b882e"
+      - UUID: "dc0c9118fd104ad19c8d736fa490591b"
+      - UUID: "a9c12f8e61f147a4b6d59b5e65a9c6c3"
+      - UUID: "55cc45682aba4cf08a8ce5ee43f0a2a6"
+      - UUID: "12535bed0039447fa7df7819c1b3950f"
 
   DPI_OpenData:
     CreatedBy: "Wisconsin Department of Public Instruction"
     SiteURL: "https://data-wi-dpi.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "DPI"
     Spatial: ["Wisconsin", "United States"]
+    AppList:
+      - UUID: "39d902cc45294ca8a3d62d1bfd237aa4" # Student Home Internet Survey
+      - UUID: "24d718b4d3674e7eb8d7230359a5b73c" # Education Boundaries, Wisconsin
+      - UUID: "9b32bb6808894d608055cf7d0300d7c7" # ISPs
+      - UUID: "f73a6de8ce0b4ce8a5376d5966d598d6" # Overlap
+      - UUID: "6936198c3fd347ebac5ccf6a94713656" # Enrollment
+      - UUID: "60474b6a64e74559a51f9993d44e0228"
+      - UUID: "1f679d805760455eab1ab9a41cf2a7c7"
+      - UUID: "269abbd1e18a4bf4ab901d73f13e06a0"
     SkipList: 
       - UUID: "WI-DPI-dpi-open-data"
       - UUID: "WI-DPI-test-layer"
@@ -113,6 +147,7 @@ ArcGIS_Sites:
     SiteURL: "https://opendata-fitchburgwi.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "CityOfFitchburg"
     Spatial: ["Fitchburg", "Wisconsin", "United States"]
+    DefaultBbox: "Dane" # For now
     SkipList: 
        - UUID: "FitchburgWI-open-data-hub"
        - UUID: "FitchburgWI-city-of-fitchburg-police-department"
@@ -125,6 +160,7 @@ ArcGIS_Sites:
     SiteURL: "http://data-cityofmadison.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "CityOfMadison"
     Spatial: ["Madison", "Wisconsin", "United States"]
+    DefaultBbox: "Dane" # For now
     SkipList: 
       - UUID: "cityofmadison-city-calendar-of-events"  
 
@@ -144,6 +180,7 @@ ArcGIS_Sites:
     SiteURL: "http://rapidsdata-wisconsinrapids.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "CityOfWisconsinRapids"
     Spatial: ["Wisconsin Rapids", "Wisconsin", "United States"]
+    DefaultBbox: "Wood" # For now
     SkipList: ""
 
 # Sun Prairie site does not seem fully-functional as of 1/14/2022
@@ -207,6 +244,12 @@ ArcGIS_Sites:
       - UUID: "86de95d4e0244cba80f0fa2c9403a7b2" 
       - UUID: "8b3b470883a744aeb60e5fff0a319ce7" 
       - UUID: "d8855ee4d3d74413babfb0f41203b168"  
+      - UUID: "9efc83597840415e8a9237c70102279a" 
+      - UUID: "9d846bd61c7745b78d24520f3ca4e173" 
+      - UUID: "01a9cf952f024a73bd8450e0319d0f47"  
+      - UUID: "00719e989d25460bbbdc6d336e281026"  
+      - UUID: "346c14ea571d4e64bafa47db05964bbd"  
+      - UUID: "4be17af8cb9a46438fb20a44f8d8de12"  
 
   ECWRPC_OpenData:
     CreatedBy: "East Central Wisconsin Regional Planning Commission"
@@ -261,24 +304,26 @@ ArcGIS_Sites:
     SiteName: "EauClaireCounty"
     DefaultBbox: "Eau Claire"
     Spatial: ["Eau Claire County", "Wisconsin", "United States"]
+    AppList:
+      - UUID: "cb505290c5e44c6185e83d814e58ed19" # Aiport Zoning
+      - UUID: "d2ba78cd16a74070b4901f38b2e706b4" # Lidar and Air Photo Download App
+      - UUID: "53b6d275fa594bb6ad8a76f612cd7b87" # Historical Air Photo App
     SkipList: 
-      - UUID: "termsofuse"
-      - UUID: "open-data"
-      - UUID: "maps-apps"
-      - UUID: "stories"
-      - UUID: "ab478acb9f074747bfe288660cfe13a6_0"
-      - UUID: "eccounty-public-notification-1"
-      - UUID: "eccounty-wg-extreme"   
+      - UUID: "f2c971b06a4340e1bfb206fe693008af"
 
   Kenosha_OpenData: 
     CreatedBy: "Kenosha County"
     SiteURL: "https://dataportal.kenoshacounty.org/api/feed/dcat-us/1.1.json"
-    SiteName: "Kenosha County"
+    SiteName: "KenoshaCounty"
     Spatial: ["Kenosha County", "Wisconsin", "United States"]
     DefaultBbox: "Kenosha"
+    AppList:
+      - UUID: "ffc6ee38a1e04a7ab0f875fff2fb1882" # Parcel Viewer
     SkipList:
-      - UUID: "kenoshacounty-citizenreportsrprtr-new"
-      - UUID: "kenoshacounty-public-notification"  
+      - UUID: "2305d040132b4e66a2f62166654e0d32"
+      - UUID: "c8f3263922c94d968d931a4ab714b943"  
+      - UUID: "d79c52a223824107a264b0884f9ab53c"
+      - UUID: "93634028191f4333a0055518d7a05d89"
 
   MilwaukeeCounty_OpenData:
     CreatedBy: "Milwaukee County"
@@ -287,18 +332,16 @@ ArcGIS_Sites:
     Spatial: ["Milwaukee County", "Wisconsin", "United States"]
     DefaultBbox: "Milwaukee"
     SkipList: 
-      - UUID: "d7f707071cd24b83ab3b9adb8a7d10ce"
       - UUID: "bce9201dd312445b9b4567ee14d8032a" 
-      - UUID: "84c7b8d95af04cdda6b0c2ae26590531"
-      - UUID: "7a1d3d055d4b4457845c721088c132f0"   
 
-  OutagamieCounty_OpenData:
-    CreatedBy: "Outagamie County"
-    SiteURL: "http://data-ocgis.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
-    SiteName: "OutagamieCounty"
-    Spatial: ["Outagamie County", "Wisconsin", "United States"]
-    DefaultBbox: "Outagamie"
-    SkipList: ""    
+# Having trouble extracting any useful data from Outagamie
+#  OutagamieCounty_OpenData:
+#    CreatedBy: "Outagamie County"
+#    SiteURL: "http://data-ocgis.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+#    SiteName: "OutagamieCounty"
+#    Spatial: ["Outagamie County", "Wisconsin", "United States"]
+#    DefaultBbox: "Outagamie"
+#    SkipList: ""    
 
   PierceCounty_OpenData:
     CreatedBy: "Pierce County"
@@ -306,6 +349,8 @@ ArcGIS_Sites:
     SiteName: "PierceCounty"
     Spatial: ["Pierce County", "Wisconsin", "United States"]
     DefaultBbox: "Pierce"
+    AppList:
+      - UUID: "cb9c65ce9ea34cc09b3e27a2f83c9077" # Tourism StoryMap
     SkipList: ""   
 
   RacineCounty_OpenData:
@@ -314,15 +359,17 @@ ArcGIS_Sites:
     Spatial: ["Racine County", "Wisconsin", "United States"]
     DefaultBbox: "Racine"
     SiteName: "RacineCounty"
+    AppList:
+      - UUID: "cb9c65ce9ea34cc09b3e27a2f83c9077"
     SkipList: ""
 
-  SheboyganCounty_OpenData:
-    CreatedBy: "Sheboygan County"
-    SiteURL: "https://geospatialhub-shebco.hub.arcgis.com/api/feed/dcat-us/1.1.json"
-    SiteName: "SheboyganCounty"
-    Spatial: ["Sheboygan County", "Wisconsin", "United States"]
-    DefaultBbox: "Sheboygan"
-    SkipList: ""    
+  # SheboyganCounty_OpenData:
+  #   CreatedBy: "Sheboygan County"
+  #   SiteURL: "https://geospatialhub-shebco.hub.arcgis.com/api/feed/dcat-us/1.1.json"
+  #   SiteName: "SheboyganCounty"
+  #   Spatial: ["Sheboygan County", "Wisconsin", "United States"]
+  #   DefaultBbox: "Sheboygan"
+  #   SkipList: ""    
 
   StCroixCounty_OpenData:
     CreatedBy: "St. Croix County"
@@ -330,7 +377,9 @@ ArcGIS_Sites:
     SiteName: "StCroixCounty"
     Spatial: ["St. Croix County", "Wisconsin", "United States"]
     DefaultBbox: "Saint Croix"
-    SkipList: ""   
+    SkipList:
+      - UUID: "ac5de4ea14c9454e8325fb957225c906"
+
 
   SaukCounty_OpenData:
     CreatedBy: "Sauk County"
@@ -340,8 +389,25 @@ ArcGIS_Sites:
     DatasetPrefix: ""
     DatasetPostfix: ", Sauk County"
     DefaultBbox: "Sauk"
+    AppList:
+      - UUID: "f8c8c723ef124d7a9a00452b87f3db80"
+      - UUID: "07db83644cfb47a8a3fb1300b683aade"
+      - UUID: "07db83644cfb47a8a3fb1300b683aade"
+      - UUID: "5770a064a59b4398aeaff698567ad55c"
+      - UUID: "321b1c18cedd4213a2a52a54d730a0b2"
+      - UUID: "38dd5615f1a04d75a36199cf739eea5a"
+      - UUID: "dcd6440ccf0b49feab4cbcd7ae9e3e5d"
+      - UUID: "0460dae891a041eda34c689609336aa3"
+      - UUID: "7562edd0e43941239fbe3aaf02ae4599"
+      - UUID: "4d052fa2d38b4724a61cb041929e8d49"
+      - UUID: "56837c2cb6fd4041affb3be102968cc1"
+      - UUID: "f034ce5347424b19aec83f9f4a2aa7a6"
+      - UUID: "a2c3954d9aa24d50b110897e71fcde86"
+      - UUID: "69764cb4c6f44f30be1069b6099a26ec"
+      - UUID: "a2ce6001eac14574b2a45724476d86de"
+      - UUID: "be7f9fe39222458b8efff167f8c94cba"
     SkipList:
-      - UUID: "saukgis-sauk-county-open-data-repository"
+      - UUID: "b4b295c1f62840a2ae28c3811ac6bcce"
 
   TrempealeauCounty_OpenData:
     CreatedBy: "Trempealeau County"
@@ -349,7 +415,8 @@ ArcGIS_Sites:
     SiteName: "TrempealeauCounty"
     Spatial: ["Trempealeau County", "Wisconsin", "United States"]
     DefaultBbox: "Trempealeau"
-    SkipList: ""
+    SkipList:
+      - UUID: "afc1effa8b5c4a98a0f35ca54e61d018"
 
   VilasCounty_OpenData:
     CreatedBy: "Vilas County"
@@ -358,9 +425,12 @@ ArcGIS_Sites:
     Spatial: ["Vilas County", "Wisconsin", "United States"]
     DefaultBbox: "Vilas"
     SkipList: 
-      - UUID: "vilas-usda-nrcs-geospatial-data-gateway"
-      - UUID: "vilas-sco-wi-aerial-photography-catalog"
-      - UUID: "vilas-vilas-county-geodata-hub"
+      - UUID: "81e69aa1029d41a09b8cdb112f221efe"
+      - UUID: "d6e8df34a3034a169073a989123f2086"
+      - UUID: "f37edafef8914e8e9d957ac490ed4f23"
+      - UUID: "1af79a5fca734020a6a41d954ebdb2e1"
+      - UUID: "50d307265f1f435c83b930497339e6d0"
+      - UUID: "08a1bcad6ffc4d6eaacbb5382436986a"
 
   WalworthCounty_OpenData:
     CreatedBy: "Walworth County"
@@ -391,6 +461,8 @@ ArcGIS_Sites:
     SiteName: "WaukeshaCounty"
     Spatial: ["Waukesha County", "Wisconsin", "United States"]
     DefaultBbox: "Waukesha"
+    AppList:
+      - UUID: "238e325d54fc4ae591bfd5df71574458"
     SkipList: ""
 
   WaupacaCounty_OpenData:
@@ -399,7 +471,10 @@ ArcGIS_Sites:
     SiteName: "WaupacaCounty"
     Spatial: ["Waupaca County", "Wisconsin", "United States"]
     DefaultBbox: "Waupaca"
-    SkipList: ""
+    AppList:
+      - UUID: "f231321d9f1d4d77b605dfb9b33046e0"
+    SkipList:
+      - UUID: "b6dd1313a3944c84ad965dbcbac197d3"
 
   WausharaCounty_OpenData:
     CreatedBy: "Waushara County"
@@ -415,6 +490,12 @@ ArcGIS_Sites:
     SiteName: "WoodCounty"
     Spatial: ["Wood County", "Wisconsin", "United States"]
     DefaultBbox: "Wood"
+    AppList:
+      - UUID: "623300abe751422091003f2ba5f4b2e9"
+      - UUID: "dbda3bb2984345f08d1b4de4523031df"
+      - UUID: "ee70f8224c9e47bdb816a4979ca092c4"
+      - UUID: "61dd328dbae5414ca2c2ee46091c7e12"
+      - UUID: "3bf1d03d96d1403588f2f758374cbb2a"
     SkipList: ""
 
 CKAN_Sites:

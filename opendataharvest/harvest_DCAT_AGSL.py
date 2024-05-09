@@ -4,20 +4,13 @@ import json
 import requests
 import re
 import time
+import csv
 from datetime import datetime
 from pprint import pp
 from urllib.parse import quote
 from dateutil import parser
 from pathlib import Path
 
-def logg(string):
-    string = str(string)
-    logfile = OUTPUTDIR / "_logfile.txt"
-    log = open(logfile, 'a')
-    log.write(string)
-    log.write("\n")
-    print(string, "\n")
-    log.close()
 
 OpenDataSites = yaml.safe_load(
     open(
@@ -30,21 +23,46 @@ OUTPUTDIR = Path(
 )
 assert OUTPUTDIR.is_dir()
 
+DEFAULTBBOX = Path(
+    r"C:\Users\srappel\Documents\GitHub\GeoDiscovery-Utils\opendataharvest\Wisconsin-Counties-CSV.csv"
+)
+
+
 CATALOG = OpenDataSites["ArcGIS_Sites"]
 assert isinstance(CATALOG, dict)
 
 MAXRETRY = 1
 SLEEPTIME = 1
 
+LOGFILE = OUTPUTDIR / "_logfile.txt"
+logw = open(LOGFILE, "w")
+logw.write("")
+logw.close()
+
+
+def logg(string):
+    string = str(string)
+    log = open(LOGFILE, "a")
+    log.write(string)
+    log.write("\n")
+    print(string, "\n")
+    log.close()
+
 
 class Site:
     def __init__(
-        self, site_name: str, site_details: dict, site_json: dict, site_skiplist: list
+        self,
+        site_name: str,
+        site_details: dict,
+        site_json: dict,
+        site_skiplist: list,
+        site_applist: list,
     ):
         self.site_name = site_name
         self.site_details = site_details
         self.site_json = site_json
         self.site_skiplist = site_skiplist
+        self.site_applist = site_applist
 
     def __getitem__(self, key):
         return getattr(self, key)
@@ -65,8 +83,12 @@ def harvest_sites() -> list:
                 if "SkipList" in details:
                     for skip in details["SkipList"]:
                         site_skiplist.append(skip["UUID"])
+                site_applist = []
+                if "AppList" in details:
+                    for app in details["AppList"]:
+                        site_applist.append(app["UUID"])
                 current_Site = Site(
-                    details["SiteName"], details, site_json, site_skiplist
+                    details["SiteName"], details, site_json, site_skiplist, site_applist
                 )
                 site_list.append(current_Site)
                 break  # If the request is successful, break the retry loop
@@ -125,6 +147,11 @@ class Aardvark:
 
         assert isinstance(self.id, str) and len(self.id) > 0, "id is required"
 
+        # Stop processing if in skiplist
+        if self.uuid in website.site_skiplist:
+            logg(f"{self.uuid} is on the skiplist...\n")
+            return
+
         # dct_identifier_sm
         self.dct_identifier_sm = dataset_dict["identifier"]
 
@@ -132,10 +159,10 @@ class Aardvark:
         self.dct_spatial_sm = website.site_details["Spatial"]
 
         # dct_title_s (REQUIRED)
-        self.dct_title_s = dataset_dict.get("title", "")
-        assert (
-            isinstance(self.dct_title_s, str) and len(self.dct_title_s) > 0
-        ), "Title is required"
+        prefix = website.site_details["CreatedBy"]
+        title = prefix + " - " + dataset_dict.get("title", "Untitled Dataset")
+
+        self.dct_title_s = title
 
         # gbl_mdModified_dt (Required)
         self.gbl_mdModified_dt = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -203,6 +230,16 @@ class Aardvark:
 
             return envelope
 
+        def defaultBbox():
+            if "DefaultBbox" in website.site_details:
+                default_bbox = website.site_details["DefaultBbox"]
+                default_csv = open(DEFAULTBBOX)
+                bboxreader = csv.DictReader(default_csv)
+                for row in bboxreader:
+                    if row["name"] == default_bbox:
+                        envelope = f"ENVELOPE({row['west']},{row['east']},{row['north']},{row['south']})"
+            return envelope
+
         if "spatial" in dataset_dict:
             try:
                 self.locn_geometry = self.dcat_bbox = process_dcat_spatial(
@@ -212,7 +249,12 @@ class Aardvark:
                 logg(
                     f"There was a problem interpreting the bbox information for: {self.id}\n\t - at {dataset_dict['landingPage']}\n\t Error: {e}\n"
                 )
-                self.locn_geometry = self.dcat_bbox = None
+                try:
+                    self.locn_geometry = self.dcat_bbox = defaultBbox()
+                    logg(f"Using default envelope for the website.")
+                except UnboundLocalError as e:
+                    logg(f"{e}\n")
+                    self.locn_geometry = self.dcat_bbox = None
 
         # dcat_keyword_sm (string multiple!)
         self.dcat_keyword_sm = dataset_dict.get("keyword", [])
@@ -301,6 +343,10 @@ class Aardvark:
 
         format_fetcher()
 
+        # Replace gbl_resourceClass_sm for web applications/websites
+        if self.uuid in website.site_applist:
+            self.gbl_resourceClass_sm = "Websites"
+
     def __str__(self):
         return f"""
         Title: {self.dct_title_s}
@@ -334,5 +380,3 @@ for website in list_of_sites:
             # print(f'Writing {newfilePath}')
             f.write(new_aardvark_object.toJSON())
             f.close()
-        else:
-            logg(f'{new_aardvark_object.id} is on the skiplist.\n')
