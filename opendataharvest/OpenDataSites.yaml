@@ -308,7 +308,7 @@ ArcGIS_Sites:
 
   SheboyganCounty_OpenData:
     CreatedBy: "Sheboygan County"
-    SiteURL: "https://data-shebco.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteURL: "https://geospatialhub-shebco.hub.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "SheboyganCounty"
     Spatial: ["Sheboygan County", "Wisconsin", "United States"]
     SkipList: ""    
