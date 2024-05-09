@@ -76,6 +76,7 @@ ArcGIS_Sites:
     SiteURL: "http://data-wi-dnr.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "WIDNR"
     Spatial: ["Wisconsin", "United States"]
+    SpatialTip: "{{extent:computeSpatialProperty}} is used in the spatial field when it's a non-spatial dataset"
     SkipList: 
       - UUID: "wi-dnr-buy-licenses-and-permits-online-at-go-wild" 
       - UUID: "wi-dnr-census-gov-geography-program"
