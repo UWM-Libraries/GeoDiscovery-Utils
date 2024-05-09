@@ -10,6 +10,15 @@ from urllib.parse import quote
 from dateutil import parser
 from pathlib import Path
 
+def logg(string):
+    string = str(string)
+    logfile = OUTPUTDIR / "_logfile.txt"
+    log = open(logfile, 'a')
+    log.write(string)
+    log.write("\n")
+    print(string, "\n")
+    log.close()
+
 OpenDataSites = yaml.safe_load(
     open(
         r"C:\Users\srappel\Documents\GitHub\GeoDiscovery-Utils\opendataharvest\OpenDataSites.yaml",
@@ -62,16 +71,16 @@ def harvest_sites() -> list:
                 site_list.append(current_Site)
                 break  # If the request is successful, break the retry loop
             except json.JSONDecodeError:
-                print(f"The content from {site} is not a valid JSON document.")
+                logg(f"The content from {site} is not a valid JSON document.")
                 break  # If the content is not valid JSON, break the retry loop
             except (requests.HTTPError, requests.exceptions.Timeout) as e:
-                print(
+                logg(
                     f"Received bad response from {site}. Retrying after {SLEEPTIME} seconds..."
                 )
                 time.sleep(SLEEPTIME)  # Wait for 1 second before retrying
                 if i == (MAXRETRY - 1):  # If this was the last retry
-                    print(f"Failed to connect to {site} after {MAXRETRY + 1} attempts.")
-                    print(e)
+                    logg(f"Failed to connect to {site} after {MAXRETRY + 1} attempts.")
+                    logg(str(e))
     return site_list
 
 
@@ -199,9 +208,9 @@ class Aardvark:
                 self.locn_geometry = self.dcat_bbox = process_dcat_spatial(
                     dataset_dict["spatial"]
                 )
-            except ValueError:
-                print(
-                    f"There was a problem interpreting the bbox information for: {self.id} - at {dataset_dict['landingPage']}"
+            except ValueError as e:
+                logg(
+                    f"There was a problem interpreting the bbox information for: {self.id}\n\t - at {dataset_dict['landingPage']}\n\t Error: {e}\n"
                 )
                 self.locn_geometry = self.dcat_bbox = None
 
@@ -325,3 +334,5 @@ for website in list_of_sites:
             # print(f'Writing {newfilePath}')
             f.write(new_aardvark_object.toJSON())
             f.close()
+        else:
+            logg(f'{new_aardvark_object.id} is on the skiplist.\n')
