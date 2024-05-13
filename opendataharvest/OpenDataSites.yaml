@@ -203,6 +203,8 @@ ArcGIS_Sites:
     SiteURL: "https://data-carpc.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "CARPC"
     Spatial: ["Wisconsin", "United States"]
+    AppList:
+      - UUID: "e64f06e8d912465a96f9ea9bfdb72676"
     SkipList: 
       - UUID: "esri-usa-topo-maps-1"   
       - UUID: "wi-dnr-303d-impaired-rivers-and-streams-listed"    

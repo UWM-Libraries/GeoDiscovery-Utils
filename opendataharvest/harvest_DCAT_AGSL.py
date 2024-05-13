@@ -5,7 +5,6 @@ import re
 import time
 from datetime import datetime
 from pathlib import Path
-from pprint import pp
 from urllib.parse import quote
 from typing import List
 
@@ -193,10 +192,6 @@ class AardvarkDataProcessor:
         publisher = dataset_dict.get("publisher", [])
         landingPage = dataset_dict.get("landingPage", "")
 
-        # Process data as needed
-        # ...
-
-        # Return processed data
         return {
             "title": title,
             "identifier": identifier,
@@ -239,19 +234,20 @@ class AardvarkDataProcessor:
         if len(matches) != 4:
             raise ValueError("Non-conforming spatial bounding box")
 
-        # Convert to floats
+        # Convert to floats and validate coordinates
         coordinates = [float(coord) for coord in matches]
+        longitudes = coordinates[::2]
+        latitudes = coordinates[1::2]
 
-        # Validate coordinates
-        if not is_in_range(coordinates[0], -180, 180) or not is_in_range(
-            coordinates[2], -180, 180
-        ):
+        if not all(is_in_range(lon, -180, 180) for lon in longitudes):
             raise ValueError("Longitude coordinates must be between -180 and 180")
 
-        if not is_in_range(coordinates[1], -90, 90) or not is_in_range(
-            coordinates[3], -90, 90
-        ):
+        if not all(is_in_range(lat, -90, 90) for lat in latitudes):
             raise ValueError("Latitude coordinates must be between -90 and 90")
+
+        # Ensure North is greater than South and East is greater than West
+        coordinates[1], coordinates[3] = sorted(latitudes)
+        coordinates[0], coordinates[2] = sorted(longitudes)
 
         # Convert to ENVELOPE format
         envelope = f"ENVELOPE({coordinates[0]},{coordinates[2]},{coordinates[1]},{coordinates[3]})"
@@ -302,22 +298,20 @@ class AardvarkDataProcessor:
 
     @staticmethod
     def format_fetcher(dataset_dict):
+        dct_format_s = None
+        gbl_resourceType_sm = None
+        gbl_resourceClass_sm = ["Datasets"]
+
         for distribution in dataset_dict["distribution"]:
             if distribution["title"] == "Shapefile":
                 dct_format_s = "Shapefile"
-                gbl_resourceType_sm = None
-                gbl_resourceClass_sm = ["Datasets"]
             elif "Aerial" in dataset_dict.get("title", "") or any(
                 keyword in dataset_dict.get("keyword", [])
                 for keyword in ["Aerial", "aerial", "imagery"]
             ):
                 gbl_resourceType_sm = "Aerial photographs"
                 dct_format_s = "Raster data"
-                gbl_resourceClass_sm = ["Datasets", "Imagery"]
-            else:
-                dct_format_s = None
-                gbl_resourceType_sm = None
-                gbl_resourceClass_sm = ["Datasets"]
+                gbl_resourceClass_sm.append("Imagery")
 
         return dct_format_s, gbl_resourceType_sm, gbl_resourceClass_sm
 
@@ -346,14 +340,13 @@ class Aardvark:
         ]
 
     def _process_id(self, dataset_dict, website):
-
         uuid, sublayer = AardvarkDataProcessor.extract_id_sublayer(
             dataset_dict["identifier"]
         )
         self.id = f"{website.site_name}-{uuid}{sublayer if sublayer else ''}"
         self.uuid = uuid
 
-        if not isinstance(self.id, str) and len(self.id) > 0:
+        if not self.id:
             logging.warning("ID is required.")
 
         # Stop processing if in skiplist
@@ -408,7 +401,7 @@ class Aardvark:
 
         # Replace gbl_resourceClass_sm for web applications/websites
         if self.uuid in website.site_applist:
-            self.gbl_resourceClass_sm = "Websites"
+            self.gbl_resourceClass_sm = ["Websites"]
 
     def _process_spatial(self, dataset_dict, website):
         if "spatial" in dataset_dict:
