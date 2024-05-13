@@ -31,13 +31,11 @@ DEFAULTBBOX = Path(
 
 
 CATALOG = OpenDataSites["ArcGIS_Sites"]
-assert isinstance(CATALOG, dict)
-
 MAXRETRY = 1
 SLEEPTIME = 1
-
-# Define the log file
-LOGFILE = OUTPUTDIR / "_logfile.txt"
+dt = str(datetime.now().timestamp())
+logfile_name = f"_logfile{dt}.txt"
+LOGFILE = OUTPUTDIR / logfile_name
 
 # Configure the logging module
 logging.basicConfig(
@@ -178,7 +176,7 @@ def harvest_sites() -> list:
     return site_list
 
 
-list_of_sites = harvest_sites()
+
 
 
 class AardvarkDataProcessor:
@@ -329,6 +327,9 @@ class AardvarkDataProcessor:
 
 
 class Aardvark:
+    """
+    A class to represent a single dataset as an OGM Aardvark record
+    """
     def __init__(self, dataset_dict, website):
         # Required fields
         self.pcdm_memberOf_sm = ["AGSLOpenDataHarvest"]
@@ -500,15 +501,13 @@ class Aardvark:
         )  # Removes uuid if it exists, does nothing otherwise
         return json.dumps(aardvark_dict)
 
+list_of_sites = harvest_sites()
 
 for website in list_of_sites:
-    for dataset in website.site_json["dataset"]:
-        new_aardvark_object = Aardvark(dataset, website)
-        if not new_aardvark_object.uuid in website.site_skiplist:
-            # print(new_aardvark_object.toJSON())
-            newfile = new_aardvark_object.id + ".json"
+    new_aardvark_objects = [Aardvark(dataset, website) for dataset in website.site_json["dataset"]]
+    for new_aardvark_object in new_aardvark_objects:
+        if new_aardvark_object.uuid not in website.site_skiplist:
+            newfile = f"{new_aardvark_object.id}.json"
             newfilePath = OUTPUTDIR / newfile
-            f = open(newfilePath, "w")
-            # print(f'Writing {newfilePath}')
-            f.write(new_aardvark_object.toJSON())
-            f.close()
+            with open(newfilePath, 'w') as f:
+                f.write(new_aardvark_object.toJSON())
