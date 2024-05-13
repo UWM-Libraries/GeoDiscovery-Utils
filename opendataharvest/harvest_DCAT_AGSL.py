@@ -40,7 +40,9 @@ SLEEPTIME = 1
 LOGFILE = OUTPUTDIR / "_logfile.txt"
 
 # Configure the logging module
-logging.basicConfig(filename=LOGFILE, filemode='w', level=logging.INFO, format='%(message)s')
+logging.basicConfig(
+    filename=LOGFILE, filemode="w", level=logging.INFO, format="%(message)s"
+)
 
 # Now, whenever you want to log a message, you can directly use logging.info()
 logging.info("This is a log message.")
@@ -85,9 +87,12 @@ def get_site_data(site: str, details: dict) -> dict:
             )
             time.sleep(SLEEPTIME)
             if i == (MAXRETRY - 1):
-                logging.warning(f"Failed to connect to {site} after {MAXRETRY + 1} attempts.")
+                logging.warning(
+                    f"Failed to connect to {site} after {MAXRETRY + 1} attempts."
+                )
                 logging.warning(str(e))
                 return None
+
 
 def get_uuid_list(details: dict, key: str) -> List[str]:
     """Extract UUIDs from details."""
@@ -96,6 +101,7 @@ def get_uuid_list(details: dict, key: str) -> List[str]:
         for item in details[key]:
             uuid_list.append(item["UUID"])
     return uuid_list
+
 
 def harvest_sites() -> list:
     """Main function to harvest sites."""
@@ -130,6 +136,77 @@ def extract_id_sublayer(url):
         logging.warning(f"No id was extracted from the url: {url}")
 
     return id_value, sublayer_value
+
+
+class AardvarkDataProcessor:
+    @staticmethod
+    def process_dcat_spatial(spatial_string):
+        def is_in_range(value, range_min, range_max):
+            return range_min <= value <= range_max
+
+        # Extract coordinates
+        pattern = r"(-?\d+\.\d+)"
+        matches = re.findall(pattern, spatial_string)
+
+        if len(matches) != 4:
+            raise ValueError("Non-conforming spatial bounding box")
+
+        # Convert to floats
+        coordinates = [float(coord) for coord in matches]
+
+        # Validate coordinates
+        if not is_in_range(coordinates[0], -180, 180) or not is_in_range(
+            coordinates[2], -180, 180
+        ):
+            raise ValueError("Longitude coordinates must be between -180 and 180")
+
+        if not is_in_range(coordinates[1], -90, 90) or not is_in_range(
+            coordinates[3], -90, 90
+        ):
+            raise ValueError("Latitude coordinates must be between -90 and 90")
+
+        # Convert to ENVELOPE format
+        envelope = f"ENVELOPE({coordinates[0]},{coordinates[2]},{coordinates[1]},{coordinates[3]})"
+
+        return envelope
+
+    @staticmethod
+    def defaultBbox(website):
+        envelope = None
+        if "DefaultBbox" in website.site_details:
+            default_bbox = website.site_details["DefaultBbox"]
+            with open(DEFAULTBBOX) as default_csv:
+                bboxreader = csv.DictReader(default_csv)
+                for row in bboxreader:
+                    if row["name"] == default_bbox:
+                        envelope = f"ENVELOPE({row['west']},{row['east']},{row['north']},{row['south']})"
+        return envelope
+
+    @staticmethod
+    def getURL(distribution):
+        url = distribution.get("accessURL", distribution.get("downloadURL", "invalid"))
+        return quote(url, safe=":/?=")
+
+    @staticmethod
+    def format_fetcher(dataset_dict):
+        for distribution in dataset_dict["distribution"]:
+            if distribution["title"] == "Shapefile":
+                dct_format_s = "Shapefile"
+                gbl_resourceType_sm = None
+                gbl_resourceClass_sm = ["Datasets"]
+            elif (
+                "Aerial" in dataset_dict.get("title", "")
+                or any(keyword in dataset_dict.get("keyword", []) for keyword in ["Aerial", "aerial", "imagery"])
+            ):
+                gbl_resourceType_sm = "Aerial photographs"
+                dct_format_s = "Raster data"
+                gbl_resourceClass_sm = ["Datasets", "Imagery"]
+            else:
+                dct_format_s = None
+                gbl_resourceType_sm = None
+                gbl_resourceClass_sm = ["Datasets"]
+
+        return dct_format_s, gbl_resourceType_sm, gbl_resourceClass_sm
 
 
 class Aardvark:
@@ -203,64 +280,20 @@ class Aardvark:
         self.dct_issued_s = dataset_dict.get("issued", "")
 
         # locn_geometry & dcat_bbox
-        def process_dcat_spatial(spatial_string):
-            # Extract coordinates
-
-            pattern = r"(-?\d+\.\d+)"
-            matches = re.findall(pattern, spatial_string)
-
-            if len(matches) != 4:
-                raise ValueError(f"Non-conforming spatial bounding box in {self.uuid}")
-
-            # Convert to floats
-            coordinates = [float(coord) for coord in matches]
-
-            #  ENVELOPE(W=0,E=2,N=1,S=3)
-
-            # error cases:
-            # North is less than South:
-            if coordinates[1] < coordinates[3]:
-                coordinates[1], coordinates[3] = coordinates[3], coordinates[1]
-
-            # East is less than West:
-            if coordinates[2] < coordinates[0]:
-                coordinates[2], coordinates[0] = coordinates[0], coordinates[2]
-
-            # West or East is greater than 180 or lower than -180
-            if not (-180 <= coordinates[0] <= 180) or not (
-                -180 <= coordinates[2] <= 180
-            ):
-                raise ValueError("CoordinateError:East-West")
-
-            if not (90 >= coordinates[1]) or not (-90 <= coordinates[3]):
-                raise ValueError("CoordinateError:North-South")
-
-            # Convert to ENVELOPE format
-            envelope = f"ENVELOPE({coordinates[0]},{coordinates[2]},{coordinates[1]},{coordinates[3]})"
-
-            return envelope
-
-        def defaultBbox():
-            if "DefaultBbox" in website.site_details:
-                default_bbox = website.site_details["DefaultBbox"]
-                default_csv = open(DEFAULTBBOX)
-                bboxreader = csv.DictReader(default_csv)
-                for row in bboxreader:
-                    if row["name"] == default_bbox:
-                        envelope = f"ENVELOPE({row['west']},{row['east']},{row['north']},{row['south']})"
-            return envelope
 
         if "spatial" in dataset_dict:
             try:
-                self.locn_geometry = self.dcat_bbox = process_dcat_spatial(
-                    dataset_dict["spatial"]
+                self.locn_geometry = self.dcat_bbox = (
+                    AardvarkDataProcessor.process_dcat_spatial(dataset_dict["spatial"])
                 )
             except ValueError as e:
                 logging.warning(
                     f"There was a problem interpreting the bbox information for: {self.id}\n\t - at {dataset_dict['landingPage']}\n\t Error: {e}\n"
                 )
                 try:
-                    self.locn_geometry = self.dcat_bbox = defaultBbox()
+                    self.locn_geometry = self.dcat_bbox = (
+                        AardvarkDataProcessor.defaultBbox(website)
+                    )
                     logging.warning(f"Using default envelope for the website.")
                 except UnboundLocalError as e:
                     logging.error(f"{e}\n")
@@ -271,20 +304,16 @@ class Aardvark:
 
         # dct_references_s
 
-        def getURL(refs):
-            url = refs.get("accessURL", refs.get("downloadURL", "invalid"))
-            return quote(url, safe=":/?=")
-
         if "distribution" in dataset_dict:
             references = {"http://schema.org/url": dataset_dict["landingPage"]}
-            for dist in dataset_dict["distribution"]:
-                url = getURL(dist)
-                if "format" in dist and url != "invalid":
-                    if dist["format"] == "ArcGIS GeoServices REST API":
+            for distribution in dataset_dict["distribution"]:
+                url = AardvarkDataProcessor.getURL(distribution)
+                if "format" in distribution and url != "invalid":
+                    if distribution["format"] == "ArcGIS GeoServices REST API":
                         if "FeatureServer" in url:
-                            references[
-                                "urn:x-esri:serviceType:ArcGIS#FeatureLayer"
-                            ] = url
+                            references["urn:x-esri:serviceType:ArcGIS#FeatureLayer"] = (
+                                url
+                            )
                         elif "ImageServer" in url:
                             references[
                                 "urn:x-esri:serviceType:ArcGIS#ImageMapLayer"
@@ -293,7 +322,7 @@ class Aardvark:
                             references[
                                 "urn:x-esri:serviceType:ArcGIS#DynamicMapLayer"
                             ] = url
-                    elif dist["format"] == "ZIP":
+                    elif distribution["format"] == "ZIP":
                         references["http://schema.org/downloadUrl"] = url
             self.dct_references_s = json.dumps(references).replace(" ", "")
 
@@ -334,24 +363,9 @@ class Aardvark:
         self.dct_rights_sm = rights
 
         # Format dct_format_s
-        # TODO: this is only catching shapefile right now.
-        def format_fetcher():
-            for distribution in dataset_dict["distribution"]:
-                if distribution["title"] == "Shapefile":
-                    self.dct_format_s = "Shapefile"
-                    return
-
-            if (
-                "Aerial" in dataset_dict.get("title")
-                or "aerial" in dataset_dict.get("keyword")
-                or "imagery" in dataset_dict.get("keyword")
-            ):
-                self.gbl_resourceType_sm = "Aerial photographs"
-                self.dct_format_s = "Raster data"
-                self.gbl_resourceClass_sm.append("Imagery")
-                return
-
-        format_fetcher()
+        self.dct_format_s, self.gbl_resourceType_sm, self.gbl_resourceClass_sm = (
+            AardvarkDataProcessor.format_fetcher(dataset_dict)
+            )
 
         # Replace gbl_resourceClass_sm for web applications/websites
         if self.uuid in website.site_applist:
