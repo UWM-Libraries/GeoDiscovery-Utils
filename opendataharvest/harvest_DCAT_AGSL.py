@@ -1,15 +1,17 @@
-# Imports
-import yaml
+import csv
 import json
-import requests
+import logging
 import re
 import time
-import csv
 from datetime import datetime
+from pathlib import Path
 from pprint import pp
 from urllib.parse import quote
+
+# Third party imports
+import requests
+import yaml
 from dateutil import parser
-from pathlib import Path
 
 
 OpenDataSites = yaml.safe_load(
