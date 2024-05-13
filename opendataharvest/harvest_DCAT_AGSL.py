@@ -122,23 +122,58 @@ def harvest_sites() -> list:
 list_of_sites = harvest_sites()
 
 
-def extract_id_sublayer(url):
-    id_pattern = r"id=([a-zA-Z0-9]+)"
-    sublayer_pattern = r"sublayer=(\d+)"
-
-    id_match = re.search(id_pattern, url)
-    sublayer_match = re.search(sublayer_pattern, url)
-
-    id_value = id_match.group(1) if id_match else None
-    sublayer_value = sublayer_match.group(1) if sublayer_match else None
-
-    if id_value is None:
-        logging.warning(f"No id was extracted from the url: {url}")
-
-    return id_value, sublayer_value
-
-
 class AardvarkDataProcessor:
+    @staticmethod
+    def extract_data(dataset_dict):
+        # Extract data from dataset_dict
+        title = dataset_dict.get("title", "Untitled Dataset")
+        identifier = dataset_dict["identifier"]
+        description = re.sub("<[^<]+?>", "", dataset_dict.get("description", []))
+        creator = (
+            [dataset_dict["publisher"]["name"]] if "publisher" in dataset_dict else []
+        )
+        issued = dataset_dict.get("issued", "")
+        modified = dataset_dict.get("modified", "")
+        keyword = dataset_dict.get("keyword", [])
+        spatial = dataset_dict.get("spatial", None)
+        distribution = dataset_dict.get("distribution", None)
+        publisher = dataset_dict.get("publisher", [])
+        landingPage = dataset_dict.get("landingPage", "")
+
+        # Process data as needed
+        # ...
+
+        # Return processed data
+        return {
+            "title": title,
+            "identifier": identifier,
+            "description": description,
+            "creator": creator,
+            "issued": issued,
+            "modified": modified,
+            "keyword": keyword,
+            "spatial": spatial,
+            "distribution": distribution,
+            "publisher": publisher,
+            "landingPage": landingPage,
+        }
+
+    @staticmethod
+    def extract_id_sublayer(url):
+        id_pattern = r"id=([a-zA-Z0-9]+)"
+        sublayer_pattern = r"sublayer=(\d+)"
+
+        id_match = re.search(id_pattern, url)
+        sublayer_match = re.search(sublayer_pattern, url)
+
+        id_value = id_match.group(1) if id_match else None
+        sublayer_value = sublayer_match.group(1) if sublayer_match else None
+
+        if id_value is None:
+            logging.warning(f"No id was extracted from the url: {url}")
+
+        return id_value, sublayer_value
+
     @staticmethod
     def process_dcat_spatial(spatial_string):
         def is_in_range(value, range_min, range_max):
@@ -188,15 +223,40 @@ class AardvarkDataProcessor:
         return quote(url, safe=":/?=")
 
     @staticmethod
+    def process_distribution(distribution):
+        url = AardvarkDataProcessor.getURL(distribution)
+        if "format" not in distribution or url == "invalid":
+            return None
+
+        format_to_reference = {
+            "ArcGIS GeoServices REST API": {
+                "FeatureServer": "urn:x-esri:serviceType:ArcGIS#FeatureLayer",
+                "ImageServer": "urn:x-esri:serviceType:ArcGIS#ImageMapLayer",
+                "MapServer": "urn:x-esri:serviceType:ArcGIS#DynamicMapLayer",
+            },
+            "ZIP": "http://schema.org/downloadUrl",
+        }
+
+        format_references = format_to_reference.get(distribution["format"], {})
+        if isinstance(format_references, dict):
+            for key, value in format_references.items():
+                if key in url:
+                    return {value: url}
+        else:
+            return {format_references: url}
+
+        return None
+
+    @staticmethod
     def format_fetcher(dataset_dict):
         for distribution in dataset_dict["distribution"]:
             if distribution["title"] == "Shapefile":
                 dct_format_s = "Shapefile"
                 gbl_resourceType_sm = None
                 gbl_resourceClass_sm = ["Datasets"]
-            elif (
-                "Aerial" in dataset_dict.get("title", "")
-                or any(keyword in dataset_dict.get("keyword", []) for keyword in ["Aerial", "aerial", "imagery"])
+            elif "Aerial" in dataset_dict.get("title", "") or any(
+                keyword in dataset_dict.get("keyword", [])
+                for keyword in ["Aerial", "aerial", "imagery"]
             ):
                 gbl_resourceType_sm = "Aerial photographs"
                 dct_format_s = "Raster data"
@@ -223,47 +283,32 @@ class Aardvark:
             "Although this data is being distributed by the American Geographical Society Library at the University of Wisconsin-Milwaukee Libraries, no warranty expressed or implied is made by the University as to the accuracy of the data and related materials. The act of distribution shall not constitute any such warranty, and no responsibility is assumed by the University in the use of this data, or related materials."
         ]
 
-        assert (
-            "title" in dataset_dict and "identifier" in dataset_dict
-        ), "Dataset missing title or identifier"
+        processed_dataset_dict = AardvarkDataProcessor.extract_data(dataset_dict)
 
-        # From YAML:
-        uuid, sublayer = extract_id_sublayer(dataset_dict["identifier"])
+        uuid, sublayer = AardvarkDataProcessor.extract_id_sublayer(
+            processed_dataset_dict["identifier"]
+        )
         self.id = f"{website.site_name}-{uuid}{sublayer if sublayer else ''}"
         self.uuid = uuid
 
-        assert isinstance(self.id, str) and len(self.id) > 0, "id is required"
+        if not isinstance(self.id, str) and len(self.id) > 0:
+            logging.warning("ID is required.")
 
         # Stop processing if in skiplist
         if self.uuid in website.site_skiplist:
             logging.info(f"{self.uuid} is on the skiplist...\n")
             return
 
-        # dct_identifier_sm
-        self.dct_identifier_sm = dataset_dict["identifier"]
+        self.dct_identifier_sm = processed_dataset_dict["identifier"]
 
-        # Process spatial bounding box
         self.dct_spatial_sm = website.site_details["Spatial"]
 
-        # dct_title_s (REQUIRED)
         prefix = website.site_details["CreatedBy"]
-        title = prefix + " - " + dataset_dict.get("title", "Untitled Dataset")
-
+        title = prefix + " - " + processed_dataset_dict["title"]
         self.dct_title_s = title
 
-        # gbl_mdModified_dt (Required)
         self.gbl_mdModified_dt = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
-        assert (
-            isinstance(self.gbl_mdModified_dt, str) and len(self.gbl_mdModified_dt) > 0
-        ), "mdModified is required"
 
-        # id (Required)
-        uuid, sublayer = extract_id_sublayer(dataset_dict["identifier"])
-        self.id = (
-            website.site_name + "-" + uuid + (sublayer if not sublayer is None else "")
-        )
-
-        # dct_description_sm
         self.dct_description_sm = [
             re.sub("<[^<]+?>", "", dataset_dict.get("description", []))
         ]
@@ -271,68 +316,57 @@ class Aardvark:
             f"This dataset was automatically cataloged from the author's Open Data Portal. In some cases, publication year and bounding coordinates shown here may be incorrect. Additional download formats may be available on the author's website. Please check the 'More details at' link for additional information."
         )
 
-        # dct_creator_sm
         self.dct_creator_sm = (
-            [dataset_dict["publisher"]["name"]] if "publisher" in dataset_dict else []
+            [processed_dataset_dict["publisher"]["name"]]
+            if "publisher" in processed_dataset_dict
+            else []
         )
 
         # dct_issued_s
-        self.dct_issued_s = dataset_dict.get("issued", "")
+        self.dct_issued_s = processed_dataset_dict["issued"]
 
-        # locn_geometry & dcat_bbox
-
-        if "spatial" in dataset_dict:
+        if "spatial" in processed_dataset_dict:
             try:
                 self.locn_geometry = self.dcat_bbox = (
                     AardvarkDataProcessor.process_dcat_spatial(dataset_dict["spatial"])
                 )
             except ValueError as e:
                 logging.warning(
-                    f"There was a problem interpreting the bbox information for: {self.id}\n\t - at {dataset_dict['landingPage']}\n\t Error: {e}\n"
+                    f"There was a problem interpreting the bbox information for: {self.id}\n\t - at {processed_dataset_dict['landingPage']}\n\t Error: {e}\n"
                 )
                 try:
                     self.locn_geometry = self.dcat_bbox = (
                         AardvarkDataProcessor.defaultBbox(website)
                     )
-                    logging.warning(f"Using default envelope for the website.")
+                    logging.warning(f"Using default envelope for the website.\n")
                 except UnboundLocalError as e:
                     logging.error(f"{e}\n")
                     self.locn_geometry = self.dcat_bbox = None
 
         # dcat_keyword_sm (string multiple!)
-        self.dcat_keyword_sm = dataset_dict.get("keyword", [])
+        self.dcat_keyword_sm = processed_dataset_dict["keyword"]
 
-        # dct_references_s
+        def process_distributions(self, processed_dataset_dict):
+            if "distribution" not in processed_dataset_dict:
+                return
 
-        if "distribution" in dataset_dict:
-            references = {"http://schema.org/url": dataset_dict["landingPage"]}
-            for distribution in dataset_dict["distribution"]:
-                url = AardvarkDataProcessor.getURL(distribution)
-                if "format" in distribution and url != "invalid":
-                    if distribution["format"] == "ArcGIS GeoServices REST API":
-                        if "FeatureServer" in url:
-                            references["urn:x-esri:serviceType:ArcGIS#FeatureLayer"] = (
-                                url
-                            )
-                        elif "ImageServer" in url:
-                            references[
-                                "urn:x-esri:serviceType:ArcGIS#ImageMapLayer"
-                            ] = url
-                        elif "MapServer" in url:
-                            references[
-                                "urn:x-esri:serviceType:ArcGIS#DynamicMapLayer"
-                            ] = url
-                    elif distribution["format"] == "ZIP":
-                        references["http://schema.org/downloadUrl"] = url
+            references = {
+                "http://schema.org/url": processed_dataset_dict["landingPage"]
+            }
+            for distribution in processed_dataset_dict["distribution"]:
+                reference = AardvarkDataProcessor.process_distribution(distribution)
+                if reference is not None:
+                    references.update(reference)
+
             self.dct_references_s = json.dumps(references).replace(" ", "")
 
         # index year and temporal coverage
-        if "modified" in dataset_dict:
+        if "modified" in processed_dataset_dict:
             try:
-                index_date = parser.parse(dataset_dict["modified"])
+                index_date = parser.parse(processed_dataset_dict["modified"])
                 index_year = int(index_date.year)
             except ImportError:
-                index_year = int(dataset_dict["modified"][:4])
+                index_year = int(processed_dataset_dict["modified"][:4])
             except Exception as e:
                 print(f"An error occurred: {e}")
 
@@ -341,14 +375,14 @@ class Aardvark:
         else:
             self.gbl_indexYear_im = []
 
-        if "issued" in dataset_dict:
+        if "issued" in processed_dataset_dict:
             try:
-                index_date = parser.parse(dataset_dict["issued"])
+                index_date = parser.parse(processed_dataset_dict["issued"])
                 index_year = int(index_date.year)
             except ImportError:
-                index_year = int(dataset_dict["issued"][:4])
+                index_year = int(processed_dataset_dict["issued"][:4])
             except Exception as e:
-                print(f"An error occurred: {e}")
+                logging.error("Problem processing the issued date.")
 
             self.gbl_indexYear_im.append(index_year)
             if self.dct_temporal_sm:
@@ -358,14 +392,14 @@ class Aardvark:
 
         # License and Rights
         rights = self.dct_rights_sm
-        if dataset_dict.get("license"):
-            rights.append(re.sub("<[^<]+?>", "", dataset_dict.get("license")))
+        if processed_dataset_dict.get("license"):
+            rights.append(re.sub("<[^<]+?>", "", processed_dataset_dict.get("license")))
         self.dct_rights_sm = rights
 
         # Format dct_format_s
         self.dct_format_s, self.gbl_resourceType_sm, self.gbl_resourceClass_sm = (
             AardvarkDataProcessor.format_fetcher(dataset_dict)
-            )
+        )
 
         # Replace gbl_resourceClass_sm for web applications/websites
         if self.uuid in website.site_applist:
@@ -373,23 +407,38 @@ class Aardvark:
 
     def __str__(self):
         return f"""
-        Title: {self.dct_title_s}
-        Id: {self.id}
-        Index Year: {self.gbl_indexYear_im}
-        Metadata Modified: {self.gbl_mdModified_dt}
-        Spatial: {self.dct_spatial_sm}
-        Description: {self.dct_description_sm}
-        Creator: {self.dct_creator_sm}
-        Issued: {self.dct_issued_s}
-        Spatial bbox: {self.locn_geometry}
-        References: {self.dct_references_s}
+        dcat_bbox: {self.dcat_bbox}
+        dcat_keyword_sm: {self.dcat_keyword_sm}
+        dct_accessRights_s: {self.dct_accessRights_s}
+        dct_creator_sm: {self.dct_creator_sm}
+        dct_description_sm: {self.dct_description_sm}
+        dct_format_s: {self.dct_format_s}
+        dct_identifier_sm: {self.dct_identifier_sm}
+        dct_issued_s: {self.dct_issued_s}
+        dct_language_sm: {self.dct_language_sm}
+        dct_references_s: {self.dct_references_s}
+        dct_rights_sm: {self.dct_rights_sm}
+        dct_spatial_sm: {self.dct_spatial_sm}
+        dct_temporal_sm: {self.dct_temporal_sm}
+        dct_title_s: {self.dct_title_s}
+        gbl_indexYear_im: {self.gbl_indexYear_im}
+        gbl_mdModified_dt: {self.gbl_mdModified_dt}
+        gbl_mdVersion_s: {self.gbl_mdVersion_s}
+        gbl_resourceClass_sm: {self.gbl_resourceClass_sm}
+        gbl_resourceType_sm: {self.gbl_resourceType_sm}
+        gbl_suppressed_b: {self.gbl_suppressed_b}
+        id: {self.id}
+        locn_geometry: {self.locn_geometry}
+        pcdm_memberOf_sm: {self.pcdm_memberOf_sm}
+        schema_provider_s: {self.schema_provider_s}
+        uuid: {self.uuid}
         """
 
     def toJSON(self):
-        # Remove UUID field
         aardvark_dict = vars(self)
-        assert isinstance(aardvark_dict, dict)
-        del aardvark_dict["uuid"]
+        aardvark_dict.pop(
+            "uuid", None
+        )  # Removes uuid if it exists, does nothing otherwise
         return json.dumps(aardvark_dict)
 
 
