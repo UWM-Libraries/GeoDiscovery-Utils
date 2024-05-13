@@ -8,7 +8,6 @@ from pathlib import Path
 from pprint import pp
 from urllib.parse import quote
 
-# Third party imports
 import requests
 import yaml
 from dateutil import parser
@@ -36,19 +35,15 @@ assert isinstance(CATALOG, dict)
 MAXRETRY = 1
 SLEEPTIME = 1
 
+# Define the log file
 LOGFILE = OUTPUTDIR / "_logfile.txt"
-logw = open(LOGFILE, "w")
-logw.write("")
-logw.close()
 
+# Configure the logging module
+logging.basicConfig(filename=LOGFILE, filemode='w', level=logging.INFO, format='%(message)s')
 
-def logg(string):
-    string = str(string)
-    log = open(LOGFILE, "a")
-    log.write(string)
-    log.write("\n")
-    print(string, "\n")
-    log.close()
+# Now, whenever you want to log a message, you can directly use logging.info()
+logging.info("This is a log message.")
+print("This is a log message.\n")
 
 
 class Site:
@@ -95,16 +90,16 @@ def harvest_sites() -> list:
                 site_list.append(current_Site)
                 break  # If the request is successful, break the retry loop
             except json.JSONDecodeError:
-                logg(f"The content from {site} is not a valid JSON document.")
+                logging.warning(f"The content from {site} is not a valid JSON document.")
                 break  # If the content is not valid JSON, break the retry loop
             except (requests.HTTPError, requests.exceptions.Timeout) as e:
-                logg(
+                logging.info(
                     f"Received bad response from {site}. Retrying after {SLEEPTIME} seconds..."
                 )
                 time.sleep(SLEEPTIME)  # Wait for 1 second before retrying
                 if i == (MAXRETRY - 1):  # If this was the last retry
-                    logg(f"Failed to connect to {site} after {MAXRETRY + 1} attempts.")
-                    logg(str(e))
+                    logging.warning(f"Failed to connect to {site} after {MAXRETRY + 1} attempts.")
+                    logging.warning(str(e))
     return site_list
 
 
@@ -120,6 +115,9 @@ def extract_id_sublayer(url):
 
     id_value = id_match.group(1) if id_match else None
     sublayer_value = sublayer_match.group(1) if sublayer_match else None
+
+    if id_value is None:
+        logging.warning(f"No id was extracted from the url: {url}")
 
     return id_value, sublayer_value
 
@@ -151,7 +149,7 @@ class Aardvark:
 
         # Stop processing if in skiplist
         if self.uuid in website.site_skiplist:
-            logg(f"{self.uuid} is on the skiplist...\n")
+            logging.info(f"{self.uuid} is on the skiplist...\n")
             return
 
         # dct_identifier_sm
@@ -248,14 +246,14 @@ class Aardvark:
                     dataset_dict["spatial"]
                 )
             except ValueError as e:
-                logg(
+                logging.warning(
                     f"There was a problem interpreting the bbox information for: {self.id}\n\t - at {dataset_dict['landingPage']}\n\t Error: {e}\n"
                 )
                 try:
                     self.locn_geometry = self.dcat_bbox = defaultBbox()
-                    logg(f"Using default envelope for the website.")
+                    logging.warning(f"Using default envelope for the website.")
                 except UnboundLocalError as e:
-                    logg(f"{e}\n")
+                    logging.error(f"{e}\n")
                     self.locn_geometry = self.dcat_bbox = None
 
         # dcat_keyword_sm (string multiple!)
