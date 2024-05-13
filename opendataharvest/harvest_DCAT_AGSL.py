@@ -510,10 +510,7 @@ class Aardvark:
 
 # Main Function
 def main():
-    try:
-        list_of_sites = harvest_sites()
-    except:
-        return
+    list_of_sites = harvest_sites()
 
     for website in list_of_sites:
         new_aardvark_objects = [
