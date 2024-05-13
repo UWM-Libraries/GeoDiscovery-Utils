@@ -44,12 +44,32 @@ logging.basicConfig(
     filename=LOGFILE, filemode="w", level=logging.INFO, format="%(message)s"
 )
 
-# Now, whenever you want to log a message, you can directly use logging.info()
-logging.info("This is a log message.")
-print("This is a log message.\n")
-
 
 class Site:
+    """
+    A class to represent a Site.
+
+    Attributes
+    ----------
+    site_name : str
+        The name of the site.
+    site_details : dict
+        The details of the site.
+    site_json : dict
+        The JSON data of the site.
+    site_skiplist : set
+        The set of UUIDs to skip.
+    site_applist : set
+        The set of UUIDs for applications.
+
+    Methods
+    -------
+    __getitem__(self, key):
+        Gets the attribute of the object using the key.
+    __setitem__(self, key, value):
+        Sets the attribute of the object using the key and value.
+    """
+
     def __init__(
         self,
         site_name: str,
@@ -58,17 +78,56 @@ class Site:
         site_skiplist: list,
         site_applist: list,
     ):
+        """
+        Constructs all the necessary attributes for the Site object.
+
+        Parameters
+        ----------
+            site_name : str
+                The name of the site.
+            site_details : dict
+                The details of the site.
+            site_json : dict
+                The JSON data of the site.
+            site_skiplist : list
+                The list of UUIDs to skip.
+            site_applist : list
+                The list of UUIDs for applications.
+        """
         self.site_name = site_name
         self.site_details = site_details
         self.site_json = site_json
-        self.site_skiplist = site_skiplist
-        self.site_applist = site_applist
+        self.site_skiplist = set(site_skiplist)
+        self.site_applist = set(site_applist)
 
     def __getitem__(self, key):
+        """
+        Gets the attribute of the object using the key.
+
+        Parameters
+        ----------
+            key : str
+                The key to the attribute.
+
+        Returns
+        -------
+            The value of the attribute.
+        """
         return getattr(self, key)
 
     def __setitem__(self, key, value):
+        """
+        Sets the attribute of the object using the key and value.
+
+        Parameters
+        ----------
+            key : str
+                The key to the attribute.
+            value : str
+                The value to set the attribute to.
+        """
         setattr(self, key, value)
+
 
 
 def get_site_data(site: str, details: dict) -> dict:
