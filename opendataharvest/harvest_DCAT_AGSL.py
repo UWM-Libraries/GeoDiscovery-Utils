@@ -331,7 +331,13 @@ class Aardvark:
     A class to represent a single dataset as an OGM Aardvark record
     """
     def __init__(self, dataset_dict, website):
-        # Required fields
+        self._initialize_required_fields()
+        dataset_dict = AardvarkDataProcessor.extract_data(dataset_dict)
+        self._process_id(dataset_dict, website)
+        self._process_dataset_dict(dataset_dict, website)
+
+    
+    def _initialize_required_fields(self):
         self.pcdm_memberOf_sm = ["AGSLOpenDataHarvest"]
         self.gbl_resourceClass_sm = ["Datasets"]
         self.dct_accessRights_s = "public"
@@ -343,10 +349,10 @@ class Aardvark:
             "Although this data is being distributed by the American Geographical Society Library at the University of Wisconsin-Milwaukee Libraries, no warranty expressed or implied is made by the University as to the accuracy of the data and related materials. The act of distribution shall not constitute any such warranty, and no responsibility is assumed by the University in the use of this data, or related materials."
         ]
 
-        processed_dataset_dict = AardvarkDataProcessor.extract_data(dataset_dict)
+    def _process_id(self, dataset_dict, website):
 
         uuid, sublayer = AardvarkDataProcessor.extract_id_sublayer(
-            processed_dataset_dict["identifier"]
+            dataset_dict["identifier"]
         )
         self.id = f"{website.site_name}-{uuid}{sublayer if sublayer else ''}"
         self.uuid = uuid
@@ -359,12 +365,13 @@ class Aardvark:
             logging.info(f"{self.uuid} is on the skiplist...\n")
             return
 
-        self.dct_identifier_sm = processed_dataset_dict["identifier"]
+        self.dct_identifier_sm = dataset_dict["identifier"]
 
+    def _process_dataset_dict(self, dataset_dict, website):
         self.dct_spatial_sm = website.site_details["Spatial"]
 
         prefix = website.site_details["CreatedBy"]
-        title = prefix + " - " + processed_dataset_dict["title"]
+        title = prefix + " - " + dataset_dict["title"]
         self.dct_title_s = title
 
         self.gbl_mdModified_dt = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -377,83 +384,27 @@ class Aardvark:
         )
 
         self.dct_creator_sm = (
-            [processed_dataset_dict["publisher"]["name"]]
-            if "publisher" in processed_dataset_dict
+            [dataset_dict["publisher"]["name"]]
+            if "publisher" in dataset_dict
             else []
         )
 
         # dct_issued_s
-        self.dct_issued_s = processed_dataset_dict["issued"]
+        self.dct_issued_s = dataset_dict["issued"]
 
-        if "spatial" in processed_dataset_dict:
-            try:
-                self.locn_geometry = self.dcat_bbox = (
-                    AardvarkDataProcessor.process_dcat_spatial(dataset_dict["spatial"])
-                )
-            except ValueError as e:
-                logging.warning(
-                    f"There was a problem interpreting the bbox information for: {self.id}\n\t - at {processed_dataset_dict['landingPage']}\n\t Error: {e}\n"
-                )
-                try:
-                    self.locn_geometry = self.dcat_bbox = (
-                        AardvarkDataProcessor.defaultBbox(website)
-                    )
-                    logging.warning(f"Using default envelope for the website.\n")
-                except UnboundLocalError as e:
-                    logging.error(f"{e}\n")
-                    self.locn_geometry = self.dcat_bbox = None
+        self._process_spatial(dataset_dict, website)
 
         # dcat_keyword_sm (string multiple!)
-        self.dcat_keyword_sm = processed_dataset_dict["keyword"]
+        self.dcat_keyword_sm = dataset_dict["keyword"]
 
-        def process_distributions(self, processed_dataset_dict):
-            if "distribution" not in processed_dataset_dict:
-                return
+        self._process_distributions(dataset_dict)
 
-            references = {
-                "http://schema.org/url": processed_dataset_dict["landingPage"]
-            }
-            for distribution in processed_dataset_dict["distribution"]:
-                reference = AardvarkDataProcessor.process_distribution(distribution)
-                if reference is not None:
-                    references.update(reference)
-
-            self.dct_references_s = json.dumps(references).replace(" ", "")
-
-        # index year and temporal coverage
-        if "modified" in processed_dataset_dict:
-            try:
-                index_date = parser.parse(processed_dataset_dict["modified"])
-                index_year = int(index_date.year)
-            except ImportError:
-                index_year = int(processed_dataset_dict["modified"][:4])
-            except Exception as e:
-                print(f"An error occurred: {e}")
-
-            self.gbl_indexYear_im = [index_year]
-            self.dct_temporal_sm = [f"Modified {index_year}"]
-        else:
-            self.gbl_indexYear_im = []
-
-        if "issued" in processed_dataset_dict:
-            try:
-                index_date = parser.parse(processed_dataset_dict["issued"])
-                index_year = int(index_date.year)
-            except ImportError:
-                index_year = int(processed_dataset_dict["issued"][:4])
-            except Exception as e:
-                logging.error("Problem processing the issued date.")
-
-            self.gbl_indexYear_im.append(index_year)
-            if self.dct_temporal_sm:
-                self.dct_temporal_sm.append(f"Issued {index_year}")
-            else:
-                self.dct_temporal_sm = [f"Issued {index_year}"]
+        self._process_temporal_coverage(dataset_dict)
 
         # License and Rights
         rights = self.dct_rights_sm
-        if processed_dataset_dict.get("license"):
-            rights.append(re.sub("<[^<]+?>", "", processed_dataset_dict.get("license")))
+        if dataset_dict.get("license"):
+            rights.append(re.sub("<[^<]+?>", "", dataset_dict.get("license")))
         self.dct_rights_sm = rights
 
         # Format dct_format_s
@@ -464,6 +415,70 @@ class Aardvark:
         # Replace gbl_resourceClass_sm for web applications/websites
         if self.uuid in website.site_applist:
             self.gbl_resourceClass_sm = "Websites"
+
+    def _process_spatial(self, dataset_dict, website):
+        if "spatial" in dataset_dict:
+            try:
+                self.locn_geometry = self.dcat_bbox = (
+                    AardvarkDataProcessor.process_dcat_spatial(dataset_dict["spatial"])
+                )
+            except ValueError as e:
+                logging.warning(
+                    f"There was a problem interpreting the bbox information for: {self.id}\n\t - at {dataset_dict['landingPage']}\n\t Error: {e}\n"
+                )
+                try:
+                    self.locn_geometry = self.dcat_bbox = (
+                        AardvarkDataProcessor.defaultBbox(website)
+                    )
+                    logging.warning(f"Using default envelope for the website.\n")
+                except UnboundLocalError as e:
+                    logging.error(f"{e}\n")
+                    self.locn_geometry = self.dcat_bbox = None
+
+    def _process_distributions(self, dataset_dict):
+        if "distribution" not in dataset_dict:
+            return
+
+        references = {
+            "http://schema.org/url": dataset_dict["landingPage"]
+        }
+        for distribution in dataset_dict["distribution"]:
+            reference = AardvarkDataProcessor.process_distribution(distribution)
+            if reference is not None:
+                references.update(reference)
+
+        self.dct_references_s = json.dumps(references).replace(" ", "")
+
+    def _process_temporal_coverage(self, dataset_dict):
+        if "modified" in dataset_dict:
+            try:
+                index_date = parser.parse(dataset_dict["modified"])
+                index_year = int(index_date.year)
+            except ImportError:
+                index_year = int(dataset_dict["modified"][:4])
+            except Exception as e:
+                print(f"An error occurred: {e}")
+
+            self.gbl_indexYear_im = [index_year]
+            self.dct_temporal_sm = [f"Modified {index_year}"]
+        else:
+            self.gbl_indexYear_im = []
+
+        if "issued" in dataset_dict:
+            try:
+                index_date = parser.parse(dataset_dict["issued"])
+                index_year = int(index_date.year)
+            except ImportError:
+                index_year = int(dataset_dict["issued"][:4])
+            except Exception as e:
+                logging.error("Problem processing the issued date.")
+
+            self.gbl_indexYear_im.append(index_year)
+            if self.dct_temporal_sm:
+                self.dct_temporal_sm.append(f"Issued {index_year}")
+            else:
+                self.dct_temporal_sm = [f"Issued {index_year}"]  
+
 
     def __str__(self):
         return f"""
@@ -501,13 +516,21 @@ class Aardvark:
         )  # Removes uuid if it exists, does nothing otherwise
         return json.dumps(aardvark_dict)
 
-list_of_sites = harvest_sites()
+# Main Function
+def main():
+    try:
+        list_of_sites = harvest_sites()
+    except:
+        return
 
-for website in list_of_sites:
-    new_aardvark_objects = [Aardvark(dataset, website) for dataset in website.site_json["dataset"]]
-    for new_aardvark_object in new_aardvark_objects:
-        if new_aardvark_object.uuid not in website.site_skiplist:
-            newfile = f"{new_aardvark_object.id}.json"
-            newfilePath = OUTPUTDIR / newfile
-            with open(newfilePath, 'w') as f:
-                f.write(new_aardvark_object.toJSON())
+    for website in list_of_sites:
+        new_aardvark_objects = [Aardvark(dataset, website) for dataset in website.site_json["dataset"]]
+        for new_aardvark_object in new_aardvark_objects:
+            if new_aardvark_object.uuid not in website.site_skiplist:
+                newfile = f"{new_aardvark_object.id}.json"
+                newfilePath = OUTPUTDIR / newfile
+                with open(newfilePath, 'w') as f:
+                    f.write(new_aardvark_object.toJSON())
+
+if __name__ == "__main__":
+    main()
