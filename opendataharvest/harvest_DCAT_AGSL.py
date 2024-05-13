@@ -127,7 +127,6 @@ class Site:
         setattr(self, key, value)
 
 
-
 def get_site_data(site: str, details: dict) -> dict:
     """Fetch the site data with retries."""
     for i in range(MAXRETRY):
@@ -174,9 +173,6 @@ def harvest_sites() -> list:
         )
         site_list.append(current_Site)
     return site_list
-
-
-
 
 
 class AardvarkDataProcessor:
@@ -330,13 +326,13 @@ class Aardvark:
     """
     A class to represent a single dataset as an OGM Aardvark record
     """
+
     def __init__(self, dataset_dict, website):
         self._initialize_required_fields()
         dataset_dict = AardvarkDataProcessor.extract_data(dataset_dict)
         self._process_id(dataset_dict, website)
         self._process_dataset_dict(dataset_dict, website)
 
-    
     def _initialize_required_fields(self):
         self.pcdm_memberOf_sm = ["AGSLOpenDataHarvest"]
         self.gbl_resourceClass_sm = ["Datasets"]
@@ -384,9 +380,7 @@ class Aardvark:
         )
 
         self.dct_creator_sm = (
-            [dataset_dict["publisher"]["name"]]
-            if "publisher" in dataset_dict
-            else []
+            [dataset_dict["publisher"]["name"]] if "publisher" in dataset_dict else []
         )
 
         # dct_issued_s
@@ -439,9 +433,7 @@ class Aardvark:
         if "distribution" not in dataset_dict:
             return
 
-        references = {
-            "http://schema.org/url": dataset_dict["landingPage"]
-        }
+        references = {"http://schema.org/url": dataset_dict["landingPage"]}
         for distribution in dataset_dict["distribution"]:
             reference = AardvarkDataProcessor.process_distribution(distribution)
             if reference is not None:
@@ -477,8 +469,7 @@ class Aardvark:
             if self.dct_temporal_sm:
                 self.dct_temporal_sm.append(f"Issued {index_year}")
             else:
-                self.dct_temporal_sm = [f"Issued {index_year}"]  
-
+                self.dct_temporal_sm = [f"Issued {index_year}"]
 
     def __str__(self):
         return f"""
@@ -516,6 +507,7 @@ class Aardvark:
         )  # Removes uuid if it exists, does nothing otherwise
         return json.dumps(aardvark_dict)
 
+
 # Main Function
 def main():
     try:
@@ -524,13 +516,16 @@ def main():
         return
 
     for website in list_of_sites:
-        new_aardvark_objects = [Aardvark(dataset, website) for dataset in website.site_json["dataset"]]
+        new_aardvark_objects = [
+            Aardvark(dataset, website) for dataset in website.site_json["dataset"]
+        ]
         for new_aardvark_object in new_aardvark_objects:
             if new_aardvark_object.uuid not in website.site_skiplist:
                 newfile = f"{new_aardvark_object.id}.json"
                 newfilePath = OUTPUTDIR / newfile
-                with open(newfilePath, 'w') as f:
+                with open(newfilePath, "w") as f:
                     f.write(new_aardvark_object.toJSON())
+
 
 if __name__ == "__main__":
     main()
