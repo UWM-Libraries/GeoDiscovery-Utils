@@ -7,6 +7,7 @@ from datetime import datetime
 from pathlib import Path
 from pprint import pp
 from urllib.parse import quote
+from typing import List
 
 import requests
 import yaml
@@ -68,38 +69,47 @@ class Site:
         setattr(self, key, value)
 
 
+def get_site_data(site: str, details: dict) -> dict:
+    """Fetch the site data with retries."""
+    for i in range(MAXRETRY):
+        try:
+            response = requests.get(details["SiteURL"], timeout=3)
+            response.raise_for_status()
+            return response.json()
+        except json.JSONDecodeError:
+            logging.warning(f"The content from {site} is not a valid JSON document.")
+            return None
+        except (requests.HTTPError, requests.exceptions.Timeout) as e:
+            logging.info(
+                f"Received bad response from {site}. Retrying after {SLEEPTIME} seconds..."
+            )
+            time.sleep(SLEEPTIME)
+            if i == (MAXRETRY - 1):
+                logging.warning(f"Failed to connect to {site} after {MAXRETRY + 1} attempts.")
+                logging.warning(str(e))
+                return None
+
+def get_uuid_list(details: dict, key: str) -> List[str]:
+    """Extract UUIDs from details."""
+    uuid_list = []
+    if key in details:
+        for item in details[key]:
+            uuid_list.append(item["UUID"])
+    return uuid_list
+
 def harvest_sites() -> list:
-    site_list = []  # list of Site objects
+    """Main function to harvest sites."""
+    site_list = []
     for site, details in CATALOG.items():
-        for i in range(MAXRETRY):  # Retry up to 5 times
-            try:
-                response = requests.get(details["SiteURL"], timeout=3)
-                response.raise_for_status()
-                site_json = response.json()
-                site_skiplist = []
-                if "SkipList" in details:
-                    for skip in details["SkipList"]:
-                        site_skiplist.append(skip["UUID"])
-                site_applist = []
-                if "AppList" in details:
-                    for app in details["AppList"]:
-                        site_applist.append(app["UUID"])
-                current_Site = Site(
-                    details["SiteName"], details, site_json, site_skiplist, site_applist
-                )
-                site_list.append(current_Site)
-                break  # If the request is successful, break the retry loop
-            except json.JSONDecodeError:
-                logging.warning(f"The content from {site} is not a valid JSON document.")
-                break  # If the content is not valid JSON, break the retry loop
-            except (requests.HTTPError, requests.exceptions.Timeout) as e:
-                logging.info(
-                    f"Received bad response from {site}. Retrying after {SLEEPTIME} seconds..."
-                )
-                time.sleep(SLEEPTIME)  # Wait for 1 second before retrying
-                if i == (MAXRETRY - 1):  # If this was the last retry
-                    logging.warning(f"Failed to connect to {site} after {MAXRETRY + 1} attempts.")
-                    logging.warning(str(e))
+        site_json = get_site_data(site, details)
+        if site_json is None:
+            continue
+        site_skiplist = get_uuid_list(details, "SkipList")
+        site_applist = get_uuid_list(details, "AppList")
+        current_Site = Site(
+            details["SiteName"], details, site_json, site_skiplist, site_applist
+        )
+        site_list.append(current_Site)
     return site_list
 
 
