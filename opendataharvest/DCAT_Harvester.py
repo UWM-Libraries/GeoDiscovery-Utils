@@ -1,7 +1,17 @@
+"""
+Open Data Harvester
+Author: Stephen Appel
+Created: May 14, 2024
+Version: 1.0
+Credit: UW-Madison - State Cartographer's Office for some code. Some code refactored and edited by CoPilot.
+Description: This script is used to harvest open data from data portals who expose a DCAT JSON. It reads configuration options from a YAML file, 
+including output directory, default bounding box, catalog, maximum retry attempts, and sleep time.
+"""
 import csv
 import json
 import logging
 import re
+import sys
 import time
 from datetime import datetime
 from pathlib import Path
@@ -18,7 +28,7 @@ try:
         config = yaml.safe_load(file)
 except FileNotFoundError:
     print("Config file not found")
-    config = {}
+    sys.exit()
 
 CONFIG = config.get("CONFIG", {})
 OUTPUTDIR = Path(CONFIG.get("OUTPUTDIR", ""))
@@ -28,7 +38,7 @@ MAXRETRY = CONFIG.get("MAXRETRY", "")
 SLEEPTIME = CONFIG.get("SLEEPTIME", "")
 
 dt = str(datetime.now().timestamp())
-logfile_name = f"_log_{dt}.txt"
+logfile_name = f"_{dt}.log"
 LOGFILE = OUTPUTDIR / logfile_name
 
 # Configure the logging module
