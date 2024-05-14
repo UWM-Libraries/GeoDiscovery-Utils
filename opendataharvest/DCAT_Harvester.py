@@ -36,20 +36,27 @@ import requests
 import yaml
 from dateutil import parser
 
+config_file = r"opendataharvest/config.yaml"
 
 try:
-    with open(r"opendataharvest/config.yaml", "r") as file:
+    with open(config_file, "r") as file:
         config = yaml.safe_load(file)
 except FileNotFoundError:
-    print("Config file not found")
+    print(f"Config file {config_file} not found")
     sys.exit()
 
-CONFIG = config.get("CONFIG", {})
-OUTPUTDIR = Path(CONFIG.get("OUTPUTDIR", ""))
-DEFAULTBBOX = Path(CONFIG.get("DEFAULTBBOX", ""))
-CATALOG = config.get(CONFIG.get("CATALOG", ""), "")
-MAXRETRY = CONFIG.get("MAXRETRY", "")
-SLEEPTIME = CONFIG.get("SLEEPTIME", "")
+try:
+    CONFIG = config.get("CONFIG")
+    OUTPUTDIR = Path(CONFIG.get("OUTPUTDIR"))
+    DEFAULTBBOX = Path(CONFIG.get("DEFAULTBBOX"))
+    CATALOG_KEY = CONFIG.get("CATALOG", "TestSites")
+    CATALOG = config.get(CATALOG_KEY, None)
+    MAXRETRY = CONFIG.get("MAXRETRY", 5)
+    SLEEPTIME = CONFIG.get("SLEEPTIME", 1)
+except AttributeError as e:
+    print(f"Unable to read all configuration values from {config_file}")
+    print(e)
+    sys.exit()
 
 dt = str(datetime.now().timestamp())
 logfile_name = f"_{dt}.log"

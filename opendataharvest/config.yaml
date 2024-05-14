@@ -5,7 +5,7 @@
 ###########################
 
 CONFIG:
-  CATALOG: "TestSites"
+  CATALOG: "TestSites" # TestSites, ArcGIS_Sites, or CKAN_Sites
   OUTPUTDIR: "opendataharvest/output_md"
   DEFAULTBBOX: "opendataharvest/default_bbox.csv"
   MAXRETRY: 3
