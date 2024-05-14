@@ -1,11 +1,17 @@
 """
-Open Data Harvester
+DCAT_Harvester.py
 Author: Stephen Appel
 Created: May 14, 2024
 Version: 1.0
 Credit: UW-Madison - State Cartographer's Office for some code. Some code refactored and edited by CoPilot.
-Description: This script is used to harvest open data from data portals who expose a DCAT JSON. It reads configuration options from a YAML file, 
-including output directory, default bounding box, catalog, maximum retry attempts, and sleep time.
+Description: This script is used to harvest open data from data portals who 
+expose a DCAT JSON. It reads configuration options from a YAML file, including 
+output directory, default bounding box, which portals to scan (catalog), maximum
+retry attempts, and sleep time for requests.
+Datasets not in the skip list will be looped over and a JSON File generated for
+each. The Aardvark class is dictionary-like and defines the structure of a 
+record object. We simply dump the Aardvark object to JSON when crosswalking is
+complete.
 """
 import csv
 import json
