@@ -13,27 +13,22 @@ import yaml
 from dateutil import parser
 
 
-OpenDataSites = yaml.safe_load(
-    open(
-        r"C:\Users\srappel\Documents\GitHub\GeoDiscovery-Utils\opendataharvest\OpenDataSites.yaml",
-        "r",
-    )
-)
-OUTPUTDIR = Path(
-    r"C:\Users\srappel\Documents\GitHub\GeoDiscovery-Utils\opendataharvest\output_md"
-)
-assert OUTPUTDIR.is_dir()
+try:
+    with open(r"opendataharvest/config.yaml", "r") as file:
+        config = yaml.safe_load(file)
+except FileNotFoundError:
+    print("Config file not found")
+    config = {}
 
-DEFAULTBBOX = Path(
-    r"C:\Users\srappel\Documents\GitHub\GeoDiscovery-Utils\opendataharvest\Wisconsin-Counties-CSV.csv"
-)
+CONFIG = config.get("CONFIG", {})
+OUTPUTDIR = Path(CONFIG.get("OUTPUTDIR", ""))
+DEFAULTBBOX = Path(CONFIG.get("DEFAULTBBOX", ""))
+CATALOG = config.get(CONFIG.get("CATALOG", ""), "")
+MAXRETRY = CONFIG.get("MAXRETRY", "")
+SLEEPTIME = CONFIG.get("SLEEPTIME", "")
 
-
-CATALOG = OpenDataSites["ArcGIS_Sites"]
-MAXRETRY = 1
-SLEEPTIME = 1
 dt = str(datetime.now().timestamp())
-logfile_name = f"_logfile{dt}.txt"
+logfile_name = f"_log_{dt}.txt"
 LOGFILE = OUTPUTDIR / logfile_name
 
 # Configure the logging module
