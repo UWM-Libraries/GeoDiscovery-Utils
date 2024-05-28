@@ -27,7 +27,7 @@ import logging
 import re
 import sys
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import quote
 from typing import List
@@ -58,7 +58,7 @@ except AttributeError as e:
     print(e)
     sys.exit()
 
-dt = str(datetime.now().timestamp())
+dt = str(datetime.now().strftime(r'%Y-%m-%d-%H:%M:%S'))
 logfile_name = f"_{dt}.log"
 LOGFILE = OUTPUTDIR / logfile_name
 
@@ -389,7 +389,7 @@ class Aardvark:
         title = prefix + " - " + dataset_dict["title"]
         self.dct_title_s = title
 
-        self.gbl_mdModified_dt = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
+        self.gbl_mdModified_dt = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
         self.dct_description_sm = [
             re.sub("<[^<]+?>", "", dataset_dict.get("description", []))
