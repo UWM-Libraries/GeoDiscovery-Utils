@@ -35,6 +35,8 @@ from typing import List
 import requests
 import yaml
 from dateutil import parser
+import jsonschema
+from jsonschema import validate
 
 config_file = r"opendataharvest/config.yaml"
 
