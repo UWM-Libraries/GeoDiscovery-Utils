@@ -55,12 +55,16 @@ try:
     CATALOG = config.get(CATALOG_KEY, None)
     MAXRETRY = CONFIG.get("MAXRETRY", 5)
     SLEEPTIME = CONFIG.get("SLEEPTIME", 1)
+
+    ## Get the JSON schema:
+    SCHEMA = CONFIG.get("SCHEMA")
+
 except AttributeError as e:
     print(f"Unable to read all configuration values from {config_file}")
     print(e)
     sys.exit()
 
-dt = str(datetime.now().strftime(r'%Y-%m-%d-%H:%M:%S'))
+dt = str(datetime.now().strftime(r"%Y-%m-%d-%H:%M:%S"))
 logfile_name = f"_{dt}.log"
 LOGFILE = OUTPUTDIR / logfile_name
 
@@ -342,6 +346,21 @@ class AardvarkDataProcessor:
                 gbl_resourceClass_sm.append("Imagery")
 
         return dct_format_s, gbl_resourceType_sm, gbl_resourceClass_sm
+    
+    @staticmethod
+    def load_schema():
+        response = requests.get(SCHEMA, timeout=3)
+        schema = json.loads(response.text)
+        return schema
+    
+    @staticmethod
+    def validate_json(json_data, schema):
+        try:
+            validate(instance=json_data, schema=schema)
+        except jsonschema.exceptions.ValidationError as err:
+            return False, err
+        return True, None
+
 
 
 class Aardvark:
@@ -391,7 +410,9 @@ class Aardvark:
         title = prefix + " - " + dataset_dict["title"]
         self.dct_title_s = title
 
-        self.gbl_mdModified_dt = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        self.gbl_mdModified_dt = datetime.now(timezone.utc).strftime(
+            "%Y-%m-%dT%H:%M:%SZ"
+        )
 
         self.dct_description_sm = [
             re.sub("<[^<]+?>", "", dataset_dict.get("description", []))
@@ -521,13 +542,29 @@ class Aardvark:
         uuid: {self.uuid}
         """
 
+
     def toJSON(self):
         aardvark_dict = vars(self)
         aardvark_dict.pop(
             "uuid", None
         )  # Removes uuid if it exists, does nothing otherwise
-        return json.dumps(aardvark_dict)
-
+        json_dump = json.dumps(aardvark_dict)
+        schema = AardvarkDataProcessor.load_schema()
+        is_valid, error = AardvarkDataProcessor.validate_json(json_dump, schema)
+        if is_valid:
+            return json_dump
+        else:
+            logging.warning(f"Failed JSON Validation")
+            return
+    
+    def is_valid(self):
+        json_object = self.toJSON
+        
+        is_valid, error = AardvarkDataProcessor.validate_json(json_object, schema)
+        if is_valid:
+            return True, None
+        else:
+            return False, error
 
 # Main Function
 def main():
@@ -542,7 +579,11 @@ def main():
                 newfile = f"{new_aardvark_object.id}.json"
                 newfilePath = OUTPUTDIR / newfile
                 with open(newfilePath, "w") as f:
-                    f.write(new_aardvark_object.toJSON())
+                    json_data = new_aardvark_object.toJSON()
+                    if not json_data is None:
+                        f.write(new_aardvark_object.toJSON())
+                    else:
+                        logging.warning(f"{str(newfilePath)} not written...")
 
 
 if __name__ == "__main__":

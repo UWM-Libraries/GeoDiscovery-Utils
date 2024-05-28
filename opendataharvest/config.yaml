@@ -10,6 +10,7 @@ CONFIG:
   DEFAULTBBOX: "opendataharvest/default_bbox.csv"
   MAXRETRY: 3
   SLEEPTIME: 2
+  SCHEMA: "https://raw.githubusercontent.com/UWM-Libraries/GeoDiscovery/main/schema/geoblacklight-schema-aardvark.json"
 
 ################
 # Localization #
