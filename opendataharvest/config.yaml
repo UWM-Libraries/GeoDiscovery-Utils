@@ -29,10 +29,10 @@ DEFAULT:
   SUPPRESSED: false
   RIGHTS:
     - Although this data is being distributed by the American Geographical Society Library at the University of Wisconsin-Milwaukee Libraries, no warranty expressed or implied is made by the University as to the accuracy of the data and related materials. The act of distribution shall not constitute any such warranty, and no responsibility is assumed by the University in the use of this data, or related materials.
-    RESOURCETYPE:
-      - "Digital maps"
-    FORMAT: None
-    DESCRIPTION: This dataset was automatically cataloged from the creator's Open Data Portal. In some cases, publication year and bounding coordinates shown here may be incorrect. Additional download formats may be available on the author's website. Please check the 'More details at' link for additional information.
+  RESOURCETYPE:
+    - "Digital maps"
+  FORMAT: None
+  DESCRIPTION: This dataset was automatically cataloged from the creator's Open Data Portal. In some cases, publication year and bounding coordinates shown here may be incorrect. Additional download formats may be available on the author's website. Please check the 'More details at' link for additional information.
 
 
 #
