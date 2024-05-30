@@ -454,7 +454,7 @@ class Aardvark:
 
         # Format dct_format_s
         def set_attributes_if_not_none(obj, attr_values):
-            attr_names = ['dct_format_s', 'gbl_resourceType_sm', 'gbl_resourceClass_sm']
+            attr_names = ["dct_format_s", "gbl_resourceType_sm", "gbl_resourceClass_sm"]
             for attr_name, attr_value in zip(attr_names, attr_values):
                 if attr_value is not None:
                     setattr(obj, attr_name, attr_value)
@@ -531,40 +531,50 @@ class Aardvark:
             else:
                 self.dct_temporal_sm = [f"Issued {index_year}"]
 
-    def __str__(self):
-        return f"""
-        dcat_bbox: {self.dcat_bbox}
-        dcat_keyword_sm: {self.dcat_keyword_sm}
-        dct_accessRights_s: {self.dct_accessRights_s}
-        dct_creator_sm: {self.dct_creator_sm}
-        dct_description_sm: {self.dct_description_sm}
-        dct_format_s: {self.dct_format_s}
-        dct_identifier_sm: {self.dct_identifier_sm}
-        dct_issued_s: {self.dct_issued_s}
-        dct_language_sm: {self.dct_language_sm}
-        dct_references_s: {self.dct_references_s}
-        dct_rights_sm: {self.dct_rights_sm}
-        dct_spatial_sm: {self.dct_spatial_sm}
-        dct_temporal_sm: {self.dct_temporal_sm}
-        dct_title_s: {self.dct_title_s}
-        gbl_indexYear_im: {self.gbl_indexYear_im}
-        gbl_mdModified_dt: {self.gbl_mdModified_dt}
-        gbl_mdVersion_s: {self.gbl_mdVersion_s}
-        gbl_resourceClass_sm: {self.gbl_resourceClass_sm}
-        gbl_resourceType_sm: {self.gbl_resourceType_sm}
-        gbl_suppressed_b: {self.gbl_suppressed_b}
-        id: {self.id}
-        locn_geometry: {self.locn_geometry}
-        pcdm_memberOf_sm: {self.pcdm_memberOf_sm}
-        schema_provider_s: {self.schema_provider_s}
-        uuid: {self.uuid}
+    def to_dict(self):
         """
+        Serialize the object to a dictionary, excluding None or empty values.
+        """
+        # List all the attributes that you want to include in the JSON output.
+        attributes = [
+            "dct_title_s",
+            "gbl_resourceClass_sm",
+            "dct_accessRights_s",
+            "id",
+            "gbl_mdModified_dt",
+            "gbl_mdVersion_s",
+            "dct_language_sm",
+            "schema_provider_s",
+            "gbl_suppressed_b",
+            "dct_rights_sm",
+            "dct_identifier_sm",
+            "dct_spatial_sm",
+            "dct_description_sm",
+            "dct_creator_sm",
+            "dct_issued_s",
+            "dcat_keyword_sm",
+            "dct_references_s",
+            "dct_format_s",
+            "gbl_resourceType_sm",
+            "locn_geometry",
+            "dct_temporal_sm",
+            "gbl_indexYear_im",
+        ]
+        # Build the dictionary with attribute names and their values if they are not None or empty.
+        return {
+            attr: getattr(self, attr)
+            for attr in attributes
+            if hasattr(self, attr) and getattr(self, attr)
+        }
+
+    def __str__(self):
+        # Use the to_dict method to get the dictionary representation of the object.
+        obj_dict = self.to_dict()
+        # Format the dictionary into a string for printing.
+        return "\n".join(f"{key}: {value}" for key, value in obj_dict.items())
 
     def toJSON(self):
-        aardvark_dict = vars(self)
-        aardvark_dict.pop(
-            "uuid", None
-        )  # Removes uuid if it exists, does nothing otherwise
+        aardvark_dict = self.to_dict()  # Use the new to_dict method
         json_dump = json.dumps(aardvark_dict)
         schema = AardvarkDataProcessor.load_schema()
         is_valid, error = AardvarkDataProcessor.validate_json(aardvark_dict, schema)
@@ -575,8 +585,14 @@ class Aardvark:
             return
 
     def is_valid(self):
-        json_object = self.toJSON
+        json_dump = self.toJSON()  # Call toJSON as a method
+        if json_dump is None:
+            return False, "JSON serialization failed."
 
+        json_object = json.loads(
+            json_dump
+        )  # Parse the JSON string back into a dictionary
+        schema = AardvarkDataProcessor.load_schema()
         is_valid, error = AardvarkDataProcessor.validate_json(json_object, schema)
         if is_valid:
             return True, None
