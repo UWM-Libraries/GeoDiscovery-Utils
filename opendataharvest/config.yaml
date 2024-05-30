@@ -35,6 +35,12 @@ DEFAULT:
     assumed by the University in the use of this data, or related materials.
   RESOURCETYPE:
     - "Digital maps"
+  FORMAT: None
+  DESCRIPTION: |
+    This dataset was automatically cataloged from the creator's Open Data Portal.
+    In some cases, publication year and bounding coordinates shown here may be incorrect.
+    Additional download formats may be available on the author's website.
+    Please check the 'More details at' link for additional information.
 
 #
 # Check this to identify new sites:

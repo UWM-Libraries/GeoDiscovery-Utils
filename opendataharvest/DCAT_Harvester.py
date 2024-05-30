@@ -67,6 +67,8 @@ try:
     SUPPRESSED = default_config.get("SUPPRESSED")  # This is a boolean value
     RIGHTS = default_config.get("RIGHTS", [])
     RESOURCETYPE = default_config.get("RESOURCETYPE", [])
+    FORMAT = default_config.get("FORMAT")
+    DESCRIPTION = default_config.get("DESCRIPTION")
 
     ## Get the JSON schema:
     SCHEMA = CONFIG.get("SCHEMA")
@@ -342,7 +344,7 @@ class AardvarkDataProcessor:
 
     @staticmethod
     def format_fetcher(dataset_dict):
-        dct_format_s = None
+        dct_format_s = FORMAT
         gbl_resourceType_sm = RESOURCETYPE
         gbl_resourceClass_sm = ["Datasets"]
 
@@ -426,9 +428,7 @@ class Aardvark:
         self.dct_description_sm = [
             re.sub("<[^<]+?>", "", dataset_dict.get("description", []))
         ]
-        self.dct_description_sm.append(
-            f"This dataset was automatically cataloged from the creator's Open Data Portal. In some cases, publication year and bounding coordinates shown here may be incorrect. Additional download formats may be available on the author's website. Please check the 'More details at' link for additional information."
-        )
+        self.dct_description_sm.append(DESCRIPTION)
 
         self.dct_creator_sm = (
             [dataset_dict["publisher"]["name"]] if "publisher" in dataset_dict else []
@@ -453,9 +453,14 @@ class Aardvark:
         self.dct_rights_sm = rights
 
         # Format dct_format_s
-        self.dct_format_s, self.gbl_resourceType_sm, self.gbl_resourceClass_sm = (
-            AardvarkDataProcessor.format_fetcher(dataset_dict)
-        )
+        def set_attributes_if_not_none(obj, attr_values):
+            attr_names = ['dct_format_s', 'gbl_resourceType_sm', 'gbl_resourceClass_sm']
+            for attr_name, attr_value in zip(attr_names, attr_values):
+                if attr_value is not None:
+                    setattr(obj, attr_name, attr_value)
+
+        attr_values = AardvarkDataProcessor.format_fetcher(dataset_dict)
+        set_attributes_if_not_none(self, attr_values)
 
         # Replace gbl_resourceClass_sm for web applications/websites
         if self.uuid in website.site_applist:
