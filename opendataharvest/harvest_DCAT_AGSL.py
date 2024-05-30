@@ -369,7 +369,7 @@ class Aardvark:
             re.sub("<[^<]+?>", "", dataset_dict.get("description", []))
         ]
         self.dct_description_sm.append(
-            f"This dataset was automatically cataloged from the author's Open Data Portal. In some cases, publication year and bounding coordinates shown here may be incorrect. Additional download formats may be available on the author's website. Please check the 'More details at' link for additional information."
+            f"This dataset was automatically cataloged from the creator's Open Data Portal. In some cases, publication year and bounding coordinates shown here may be incorrect. Additional download formats may be available on the author's website. Please check the 'More details at' link for additional information."
         )
 
         self.dct_creator_sm = (
@@ -460,7 +460,7 @@ class Aardvark:
 
             self.gbl_indexYear_im.append(index_year)
             if self.dct_temporal_sm:
-                self.dct_temporal_sm.append(f"Issued {index_year}")
+                self.dct_temporal_sm[0] = f"Issued {index_year}"
             else:
                 self.dct_temporal_sm = [f"Issued {index_year}"]
 
