@@ -554,7 +554,7 @@ class Aardvark:
         if is_valid:
             return json_dump
         else:
-            logging.warning(f"Failed JSON Validation")
+            logging.warning(f"Failed JSON Validation:\n{error}")
             return
     
     def is_valid(self):
