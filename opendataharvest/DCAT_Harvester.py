@@ -41,7 +41,7 @@ from jsonschema import validate
 config_file = r"opendataharvest/config.yaml"
 
 try:
-    with open(config_file, "r") as file:
+    with open(config_file, "r", encoding='utf-8') as file:
         config = yaml.safe_load(file)
 except FileNotFoundError:
     print(f"Config file {config_file} not found")
@@ -362,6 +362,17 @@ class AardvarkDataProcessor:
 
         return dct_format_s, gbl_resourceType_sm, gbl_resourceClass_sm
 
+    @staticmethod
+    def issue_date_parser(dataset_dict):
+        dt_string = dataset_dict["issued"]
+        try:
+            parsed_date = parser.parse(dt_string)
+            dct_issued_s = parsed_date.strftime(r'%Y-%m-%d')
+        except Exception as e:
+            logging.warning(f'Unable to parse the year from: "{dt_string}". Error: {e}')
+            dct_issued_s = dt_string
+
+        return dct_issued_s
 
     @staticmethod
     def load_schema():
@@ -437,7 +448,7 @@ class Aardvark:
         )
 
         # dct_issued_s
-        self.dct_issued_s = dataset_dict["issued"]
+        self.dct_issued_s = AardvarkDataProcessor.issue_date_parser(dataset_dict)
 
         self._process_spatial(dataset_dict, website)
 
@@ -614,7 +625,7 @@ def main():
             if new_aardvark_object.uuid not in website.site_skiplist:
                 newfile = f"{new_aardvark_object.id}.json"
                 newfilePath = OUTPUTDIR / newfile
-                with open(newfilePath, "w") as f:
+                with open(newfilePath, "w", encoding='utf-8') as f:
                     json_data = new_aardvark_object.toJSON()
                     if not json_data is None:
                         f.write(new_aardvark_object.toJSON())
