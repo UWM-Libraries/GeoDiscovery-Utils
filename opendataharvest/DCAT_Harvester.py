@@ -292,7 +292,7 @@ class AardvarkDataProcessor:
             raise ValueError("Latitude coordinates must be between -90 and 90")
 
         # Ensure North is greater than South and East is greater than West
-        coordinates[1], coordinates[3] = sorted(latitudes)
+        coordinates[1], coordinates[3] = sorted(latitudes, reverse=True)
         coordinates[0], coordinates[2] = sorted(longitudes)
 
         # Convert to ENVELOPE format
