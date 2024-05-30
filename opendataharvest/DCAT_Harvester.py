@@ -357,9 +357,11 @@ class AardvarkDataProcessor:
             ):
                 gbl_resourceType_sm[0] = "Aerial photographs"
                 dct_format_s = "Raster data"
-                gbl_resourceClass_sm.append("Imagery")
+                if "Imagery" not in gbl_resourceClass_sm:
+                    gbl_resourceClass_sm.append("Imagery")
 
         return dct_format_s, gbl_resourceType_sm, gbl_resourceClass_sm
+
 
     @staticmethod
     def load_schema():
