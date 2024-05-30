@@ -50,6 +50,7 @@ except FileNotFoundError:
 try:
     CONFIG = config.get("CONFIG")
     OUTPUTDIR = Path(CONFIG.get("OUTPUTDIR"))
+    LOGDIR = Path(CONFIG.get("LOGDIR"))
     DEFAULTBBOX = Path(CONFIG.get("DEFAULTBBOX"))
     CATALOG_KEY = CONFIG.get("CATALOG", "TestSites")
     CATALOG = config.get(CATALOG_KEY, None)
@@ -80,7 +81,7 @@ except AttributeError as e:
 
 dt = str(datetime.now().strftime(r"%Y%m%d%H%M%S"))
 logfile_name = f"_{dt}.log"
-LOGFILE = OUTPUTDIR / logfile_name
+LOGFILE = LOGDIR / logfile_name
 
 # Configure the logging module
 logging.basicConfig(

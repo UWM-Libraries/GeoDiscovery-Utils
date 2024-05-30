@@ -7,6 +7,7 @@
 CONFIG:
   CATALOG: "TestSites" # TestSites, ArcGIS_Sites, or CKAN_Sites
   OUTPUTDIR: "opendataharvest/output_md"
+  LOGDIR: "opendataharvest/log"
   DEFAULTBBOX: "opendataharvest/default_bbox.csv"
   MAXRETRY: 3
   SLEEPTIME: 2
