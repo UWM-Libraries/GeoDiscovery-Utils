@@ -64,7 +64,7 @@ except AttributeError as e:
     print(e)
     sys.exit()
 
-dt = str(datetime.now().strftime(r"%Y-%m-%d-%H:%M:%S"))
+dt = str(datetime.now().strftime(r"%Y%m%d%H%M%S"))
 logfile_name = f"_{dt}.log"
 LOGFILE = OUTPUTDIR / logfile_name
 
