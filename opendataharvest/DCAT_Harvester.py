@@ -66,6 +66,7 @@ try:
     PROVIDER = default_config.get("PROVIDER")  # This is a single string value
     SUPPRESSED = default_config.get("SUPPRESSED")  # This is a boolean value
     RIGHTS = default_config.get("RIGHTS", [])
+    RESOURCETYPE = default_config.get("RESOURCETYPE", [])
 
     ## Get the JSON schema:
     SCHEMA = CONFIG.get("SCHEMA")
@@ -342,7 +343,7 @@ class AardvarkDataProcessor:
     @staticmethod
     def format_fetcher(dataset_dict):
         dct_format_s = None
-        gbl_resourceType_sm = None
+        gbl_resourceType_sm = RESOURCETYPE
         gbl_resourceClass_sm = ["Datasets"]
 
         for distribution in dataset_dict["distribution"]:
@@ -352,7 +353,7 @@ class AardvarkDataProcessor:
                 keyword in dataset_dict.get("keyword", [])
                 for keyword in ["Aerial", "aerial", "imagery"]
             ):
-                gbl_resourceType_sm = "Aerial photographs"
+                gbl_resourceType_sm[0] = "Aerial photographs"
                 dct_format_s = "Raster data"
                 gbl_resourceClass_sm.append("Imagery")
 
@@ -409,7 +410,7 @@ class Aardvark:
             logging.info(f"{self.uuid} is on the skiplist...\n")
             return
 
-        self.dct_identifier_sm = dataset_dict["identifier"]
+        self.dct_identifier_sm = [dataset_dict["identifier"]]
 
     def _process_dataset_dict(self, dataset_dict, website):
         self.dct_spatial_sm = website.site_details["Spatial"]
@@ -461,23 +462,27 @@ class Aardvark:
             self.gbl_resourceClass_sm = ["Websites"]
 
     def _process_spatial(self, dataset_dict, website):
-        if "spatial" in dataset_dict:
-            try:
-                self.locn_geometry = self.dcat_bbox = (
-                    AardvarkDataProcessor.process_dcat_spatial(dataset_dict["spatial"])
-                )
-            except ValueError as e:
-                logging.warning(
-                    f"There was a problem interpreting the bbox information for: {self.id}\n\t - at {dataset_dict['landingPage']}\n\t Error: {e}\n"
-                )
-                try:
-                    self.locn_geometry = self.dcat_bbox = (
-                        AardvarkDataProcessor.defaultBbox(website)
-                    )
-                    logging.warning(f"Using default envelope for the website.\n")
-                except UnboundLocalError as e:
-                    logging.error(f"{e}\n")
-                    self.locn_geometry = self.dcat_bbox = None
+        if "spatial" not in dataset_dict:
+            logging.warning(f"No spatial information found for: {self.id}")
+            return
+
+        try:
+            processed_spatial = AardvarkDataProcessor.process_dcat_spatial(
+                dataset_dict["spatial"]
+            )
+            self.locn_geometry = self.dcat_bbox = processed_spatial
+        except ValueError as e:
+            logging.warning(
+                f"There was a problem interpreting the bbox information for: {self.id}\n"
+                f"\t - at {dataset_dict['landingPage']}\n"
+                f"\t Error: {e}\n"
+            )
+            default_bbox = AardvarkDataProcessor.defaultBbox(website)
+            if default_bbox is not None:
+                self.locn_geometry = self.dcat_bbox = default_bbox
+                logging.warning("Using default envelope for the website.\n")
+            else:
+                logging.warning(f"No default bounding box set for {website}")
 
     def _process_distributions(self, dataset_dict):
         if "distribution" not in dataset_dict:

@@ -33,6 +33,8 @@ DEFAULT:
     is made by the University as to the accuracy of the data and related materials. The
     act of distribution shall not constitute any such warranty, and no responsibility is
     assumed by the University in the use of this data, or related materials.
+  RESOURCETYPE:
+    - "Digital maps"
 
 #
 # Check this to identify new sites:
