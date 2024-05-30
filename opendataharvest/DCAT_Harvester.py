@@ -56,6 +56,17 @@ try:
     MAXRETRY = CONFIG.get("MAXRETRY", 5)
     SLEEPTIME = CONFIG.get("SLEEPTIME", 1)
 
+    # Default Values
+    default_config = config.get("DEFAULT", {})
+    MEMBEROF = default_config.get("MEMBEROF", [])
+    RESOURCECLASS = default_config.get("RESOURCECLASS", [])
+    ACCESSRIGHTS = default_config.get("ACCESSRIGHTS")  # This is a single string value
+    MDVERSION = default_config.get("MDVERSION")  # This is a single string value
+    LANG = default_config.get("LANG", [])
+    PROVIDER = default_config.get("PROVIDER")  # This is a single string value
+    SUPPRESSED = default_config.get("SUPPRESSED")  # This is a boolean value
+    RIGHTS = default_config.get("RIGHTS", [])
+
     ## Get the JSON schema:
     SCHEMA = CONFIG.get("SCHEMA")
 
@@ -346,13 +357,13 @@ class AardvarkDataProcessor:
                 gbl_resourceClass_sm.append("Imagery")
 
         return dct_format_s, gbl_resourceType_sm, gbl_resourceClass_sm
-    
+
     @staticmethod
     def load_schema():
         response = requests.get(SCHEMA, timeout=3)
         schema = json.loads(response.text)
         return schema
-    
+
     @staticmethod
     def validate_json(json_data, schema):
         try:
@@ -360,7 +371,6 @@ class AardvarkDataProcessor:
         except jsonschema.exceptions.ValidationError as err:
             return False, err
         return True, None
-
 
 
 class Aardvark:
@@ -375,16 +385,14 @@ class Aardvark:
         self._process_dataset_dict(dataset_dict, website)
 
     def _initialize_required_fields(self):
-        self.pcdm_memberOf_sm = ["AGSLOpenDataHarvest"]
-        self.gbl_resourceClass_sm = ["Datasets"]
-        self.dct_accessRights_s = "public"
-        self.gbl_mdVersion_s = "Aardvark"
-        self.dct_language_sm = ["English"]
-        self.schema_provider_s = "American Geographical Society Library – UWM Libraries"
-        self.gbl_suppressed_b = False
-        self.dct_rights_sm = [
-            "Although this data is being distributed by the American Geographical Society Library at the University of Wisconsin-Milwaukee Libraries, no warranty expressed or implied is made by the University as to the accuracy of the data and related materials. The act of distribution shall not constitute any such warranty, and no responsibility is assumed by the University in the use of this data, or related materials."
-        ]
+        self.pcdm_memberOf_sm = MEMBEROF
+        self.gbl_resourceClass_sm = RESOURCECLASS
+        self.dct_accessRights_s = ACCESSRIGHTS
+        self.gbl_mdVersion_s = MDVERSION
+        self.dct_language_sm = LANG
+        self.schema_provider_s = PROVIDER
+        self.gbl_suppressed_b = SUPPRESSED
+        self.dct_rights_sm = RIGHTS
 
     def _process_id(self, dataset_dict, website):
         uuid, sublayer = AardvarkDataProcessor.extract_id_sublayer(
@@ -542,7 +550,6 @@ class Aardvark:
         uuid: {self.uuid}
         """
 
-
     def toJSON(self):
         aardvark_dict = vars(self)
         aardvark_dict.pop(
@@ -550,21 +557,22 @@ class Aardvark:
         )  # Removes uuid if it exists, does nothing otherwise
         json_dump = json.dumps(aardvark_dict)
         schema = AardvarkDataProcessor.load_schema()
-        is_valid, error = AardvarkDataProcessor.validate_json(json_dump, schema)
+        is_valid, error = AardvarkDataProcessor.validate_json(aardvark_dict, schema)
         if is_valid:
             return json_dump
         else:
             logging.warning(f"Failed JSON Validation:\n{error}")
             return
-    
+
     def is_valid(self):
         json_object = self.toJSON
-        
+
         is_valid, error = AardvarkDataProcessor.validate_json(json_object, schema)
         if is_valid:
             return True, None
         else:
             return False, error
+
 
 # Main Function
 def main():

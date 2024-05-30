@@ -15,16 +15,24 @@ CONFIG:
 ################
 # Localization #
 ################
-
-defaults:
-- pcdm_memberOf_sm: ["AGSLOpenDataHarvest"]
-- gbl_resourceClass_sm: ["Datasets"]
-- dct_accessRights_s: "public"
-- gbl_mdVersion_s: "Aardvark"
-- dct_language_sm: ["English"]
-- schema_provider_s: "American Geographical Society Library – UWM Libraries"
-- gbl_suppressed_b: False
-- dct_rights_sm: ["Although this data is being distributed by the American Geographical Society Library at the University of Wisconsin-Milwaukee Libraries, no warranty expressed or implied is made by the University as to the accuracy of the data and related materials. The act of distribution shall not constitute any such warranty, and no responsibility is assumed by the University in the use of this data, or related materials."]
+DEFAULT:
+  MEMBEROF:
+    - "AGSLOpenDataHarvest"
+  RESOURCECLASS:
+    - "Datasets"
+  ACCESSRIGHTS: "public"
+  MDVERSION: "Aardvark"
+  LANG:
+    - "English"
+  PROVIDER: "American Geographical Society Library – UWM Libraries"
+  SUPPRESSED: false
+  RIGHTS:
+  - |
+    Although this data is being distributed by the American Geographical Society Library
+    at the University of Wisconsin-Milwaukee Libraries, no warranty expressed or implied
+    is made by the University as to the accuracy of the data and related materials. The
+    act of distribution shall not constitute any such warranty, and no responsibility is
+    assumed by the University in the use of this data, or related materials.
 
 #
 # Check this to identify new sites:
