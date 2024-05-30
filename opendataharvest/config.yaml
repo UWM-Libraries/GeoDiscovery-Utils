@@ -1,3 +1,31 @@
+# config.yaml
+
+###########################
+# Harvester Configuration #
+###########################
+
+CONFIG:
+  CATALOG: "TestSites" # TestSites, ArcGIS_Sites, or CKAN_Sites
+  OUTPUTDIR: "opendataharvest/output_md"
+  DEFAULTBBOX: "opendataharvest/default_bbox.csv"
+  MAXRETRY: 3
+  SLEEPTIME: 2
+  SCHEMA: "https://raw.githubusercontent.com/UWM-Libraries/GeoDiscovery/main/schema/geoblacklight-schema-aardvark.json"
+
+################
+# Localization #
+################
+
+defaults:
+- pcdm_memberOf_sm: ["AGSLOpenDataHarvest"]
+- gbl_resourceClass_sm: ["Datasets"]
+- dct_accessRights_s: "public"
+- gbl_mdVersion_s: "Aardvark"
+- dct_language_sm: ["English"]
+- schema_provider_s: "American Geographical Society Library – UWM Libraries"
+- gbl_suppressed_b: False
+- dct_rights_sm: ["Although this data is being distributed by the American Geographical Society Library at the University of Wisconsin-Milwaukee Libraries, no warranty expressed or implied is made by the University as to the accuracy of the data and related materials. The act of distribution shall not constitute any such warranty, and no responsibility is assumed by the University in the use of this data, or related materials."]
+
 #
 # Check this to identify new sites:
 # https://hub.arcgis.com/search?collection=Site&q=wisconsin
@@ -14,6 +42,10 @@
   #   SkipList: 
   #     - UUID: "a-particular-dataset" 
   #     - UUID: "a-different-dataset"
+
+##############
+# Test Sites #
+##############
 
 TestSites:
   MilwaukeeCounty_OpenData:
@@ -35,6 +67,10 @@ TestSites:
      - UUID: "ca921d70bdd84ae8bc84cd09abd822d7" # link to census geography website 
      - UUID: "00883495714c42a9be53b76b24300c8e" # GIS data disclaimer 
      - UUID: "200036084844418bb3119d963cd7d98c" # OSDP Help?
+
+########################
+# DCAT compliant sites #
+########################
 
 ArcGIS_Sites:
 

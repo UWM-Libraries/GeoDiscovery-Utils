@@ -1,9 +1,33 @@
+"""
+DCAT_Harvester.py
+Author: Stephen Appel
+Created: May 14, 2024
+Version: 0.1
+Dependencies: requests, yaml, and dateutil are not part of the standard library.
+Credit: UW-Madison - State Cartographer's Office for some code. Some code refactored and edited by CoPilot.
+Description: This script is used to harvest open data from data portals who 
+expose a DCAT JSON. It reads configuration options from a YAML file, including 
+output directory, default bounding box, which portals to scan (catalog), maximum
+retry attempts, and sleep time for requests.
+A Site object is crated for each website in the defined catalog. Datasets not 
+in the skip list for the Site will be looped over and a JSON File generated for
+each. The Aardvark class is dictionary-like and defines the structure of a 
+single dataset description. We  dump the Aardvark object to JSON when 
+crosswalking is completeo and write it to a file. A timestamped log file is 
+created on each run and contains verbose output for debugging and for maintaining
+the config.yaml file such as datasets to add to the skip list, etc.
+Code is formated according to PEP8 using Black.
+Care is taken to use functionality from the Python standard library.
+AI was utilized in authoring this script.
+"""
+
 import csv
 import json
 import logging
 import re
+import sys
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import quote
 from typing import List
@@ -11,29 +35,37 @@ from typing import List
 import requests
 import yaml
 from dateutil import parser
+import jsonschema
+from jsonschema import validate
 
+config_file = r"opendataharvest/config.yaml"
 
-OpenDataSites = yaml.safe_load(
-    open(
-        r"C:\Users\srappel\Documents\GitHub\GeoDiscovery-Utils\opendataharvest\OpenDataSites.yaml",
-        "r",
-    )
-)
-OUTPUTDIR = Path(
-    r"C:\Users\srappel\Documents\GitHub\GeoDiscovery-Utils\opendataharvest\output_md"
-)
-assert OUTPUTDIR.is_dir()
+try:
+    with open(config_file, "r") as file:
+        config = yaml.safe_load(file)
+except FileNotFoundError:
+    print(f"Config file {config_file} not found")
+    sys.exit()
 
-DEFAULTBBOX = Path(
-    r"C:\Users\srappel\Documents\GitHub\GeoDiscovery-Utils\opendataharvest\Wisconsin-Counties-CSV.csv"
-)
+try:
+    CONFIG = config.get("CONFIG")
+    OUTPUTDIR = Path(CONFIG.get("OUTPUTDIR"))
+    DEFAULTBBOX = Path(CONFIG.get("DEFAULTBBOX"))
+    CATALOG_KEY = CONFIG.get("CATALOG", "TestSites")
+    CATALOG = config.get(CATALOG_KEY, None)
+    MAXRETRY = CONFIG.get("MAXRETRY", 5)
+    SLEEPTIME = CONFIG.get("SLEEPTIME", 1)
 
+    ## Get the JSON schema:
+    SCHEMA = CONFIG.get("SCHEMA")
 
-CATALOG = OpenDataSites["ArcGIS_Sites"]
-MAXRETRY = 1
-SLEEPTIME = 1
-dt = str(datetime.now().timestamp())
-logfile_name = f"_logfile{dt}.txt"
+except AttributeError as e:
+    print(f"Unable to read all configuration values from {config_file}")
+    print(e)
+    sys.exit()
+
+dt = str(datetime.now().strftime(r"%Y-%m-%d-%H:%M:%S"))
+logfile_name = f"_{dt}.log"
 LOGFILE = OUTPUTDIR / logfile_name
 
 # Configure the logging module
@@ -314,6 +346,21 @@ class AardvarkDataProcessor:
                 gbl_resourceClass_sm.append("Imagery")
 
         return dct_format_s, gbl_resourceType_sm, gbl_resourceClass_sm
+    
+    @staticmethod
+    def load_schema():
+        response = requests.get(SCHEMA, timeout=3)
+        schema = json.loads(response.text)
+        return schema
+    
+    @staticmethod
+    def validate_json(json_data, schema):
+        try:
+            validate(instance=json_data, schema=schema)
+        except jsonschema.exceptions.ValidationError as err:
+            return False, err
+        return True, None
+
 
 
 class Aardvark:
@@ -363,7 +410,9 @@ class Aardvark:
         title = prefix + " - " + dataset_dict["title"]
         self.dct_title_s = title
 
-        self.gbl_mdModified_dt = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
+        self.gbl_mdModified_dt = datetime.now(timezone.utc).strftime(
+            "%Y-%m-%dT%H:%M:%SZ"
+        )
 
         self.dct_description_sm = [
             re.sub("<[^<]+?>", "", dataset_dict.get("description", []))
@@ -493,13 +542,29 @@ class Aardvark:
         uuid: {self.uuid}
         """
 
+
     def toJSON(self):
         aardvark_dict = vars(self)
         aardvark_dict.pop(
             "uuid", None
         )  # Removes uuid if it exists, does nothing otherwise
-        return json.dumps(aardvark_dict)
-
+        json_dump = json.dumps(aardvark_dict)
+        schema = AardvarkDataProcessor.load_schema()
+        is_valid, error = AardvarkDataProcessor.validate_json(json_dump, schema)
+        if is_valid:
+            return json_dump
+        else:
+            logging.warning(f"Failed JSON Validation")
+            return
+    
+    def is_valid(self):
+        json_object = self.toJSON
+        
+        is_valid, error = AardvarkDataProcessor.validate_json(json_object, schema)
+        if is_valid:
+            return True, None
+        else:
+            return False, error
 
 # Main Function
 def main():
@@ -514,7 +579,11 @@ def main():
                 newfile = f"{new_aardvark_object.id}.json"
                 newfilePath = OUTPUTDIR / newfile
                 with open(newfilePath, "w") as f:
-                    f.write(new_aardvark_object.toJSON())
+                    json_data = new_aardvark_object.toJSON()
+                    if not json_data is None:
+                        f.write(new_aardvark_object.toJSON())
+                    else:
+                        logging.warning(f"{str(newfilePath)} not written...")
 
 
 if __name__ == "__main__":
