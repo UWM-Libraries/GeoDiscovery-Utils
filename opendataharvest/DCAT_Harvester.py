@@ -345,11 +345,10 @@ class AardvarkDataProcessor:
 
     @staticmethod
     def format_fetcher(dataset_dict):
-        dct_format_s = FORMAT
-        gbl_resourceType_sm = RESOURCETYPE
-        gbl_resourceClass_sm = ["Datasets"]
-
         for distribution in dataset_dict["distribution"]:
+            dct_format_s = FORMAT
+            gbl_resourceType_sm = RESOURCETYPE
+            gbl_resourceClass_sm = ["Datasets"]
             if distribution["title"] == "Shapefile":
                 dct_format_s = "Shapefile"
             elif "aerial" in dataset_dict.get("title", "").lower() or any(
@@ -396,15 +395,15 @@ class Aardvark:
     """
 
     def __init__(self, dataset_dict, website):
-        self._initialize_required_fields()
-        dataset_dict = AardvarkDataProcessor.extract_data(dataset_dict)
         process_id_result = self._process_id(dataset_dict, website)
-        if process_id_result is None:
+        if not process_id_result: # Dataset is in the skiplist
             return
-        self._process_dataset_dict(dataset_dict, website)
+        self._initialize_default_field_values()
+        extracted_dataset_dict = AardvarkDataProcessor.extract_data(dataset_dict)
+        self._process_extracted_dataset_dict(extracted_dataset_dict, website)
 
 
-    def _initialize_required_fields(self):
+    def _initialize_default_field_values(self):
         self.pcdm_memberOf_sm = MEMBEROF
         self.gbl_resourceClass_sm = RESOURCECLASS
         self.dct_accessRights_s = ACCESSRIGHTS
@@ -423,6 +422,7 @@ class Aardvark:
 
         if not self.id:
             logging.warning("ID is required.")
+            return None
 
         # Stop processing if in skiplist
         if self.uuid in website.site_skiplist:
@@ -432,7 +432,7 @@ class Aardvark:
         self.dct_identifier_sm = [dataset_dict["identifier"]]
         return True
 
-    def _process_dataset_dict(self, dataset_dict, website):
+    def _process_extracted_dataset_dict(self, dataset_dict, website):
         self.dct_spatial_sm = website.site_details["Spatial"]
 
         prefix = website.site_details["CreatedBy"]
