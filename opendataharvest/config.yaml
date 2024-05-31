@@ -218,7 +218,11 @@ ArcGIS_Sites:
     Spatial: ["Madison", "Wisconsin", "United States"]
     DefaultBbox: "Dane" # For now
     SkipList: 
-      - UUID: "cityofmadison-city-calendar-of-events"  
+      - UUID: "9707ce85a9554be89e46f9fd2a4fec33"
+      - UUID: "48695c41208b4a9ab6d3fceda27afb0a"
+      - UUID: "c7459351d2b444448b098a6892eeaf5e"
+      - UUID: "365b9d3ba82f40dbbc5594696836b91f"
+      - UUID: "0ae67f0f85e04bebbaac8f91a38c758c"
 
 # City of Milwaukee is a CKAN site; does not include bounding coordinates in anything!
 #  Milwaukee_OpenData:
@@ -237,7 +241,17 @@ ArcGIS_Sites:
     SiteName: "CityOfWisconsinRapids"
     Spatial: ["Wisconsin Rapids", "Wisconsin", "United States"]
     DefaultBbox: "Wood" # For now
-    SkipList: ""
+    AppList:
+      - UUID: "fb7388fef8974f068f74c71db5f33f59"
+      - UUID: "5b1f0e2b911b45c68abbd81a4cf493f7"
+    SkipList:
+      - UUID: "6489bbea63cc4b5192de3f8d5b043c0c"
+      - UUID: "e9a6aad1be31421e901b0224ca763336"
+      - UUID: "4685e0998b1c427ca57f2ac481b934b1"
+      - UUID: "c902406a9412465094cef0c1ff3e98ad"
+      - UUID: "5b1982485c184267a8a51eedc171a999"
+      - UUID: "68147efce2ba4155aad7bfc887c9e46a"
+      - UUID: "5b1f0e2b911b45c68abbd81a4cf493f7"
 
 # Sun Prairie site does not seem fully-functional as of 1/14/2022
 #  SunPrairie_OpenData:
