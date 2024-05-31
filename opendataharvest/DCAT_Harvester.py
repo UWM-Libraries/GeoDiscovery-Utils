@@ -352,9 +352,9 @@ class AardvarkDataProcessor:
         for distribution in dataset_dict["distribution"]:
             if distribution["title"] == "Shapefile":
                 dct_format_s = "Shapefile"
-            elif "Aerial" in dataset_dict.get("title", "") or any(
-                keyword in dataset_dict.get("keyword", [])
-                for keyword in ["Aerial", "aerial", "imagery"]
+            elif "aerial" in dataset_dict.get("title", "").lower() or any(
+                keyword.lower() in ["aerial photograph", "aerial imagery"]
+                for keyword in dataset_dict.get("keyword", [])
             ):
                 gbl_resourceType_sm[0] = "Aerial photographs"
                 dct_format_s = "Raster data"
@@ -398,8 +398,11 @@ class Aardvark:
     def __init__(self, dataset_dict, website):
         self._initialize_required_fields()
         dataset_dict = AardvarkDataProcessor.extract_data(dataset_dict)
-        self._process_id(dataset_dict, website)
+        process_id_result = self._process_id(dataset_dict, website)
+        if process_id_result is None:
+            return
         self._process_dataset_dict(dataset_dict, website)
+
 
     def _initialize_required_fields(self):
         self.pcdm_memberOf_sm = MEMBEROF
@@ -424,9 +427,10 @@ class Aardvark:
         # Stop processing if in skiplist
         if self.uuid in website.site_skiplist:
             logging.info(f"{self.uuid} is on the skiplist...\n")
-            return
+            return None
 
         self.dct_identifier_sm = [dataset_dict["identifier"]]
+        return True
 
     def _process_dataset_dict(self, dataset_dict, website):
         self.dct_spatial_sm = website.site_details["Spatial"]

@@ -76,6 +76,7 @@ TestSites:
      - UUID: "ca921d70bdd84ae8bc84cd09abd822d7" # link to census geography website 
      - UUID: "00883495714c42a9be53b76b24300c8e" # GIS data disclaimer 
      - UUID: "200036084844418bb3119d963cd7d98c" # OSDP Help?
+     - UUID: "29c62b7a834944ef8196573c123d7a9d"
 
 ########################
 # DCAT compliant sites #
