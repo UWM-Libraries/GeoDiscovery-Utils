@@ -399,6 +399,7 @@ ArcGIS_Sites:
       - UUID: "53b6d275fa594bb6ad8a76f612cd7b87" # Historical Air Photo App
     SkipList: 
       - UUID: "f2c971b06a4340e1bfb206fe693008af"
+      - UUID: "3cf146ed887e407586413747a2b2c029"
 
   Kenosha_OpenData: 
     CreatedBy: "Kenosha County"
