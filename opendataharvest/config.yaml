@@ -193,12 +193,23 @@ ArcGIS_Sites:
     SiteName: "CityOfFitchburg"
     Spatial: ["Fitchburg", "Wisconsin", "United States"]
     DefaultBbox: "Dane" # For now
+    AppList:
+       - UUID: "4a691e2b13c249e287109fbfe10a76f4"
+       - UUID: "21be1cd4662542198dec32eec45939d2"
+       - UUID: "4b7708c82ef44ffc929d0c5ff72a748a"
+       - UUID: "8853de122f734a16abde5973d58d2c6d"
+       - UUID: "ba6321c4459a440fb12e37f8100e9840"
     SkipList: 
        - UUID: "FitchburgWI-open-data-hub"
        - UUID: "FitchburgWI-city-of-fitchburg-police-department"
        - UUID: "FitchburgWI-fbpd"
        - UUID: "FitchburgWI-fitchburg-gisowner-outfallinspections"
-       - UUID: "FitchburgWI-fitchburg-gisowner-outfalls"  
+       - UUID: "FitchburgWI-fitchburg-gisowner-outfalls"
+       - UUID: "e087f8f48633429a9192299698bae3c5"
+       - UUID: "99d417989850413c9891d12dc4c989f8"
+       - UUID: "807c1ed9135e4ada932894765475ad4b"
+       - UUID: "bbd8c8834f124420a7709205e7c237a1"
+       - UUID: "0c43abdea8e0477f8e674401340de1f3"
       
   Madison_OpenData:
     CreatedBy: "City of Madison"
@@ -248,6 +259,7 @@ ArcGIS_Sites:
     SiteURL: "https://data-carpc.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "CARPC"
     Spatial: ["Wisconsin", "United States"]
+    DefaultBbox: "Dane" # For now
     AppList:
       - UUID: "e64f06e8d912465a96f9ea9bfdb72676"
     SkipList: 
