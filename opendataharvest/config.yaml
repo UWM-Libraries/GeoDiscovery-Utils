@@ -190,7 +190,7 @@ ArcGIS_Sites:
   Fitchburg_OpenData:
     CreatedBy: "City of Fitchburg"
     SiteURL: "https://opendata-fitchburgwi.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
-    SiteName: "CityOfFitchburg"
+    SiteName: "Fitchburg"
     Spatial: ["Fitchburg", "Wisconsin", "United States"]
     DefaultBbox: "Dane" # For now
     AppList:
@@ -214,7 +214,7 @@ ArcGIS_Sites:
   Madison_OpenData:
     CreatedBy: "City of Madison"
     SiteURL: "http://data-cityofmadison.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
-    SiteName: "CityOfMadison"
+    SiteName: "Madison"
     Spatial: ["Madison", "Wisconsin", "United States"]
     DefaultBbox: "Dane" # For now
     SkipList: 
@@ -238,7 +238,7 @@ ArcGIS_Sites:
   WisconsinRapids_OpenData:
     CreatedBy: "City of Wisconsin Rapids"
     SiteURL: "http://rapidsdata-wisconsinrapids.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
-    SiteName: "CityOfWisconsinRapids"
+    SiteName: "WisconsinRapids"
     Spatial: ["Wisconsin Rapids", "Wisconsin", "United States"]
     DefaultBbox: "Wood" # For now
     AppList:
@@ -351,6 +351,8 @@ ArcGIS_Sites:
     SiteName: "ColumbiaCounty"
     Spatial: ["Columbia County", "Wisconsin", "United States"]
     DefaultBbox: "Columbia"
+    AppList: 
+      - UUID: "2233871b2d7740998bffcdedffea2818"
     SkipList: 
       - UUID: "25869b8718c0419db87dad07de5b02d8"
       - UUID: "48b8cec7ebf04b5fbdcaf70d09daff21"
@@ -360,7 +362,15 @@ ArcGIS_Sites:
       - UUID: "6e03e8c26aad4b9c92a87c1063ddb0e3"
       - UUID: "86de95d4e0244cba80f0fa2c9403a7b2"  
       - UUID: "8b3b470883a744aeb60e5fff0a319ce7" 
-      - UUID: "d8855ee4d3d74413babfb0f41203b168"        
+      - UUID: "d8855ee4d3d74413babfb0f41203b168"
+      - UUID: "64a332c9dd094241b02ff05050117ce2"
+      - UUID: "413fd05bbd7342f5991d5ec96f4f8b18"
+      - UUID: "3d66e986942348698ae68f130ce949f4"
+      - UUID: "e2bf7b46c4a7475a89a6a7b666748408"      
+      - UUID: "9539d56dd6534e949de742e70d44b96a"
+      - UUID: "aab054ab883c4a4094c72e949566ad40"
+      - UUID: "931d892ac7a843d7ba29d085e0433465"
+      - UUID: "6d9fa6d159ae4a1f80b9e296ed300767"
 
   DaneCounty_OpenData: 
     CreatedBy: "Dane County"
