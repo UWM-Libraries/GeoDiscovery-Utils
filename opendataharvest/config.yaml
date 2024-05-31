@@ -331,8 +331,14 @@ ArcGIS_Sites:
     Spatial: ["Wisconsin", "United States"]
     DatasetPrefix: ""
     DatasetPostfix: ", ECWRPC"
-    SkipList: ""  
-
+    SkipList:
+      - UUID: "0c465bf2950e4140b05f8bdae7adc9c0" 
+      - UUID: "fbc3bb37905d4dc091a282a17b91e3a1"
+      - UUID: "2f68b9dc2d5d43faa029691a3dec5862"
+      - UUID: "9b6c6ab3dc1b4041937ba174246c96c9"
+      - UUID: "346c14ea571d4e64bafa47db05964bbd"
+      - UUID: "4be17af8cb9a46438fb20a44f8d8de12"
+      
 ######################
 # Wisconsin Counties #
 ######################
