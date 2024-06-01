@@ -315,7 +315,10 @@ class AardvarkDataProcessor:
 
     @staticmethod
     def getURL(distribution):
-        url = distribution.get("accessURL", distribution.get("downloadURL", "invalid"))
+        url = distribution.get("accessURL", None)
+        if url is None:
+            print("There is no accessURL, looking for downloadURL instead.")
+            url = distribution.get("downloadURL", None)
         return quote(url, safe=":/?=")
 
     @staticmethod
