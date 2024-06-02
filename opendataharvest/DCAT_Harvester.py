@@ -42,7 +42,7 @@ from jsonschema import validate
 config_file = r"opendataharvest/config.yaml"
 
 try:
-    with open(config_file, "r", encoding='utf-8') as file:
+    with open(config_file, "r", encoding="utf-8") as file:
         config = yaml.safe_load(file)
 except FileNotFoundError:
     print(f"Config file {config_file} not found")
@@ -324,7 +324,7 @@ class AardvarkDataProcessor:
     def getURL(distribution):
         url = distribution.get("accessURL", None)
         if url is None:
-            print("There is no accessURL, looking for downloadURL instead.")
+            logging.info("There is no accessURL, looking for downloadURL instead.")
             url = distribution.get("downloadURL", None)
         return quote(url, safe=":/?=")
 
@@ -352,48 +352,44 @@ class AardvarkDataProcessor:
             return {format_references: url}
 
         return None
-    
+
     @staticmethod
     def process_dataset_class_type_and_format(dataset):
 
-        shapefile_datasets = []
         aerial_keywords = ["aerial", "air photo", "orthophoto"]
 
         result = {
-            "Format": None,
-            "Resource Class": [],
-            "Resource Type": []
+            "dct_format_s": None,
+            "gbl_resourceClass_sm": RESOURCECLASS,
+            "gbl_resourceType_sm": RESOURCETYPE,
         }
 
         shapefile_found = False
-        for distribution in dataset.get('distribution', []):
-            if distribution.get('title') == "Shapefile":
-                result["Format"] = "Shapefile"  
-                result["Resource Class"].append("Datasets")
-                result["Resource Type"].append("Digital Maps")
+        for distribution in dataset.get("distribution", []):
+            if distribution.get("title") == "Shapefile":
+                result["gbl_resourceClass_sm"] = ["Datasets"]
+                result["gbl_resourceType_sm"] = ["Digital maps"]
                 shapefile_found = True
-                break
 
         if not shapefile_found:
-            title = dataset.get('title', '').lower()
+            title = dataset.get("title", "").lower()
             is_aerial = any(keyword in title for keyword in aerial_keywords)
 
             if is_aerial:
-                result["Resource Class"].append("Imagery")
-                result["Resource Type"].append("Aerial photograph")
+                result["gbl_resourceClass_sm"].append("Imagery")
+                result["gbl_resourceType_sm"] = ["Aerial photographs"]
 
-        result["Resource Class"] = list(set(result["Resource Class"])) or None
-        result["Resource Type"] = list(set(result["Resource Type"])) or None
-
+        result["gbl_resourceClass_sm"] = list(set(result["gbl_resourceClass_sm"]))
+        result["gbl_resourceType_sm"] = list(set(result["gbl_resourceType_sm"]))
+        logging.debug(result)
         return result
-
 
     @staticmethod
     def issue_date_parser(dataset_dict):
         dt_string = dataset_dict["issued"]
         try:
             parsed_date = parser.parse(dt_string)
-            dct_issued_s = parsed_date.strftime(r'%Y-%m-%d')
+            dct_issued_s = parsed_date.strftime(r"%Y-%m-%d")
         except Exception as e:
             logging.warning(f'Unable to parse the year from: "{dt_string}". Error: {e}')
             dct_issued_s = dt_string
@@ -422,12 +418,11 @@ class Aardvark:
 
     def __init__(self, dataset_dict, website):
         process_id_result = self._process_id(dataset_dict, website)
-        if not process_id_result: # Dataset is in the skiplist
+        if not process_id_result:  # Dataset is in the skiplist
             return
         self._initialize_default_field_values()
         extracted_dataset_dict = AardvarkDataProcessor.extract_data(dataset_dict)
         self._process_extracted_dataset_dict(extracted_dataset_dict, website)
-
 
     def _initialize_default_field_values(self):
         self.pcdm_memberOf_sm = MEMBEROF
@@ -496,21 +491,21 @@ class Aardvark:
             rights.append(re.sub("<[^<]+?>", "", dataset_dict.get("license")))
         self.dct_rights_sm = rights
 
-
         # Replace gbl_resourceClass_sm for web applications/websites
         if not self.uuid in website.site_applist:
-            # Format dct_format_s
-            def set_attributes_if_not_none(obj, attr_values):
-                attr_names = ["dct_format_s", "gbl_resourceType_sm", "gbl_resourceClass_sm"]
-                for attr_name, attr_value in zip(attr_names, attr_values):
-                    if attr_value is not None:
-                        setattr(obj, attr_name, attr_value)
-
-            attr_values = AardvarkDataProcessor.process_dataset_class_type_and_format(dataset_dict)
-            set_attributes_if_not_none(self, attr_values)
+            result = AardvarkDataProcessor.process_dataset_class_type_and_format(
+                dataset_dict
+            )
+            self.dct_format_s = result["dct_format_s"]
+            self.gbl_resourceClass_sm = result["gbl_resourceClass_sm"]
+            self.gbl_resourceType_sm = result["gbl_resourceType_sm"]
         else:
+            logging.info(
+                f"UUID {self.uuid} is in site_applist, setting gbl_resourceClass_sm to ['Websites']"
+            )
             self.gbl_resourceClass_sm = ["Websites"]
-
+            self.dct_format_s = None
+            self.dct_resourceType_sm = None
 
     def _process_spatial(self, dataset_dict, website):
         if "spatial" not in dataset_dict:
@@ -555,7 +550,7 @@ class Aardvark:
             except ImportError:
                 index_year = int(dataset_dict["modified"][:4])
             except Exception as e:
-                print(f"An error occurred: {e}")
+                logging.error(f"An error occurred: {e}")
 
             self.gbl_indexYear_im = [index_year]
             self.dct_temporal_sm = [f"Modified {index_year}"]
@@ -628,7 +623,8 @@ class Aardvark:
             return json_dump
         else:
             logging.warning(f"Failed JSON Validation:\n{error}")
-            return
+            logging.info(str(json_dump))
+            return None
 
     def is_valid(self):
         json_dump = self.toJSON()  # Call toJSON as a method
@@ -658,12 +654,12 @@ def main():
             if new_aardvark_object.uuid not in website.site_skiplist:
                 newfile = f"{new_aardvark_object.id}.json"
                 newfilePath = OUTPUTDIR / newfile
-                with open(newfilePath, "w", encoding='utf-8') as f:
-                    json_data = new_aardvark_object.toJSON()
-                    if not json_data is None:
+                json_data = new_aardvark_object.toJSON()
+                if not json_data is None:
+                    with open(newfilePath, "w", encoding="utf-8") as f:
                         f.write(new_aardvark_object.toJSON())
-                    else:
-                        logging.warning(f"{str(newfilePath)} not written...")
+                else:
+                    logging.warning(f"{str(newfilePath)} not written...")
 
 
 if __name__ == "__main__":
