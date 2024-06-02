@@ -12,7 +12,7 @@ CONFIG:
   MAXRETRY: 3
   SLEEPTIME: 2
   SCHEMA: "https://raw.githubusercontent.com/UWM-Libraries/GeoDiscovery/main/schema/geoblacklight-schema-aardvark.json"
-  FORMAT_CONFIG: "opendataharvest/format_keywords.yaml"
+
 ################
 # Localization #
 ################

@@ -39,8 +39,6 @@ from dateutil import parser
 import jsonschema
 from jsonschema import validate
 
-from metadata_sorter import MetadataSorter
-
 config_file = r"opendataharvest/config.yaml"
 
 try:
@@ -59,7 +57,6 @@ try:
     CATALOG = config.get(CATALOG_KEY, None)
     MAXRETRY = CONFIG.get("MAXRETRY", 5)
     SLEEPTIME = CONFIG.get("SLEEPTIME", 1)
-    FORMAT_CONFIG = CONFIG.get("FORMAT_CONFIG", "opendataharvest/format_keywords.yaml")
 
     # Default Values
     default_config = config.get("DEFAULT", {})
@@ -355,27 +352,41 @@ class AardvarkDataProcessor:
             return {format_references: url}
 
         return None
-
+    
     @staticmethod
-    def format_fetcher(dataset_dict):
-        # Configure format keywords
-        try:
-            sorter = MetadataSorter(FORMAT_CONFIG)
-        except Exception as e:
-            logging.fatal("Failed to create the format sorter", exc_info=e)
-            sys.exit(1)
-            
-        classifications = sorter.classify_record(dataset_dict)
+    def process_dataset_class_type_and_format(dataset):
 
-        dct_format_s = classifications["format"]
-        gbl_resourceType_sm = [classifications["resource_type"]]
-        gbl_resourceClass_sm = ["Datasets", classifications["resource_class"]]
+        shapefile_datasets = []
+        aerial_keywords = ["aerial", "air photo", "orthophoto"]
 
-        # Deduplicate the lists
-        gbl_resourceType_sm = list(set(gbl_resourceType_sm))
-        gbl_resourceClass_sm = list(set(gbl_resourceClass_sm))
+        result = {
+            "Format": None,
+            "Resource Class": [],
+            "Resource Type": []
+        }
 
-        return dct_format_s, gbl_resourceType_sm, gbl_resourceClass_sm
+        shapefile_found = False
+        for distribution in dataset.get('distribution', []):
+            if distribution.get('title') == "Shapefile":
+                result["Format"] = "Shapefile"  
+                result["Resource Class"].append("Datasets")
+                result["Resource Type"].append("Digital Maps")
+                shapefile_found = True
+                break
+
+        if not shapefile_found:
+            title = dataset.get('title', '').lower()
+            is_aerial = any(keyword in title for keyword in aerial_keywords)
+
+            if is_aerial:
+                result["Resource Class"].append("Imagery")
+                result["Resource Type"].append("Aerial photograph")
+
+        result["Resource Class"] = list(set(result["Resource Class"])) or None
+        result["Resource Type"] = list(set(result["Resource Type"])) or None
+
+        return result
+
 
     @staticmethod
     def issue_date_parser(dataset_dict):
@@ -485,19 +496,21 @@ class Aardvark:
             rights.append(re.sub("<[^<]+?>", "", dataset_dict.get("license")))
         self.dct_rights_sm = rights
 
-        # Format dct_format_s
-        def set_attributes_if_not_none(obj, attr_values):
-            attr_names = ["dct_format_s", "gbl_resourceType_sm", "gbl_resourceClass_sm"]
-            for attr_name, attr_value in zip(attr_names, attr_values):
-                if attr_value is not None:
-                    setattr(obj, attr_name, attr_value)
-
-        attr_values = AardvarkDataProcessor.format_fetcher(dataset_dict)
-        set_attributes_if_not_none(self, attr_values)
 
         # Replace gbl_resourceClass_sm for web applications/websites
-        if self.uuid in website.site_applist:
+        if not self.uuid in website.site_applist:
+            # Format dct_format_s
+            def set_attributes_if_not_none(obj, attr_values):
+                attr_names = ["dct_format_s", "gbl_resourceType_sm", "gbl_resourceClass_sm"]
+                for attr_name, attr_value in zip(attr_names, attr_values):
+                    if attr_value is not None:
+                        setattr(obj, attr_name, attr_value)
+
+            attr_values = AardvarkDataProcessor.process_dataset_class_type_and_format(dataset_dict)
+            set_attributes_if_not_none(self, attr_values)
+        else:
             self.gbl_resourceClass_sm = ["Websites"]
+
 
     def _process_spatial(self, dataset_dict, website):
         if "spatial" not in dataset_dict:
