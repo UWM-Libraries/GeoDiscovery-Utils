@@ -2,7 +2,7 @@ import json
 import yaml
 
 class MetadataSorter:
-    def __init__(self, config_file='format_keywords.yaml'):
+    def __init__(self, config_file='opendataharvest/format_keywords.yaml'):
         self.load_config(config_file)
 
     def load_config(self, config_file):
@@ -45,10 +45,11 @@ class MetadataSorter:
 
 if __name__ == "__main__":
     # Example usage:
-    with open('dcat_record.json', 'r') as file:
-        record = json.load(file)
-    
-    sorter = MetadataSorter()
-    classifications = sorter.format_fetcher(record)
-
-    print(f'Classifications: {classifications}')
+    with open('uwm_fixture/MCLIO_dcat.json', 'r') as file:
+        file_json = json.load(file)
+        records = file_json['dataset']
+        for record in records:
+            sorter = MetadataSorter()
+            classifications = sorter.format_fetcher(record)
+            print(f'{record["title"]}')
+            print(f'Classifications: {classifications}')
