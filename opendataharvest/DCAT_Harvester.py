@@ -371,6 +371,10 @@ class AardvarkDataProcessor:
         gbl_resourceType_sm = [classifications["resource_type"]]
         gbl_resourceClass_sm = ["Datasets", classifications["resource_class"]]
 
+        # Deduplicate the lists
+        gbl_resourceType_sm = list(set(gbl_resourceType_sm))
+        gbl_resourceClass_sm = list(set(gbl_resourceClass_sm))
+
         return dct_format_s, gbl_resourceType_sm, gbl_resourceClass_sm
 
     @staticmethod

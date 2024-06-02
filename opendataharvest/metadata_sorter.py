@@ -2,7 +2,7 @@ import json
 import yaml
 
 class MetadataSorter:
-    def __init__(self, config_file='updated_config.yaml'):
+    def __init__(self, config_file='format_keywords.yaml'):
         self.load_config(config_file)
 
     def load_config(self, config_file):
