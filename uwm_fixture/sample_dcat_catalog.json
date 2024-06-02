@@ -1,0 +1,269 @@
+{
+    "@context": "https://project-open-data.cio.gov/v1.1/schema/catalog.jsonld",
+    "@type": "dcat:Catalog",
+    "conformsTo": "https://project-open-data.cio.gov/v1.1/schema",
+    "describedBy": "https://project-open-data.cio.gov/v1.1/schema/catalog.json",
+    "dataset": [
+      {
+        "title": "Sample Dataset 1",
+        "description": "This dataset contains statistical data and geographic information.",
+        "keyword": ["dataset", "statistical", "geographic"],
+        "modified": "2024-06-01",
+        "publisher": {
+          "name": "Example Publisher"
+        },
+        "contactPoint": {
+          "fn": "John Doe",
+          "hasEmail": "mailto:johndoe@example.com"
+        },
+        "identifier": "1",
+        "accessLevel": "public",
+        "bureauCode": ["020:00"],
+        "programCode": ["020:001"],
+        "license": "http://www.opendefinition.org/licenses/cc-by",
+        "spatial": "102100",
+        "temporal": "2024-01-01/2024-12-31",
+        "distribution": [
+          {
+            "accessURL": "http://example.com/dataset1.csv",
+            "format": "CSV"
+          }
+        ]
+      },
+      {
+        "title": "Aerial Imagery 2024",
+        "description": "High-resolution aerial imagery for urban planning.",
+        "keyword": ["imagery", "aerial photo", "remote sensing"],
+        "modified": "2024-05-15",
+        "publisher": {
+          "name": "Example Publisher"
+        },
+        "contactPoint": {
+          "fn": "Jane Smith",
+          "hasEmail": "mailto:janesmith@example.com"
+        },
+        "identifier": "2",
+        "accessLevel": "public",
+        "bureauCode": ["020:00"],
+        "programCode": ["020:002"],
+        "license": "http://www.opendefinition.org/licenses/cc-by",
+        "spatial": "102100",
+        "temporal": "2024-01-01/2024-12-31",
+        "distribution": [
+          {
+            "accessURL": "http://example.com/aerial_imagery_2024.tiff",
+            "format": "TIFF"
+          }
+        ]
+      },
+      {
+        "title": "Web Service for Map Layers",
+        "description": "This web service provides access to various map layers.",
+        "keyword": ["service", "web service", "api"],
+        "modified": "2024-04-20",
+        "publisher": {
+          "name": "Example Publisher"
+        },
+        "contactPoint": {
+          "fn": "Alice Brown",
+          "hasEmail": "mailto:alicebrown@example.com"
+        },
+        "identifier": "3",
+        "accessLevel": "public",
+        "bureauCode": ["020:00"],
+        "programCode": ["020:003"],
+        "license": "http://www.opendefinition.org/licenses/cc-by",
+        "spatial": "102100",
+        "temporal": "2024-01-01/2024-12-31",
+        "distribution": [
+          {
+            "accessURL": "http://example.com/map_service",
+            "format": "WMS"
+          }
+        ]
+      },
+      {
+        "title": "Census Data 2024",
+        "description": "Comprehensive census data for demographic analysis.",
+        "keyword": ["census", "demographic", "dataset"],
+        "modified": "2024-03-10",
+        "publisher": {
+          "name": "Example Publisher"
+        },
+        "contactPoint": {
+          "fn": "Bob Green",
+          "hasEmail": "mailto:bobgreen@example.com"
+        },
+        "identifier": "4",
+        "accessLevel": "public",
+        "bureauCode": ["020:00"],
+        "programCode": ["020:004"],
+        "license": "http://www.opendefinition.org/licenses/cc-by",
+        "spatial": "102100",
+        "temporal": "2024-01-01/2024-12-31",
+        "distribution": [
+          {
+            "accessURL": "http://example.com/census_data_2024.geojson",
+            "format": "GeoJSON"
+          }
+        ]
+      },
+      {
+        "title": "Land Use Map",
+        "description": "Map showing land use classifications.",
+        "keyword": ["map", "land use", "geographic"],
+        "modified": "2024-02-25",
+        "publisher": {
+          "name": "Example Publisher"
+        },
+        "contactPoint": {
+          "fn": "Chris White",
+          "hasEmail": "mailto:chriswhite@example.com"
+        },
+        "identifier": "5",
+        "accessLevel": "public",
+        "bureauCode": ["020:00"],
+        "programCode": ["020:005"],
+        "license": "http://www.opendefinition.org/licenses/cc-by",
+        "spatial": "102100",
+        "temporal": "2024-01-01/2024-12-31",
+        "distribution": [
+          {
+            "accessURL": "http://example.com/land_use_map.kml",
+            "format": "KML"
+          }
+        ]
+      },
+      {
+        "title": "Climate Report 2024",
+        "description": "Detailed climate report for the year 2024.",
+        "keyword": ["report", "climate", "document"],
+        "modified": "2024-02-10",
+        "publisher": {
+          "name": "Example Publisher"
+        },
+        "contactPoint": {
+          "fn": "Emily Clark",
+          "hasEmail": "mailto:emilyclark@example.com"
+        },
+        "identifier": "6",
+        "accessLevel": "public",
+        "bureauCode": ["020:00"],
+        "programCode": ["020:006"],
+        "license": "http://www.opendefinition.org/licenses/cc-by",
+        "spatial": "102100",
+        "temporal": "2024-01-01/2024-12-31",
+        "distribution": [
+          {
+            "accessURL": "http://example.com/climate_report_2024.pdf",
+            "format": "PDF"
+          }
+        ]
+      },
+      {
+        "title": "Interactive Land Use Tool",
+        "description": "An interactive tool for exploring land use data.",
+        "keyword": ["interactive", "tool", "web application"],
+        "modified": "2024-01-15",
+        "publisher": {
+          "name": "Example Publisher"
+        },
+        "contactPoint": {
+          "fn": "David Lee",
+          "hasEmail": "mailto:davidlee@example.com"
+        },
+        "identifier": "7",
+        "accessLevel": "public",
+        "bureauCode": ["020:00"],
+        "programCode": ["020:007"],
+        "license": "http://www.opendefinition.org/licenses/cc-by",
+        "spatial": "102100",
+        "temporal": "2024-01-01/2024-12-31",
+        "distribution": [
+          {
+            "accessURL": "http://example.com/interactive_land_use_tool",
+            "format": "HTML"
+          }
+        ]
+      },
+      {
+        "title": "Historical Photograph Collection",
+        "description": "A collection of historical photographs from the early 20th century.",
+        "keyword": ["photograph", "historical", "collection"],
+        "modified": "2024-01-01",
+        "publisher": {
+          "name": "Example Publisher"
+        },
+        "contactPoint": {
+          "fn": "Karen Brown",
+          "hasEmail": "mailto:karenbrown@example.com"
+        },
+        "identifier": "8",
+        "accessLevel": "public",
+        "bureauCode": ["020:00"],
+        "programCode": ["020:008"],
+        "license": "http://www.opendefinition.org/licenses/cc-by",
+        "spatial": "102100",
+        "temporal": "2024-01-01/2024-12-31",
+        "distribution": [
+          {
+            "accessURL": "http://example.com/historical_photos.zip",
+            "format": "ZIP"
+          }
+        ]
+      },
+      {
+        "title": "Lidar Data 2024",
+        "description": "Lidar data for topographic analysis.",
+        "keyword": ["lidar", "topography", "dataset"],
+        "modified": "2024-03-05",
+        "publisher": {
+          "name": "Example Publisher"
+        },
+        "contactPoint": {
+          "fn": "Laura Grey",
+          "hasEmail": "mailto:lauragrey@example.com"
+        },
+        "identifier": "9",
+        "accessLevel": "public",
+        "bureauCode": ["020:00"],
+        "programCode": ["020:009"],
+        "license": "http://www.opendefinition.org/licenses/cc-by",
+        "spatial": "102100",
+        "temporal": "2024-01-01/2024-12-31",
+        "distribution": [
+          {
+            "accessURL": "http://example.com/lidar_data_2024.xml",
+            "format": "XML"
+          }
+        ]
+      },
+      {
+        "title": "Environmental Impact Assessment",
+        "description": "Assessment of environmental impact for the new development project.",
+        "keyword": ["assessment", "environmental", "document"],
+        "modified": "2024-04-30",
+        "publisher": {
+          "name": "Example Publisher"
+        },
+        "contactPoint": {
+          "fn": "Michael White",
+          "hasEmail": "mailto:michaelwhite@example.com"
+        },
+        "identifier": "10",
+        "accessLevel": "public",
+        "bureauCode": ["020:00"],
+        "programCode": ["020:010"],
+        "license": "http://www.opendefinition.org/licenses/cc-by",
+        "spatial": "102100",
+        "temporal": "2024-01-01/2024-12-31",
+        "distribution": [
+          {
+            "accessURL": "http://example.com/environmental_impact_assessment.pdf",
+            "format": "PDF"
+          }
+        ]
+      }
+    ]
+  }
+  
