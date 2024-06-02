@@ -12,7 +12,7 @@ CONFIG:
   MAXRETRY: 3
   SLEEPTIME: 2
   SCHEMA: "https://raw.githubusercontent.com/UWM-Libraries/GeoDiscovery/main/schema/geoblacklight-schema-aardvark.json"
-
+  FORMAT_CONFIG: "opendataharvest/format_keywords.yaml"
 ################
 # Localization #
 ################
@@ -57,6 +57,13 @@ DEFAULT:
 ##############
 
 TestSites:
+  TestCatalog:
+    CreatedBy: "sample"
+    SiteURL: "uwm_fixture/sample_dcat_catalog.json"
+    SiteName: "sample"
+    DefaultBbox: "Winnebago"
+    SkipList: ""
+    Spatial: ["Winnebago County", "Wisconsin", "United States"]
   MilwaukeeCounty_OpenData:
     CreatedBy: "Milwaukee County"
     SiteURL: "https://data-mclio.hub.arcgis.com/api/feed/dcat-us/1.1.json"

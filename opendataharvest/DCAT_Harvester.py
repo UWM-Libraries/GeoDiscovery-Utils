@@ -27,6 +27,7 @@ import logging
 import re
 import sys
 import time
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import quote
@@ -37,6 +38,8 @@ import yaml
 from dateutil import parser
 import jsonschema
 from jsonschema import validate
+
+from metadata_sorter import MetadataSorter
 
 config_file = r"opendataharvest/config.yaml"
 
@@ -56,6 +59,7 @@ try:
     CATALOG = config.get(CATALOG_KEY, None)
     MAXRETRY = CONFIG.get("MAXRETRY", 5)
     SLEEPTIME = CONFIG.get("SLEEPTIME", 1)
+    FORMAT_CONFIG = CONFIG.get("FORMAT_CONFIG", "opendataharvest/format_keywords.yaml")
 
     # Default Values
     default_config = config.get("DEFAULT", {})
@@ -180,6 +184,10 @@ def get_site_data(site: str, details: dict) -> dict:
             response = requests.get(details["SiteURL"], timeout=3)
             response.raise_for_status()
             return response.json()
+        except requests.exceptions.MissingSchema:
+            logging.warning(f"trying SitURL for {site} as a filepath")
+            response_file = json.load(open(Path(details["SiteURL"]), "r"))
+            return response_file
         except json.JSONDecodeError:
             logging.warning(f"The content from {site} is not a valid JSON document.")
             return None
@@ -254,18 +262,20 @@ class AardvarkDataProcessor:
         }
 
     @staticmethod
-    def extract_id_sublayer(url):
+    def extract_id_sublayer(identifier):
         id_pattern = r"id=([a-zA-Z0-9]+)"
         sublayer_pattern = r"sublayer=(\d+)"
 
-        id_match = re.search(id_pattern, url)
-        sublayer_match = re.search(sublayer_pattern, url)
+        id_match = re.search(id_pattern, identifier)
+        sublayer_match = re.search(sublayer_pattern, identifier)
 
         id_value = id_match.group(1) if id_match else None
         sublayer_value = sublayer_match.group(1) if sublayer_match else None
 
         if id_value is None:
-            logging.warning(f"No id was extracted from the url: {url}")
+            logging.warning(f"No id was extracted from: {identifier}")
+            id_value = uuid.uuid4()
+            logging.info(f"Assigned new UUID: {id_value}")
 
         return id_value, sublayer_value
 
@@ -348,20 +358,18 @@ class AardvarkDataProcessor:
 
     @staticmethod
     def format_fetcher(dataset_dict):
-        for distribution in dataset_dict["distribution"]:
-            dct_format_s = FORMAT
-            gbl_resourceType_sm = RESOURCETYPE
-            gbl_resourceClass_sm = ["Datasets"]
-            if distribution["title"] == "Shapefile":
-                dct_format_s = "Shapefile"
-            elif "aerial" in dataset_dict.get("title", "").lower() or any(
-                keyword.lower() in ["aerial photograph", "aerial imagery"]
-                for keyword in dataset_dict.get("keyword", [])
-            ):
-                gbl_resourceType_sm[0] = "Aerial photographs"
-                dct_format_s = "Raster data"
-                if "Imagery" not in gbl_resourceClass_sm:
-                    gbl_resourceClass_sm.append("Imagery")
+        # Configure format keywords
+        try:
+            sorter = MetadataSorter(FORMAT_CONFIG)
+        except Exception as e:
+            logging.fatal("Failed to create the format sorter", exc_info=e)
+            sys.exit(1)
+            
+        classifications = sorter.classify_record(dataset_dict)
+
+        dct_format_s = classifications["format"]
+        gbl_resourceType_sm = [classifications["resource_type"]]
+        gbl_resourceClass_sm = ["Datasets", classifications["resource_class"]]
 
         return dct_format_s, gbl_resourceType_sm, gbl_resourceClass_sm
 
