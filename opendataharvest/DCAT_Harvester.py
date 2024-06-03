@@ -197,7 +197,8 @@ def get_site_data(site: str, details: dict) -> dict:
                 logging.warning(
                     f"Failed to connect to {site} after {MAXRETRY + 1} attempts."
                 )
-                logging.warning(str(e))
+                error = str(e) + "\n"
+                logging.warning(error)
                 return None
 
 
@@ -356,7 +357,7 @@ class AardvarkDataProcessor:
     @staticmethod
     def process_dataset_class_type_and_format(dataset):
 
-        aerial_keywords = ["aerial", "air photo", "orthophoto"]
+        aerial_keywords = ["aerial", "air photo", "ortho" "sid", "mrsid"]
 
         result = {
             "dct_format_s": None,
@@ -501,7 +502,7 @@ class Aardvark:
             self.gbl_resourceType_sm = result["gbl_resourceType_sm"]
         else:
             logging.info(
-                f"UUID {self.uuid} is in site_applist, setting gbl_resourceClass_sm to ['Websites']"
+                f"UUID {self.uuid} is in site_applist, setting gbl_resourceClass_sm to ['Websites']\n"
             )
             self.gbl_resourceClass_sm = ["Websites"]
             self.dct_format_s = None
