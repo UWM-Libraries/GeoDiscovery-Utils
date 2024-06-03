@@ -89,6 +89,12 @@ logging.basicConfig(
     filename=LOGFILE, filemode="w", level=logging.INFO, format="%(message)s"
 )
 
+# # Add a console handler for debug messages
+# console_handler = logging.StreamHandler()
+# console_handler.setLevel(logging.DEBUG)
+# console_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+# console_handler.setFormatter(console_formatter)
+# logging.getLogger().addHandler(console_handler)
 
 class Site:
     """
@@ -122,6 +128,7 @@ class Site:
         site_json: dict,
         site_skiplist: list,
         site_applist: list,
+        site_maplist: list,
     ):
         """
         Constructs all the necessary attributes for the Site object.
@@ -144,6 +151,7 @@ class Site:
         self.site_json = site_json
         self.site_skiplist = set(site_skiplist)
         self.site_applist = set(site_applist)
+        self.site_maplist = set(site_maplist)
 
     def __getitem__(self, key):
         """
@@ -220,8 +228,9 @@ def harvest_sites() -> list:
             continue
         site_skiplist = get_uuid_list(details, "SkipList")
         site_applist = get_uuid_list(details, "AppList")
+        site_maplist = get_uuid_list(details, "MapList")
         current_Site = Site(
-            details["SiteName"], details, site_json, site_skiplist, site_applist
+            details["SiteName"], details, site_json, site_skiplist, site_applist, site_maplist
         )
         site_list.append(current_Site)
     return site_list
@@ -356,8 +365,7 @@ class AardvarkDataProcessor:
 
     @staticmethod
     def process_dataset_class_type_and_format(dataset):
-
-        aerial_keywords = ["aerial", "air photo", "ortho" "sid", "mrsid"]
+        aerial_keywords = ["aerial", "air photo", "ortho", "mrsid", "sid image"]
 
         result = {
             "dct_format_s": None,
@@ -368,13 +376,17 @@ class AardvarkDataProcessor:
         shapefile_found = False
         for distribution in dataset.get("distribution", []):
             if distribution.get("title") == "Shapefile":
+                result["dct_format_s"] = "Shapefile"
                 result["gbl_resourceClass_sm"] = ["Datasets"]
                 result["gbl_resourceType_sm"] = ["Digital maps"]
                 shapefile_found = True
 
         if not shapefile_found:
             title = dataset.get("title", "").lower()
-            is_aerial = any(keyword in title for keyword in aerial_keywords)
+            logging.info(f"Processing title: {title} ({dataset.get('identifier', 'no id')})\n")
+            matched_keywords = [keyword for keyword in aerial_keywords if keyword in title]
+            is_aerial = bool(matched_keywords)
+            logging.info(f"Keywords matched: {is_aerial}, Matched keywords: {matched_keywords}\n")
 
             if is_aerial:
                 result["gbl_resourceClass_sm"].append("Imagery")
@@ -384,6 +396,7 @@ class AardvarkDataProcessor:
         result["gbl_resourceType_sm"] = list(set(result["gbl_resourceType_sm"]))
         logging.debug(result)
         return result
+
 
     @staticmethod
     def issue_date_parser(dataset_dict):
@@ -399,9 +412,14 @@ class AardvarkDataProcessor:
 
     @staticmethod
     def load_schema():
-        response = requests.get(SCHEMA, timeout=3)
-        schema = json.loads(response.text)
-        return schema
+        try:
+            response = requests.get(SCHEMA, timeout=10)
+            schema = json.loads(response.text)
+            return schema
+        except requests.exceptions.ReadTimeout as e:
+            logging.error("Failed to fetch schema from GitHub!")
+            sys.exit()
+
 
     @staticmethod
     def validate_json(json_data, schema):
@@ -465,10 +483,13 @@ class Aardvark:
             "%Y-%m-%dT%H:%M:%SZ"
         )
 
-        self.dct_description_sm = [
-            re.sub("<[^<]+?>", "", dataset_dict.get("description", []))
-        ]
-        self.dct_description_sm.append(DESCRIPTION)
+        description = dataset_dict.get("description", "No description provided.")
+        if "{{description}}" not in description:
+            cleaned_description = re.sub("<[^<]+?>", "", description)
+            self.dct_description_sm = [cleaned_description, DESCRIPTION]
+        else:
+            self.dct_description_sm = [DESCRIPTION]
+        
 
         self.dct_creator_sm = (
             [dataset_dict["publisher"]["name"]] if "publisher" in dataset_dict else []
@@ -493,7 +514,7 @@ class Aardvark:
         self.dct_rights_sm = rights
 
         # Replace gbl_resourceClass_sm for web applications/websites
-        if not self.uuid in website.site_applist:
+        if (not self.uuid in website.site_applist) and (not self.uuid in website.site_maplist):
             result = AardvarkDataProcessor.process_dataset_class_type_and_format(
                 dataset_dict
             )
@@ -501,12 +522,21 @@ class Aardvark:
             self.gbl_resourceClass_sm = result["gbl_resourceClass_sm"]
             self.gbl_resourceType_sm = result["gbl_resourceType_sm"]
         else:
-            logging.info(
-                f"UUID {self.uuid} is in site_applist, setting gbl_resourceClass_sm to ['Websites']\n"
-            )
-            self.gbl_resourceClass_sm = ["Websites"]
-            self.dct_format_s = None
-            self.dct_resourceType_sm = None
+            if self.uuid in website.site_applist:
+                logging.info(
+                    f"UUID {self.uuid} is in site_applist, setting gbl_resourceClass_sm to ['Websites']\n"
+                )
+                self.gbl_resourceClass_sm = ["Websites"]
+                self.dct_format_s = None
+                self.gbl_resourceType_sm = None
+            elif self.uuid in website.site_maplist:
+                logging.info(
+                    f"UUID {self.uuid} is in site_maplist, setting gbl_resourceClass_sm to ['Maps']\n"
+                )
+                self.gbl_resourceClass_sm = ["Maps"]
+                self.dct_format_s = None
+                self.gbl_resourceType_sm = ["Digital maps"]
+            
 
     def _process_spatial(self, dataset_dict, website):
         if "spatial" not in dataset_dict:
@@ -664,4 +694,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        logging.error(str(e))
