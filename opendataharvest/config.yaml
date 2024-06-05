@@ -455,6 +455,7 @@ DCAT_Sites:
     SkipList: ""   
     AppList:
       - UUID: "e52ed4bdd26d40c89a482fab7a249aaf"
+      - UUID: "ff751a4250824a0aa65a29d1ac3add43"
 
   StCroixCounty_OpenData:
     CreatedBy: "St. Croix County"
