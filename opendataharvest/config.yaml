@@ -452,7 +452,9 @@ DCAT_Sites:
     SiteName: "SheboyganCounty"
     Spatial: ["Sheboygan County", "Wisconsin", "United States"]
     DefaultBbox: "Sheboygan"
-    SkipList: ""    
+    SkipList: ""   
+    AppList:
+      - UUID: "e52ed4bdd26d40c89a482fab7a249aaf"
 
   StCroixCounty_OpenData:
     CreatedBy: "St. Croix County"
