@@ -505,6 +505,10 @@ DCAT_Sites:
     DefaultBbox: "Trempealeau"
     SkipList:
       - UUID: "afc1effa8b5c4a98a0f35ca54e61d018"
+      - UUID: "1fde0029367c4bc1b8da3687eac27b09" # BeamGuard collection
+    Override:
+      - UUID: "1fde0029367c4bc1b8da3687eac27b091"
+        - dct_title_s: "Trempealeau County Boundary"
 
   VilasCounty_OpenData:
     CreatedBy: "Vilas County"
