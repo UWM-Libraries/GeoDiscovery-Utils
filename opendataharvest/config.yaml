@@ -539,6 +539,9 @@ DCAT_Sites:
     Spatial: ["Washington County", "Wisconsin", "United States"]
     SkipList: 
       - UUID: "6e03e8c26aad4b9c92a87c1063ddb0e3"
+      - UUID: "7b7f30e35da34fa7b0b719dc9e2cb9e2" # Bikeway and Trail Plan never loads, but if it's fixed it should be in applist
+      - UUID: "fe03e00f6ad74391b5062f8492d29d2f" # points to multiple layers related to political districts and census
+            
 
   WaukeshaCounty_OpenData:
     CreatedBy: "Waukesha County"
