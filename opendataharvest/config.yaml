@@ -262,7 +262,46 @@ DCAT_Sites:
     SiteName: "SunPrairie"
     DefaultBbox: "Sun Prairie"
     Spatial: ["Sun Prairie", "Wisconsin", "United States"]
-    SkipList: ""
+    AppList:
+      - UUID: "9c601fd99f4144a89b9b7d1964868b83" # Bike & Ped App
+      - UUID: "e536943d903946088aa488db5f8a05be"
+      - UUID: "6d282fe4583041a59c84afc15a0b2e36"
+      - UUID: "99cf480470dc4f3a9192ea11ee1f4943"
+      - UUID: "28efe9758206439ebb604fccd1dc7ed0"
+      - UUID: "8837da1c5ab2406b9650cd149356e8b0"
+      - UUID: "8b12f3b66e304437bc953afc8c5f42ec"
+      - UUID: "167c1114b195485da1bb99310a2f9d57"
+      - UUID: "9e27746810d44f09b50498044d4211c1"
+      - UUID: "3f1c4e128b5740c79fa7d561fe40f9a6"
+      - UUID: "f9d2f85fa5594e2d94825593625e1150"
+      - UUID: "b85d192195c14894b9345c8d468c73d2"
+    MapList:
+      - UUID: "4d768ac2fd4c4bc888aaeea26bd75565"
+      - UUID: "f2516b36645f48a6bd9a56f2f98e7692"
+      - UUID: "fb079743a108472f9995dfe59f76976b"
+      - UUID: "0dc2d77338394ae39a294cab1af381c8"
+      - UUID: "96ba33655e3641d19c1b6e002d7d0730"
+    SkipList:
+      - UUID: "68f0e2cc418f466daaf451782595c250"
+      - UUID: "cba4365251c14f75addedd6a405eb575"
+      - UUID: "fc3461b52e52468f818f2e832b6bfd17"
+      - UUID: "fc3461b52e52468f818f2e832b6bfd17"
+      - UUID: "667cf7abbbae4124adb3e682d0439bfa"
+      - UUID: "44005dbb653e46b7b2ee99c60b76836e"
+      - UUID: "d0afce693f1d4165a750d1099459a1df"
+      - UUID: "47b28c7ae56846c8b83182e75e989452"
+      - UUID: "a0a34f73e6d94780bc154bb8f557a906"
+      - UUID: "2eecd0d36f7542b08a83dda4a3f9ab90"
+      - UUID: "3e9f327b20ee46feaa6abb36eed5e9c0"
+      - UUID: "849955db72e047de8d5ac1a483408363"
+      - UUID: "83f96186dd494f5aadef9c87d1d42570"
+      - UUID: "953304a199184d80aacb5a4b0d07c96f"
+      - UUID: "fa8952a5e21b44d1bdafc8fb8f3a5b6d"
+      - UUID: "6552c98ea7724f1a94df4d842b872d2d"
+      - UUID: "bf89cec6cef04c97a511c52710e48f90"
+      - UUID: "92e35fdfe6c846828e4ea4916e2b1ad7"
+      - UUID: "d60258cbc1374420ade86bba3f17cc07"
+   
 
 ############################
 # Regional Planning Comm's #
