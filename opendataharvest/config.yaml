@@ -258,7 +258,7 @@ DCAT_Sites:
 
   SunPrairie_OpenData:
     CreatedBy: "City of Sun Prairie"
-    SiteURL: "https://maps-sunprairie.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteURL: "https://city-of-sun-prairie-hub-site-sunprairie.hub.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "SunPrairie"
     DefaultBbox: "Sun Prairie"
     Spatial: ["Sun Prairie", "Wisconsin", "United States"]
