@@ -512,14 +512,18 @@ DCAT_Sites:
     SiteName: "VilasCounty"
     Spatial: ["Vilas County", "Wisconsin", "United States"]
     DefaultBbox: "Vilas"
+    AppList:
+      - UUID: "2640080de8374ac1b532ad0a2e3b622c"
+      - UUID: "ae6fc96ad7714a20afcfbd4e48c22ef6"
+      - UUID: "fb3691c2030449f79fdd622fd1f7a14b" # link to data hub
     SkipList: 
       - UUID: "81e69aa1029d41a09b8cdb112f221efe"
       - UUID: "d6e8df34a3034a169073a989123f2086"
       - UUID: "f37edafef8914e8e9d957ac490ed4f23"
       - UUID: "1af79a5fca734020a6a41d954ebdb2e1"
       - UUID: "50d307265f1f435c83b930497339e6d0"
-      - UUID: "08a1bcad6ffc4d6eaacbb5382436986a"
-
+      - UUID: "08a1bcad6ffc4d6eaacbb5382436986a" # lidar/imagery data order site
+      
   WalworthCounty_OpenData:
     CreatedBy: "Walworth County"
     SiteURL: "https://open-walco.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
