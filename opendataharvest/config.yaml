@@ -577,12 +577,14 @@ DCAT_Sites:
     Spatial: ["Wood County", "Wisconsin", "United States"]
     DefaultBbox: "Wood"
     AppList:
-      - UUID: "623300abe751422091003f2ba5f4b2e9"
       - UUID: "dbda3bb2984345f08d1b4de4523031df"
       - UUID: "ee70f8224c9e47bdb816a4979ca092c4"
-      - UUID: "61dd328dbae5414ca2c2ee46091c7e12"
       - UUID: "3bf1d03d96d1403588f2f758374cbb2a"
-    SkipList: ""
+    SkipList:
+      - UUID: "077a745d8dfe471d8b00ff6e1c9c1729"
+      - UUID: "623300abe751422091003f2ba5f4b2e9" # dead link
+      - UUID: "61dd328dbae5414ca2c2ee46091c7e12" # dead link
+
 
 ########################
 ########################
