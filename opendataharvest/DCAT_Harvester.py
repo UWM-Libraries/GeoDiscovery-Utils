@@ -96,6 +96,7 @@ logging.basicConfig(
 # console_handler.setFormatter(console_formatter)
 # logging.getLogger().addHandler(console_handler)
 
+
 class Site:
     """
     A class to represent a Site.
@@ -230,7 +231,12 @@ def harvest_sites() -> list:
         site_applist = get_uuid_list(details, "AppList")
         site_maplist = get_uuid_list(details, "MapList")
         current_Site = Site(
-            details["SiteName"], details, site_json, site_skiplist, site_applist, site_maplist
+            details["SiteName"],
+            details,
+            site_json,
+            site_skiplist,
+            site_applist,
+            site_maplist,
         )
         site_list.append(current_Site)
     return site_list
@@ -383,10 +389,16 @@ class AardvarkDataProcessor:
 
         if not shapefile_found:
             title = dataset.get("title", "").lower()
-            logging.info(f"Processing title: {title} ({dataset.get('identifier', 'no id')})\n")
-            matched_keywords = [keyword for keyword in aerial_keywords if keyword in title]
+            logging.info(
+                f"Processing title: {title} ({dataset.get('identifier', 'no id')})\n"
+            )
+            matched_keywords = [
+                keyword for keyword in aerial_keywords if keyword in title
+            ]
             is_aerial = bool(matched_keywords)
-            logging.info(f"Keywords matched: {is_aerial}, Matched keywords: {matched_keywords}\n")
+            logging.info(
+                f"Keywords matched: {is_aerial}, Matched keywords: {matched_keywords}\n"
+            )
 
             if is_aerial:
                 result["gbl_resourceClass_sm"].append("Imagery")
@@ -396,7 +408,6 @@ class AardvarkDataProcessor:
         result["gbl_resourceType_sm"] = list(set(result["gbl_resourceType_sm"]))
         logging.debug(result)
         return result
-
 
     @staticmethod
     def issue_date_parser(dataset_dict):
@@ -420,7 +431,6 @@ class AardvarkDataProcessor:
             logging.error("Failed to fetch schema from GitHub!")
             sys.exit()
 
-
     @staticmethod
     def validate_json(json_data, schema):
         try:
@@ -430,6 +440,10 @@ class AardvarkDataProcessor:
         return True, None
 
 
+class InitializationError(Exception):
+    pass
+
+
 class Aardvark:
     """
     A class to represent a single dataset as an OGM Aardvark record
@@ -437,8 +451,8 @@ class Aardvark:
 
     def __init__(self, dataset_dict, website):
         process_id_result = self._process_id(dataset_dict, website)
-        if not process_id_result:  # Dataset is in the skiplist
-            return
+        if process_id_result is False:
+            raise InitializationError("Initialization failed: dataset in skiplist")
         self._initialize_default_field_values()
         extracted_dataset_dict = AardvarkDataProcessor.extract_data(dataset_dict)
         self._process_extracted_dataset_dict(extracted_dataset_dict, website)
@@ -462,12 +476,12 @@ class Aardvark:
 
         if not self.id:
             logging.warning("ID is required.")
-            return None
+            return False
 
         # Stop processing if in skiplist
         if self.uuid in website.site_skiplist:
             logging.info(f"{self.uuid} is on the skiplist...\n")
-            return None
+            return False
 
         self.dct_identifier_sm = [dataset_dict["identifier"]]
         return True
@@ -489,7 +503,6 @@ class Aardvark:
             self.dct_description_sm = [cleaned_description, DESCRIPTION]
         else:
             self.dct_description_sm = [DESCRIPTION]
-        
 
         self.dct_creator_sm = (
             [dataset_dict["publisher"]["name"]] if "publisher" in dataset_dict else []
@@ -514,7 +527,9 @@ class Aardvark:
         self.dct_rights_sm = rights
 
         # Replace gbl_resourceClass_sm for web applications/websites
-        if (not self.uuid in website.site_applist) and (not self.uuid in website.site_maplist):
+        if (not self.uuid in website.site_applist) and (
+            not self.uuid in website.site_maplist
+        ):
             result = AardvarkDataProcessor.process_dataset_class_type_and_format(
                 dataset_dict
             )
@@ -536,7 +551,6 @@ class Aardvark:
                 self.gbl_resourceClass_sm = ["Maps"]
                 self.dct_format_s = None
                 self.gbl_resourceType_sm = ["Digital maps"]
-            
 
     def _process_spatial(self, dataset_dict, website):
         if "spatial" not in dataset_dict:
@@ -678,19 +692,18 @@ def main():
     list_of_sites = harvest_sites()
 
     for website in list_of_sites:
-        new_aardvark_objects = [
-            Aardvark(dataset, website) for dataset in website.site_json["dataset"]
-        ]
-        for new_aardvark_object in new_aardvark_objects:
-            if new_aardvark_object.uuid not in website.site_skiplist:
+        new_aardvark_objects = []
+        for dataset in website.site_json["dataset"]:
+            try:
+                new_aardvark_object = Aardvark(dataset, website)
+                new_aardvark_objects.append(new_aardvark_object)
                 newfile = f"{new_aardvark_object.id}.json"
                 newfilePath = OUTPUTDIR / newfile
                 json_data = new_aardvark_object.toJSON()
-                if not json_data is None:
-                    with open(newfilePath, "w", encoding="utf-8") as f:
-                        f.write(new_aardvark_object.toJSON())
-                else:
-                    logging.warning(f"{str(newfilePath)} not written...")
+                with open(newfilePath, "w", encoding="utf-8") as f:
+                    f.write(new_aardvark_object.toJSON())
+            except InitializationError as e:
+                logging.info(str(e))
 
 
 if __name__ == "__main__":
