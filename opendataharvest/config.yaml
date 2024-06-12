@@ -144,6 +144,7 @@ DCAT_Sites:
       - UUID: "f34ca451d5d14e23a588e8a93dc9417e" # Wetland Monitoring Gallery
       - UUID: "200c06fc04074ef7ae24c0b74737b187" # Wetland Geodatabase
       - UUID: "4da3c08881cb4bd880bf9f695840b29b" # Land Patents
+      - UUID: "f2e49a42f5e14dd5845536408279da9d" # Wisconsin DEM and Hillshade from LiDAR
     SkipList: 
       - UUID: "0542ce7130144fe69705848f8d319ae7"
       - UUID: "438c9dbdf5374faeba3339253e0c231c"
