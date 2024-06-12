@@ -28,6 +28,7 @@ import re
 import sys
 import time
 import uuid
+import html
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import quote
@@ -500,7 +501,8 @@ class Aardvark:
         description = dataset_dict.get("description", "No description provided.")
         if "{{description}}" not in description:
             cleaned_description = re.sub("<[^<]+?>", "", description)
-            self.dct_description_sm = [cleaned_description, DESCRIPTION]
+            unescaped_description = html.unescape(cleaned_description)
+            self.dct_description_sm = [unescaped_description, DESCRIPTION]
         else:
             self.dct_description_sm = [DESCRIPTION]
 
