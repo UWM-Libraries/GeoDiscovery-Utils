@@ -568,7 +568,7 @@ class Aardvark:
             logging.warning(
                 f"There was a problem interpreting the bbox information for: {self.id}\n"
                 f"\t - at {dataset_dict['landingPage']}\n"
-                f"\t Error: {e}\n"
+                f"\t Warning: {e}\n"
             )
             default_bbox = AardvarkDataProcessor.defaultBbox(website)
             if default_bbox is not None:
