@@ -494,10 +494,14 @@ DCAT_Sites:
     DefaultBbox: "Sheboygan"
     SkipList:  
       - UUID: "5c46afb16574469880656438923bce8d"
+      - UUID: "36ddd9860cdc4e9a8b1c7d0161b4c8aa"
+      - UUID: "6c0a6b2b1b0f47a69055d2da08eb700c"
     AppList:
       - UUID: "e52ed4bdd26d40c89a482fab7a249aaf"
       - UUID: "ff751a4250824a0aa65a29d1ac3add43"
       - UUID: "eec04509bf8c45d4b493b841aa5908e7"
+      - UUID: "7fe9c7d5d1724b879b92fc5938e8cbcc"
+      - UUID: "9ef5e1efc66c488291a0b009aa5a5019"
       
 
   StCroixCounty_OpenData:
