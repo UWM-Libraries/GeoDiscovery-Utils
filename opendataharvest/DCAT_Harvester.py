@@ -81,14 +81,17 @@ except AttributeError as e:
     print(e)
     sys.exit()
 
-dt = str(datetime.now().strftime(r"%Y%m%d%H%M%S"))
-logfile_name = f"_{dt}.log"
+# dt = str(datetime.now().strftime(r"%Y%m%d%H%M%S"))
+logfile_name = f"opendataharvest.log"
 LOGFILE = LOGDIR / logfile_name
 
 # Configure the logging module
 logging.basicConfig(
-    filename=LOGFILE, filemode="w", level=logging.INFO, format="%(message)s"
+    filename=LOGFILE, filemode="a", level=logging.WARNING, format="%(message)s"
 )
+
+dt = datetime.now().strftime(r'%Y-%m-%d %H:%M:%S')
+logging.warning(f"Script running at {dt}")
 
 # # Add a console handler for debug messages
 # console_handler = logging.StreamHandler()
@@ -707,9 +710,11 @@ def main():
             except InitializationError as e:
                 logging.info(str(e))
 
-
 if __name__ == "__main__":
     try:
         main()
+        dt = datetime.now().strftime(r'%Y-%m-%d %H:%M:%S')
+        logging.warning(f"Script finished at {dt}")
     except Exception as e:
         logging.error(str(e))
+  
