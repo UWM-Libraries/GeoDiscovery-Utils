@@ -10,7 +10,7 @@
 ###########################
 
 CONFIG:
-  CATALOG: "DCAT_Sites" # TestSites, DCAT_Sites, or CKAN_Sites
+  CATALOG: "TestSites" # TestSites, DCAT_Sites, or CKAN_Sites
   OUTPUTDIR: "opendataharvest/output_md"
   LOGDIR: "opendataharvest/log"
   DEFAULTBBOX: "opendataharvest/default_bbox.csv"
@@ -43,13 +43,6 @@ DEFAULT:
 # Test Sites #
 ##############
 TestSites:
-  TestCatalog:
-    CreatedBy: "sample"
-    SiteURL: "uwm_fixture/sample_dcat_catalog.json"
-    SiteName: "sample"
-    DefaultBbox: "Wisconsin"
-    SkipList: ""
-    Spatial: ["Winnebago County", "Wisconsin", "United States"]
   MilwaukeeCounty_OpenData:
     CreatedBy: "Milwaukee County" 
     SiteURL: "https://data-mclio.hub.arcgis.com/api/feed/dcat-us/1.1.json"
