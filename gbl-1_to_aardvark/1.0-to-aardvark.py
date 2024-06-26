@@ -13,15 +13,15 @@ dir_crosswalk = Path(
 )
 # add directory of JSON files in the 1.0 schema
 dir_old_schema = Path(
-    r"C:\Users\srappel\Desktop\opengeometadata\princeton-1.0"
+    r"C:\Users\srappel\Desktop\opengeometadata\stanford-1.0"
 )
 # add directory for new JSON files in the Aardvark schema
 dir_new_schema = Path(
-    r"C:\Users\srappel\Desktop\opengeometadata\princeton"
+    r"C:\Users\srappel\Desktop\opengeometadata\stanford-aardvark"
 )
 
 # Default values
-RESOURCE_CLASS_DEFAULT = "Maps"
+RESOURCE_CLASS_DEFAULT = "Other"
 PLACE_DEFAULT = None
 
 assert dir_old_schema.is_dir()
@@ -48,7 +48,6 @@ def string2array(data_dict):
                 data_dict[key] = [val]
     return data_dict
 
-
 def check_required(data_dict):
     # Check if required fields are present
     requirements = [
@@ -59,6 +58,7 @@ def check_required(data_dict):
         "gbl_resourceClass_sm",
         "id",
         "gbl_mdModified_dt",
+        "gbl_resourceType_sm",
     ]
 
     for req in requirements:
@@ -66,26 +66,21 @@ def check_required(data_dict):
             print(f"Requirement {req} is not present...")
 
             if req == "gbl_resourceClass_sm":
-                if "dc_type_s" not in data_dict:
-                    print(f"No dc_type_s information found.")
-                    data_dict["gbl_resourceClass_sm"] = [RESOURCE_CLASS_DEFAULT]
-                elif data_dict["dc_type_s"] == "Dataset":
-                    data_dict["gbl_resourceClass_sm"] = ["Datasets"]
-                    print(
-                        f"Replaced dc_type_s:Dataset with gbl_resourceClass_sm:Datasets"
-                    )
-                elif data_dict["dc_type_s"] == "Image":
-                    data_dict["gbl_resourceClass_sm"] = ["Imagery"]
-                    print(
-                        f"Replaced dc_type_s:Dataset with gbl_resourceClass_sm:Imagery"
-                    )
+                # Modified for Stanford Branch
+                if "dct_format_s" in data_dict:
+                        print(f"Crosswalking gbl_resourceClass_sm from dct_format_s")
+                        # Use dct_format_s to fill.
+                        format = data_dict["dct_format_s"]
+                        if format in ["Shapefile", "ArcGrid", "GeoDatabase"]:
+                            data_dict["gbl_resourceClass_sm"] = "Datasets"
+                        elif format == "GeoTIFF":
+                            # Check if "georeferenced" appears in dct_description_sm
+                            if "georeferenced" in data_dict["dct_description_sm"]:
+                                data_dict["gbl_resourceClass_sm"] = "Maps"
+                            else:
+                                data_dict["gbl_resourceClass_sm"] = "Datasets" 
                 else:
-                    data_dict["gbl_resourceClass_sm"] = [
-                        RESOURCE_CLASS_DEFAULT
-                    ]  # change if needed!
-                    print(
-                        f"Replaced dc_type_s:Null with gbl_resourceClass_sm:{RESOURCE_CLASS_DEFAULT}"
-                    )
+                    data_dict["gbl_resourceClass_sm"] = [RESOURCE_CLASS_DEFAULT]
 
             elif req == "dct_spatial_sm":
                 if not PLACE_DEFAULT is None:
@@ -113,6 +108,23 @@ def check_required(data_dict):
                     )
                 else:
                     continue
+
+            elif req == "gbl_resourceType_sm":
+                if "dct_source_sm" in data_dict:
+                    if "stanford-ch237ht4777" in data_dict["dct_source_sm"]:
+                        print("This is an Index Map!")
+                        data_dict["gbl_resourceType_sm"] = "Index maps"
+                        data_dict["gbl_resourceClass_sm"] = "Maps"
+                    elif data_dict["id"] == "stanford-ch237ht4777":
+                        print("This is the Stanford Index Map parent!")
+                        data_dict["gbl_resourceType_sm"] = "Index maps"
+                        data_dict["gbl_resourceClass_sm"] = "Maps"
+                    else:
+                        continue
+                else:
+                    continue
+            else:
+                continue
     return
 
 
@@ -133,6 +145,16 @@ def remove_deprecated(data_dict):
 
     return
 
+def stanford_place(data_dict):
+    spatial = data_dict["dct_spatial_sm"]
+    if len(spatial) > 1:
+        if "Wisconsin" in spatial and "United States" in spatial:
+            print("Fixing the Wisconsin issue in US coverage")
+            data_dict["dct_spatial_sm"] = ["United States"]
+        else:
+            return
+    else:
+        return
 
 # Function to update the metadata schema
 def schema_update(filepath):
@@ -161,6 +183,10 @@ def schema_update(filepath):
 
         # Remove deprecated fields
         remove_deprecated(data)
+
+        #Stanford Place Fix
+        if "dct_spatial_sm" in data:
+            stanford_place(data)
 
     # check for multi-valued fields - if so, convert its value to an array
     data = string2array(data)
