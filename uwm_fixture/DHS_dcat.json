@@ -1,0 +1,3379 @@
+{
+	"@context": "https://project-open-data.cio.gov/v1.1/schema/catalog.jsonld",
+	"@type": "dcat:Catalog",
+	"conformsTo": "https://project-open-data.cio.gov/v1.1/schema",
+	"describedBy": "https://project-open-data.cio.gov/v1.1/schema/catalog.json",
+	"dataset": [
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=5c319ea01ab742c297ccf4280bb59c80&sublayer=6",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-home-health-agencies",
+			"title": "Wisconsin Home Health Agencies",
+			"description": "<div><font><span style='font-size:16px;'>This dataset contains locations and attributes of home health agencies licensed by the state of Wisconsin.  The data is used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies. </span></font></div><div><font><span style='font-size:16px;'><br /></span></font></div><div><font><span style='font-size:16px;'>For more information please visit the Wisconsin Department of Health Services website: </span></font><a href='https://www.dhs.wisconsin.gov/guide/home-health.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/guide/home-health.htm</a></div><div><br /></div>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"Facilities and Services",
+				"Wisconsin",
+				"DHS",
+				"WI",
+				"Home Health Agencies",
+				"Health Services",
+				"Health Care",
+				"Health Care Facility"
+			],
+			"issued": "2019-03-20T17:52:19.000Z",
+			"modified": "2024-04-11T21:00:33.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-93.2061,42.0437,-87.3785,46.8697",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-home-health-agencies"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Services/MapServer/6"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/5c319ea01ab742c297ccf4280bb59c80/csv?layers=6"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/5c319ea01ab742c297ccf4280bb59c80/geojson?layers=6"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/5c319ea01ab742c297ccf4280bb59c80/shapefile?layers=6"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/5c319ea01ab742c297ccf4280bb59c80/kml?layers=6"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=00865d9c0798417badbff9e8e8658686&sublayer=18",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-rehabilitation-hospitals",
+			"title": "Wisconsin Rehabilitation Hospitals",
+			"description": "This dataset contains locations and attributes of rehabilitation hospitals licensed by the state of Wisconsin. This dataset is derived from the ‘REHABILITATION’ subtype of the ‘HOSPITALS’ type dataset. The data are used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies. <br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/guide/hospital.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/guide/hospital.htm</a>",
+			"keyword": [
+				"Wisconsin",
+				"Rehabilitation Hospital",
+				"Mental Health",
+				"Health Facility",
+				"Department of Health Services",
+				"WI",
+				"DHS",
+				"Rehab",
+				"Wisconsin Department of Health Services",
+				"Locations",
+				"Health Care Facility",
+				"Health Care"
+			],
+			"issued": "2019-09-11T20:30:51.000Z",
+			"modified": "2024-04-11T21:00:31.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-89.2977,42.9866,-87.8808,43.1525",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-rehabilitation-hospitals"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Facilities/MapServer/18"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/00865d9c0798417badbff9e8e8658686/csv?layers=18"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/00865d9c0798417badbff9e8e8658686/geojson?layers=18"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/00865d9c0798417badbff9e8e8658686/shapefile?layers=18"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/00865d9c0798417badbff9e8e8658686/kml?layers=18"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=a9332f6996c1446c8868c161149df271&sublayer=16",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-psychiatric-hospitals",
+			"title": "Wisconsin Psychiatric Hospitals",
+			"description": "This dataset contains locations and attributes of psychiatric hospitals licensed by the state of Wisconsin. This dataset is derived from the ‘PSYCHIATRIC’ subtype of the ‘HOSPITALS’ type dataset. The data are used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/regulations/mentalhealth/introduction.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/regulations/mentalhealth/introduction.htm</a>",
+			"keyword": [
+				"Wisconsin",
+				"Psychiatric Hospital",
+				"Mental Health",
+				"Health Facility",
+				"Department of Health Services",
+				"WI",
+				"DHS",
+				"Wisconsin Department of Health Services",
+				"Locations",
+				"Health Care Facility",
+				"Health Care"
+			],
+			"issued": "2019-09-11T20:20:59.000Z",
+			"modified": "2024-04-11T21:00:28.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-90.1669,43.0121,-87.9246,44.9315",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-psychiatric-hospitals"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Facilities/MapServer/16"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/a9332f6996c1446c8868c161149df271/csv?layers=16"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/a9332f6996c1446c8868c161149df271/geojson?layers=16"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/a9332f6996c1446c8868c161149df271/shapefile?layers=16"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/a9332f6996c1446c8868c161149df271/kml?layers=16"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=3249e26c3cba45fc9b6ad0effdb7976b&sublayer=15",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-long-term-care-hospitals",
+			"title": "Wisconsin Long-Term Care Hospitals",
+			"description": "This dataset contains locations and attributes of long term care hospitals licensed by the state of Wisconsin. This dataset is derived from the ‘LONG TERM’ subtype of the ‘HOSPITALS’ type dataset. The data are used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/guide/hospital.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/guide/hospital.htm</a>",
+			"keyword": [
+				"Wisconsin",
+				"Long Term Care Hospital",
+				"Health Facility",
+				"Department of Health Services",
+				"WI",
+				"DHS",
+				"Long-Term",
+				"Long-Term Care",
+				"Wisconsin Department of Health Services",
+				"Locations",
+				"Health Care",
+				"Health Care Facility"
+			],
+			"issued": "2019-09-11T20:18:24.000Z",
+			"modified": "2024-04-11T21:00:26.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-89.3995,42.7382,-88.0242,43.0657",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-long-term-care-hospitals"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Facilities/MapServer/15"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/3249e26c3cba45fc9b6ad0effdb7976b/csv?layers=15"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/3249e26c3cba45fc9b6ad0effdb7976b/geojson?layers=15"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/3249e26c3cba45fc9b6ad0effdb7976b/shapefile?layers=15"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/3249e26c3cba45fc9b6ad0effdb7976b/kml?layers=15"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=64856c35caed40f091189f93bcec02b8&sublayer=7",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-community-based-residential-facilities",
+			"title": "Wisconsin Community-Based Residential Facilities",
+			"description": "This dataset contains locations and attributes of community-based residential facilities licensed by the state of Wisconsin. The data are used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/regulations/cbrf/introduction.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/regulations/cbrf/introduction.htm</a>",
+			"keyword": [
+				"Wisconsin",
+				"Community Based Residential Facility",
+				"CBRF",
+				"assisted living facility",
+				"Department of Health Services",
+				"WI",
+				"DHS",
+				"Assisted Living Facility",
+				"Health Care Facility",
+				"Health Care"
+			],
+			"issued": "2019-09-11T19:40:49.000Z",
+			"modified": "2024-04-11T21:00:22.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.7436,42.4990,-87.1190,46.7213",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-community-based-residential-facilities"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Facilities/MapServer/7"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/64856c35caed40f091189f93bcec02b8/csv?layers=7"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/64856c35caed40f091189f93bcec02b8/geojson?layers=7"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/64856c35caed40f091189f93bcec02b8/shapefile?layers=7"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/64856c35caed40f091189f93bcec02b8/kml?layers=7"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=6c22cf6a647b45f499f2427947041595&sublayer=10",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-critical-access-hospitals",
+			"title": "Wisconsin Critical Access Hospitals",
+			"description": "This dataset contains locations and attributes of critical access hospitals licensed by the state of Wisconsin.  The data is used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/regulations/cah/introduction.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/regulations/cah/introduction.htm</a>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"Wisconsin",
+				"Health Facility",
+				"Critical Access Hospitals",
+				"WI",
+				"DHS",
+				"Emergency",
+				"Locations",
+				"Health Care Facility",
+				"Health Care"
+			],
+			"issued": "2019-05-16T13:26:23.000Z",
+			"modified": "2024-04-11T21:00:21.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.7174,42.5967,-87.3536,46.6975",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-critical-access-hospitals"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Facilities/MapServer/10"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/6c22cf6a647b45f499f2427947041595/csv?layers=10"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/6c22cf6a647b45f499f2427947041595/geojson?layers=10"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/6c22cf6a647b45f499f2427947041595/shapefile?layers=10"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/6c22cf6a647b45f499f2427947041595/kml?layers=10"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=dbe5769f41974f87a63b32ff845339e9&sublayer=2",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-adult-family-homes",
+			"title": "Wisconsin Adult Family Homes",
+			"description": "This dataset contains locations and attributes of adult family homes licensed by the state of Wisconsin.  The data is used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/regulations/afh/introduction.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/regulations/afh/introduction.htm</a>",
+			"keyword": [
+				"Wisconsin",
+				"Adult Family Home",
+				"AFH",
+				"Department of Health Services",
+				"WI",
+				"DHS",
+				"Assisted Living Facility",
+				"Wisconsin Department of Health Services",
+				"Locations",
+				"Health Care",
+				"H",
+				"Health Care Facility"
+			],
+			"issued": "2019-09-11T19:36:03.000Z",
+			"modified": "2024-04-11T21:00:18.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.7896,-88.3403,44.2743,46.7150",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-adult-family-homes"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Facilities/MapServer/2"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/dbe5769f41974f87a63b32ff845339e9/csv?layers=2"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/dbe5769f41974f87a63b32ff845339e9/geojson?layers=2"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/dbe5769f41974f87a63b32ff845339e9/shapefile?layers=2"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/dbe5769f41974f87a63b32ff845339e9/kml?layers=2"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=cc40c0ce78174865b412bbab0e46c791&sublayer=3",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-adult-day-care-locations",
+			"title": "Wisconsin Adult Day Care Locations",
+			"description": "This dataset contains locations and attributes of adult day cares licensed by the state of Wisconsin.  The data is used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/regulations/adultdaycare/introduction.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/regulations/adultdaycare/introduction.htm</a>",
+			"keyword": [
+				"Wisconsin",
+				"Adult Day Care",
+				"ADC",
+				"Department of Health Services",
+				"WI",
+				"DHS",
+				"Assisted Living Facility",
+				"Wisconsin Department of Health Services",
+				"Locations",
+				"Health Care",
+				"Health Care Facility"
+			],
+			"issued": "2019-09-11T19:31:22.000Z",
+			"modified": "2024-04-11T21:00:17.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.6535,42.4978,-87.3865,46.7322",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-adult-day-care-locations"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Facilities/MapServer/3"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/cc40c0ce78174865b412bbab0e46c791/csv?layers=3"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/cc40c0ce78174865b412bbab0e46c791/geojson?layers=3"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/cc40c0ce78174865b412bbab0e46c791/shapefile?layers=3"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/cc40c0ce78174865b412bbab0e46c791/kml?layers=3"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=0f8e25b2fe314ed88feb97ebed47bfe8&sublayer=5",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-licensed-and-certified-childcare",
+			"title": "Wisconsin Licensed and Certified Childcare",
+			"description": "This dataset contains locations and attributes licensed and certified childcare facilities licensed by the state of Wisconsin.  The data are used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies.<br /><br />\nFor more information please visit the Wisconsin Department of Children and Families' website: <a href='https://dcf.wisconsin.gov/childcare' target='_blank' rel='nofollow ugc noopener noreferrer'>https://dcf.wisconsin.gov/childcare</a>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"DHS",
+				"Wisconsin",
+				"WI",
+				"Other Facilities",
+				"Childcare",
+				"Daycare",
+				"Childcare Facilities",
+				"Wisconsin Department of Children and Families",
+				"DCF",
+				"Community Services"
+			],
+			"issued": "2019-05-16T15:17:07.000Z",
+			"modified": "2022-07-22T14:35:24.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-93.1793,42.2411,-87.0863,47.0249",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-licensed-and-certified-childcare"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Services/MapServer/5"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/0f8e25b2fe314ed88feb97ebed47bfe8/csv?layers=5"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/0f8e25b2fe314ed88feb97ebed47bfe8/geojson?layers=5"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/0f8e25b2fe314ed88feb97ebed47bfe8/shapefile?layers=5"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/0f8e25b2fe314ed88feb97ebed47bfe8/kml?layers=5"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=386e06aaf0d247c09bb494cdacb25d70&sublayer=1",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-rural-health-clinics",
+			"title": "Wisconsin Rural Health Clinics",
+			"description": "This dataset contains locations and attributes of rural health clinics licensed by the state of Wisconsin.  The data is used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/regulations/rhc/introduction.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/regulations/rhc/introduction.htm</a>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"Wisconsin",
+				"Health Facility",
+				"Rural Health Clinic",
+				"WI",
+				"DHS",
+				"Locations",
+				"Health Care Facility",
+				"Health Care"
+			],
+			"issued": "2019-03-20T19:44:45.000Z",
+			"modified": "2024-04-11T23:42:46.219Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.7004,42.5717,-86.9290,46.4492",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-rural-health-clinics"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Facilities/MapServer/1"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/386e06aaf0d247c09bb494cdacb25d70/csv?layers=1"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/386e06aaf0d247c09bb494cdacb25d70/geojson?layers=1"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/386e06aaf0d247c09bb494cdacb25d70/shapefile?layers=1"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/386e06aaf0d247c09bb494cdacb25d70/kml?layers=1"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=7ff90de1bf744710baf22c8c6718f329&sublayer=0",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-vaccines-for-children-program-participant-locations",
+			"title": "Wisconsin Vaccines for Children Program Participant Locations",
+			"description": "This dataset contains locations and attributes of health care providers participating in the Vaccines for Children Program in the state of Wisconsin.  The data is used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies. <br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/immunization/vfc.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/immunization/vfc.htm</a>",
+			"keyword": [
+				"Wisconsin",
+				"Vaccines for Children Program",
+				"VFC",
+				"WI",
+				"DHS",
+				"Vaccine",
+				"Vaccinations",
+				"Immunizations",
+				"Health Services",
+				"Wisconsin Department of Health Services",
+				"Health Care"
+			],
+			"issued": "2019-09-12T13:39:30.000Z",
+			"modified": "2021-06-17T13:52:57.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.7192,42.5192,-87.2123,46.8585",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-vaccines-for-children-program-participant-locations"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Services/MapServer/0"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/7ff90de1bf744710baf22c8c6718f329/csv?layers=0"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/7ff90de1bf744710baf22c8c6718f329/geojson?layers=0"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/7ff90de1bf744710baf22c8c6718f329/shapefile?layers=0"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/7ff90de1bf744710baf22c8c6718f329/kml?layers=0"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=f02c97fdf0f54ac4ab86b45d3e7d684a&sublayer=13",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-free-and-charitable-clinics",
+			"title": "Wisconsin Free and Charitable Clinics",
+			"description": "This dataset contains locations and attributes of free and charitable clinics licensed by the state of Wisconsin.  The data is used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/forwardhealth/clinics.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/forwardhealth/clinics.htm</a>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"Free and Charitable Clinic",
+				"Wisconsin",
+				"DHS",
+				"WI",
+				"Health Facility",
+				"Locations",
+				"Health Care Facility",
+				"Health Care"
+			],
+			"issued": "2019-03-20T14:26:20.000Z",
+			"modified": "2021-05-05T13:14:02.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.6224,42.5010,-87.1282,46.7205",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-free-and-charitable-clinics"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Facilities/MapServer/13"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/f02c97fdf0f54ac4ab86b45d3e7d684a/csv?layers=13"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/f02c97fdf0f54ac4ab86b45d3e7d684a/geojson?layers=13"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/f02c97fdf0f54ac4ab86b45d3e7d684a/shapefile?layers=13"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/f02c97fdf0f54ac4ab86b45d3e7d684a/kml?layers=13"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=41a22a5f044b4daab35da9d316ff55af&sublayer=0",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-tribal-clinics",
+			"title": "Wisconsin Tribal Clinics",
+			"description": "This dataset contains locations and attributes of tribal clinics (ITU) registered in the Health Resources and Services Administration. The data is used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/lh-depts/tribal.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/lh-depts/tribal.htm</a>",
+			"keyword": [
+				"Wisconsin",
+				"Tribal Clinic",
+				"RHC",
+				"Health Facility",
+				"Indian Health Service",
+				"ITU",
+				"Urban Indian Health Clinic",
+				"Department of Health Services",
+				"WI",
+				"DHS",
+				"Emergency",
+				"Wisconsin Department of Health Services",
+				"Locations",
+				"Health Care",
+				"Health Care Facility"
+			],
+			"issued": "2019-09-11T19:22:10.000Z",
+			"modified": "2021-05-05T13:13:32.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.2072,43.0126,-87.9237,46.8585",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-tribal-clinics"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Facilities/MapServer/0"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/41a22a5f044b4daab35da9d316ff55af/csv?layers=0"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/41a22a5f044b4daab35da9d316ff55af/geojson?layers=0"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/41a22a5f044b4daab35da9d316ff55af/shapefile?layers=0"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/41a22a5f044b4daab35da9d316ff55af/kml?layers=0"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=56319361f938490a8eb2c894402a5e35&sublayer=2",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-programs-of-all-inclusive-care-for-the-elderly-pace",
+			"title": "Wisconsin Programs of All-Inclusive Care for the Elderly (PACE)",
+			"description": "This dataset contains locations and attributes of programs of all-inclusive care for the elderly licensed by the state of Wisconsin.  The data is used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/familycare/pace.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/familycare/pace.htm</a>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"DHS",
+				"Wisconsin",
+				"WI",
+				"Programs of All-Inclusive Care for the Elderly",
+				"PACE",
+				"Health Services",
+				"Health Care Services"
+			],
+			"issued": "2019-05-15T18:57:50.000Z",
+			"modified": "2020-12-16T18:50:13.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-87.9489,43.0147,-87.9489,43.0147",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-programs-of-all-inclusive-care-for-the-elderly-pace"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Services/MapServer/2"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/56319361f938490a8eb2c894402a5e35/csv?layers=2"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/56319361f938490a8eb2c894402a5e35/geojson?layers=2"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/56319361f938490a8eb2c894402a5e35/shapefile?layers=2"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/56319361f938490a8eb2c894402a5e35/kml?layers=2"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=9ad4397c9dce4755bdbfc855d1283943&sublayer=3",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-organ-procurement-organizations",
+			"title": "Wisconsin Organ Procurement Organizations",
+			"description": "This dataset contains locations and attributes of organ procurement organizations licensed by the state of Wisconsin.  The data is used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies. <br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/donatelife/index.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/donatelife/index.htm</a>",
+			"keyword": [
+				"Organ Procurement Organization",
+				"Wisconsin Department of Health Services",
+				"Wisconsin",
+				"OPO",
+				"WI",
+				"DHS",
+				"Health Services",
+				"Health Care",
+				"Health Care Services"
+			],
+			"issued": "2019-05-16T13:38:22.000Z",
+			"modified": "2020-12-16T18:38:41.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-89.4308,43.0377,-87.9349,43.0763",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-organ-procurement-organizations"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Services/MapServer/3"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/9ad4397c9dce4755bdbfc855d1283943/csv?layers=3"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/9ad4397c9dce4755bdbfc855d1283943/geojson?layers=3"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/9ad4397c9dce4755bdbfc855d1283943/shapefile?layers=3"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/9ad4397c9dce4755bdbfc855d1283943/kml?layers=3"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=2384994880ae4f229ecd63ea9f17f9f3&sublayer=5",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-regional-trauma-advisory-council-rtca-regions",
+			"title": "Wisconsin Regional Trauma Advisory Council (RTCA) Regions",
+			"description": "This dataset contains boundaries for the Wisconsin Regional Trauma Advisory Councils. DHS 118.04 authorizes the department to organize and structure Regional Trauma Advisory Councils (RTACs) and to approve the designation of all trauma care geographic regions based on consideration that represents the best care of trauma patients. The RTACs are structured to be self-directed work groups focusing on regional needs and to improve the care of trauma patients and their families.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/wish/injury-mortality/rtac.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/wish/injury-mortality/rtac.htm</a>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"DHS",
+				"WI",
+				"Wisconsin",
+				"Regional Trauma Advisory Council Regions",
+				"Trauma",
+				"Regions",
+				"RTAC"
+			],
+			"issued": "2019-05-22T13:29:23.000Z",
+			"modified": "2020-02-28T15:22:14.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.8892,42.4920,-86.8045,47.0808",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-regional-trauma-advisory-council-rtca-regions"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Regions/MapServer/5"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/2384994880ae4f229ecd63ea9f17f9f3/csv?layers=5"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/2384994880ae4f229ecd63ea9f17f9f3/geojson?layers=5"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/2384994880ae4f229ecd63ea9f17f9f3/shapefile?layers=5"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/2384994880ae4f229ecd63ea9f17f9f3/kml?layers=5"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=36662e2dcd7548198976fceab0f62cdc&sublayer=12",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-bureau-of-nursing-home-resident-care-bnhrc-regions",
+			"title": "Wisconsin Bureau of Nursing Home Resident Care (BNHRC) Regions",
+			"description": "This dataset contains boundaries for the Bureau of Nursing Home Resident Care regions. The Bureau of Nursing Home Resident Care (BNHRC) is responsible for conducting unannounced health care surveys of nursing homes and facilities serving persons with developmental disabilities (FDDs - also known as Intermediate Care Facilities for Individuals with Intellectual Disabilities, ICF/IID).<br /><br />For more information please visit the Wisconsin Department of Health Services website: h<a href='https://www.dhs.wisconsin.gov/dqa/bnhrc-regionalmap.htm' rel='nofollow ugc' target='_blank'>ttps://www.dhs.wisconsin.gov/dqa/bnhrc-regionalmap.htm</a>",
+			"keyword": [
+				"Bureau of Nursing Home Resident Care",
+				"Wisconsin Department of Health Services",
+				"DHS",
+				"WI",
+				"Wisconsin",
+				"Regions",
+				"Nursing Home",
+				"ICF/IID).",
+				"BNHRC"
+			],
+			"issued": "2019-05-22T13:58:29.000Z",
+			"modified": "2020-02-28T15:21:56.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.8894,42.4918,-86.7641,47.0809",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-bureau-of-nursing-home-resident-care-bnhrc-regions"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Regions/MapServer/12"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/36662e2dcd7548198976fceab0f62cdc/csv?layers=12"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/36662e2dcd7548198976fceab0f62cdc/geojson?layers=12"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/36662e2dcd7548198976fceab0f62cdc/shapefile?layers=12"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/36662e2dcd7548198976fceab0f62cdc/kml?layers=12"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=8568f040ef5043e68d82b2f1b8847d3d&sublayer=9",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-foodshare-employment-and-training-fset-regions",
+			"title": "Wisconsin FoodShare Employment and Training (FSET) Regions",
+			"description": "This dataset contains boundaries for the FoodShare Employment and Training regions. The FoodShare Employment and Training (FSET) program is a free program that helps FoodShare members build their job skills and find jobs. There are eleven FSET regions. Each FSET region coordinates FSET services for the residents of counties located in that region.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/fset/fset-regions.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/fset/fset-regions.htm</a>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"DHS",
+				"WI",
+				"Wisconsin",
+				"FoodShare Training and Employment Regions",
+				"Regions",
+				"FSET",
+				"FoodShare"
+			],
+			"issued": "2019-05-22T13:50:45.000Z",
+			"modified": "2020-02-28T15:21:21.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.8894,42.4918,-86.7641,47.0809",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-foodshare-employment-and-training-fset-regions"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Regions/MapServer/9"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/8568f040ef5043e68d82b2f1b8847d3d/csv?layers=9"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/8568f040ef5043e68d82b2f1b8847d3d/geojson?layers=9"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/8568f040ef5043e68d82b2f1b8847d3d/shapefile?layers=9"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/8568f040ef5043e68d82b2f1b8847d3d/kml?layers=9"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=5f1111b1ad8944d2b5ab6d99991f1db4&sublayer=1",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-public-health-regions",
+			"title": "Wisconsin Public Health Regions",
+			"description": "This dataset contains boundaries for the Wisconsin Public Health Regions. Public Health Regions are used to coordinate staff and resources for the Division of Public Health. Resources and staff are organized by Public Health regions and provide contract monitoring, technical assistance, and training related to public health infrastructure, family and community health, communicable disease prevention and control, chronic disease prevention and health promotion, environmental health, and injury prevention.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/lh-depts/counties.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/lh-depts/counties.htm</a>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"DHS",
+				"WI",
+				"Wisconsin",
+				"Regions",
+				"Public Health",
+				"Public Health Regions"
+			],
+			"issued": "2019-05-22T12:57:22.000Z",
+			"modified": "2020-02-28T15:20:38.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.8894,42.4918,-86.7641,47.0809",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-public-health-regions"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Regions/MapServer/1"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/5f1111b1ad8944d2b5ab6d99991f1db4/csv?layers=1"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/5f1111b1ad8944d2b5ab6d99991f1db4/geojson?layers=1"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/5f1111b1ad8944d2b5ab6d99991f1db4/shapefile?layers=1"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/5f1111b1ad8944d2b5ab6d99991f1db4/kml?layers=1"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=2a4bc04753d64a47a785db4298e3c7b7&sublayer=4",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-income-maintenance-regions",
+			"title": "Wisconsin Income Maintenance Regions",
+			"description": "This dataset contains boundaries for the Wisconsin Income Maintenance Consortia. The Wisconsin Department of Health Services partners with counties and tribes to provide eligibility services for people who are applying for or are enrolled in programs like Medicaid, BadgerCare Plus, and FoodShare. County agencies that provide eligibility services are often called income maintenance or economic support agencies. These county agencies have joined together to form 11 consortium across the state.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/forwardhealth/imagency/index.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/forwardhealth/imagency/index.htm</a>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"DHS",
+				"WI",
+				"Wisconsin",
+				"Income Maintenance Regions",
+				"Regions",
+				"Consortia",
+				"Consortium"
+			],
+			"issued": "2019-05-22T13:20:41.000Z",
+			"modified": "2020-02-28T15:20:19.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.8892,42.4920,-86.8045,47.0808",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-income-maintenance-regions"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Regions/MapServer/4"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/2a4bc04753d64a47a785db4298e3c7b7/csv?layers=4"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/2a4bc04753d64a47a785db4298e3c7b7/geojson?layers=4"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/2a4bc04753d64a47a785db4298e3c7b7/shapefile?layers=4"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/2a4bc04753d64a47a785db4298e3c7b7/kml?layers=4"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=55db837eba7e44dca6c918164353c699&sublayer=3",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-healthcare-emergency-readiness-coalition-regions",
+			"title": "Wisconsin Healthcare Emergency Readiness Coalition Regions",
+			"description": "This dataset contains the boundaries for the Wisconsin Healthcare Emergency Readiness Coalition regions.  In 2014, Wisconsin established seven healthcare coalition regions to coordinate how public health, healthcare institutions, and first responder agencies, such as police, fire and emergency medical services (EMS), will manage their efforts to enact a uniform and unified response to an emergency, including a mass casualty or other catastrophic event.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/preparedness/healthcare/index.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/preparedness/healthcare/index.htm</a>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"DHS",
+				"Wisconsin",
+				"WI",
+				"Regions",
+				"Healthcare Emergency Readiness Coalition Regions",
+				"Emergency",
+				"Readiness",
+				"Coalition",
+				"HERC"
+			],
+			"issued": "2019-05-22T13:10:51.000Z",
+			"modified": "2020-02-28T15:19:59.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.8892,42.4920,-86.8045,47.0808",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-healthcare-emergency-readiness-coalition-regions"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Regions/MapServer/3"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/55db837eba7e44dca6c918164353c699/csv?layers=3"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/55db837eba7e44dca6c918164353c699/geojson?layers=3"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/55db837eba7e44dca6c918164353c699/shapefile?layers=3"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/55db837eba7e44dca6c918164353c699/kml?layers=3"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=53cd456630934389979f688f673e7163&sublayer=6",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-family-care-geographic-service-regions",
+			"title": "Wisconsin Family Care Geographic Service Regions",
+			"description": "This dataset contains boundaries for the Family Care Geographic Service Regions. Family Care is a Medicaid long-term care program for frail elders, and adults with physical, developmental, or intellectual disabilities. People in the program receive long-term care services to help them live in their own home whenever possible.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/familycare/index.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/familycare/index.htm</a>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"DHS",
+				"WI",
+				"Wisconsin",
+				"Family Care Geographic Service Regions",
+				"Regions",
+				"Family"
+			],
+			"issued": "2019-05-22T13:31:57.000Z",
+			"modified": "2020-02-28T15:19:43.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.8894,42.4918,-86.7641,47.0809",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-family-care-geographic-service-regions"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Regions/MapServer/6"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/53cd456630934389979f688f673e7163/csv?layers=6"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/53cd456630934389979f688f673e7163/geojson?layers=6"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/53cd456630934389979f688f673e7163/shapefile?layers=6"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/53cd456630934389979f688f673e7163/kml?layers=6"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=8c59077f98cf42b2b3b9fa0a5e4a5f6e&sublayer=2",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-area-administration-regions",
+			"title": "Wisconsin Area Administration Regions",
+			"description": "This dataset contains boundaries for the Wisconsin DHS Area Administration regions. Area Administration Regions are a function of the Wisconsin Department of Health Services to be used for reference and resource allocation of WI DHS Area Administration resources and programs.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/areaadmin/index.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/areaadmin/index.htm</a>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"DHS",
+				"WI",
+				"Wisconsin",
+				"Regions",
+				"Area Administration Regions"
+			],
+			"issued": "2019-05-22T13:00:07.000Z",
+			"modified": "2020-02-28T15:19:10.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.8894,42.4918,-86.7641,47.0809",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-area-administration-regions"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Regions/MapServer/2"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/8c59077f98cf42b2b3b9fa0a5e4a5f6e/csv?layers=2"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/8c59077f98cf42b2b3b9fa0a5e4a5f6e/geojson?layers=2"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/8c59077f98cf42b2b3b9fa0a5e4a5f6e/shapefile?layers=2"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/8c59077f98cf42b2b3b9fa0a5e4a5f6e/kml?layers=2"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=8cdcbf6e3c3242bd8d5222268567bf79&sublayer=10",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-program-of-all-inclusive-care-for-the-elderly-pace-regions",
+			"title": "Wisconsin Program of All-Inclusive Care for the Elderly (PACE) Regions",
+			"description": "This dataset contains boundaries for the Program of All-Inclusive Care regions. The Program of All-Inclusive Care for the Elderly, also known as PACE, provides a full range of long-term care, health care, and prescription drugs to older people with chronic needs.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/familycare/pace.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/familycare/pace.htm</a>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"DHS",
+				"WI",
+				"Wisconsin",
+				"PACE",
+				"Programs of All-Inclusive Care for the Elderly",
+				"Elderly",
+				"Regions"
+			],
+			"issued": "2019-05-22T13:54:04.000Z",
+			"modified": "2020-02-28T15:18:53.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.8894,42.4918,-86.7641,47.0809",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-program-of-all-inclusive-care-for-the-elderly-pace-regions"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Regions/MapServer/10"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/8cdcbf6e3c3242bd8d5222268567bf79/csv?layers=10"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/8cdcbf6e3c3242bd8d5222268567bf79/geojson?layers=10"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/8cdcbf6e3c3242bd8d5222268567bf79/shapefile?layers=10"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/8cdcbf6e3c3242bd8d5222268567bf79/kml?layers=10"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=7d012ac34d024d2fbb6f65e1cba4457c&sublayer=0",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-division-of-public-health-regional-offices",
+			"title": "Wisconsin Division of Public Health Regional Offices",
+			"description": "This dataset contains the point locations of the Division of Public Health regional offices in Wisconsin.  The Division of Public Health (DPH) works with our local and tribal public health partners, and community groups statewide, on a wide variety of programs and services that protect the health of Wisconsin residents.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/dph/index.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/dph/index.htm</a>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"Wisconsin",
+				"DHS",
+				"WI DHS",
+				"WI",
+				"DPH",
+				"Division of Public Health",
+				"Region",
+				"Public Health",
+				"Offices",
+				"Locations"
+			],
+			"issued": "2019-06-03T16:51:47.000Z",
+			"modified": "2020-02-28T15:14:37.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-91.4971,43.0405,-87.9193,45.6555",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-division-of-public-health-regional-offices"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Offices/MapServer/0"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/7d012ac34d024d2fbb6f65e1cba4457c/csv?layers=0"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/7d012ac34d024d2fbb6f65e1cba4457c/geojson?layers=0"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/7d012ac34d024d2fbb6f65e1cba4457c/shapefile?layers=0"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/7d012ac34d024d2fbb6f65e1cba4457c/kml?layers=0"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=42e50bd9b1ab42b68105616c4a25f9ba&sublayer=1",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-nurse-aide-training-programs",
+			"title": "Wisconsin Nurse Aide Training Programs",
+			"description": "<div style='text-align:Left;'><div style='font-family:&quot;Avenir Next W01&quot;, &quot;Avenir Next W00&quot;, &quot;Avenir Next&quot;, Avenir, &quot;Helvetica Neue&quot;, sans-serif;'><font size='3' style='background-color:rgb(255, 255, 255);'><font style='font-family:inherit;'>This dataset contains locations and attributes of Nurse Aide Training Programs approved by the state of Wisconsin.  The data is used for planning, management and analysis by Wisconsin Department of Health Services staff and other government agencies. Nurse Aide Training Programs are training sites/programs/instructors approved by the Division of Quality Assurance (DQA) to train\ncertified nursing assistants (CNAs) that will have the credentials needed to\nwork in DQA-regulated health care facilities such as nursing homes. They can be\naffiliated with/run by licensed health care facilities or stand-alone programs.</font></font></div><div style='font-family:&quot;Avenir Next W01&quot;, &quot;Avenir Next W00&quot;, &quot;Avenir Next&quot;, Avenir, &quot;Helvetica Neue&quot;, sans-serif; font-size:16px;'><font size='3' style='background-color:rgb(255, 255, 255);'><font style='font-family:inherit;'><br /></font></font></div><div style='font-family:&quot;Avenir Next W01&quot;, &quot;Avenir Next W00&quot;, &quot;Avenir Next&quot;, Avenir, &quot;Helvetica Neue&quot;, sans-serif; font-size:16px;'><font size='3' style='background-color:rgb(255, 255, 255);'><font style='font-family:inherit;'>For more information, please visit the Wisconsin Department of Health Services website: </font></font><a href='https://www.dhs.wisconsin.gov/caregiver/nurse-aide/index.htm' style='font-family:&quot;Avenir Next&quot;, Avenir, &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; font-size:15px;' target='_blank' rel='nofollow ugc noopener noreferrer'>https://www.dhs.wisconsin.gov/caregiver/nurse-aide/index.htm</a></div></div>",
+			"keyword": [
+				"Wisconsin",
+				"Nursing Aide Training Program",
+				"nursing",
+				"DQA",
+				"caregiver",
+				"Division of Quality Assurance",
+				"Department of Health Services",
+				"WI",
+				"DHS"
+			],
+			"issued": "2023-01-06T21:54:03.000Z",
+			"modified": "2024-04-02T20:03:26.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.7885,42.5018,-87.3519,46.7162",
+			"license": "<span><span style='font-family:Calibri, sans-serif;'><font size='3'>This data (i) is furnished &quot;AS IS&quot; with no representation as to completeness or accuracy; (ii) is furnished with no warranty of any kind; and (iii) is not suitable for legal, engineering, or surveying purposes.</font></span></span>",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-nurse-aide-training-programs"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Services/MapServer/1"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/42e50bd9b1ab42b68105616c4a25f9ba/csv?layers=1"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/42e50bd9b1ab42b68105616c4a25f9ba/geojson?layers=1"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/42e50bd9b1ab42b68105616c4a25f9ba/shapefile?layers=1"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/42e50bd9b1ab42b68105616c4a25f9ba/kml?layers=1"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=79eb14d4a41d4540bec888b3b4ee5ffe&sublayer=5",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-hospitals",
+			"title": "Wisconsin Hospitals",
+			"description": "This dataset contains locations and attributes of hospitals licensed by the state of Wisconsin.  The data are used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies. <br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/guide/hospital.htm' target='_blank' rel='nofollow ugc noopener noreferrer'>https://www.dhs.wisconsin.gov/guide/hospital.htm</a>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"Wisconsin",
+				"Hospital",
+				"DHS",
+				"WI",
+				"Health Facility",
+				"Emergency",
+				"Locations",
+				"Health Care Facility",
+				"Health Care"
+			],
+			"issued": "2019-05-16T13:35:31.000Z",
+			"modified": "2024-04-12T16:08:14.787Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.7174,42.5483,-87.3536,46.6975",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-hospitals"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Facilities/MapServer/5"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/79eb14d4a41d4540bec888b3b4ee5ffe/csv?layers=5"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/79eb14d4a41d4540bec888b3b4ee5ffe/geojson?layers=5"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/79eb14d4a41d4540bec888b3b4ee5ffe/shapefile?layers=5"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/79eb14d4a41d4540bec888b3b4ee5ffe/kml?layers=5"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=826c3f41da4e4b3cb067665a3b13c874&sublayer=17",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-residential-care-apartment-complexes",
+			"title": "Wisconsin Residential Care Apartment Complexes",
+			"description": "This dataset contains locations and attributes of residential care apartment complexes licensed by the state of Wisconsin. The data are used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies. <br /><br />For more information please visit the Wisconsin Department of Health Services website:<a href='https://www.dhs.wisconsin.gov/guide/rcac.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/guide/rcac.htm</a>",
+			"keyword": [
+				"Wisconsin",
+				"Residential Care Apartment Complex",
+				"RCAC",
+				"Apartment",
+				"Department of Health Services",
+				"WI",
+				"DHS",
+				"Assisted Living Facility",
+				"Wisconsin Department of Health Services",
+				"Locations",
+				"Health Care",
+				"Health Care Facility"
+			],
+			"issued": "2019-09-11T20:27:19.000Z",
+			"modified": "2024-04-11T21:00:30.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.7408,-87.6435,44.1097,46.7002",
+			"license": "<div><a href='https://data.dhsgis.wi.gov/pages/gis-data-disclaimer' target='_blank'>https://data.dhsgis.wi.gov/pages/gis-data-disclaimer</a><br /></div>",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-residential-care-apartment-complexes"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Facilities/MapServer/17"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/826c3f41da4e4b3cb067665a3b13c874/csv?layers=17"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/826c3f41da4e4b3cb067665a3b13c874/geojson?layers=17"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/826c3f41da4e4b3cb067665a3b13c874/shapefile?layers=17"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/826c3f41da4e4b3cb067665a3b13c874/kml?layers=17"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=b275114a8e4540228a4e38c237c85541&sublayer=4",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-nursing-homes",
+			"title": "Wisconsin Nursing Homes",
+			"description": "This dataset contains locations and attributes of nursing homes licensed by the state of Wisconsin.  The data is used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies. <br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/guide/nursing-home.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/guide/nursing-home.htm</a>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"Wisconsin",
+				"Nursing Homes",
+				"DHS",
+				"WI",
+				"Health Facility",
+				"Locations",
+				"Health Care Facility"
+			],
+			"issued": "2019-03-20T19:13:48.000Z",
+			"modified": "2024-04-11T21:00:27.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.7858,42.5208,-87.1188,46.7171",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-nursing-homes"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Facilities/MapServer/4"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/b275114a8e4540228a4e38c237c85541/csv?layers=4"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/b275114a8e4540228a4e38c237c85541/geojson?layers=4"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/b275114a8e4540228a4e38c237c85541/shapefile?layers=4"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/b275114a8e4540228a4e38c237c85541/kml?layers=4"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=4f451be2414a49789c051f3f49e51a84&sublayer=6",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-hospice-location",
+			"title": "Wisconsin Hospice Location",
+			"description": "This dataset contains locations and attributes of hospices licensed by the state of Wisconsin.  The data is used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies. <br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/guide/hospice.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/guide/hospice.htm</a>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"Wisconsin",
+				"Hospice",
+				"DHS",
+				"WI",
+				"Locations",
+				"Health Care Facility"
+			],
+			"issued": "2019-03-20T18:34:16.000Z",
+			"modified": "2024-04-11T21:00:24.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-93.3473,42.2679,-87.0811,46.8279",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-hospice-location"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Facilities/MapServer/6"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/4f451be2414a49789c051f3f49e51a84/csv?layers=6"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/4f451be2414a49789c051f3f49e51a84/geojson?layers=6"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/4f451be2414a49789c051f3f49e51a84/shapefile?layers=6"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/4f451be2414a49789c051f3f49e51a84/kml?layers=6"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=273ce294bddd484985a4938e6b9d42ee&sublayer=9",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-end-stage-renal-disease",
+			"title": "Wisconsin End Stage Renal Disease",
+			"description": "This dataset contains locations and attributes of end stage renal dialysis facilities licensed by the state of Wisconsin.  The data is used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies. <br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/guide/esrd.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/guide/esrd.htm</a>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"Wisconsin",
+				"End Stage Renal Dialysis",
+				"DHS",
+				"WI",
+				"Health Facility",
+				"ESRD",
+				"Locations",
+				"Health Care Facility"
+			],
+			"issued": "2019-05-16T13:29:21.000Z",
+			"modified": "2024-04-11T21:00:23.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.7333,42.5483,-87.3664,46.6975",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-end-stage-renal-disease"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Facilities/MapServer/9"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/273ce294bddd484985a4938e6b9d42ee/csv?layers=9"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/273ce294bddd484985a4938e6b9d42ee/geojson?layers=9"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/273ce294bddd484985a4938e6b9d42ee/shapefile?layers=9"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/273ce294bddd484985a4938e6b9d42ee/kml?layers=9"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=b1c524c02fa44becae624b5bf03a8808&sublayer=11",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-ambulatory-surgical-centers",
+			"title": "Wisconsin Ambulatory Surgical Centers",
+			"description": "This dataset contains locations and attributes of ambulatory surgical centers licensed by the state of Wisconsin. The data are used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies. <br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/guide/asc.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/guide/asc.htm</a>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"Wisconsin",
+				"DHS",
+				"WI",
+				"Health Facility",
+				"Ambulatory Surgical Centers",
+				"ASC",
+				"Locations",
+				"Health Care Facility",
+				"Health Care"
+			],
+			"issued": "2019-03-20T13:02:12.000Z",
+			"modified": "2024-04-11T21:00:19.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-91.5204,42.5000,-87.6596,45.8958",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-ambulatory-surgical-centers"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Facilities/MapServer/11"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/b1c524c02fa44becae624b5bf03a8808/csv?layers=11"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/b1c524c02fa44becae624b5bf03a8808/geojson?layers=11"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/b1c524c02fa44becae624b5bf03a8808/shapefile?layers=11"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/b1c524c02fa44becae624b5bf03a8808/kml?layers=11"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=595fd0136ac546afbd68be5cd544732f&sublayer=12",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-trauma-centers",
+			"title": "Wisconsin Trauma Centers",
+			"description": "This dataset contains locations and attributes of trauma centers licensed by the state of Wisconsin.  The data is used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/trauma/index.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/trauma/index.htm</a>",
+			"keyword": [
+				"Wisconsin",
+				"Trauma Center",
+				"Department of Health Services",
+				"WI",
+				"DHS",
+				"emergency",
+				"Trauma Level",
+				"Hospital",
+				"Wisconsin Department of Health Services",
+				"Locations"
+			],
+			"issued": "2019-09-11T19:17:29.000Z",
+			"modified": "2024-03-23T14:30:10.006Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.7177,42.5483,-87.3536,46.6975",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-trauma-centers"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Facilities/MapServer/12"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/595fd0136ac546afbd68be5cd544732f/csv?layers=12"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/595fd0136ac546afbd68be5cd544732f/geojson?layers=12"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/595fd0136ac546afbd68be5cd544732f/shapefile?layers=12"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/595fd0136ac546afbd68be5cd544732f/kml?layers=12"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=3880ec267a7049b5b876eb943e9bae57&sublayer=4",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-pharmacy-naloxone-provider-locations",
+			"title": "Wisconsin Pharmacy Naloxone Provider Locations",
+			"description": "This dataset contains locations and attributes of pharmacies providing Naloxone in the state of Wisconsin.  The data is used for planning, management and analysis by Wisconsin Department of Health Services staff and by other government agencies. <br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/opioids/naloxone-pharmacies.htm' target='_blank'>https://www.dhs.wisconsin.gov/opioids/naloxone-pharmacies.htm</a>",
+			"keyword": [
+				"Wisconsin",
+				"Naloxone",
+				"WI",
+				"DHS",
+				"Pharmacy",
+				"Substance Use",
+				"Opiod",
+				"Wisconsin Department of Health Services",
+				"Health Services",
+				"Health Care",
+				"Health Care Services"
+			],
+			"issued": "2019-09-12T13:34:46.000Z",
+			"modified": "2020-03-12T15:53:46.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-94.8807,42.4982,-87.3478,47.4740",
+			"license": "<div><a href='https://data.dhsgis.wi.gov/pages/gis-data-disclaimer' target='_blank'>https://data.dhsgis.wi.gov/pages/gis-data-disclaimer</a><br /></div>",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-pharmacy-naloxone-provider-locations"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Services/MapServer/4"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/3880ec267a7049b5b876eb943e9bae57/csv?layers=4"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/3880ec267a7049b5b876eb943e9bae57/geojson?layers=4"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/3880ec267a7049b5b876eb943e9bae57/shapefile?layers=4"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/3880ec267a7049b5b876eb943e9bae57/kml?layers=4"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=7d29decc3c8f412aa2d52693c18bbd1b&sublayer=7",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-aging-and-disability-resource-center-adrc-regions",
+			"title": "Wisconsin Aging and Disability Resource Center (ADRC) Regions",
+			"description": "This dataset contains boundaries for the Aging &amp; Disability Resource Center regions. Local aging and disability resource centers (ADRCs) provide accurate, unbiased information on all aspects of life related to aging or living with a disability.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/adrc/index.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/adrc/index.htm</a>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"DHS",
+				"WI",
+				"Wisconsin",
+				"Aging and Disability Resource Center",
+				"Aging",
+				"Disability",
+				"Regions",
+				"ADRC"
+			],
+			"issued": "2019-05-22T13:44:32.000Z",
+			"modified": "2024-01-04T21:16:00.910Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.8894,42.4918,-86.7640,47.0809",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-aging-and-disability-resource-center-adrc-regions"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Regions/MapServer/7"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/7d29decc3c8f412aa2d52693c18bbd1b/csv?layers=7"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/7d29decc3c8f412aa2d52693c18bbd1b/geojson?layers=7"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/7d29decc3c8f412aa2d52693c18bbd1b/shapefile?layers=7"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/7d29decc3c8f412aa2d52693c18bbd1b/kml?layers=7"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=c36cbdbb1b2042638f279ff2b23e6d84&sublayer=11",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-bureau-of-assisted-living-regions",
+			"title": "Wisconsin Bureau of Assisted Living Regions",
+			"description": "This dataset contains boundaries for the Bureau of Assisted Living regions. The Bureau of Assisted Living is within the Division of Quality Assurance and responsible for the regulation of assisted living providers.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/dqa/bal-regionalmap.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/dqa/bal-regionalmap.htm</a>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"DHS",
+				"WI",
+				"Wisconsin",
+				"Bureau of Assisted Living",
+				"Assisted Living",
+				"Regions"
+			],
+			"issued": "2019-05-22T13:55:54.000Z",
+			"modified": "2020-02-28T15:19:26.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.8894,42.4918,-86.7641,47.0809",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-bureau-of-assisted-living-regions"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Regions/MapServer/11"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/c36cbdbb1b2042638f279ff2b23e6d84/csv?layers=11"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/c36cbdbb1b2042638f279ff2b23e6d84/geojson?layers=11"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/c36cbdbb1b2042638f279ff2b23e6d84/shapefile?layers=11"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/c36cbdbb1b2042638f279ff2b23e6d84/kml?layers=11"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=8f1e99e30d8e46d9835038a7b1c6e340&sublayer=1",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-local-public-health-department-offices",
+			"title": "Wisconsin Local Public Health Department Offices",
+			"description": "This dataset contains the point locations of local health department offices in Wisconsin.  Wisconsin local health departments play a central role in providing essential public health services in communities.<br /><br />For more information please visit the Wisconsin Department of Health Services website: <a href='https://www.dhs.wisconsin.gov/lh-depts/counties.htm' rel='nofollow ugc' target='_blank'>https://www.dhs.wisconsin.gov/lh-depts/counties.htm</a>",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"Wisconsin",
+				"DHS",
+				"WI DHS",
+				"WI",
+				"Local Public Health Departments",
+				"Public Health",
+				"Offices",
+				"Locations",
+				"Local Health Departments",
+				"Local Health"
+			],
+			"issued": "2019-06-03T16:55:23.000Z",
+			"modified": "2020-02-28T15:14:10.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.5354,42.5496,-87.3734,46.7218",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-local-public-health-department-offices"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_GIS/Offices/MapServer/1"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/8f1e99e30d8e46d9835038a7b1c6e340/csv?layers=1"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/8f1e99e30d8e46d9835038a7b1c6e340/geojson?layers=1"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/8f1e99e30d8e46d9835038a7b1c6e340/shapefile?layers=1"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/8f1e99e30d8e46d9835038a7b1c6e340/kml?layers=1"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=ca921d70bdd84ae8bc84cd09abd822d7",
+			"landingPage": "https://data.dhsgis.wi.gov/documents/wi-dhs::census-gov-geography-program",
+			"title": "Census.gov Geography Program",
+			"description": "<font face='Avenir Next W01, Avenir Next W00, Avenir Next, Avenir, Helvetica Neue, sans-serif'><span style='font-size: 16px;'>Link to the census.gov (United States Census Bureau) Geography Program web page to access demographic, economic, boundary, and road data.</span></font>",
+			"keyword": [
+				"US Census",
+				"Census",
+				"census.gov",
+				"Boundaries",
+				"United States Census Bureau"
+			],
+			"issued": "2019-04-19T15:16:00.000Z",
+			"modified": "2019-09-13T13:52:54.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "{{extent:computeSpatialProperty}}",
+			"license": "https://www.census.gov/quality/",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/documents/wi-dhs::census-gov-geography-program"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://www.census.gov/programs-surveys/geography.html"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=29c62b7a834944ef8196573c123d7a9d",
+			"landingPage": "https://data.dhsgis.wi.gov/documents/wi-dhs::wisconsin-environmental-public-health-tracking",
+			"title": "Wisconsin Environmental Public Health Tracking",
+			"description": "<p>Wisconsin Environmental Public Health Tracking is your source for environmental health data in Wisconsin.</p><p>COMPREHENSIVE.</p><p>We house data on nearly a dozen environmental public health topics such as air quality, asthma, Lyme disease, and many others.</p><p>CURRENT.</p><p>We work with data managers to host the most up-to-date data available.</p><p>EASY.</p><p>Our data portal has improved mapping, exporting, mobility, and the capacity to display data below the county-level. Note that the portal works best with Firefox and Chrome web browsers.</p>",
+			"keyword": [
+				"Wisconsin Environmental Public Health Tracking",
+				"Wisconsin Department of Health Services",
+				"Environment",
+				"Public Health Data",
+				"Wisconsin",
+				"Public Health",
+				"EPHT",
+				"WI",
+				"DHS",
+				"Data"
+			],
+			"issued": "2019-03-20T18:06:52.000Z",
+			"modified": "2020-02-11T16:02:43.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "{{extent:computeSpatialProperty}}",
+			"license": "By using these data, you signify your agreement to comply with the following requirements.<div><ol><li>The data will be used for statistical reporting and analysis only.</li><li>The data will not be used in an attempt to learn the identity of any person included in the data.</li><li>The data will not be combined with other data for the purpose of matching records to identify individuals.</li><li>The user will not imply or state, either in written or oral form, that interpretations based on the data are those of the original data sources or Department of Health Services unless the data user and data sources are formally collaborating.</li><li>The user will acknowledge, in all reports or presentations based on these data, the original source of the data and the Wisconsin Environmental Public Health Tracking program.</li><li>The user will not disclose or make use of the identity of any person or establishment discovered inadvertently, and the user will report the discovery to:</li></ol></div><div><br /></div><div>Environmental Public Health Tracking</div><div>PO Box 2659, Rm 150</div><div>Madison, WI 53701-2659</div><div>dhstracking@wi.gov</div>",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/documents/wi-dhs::wisconsin-environmental-public-health-tracking"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/DHS/EPHTracker/#/map"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=e1ca38bf16f54fb8ac879b386dbce422",
+			"landingPage": "https://data.dhsgis.wi.gov/documents/wi-dhs::flood-risk-map",
+			"title": "Flood Risk Map",
+			"description": "The Wisconsin Department of Health Services, along with several partnering agencies, has created the Wisconsin Flood Risk Mapping Application (WFRMA) to provide accurate, authoritative, and relevant spatial data resources for emergency preparedness and planning efforts.",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"Public Health",
+				"Wisconsin",
+				"Flood",
+				"Public Health Data",
+				"WI",
+				"DHS",
+				"Mapping Application",
+				"Flood Risk Map"
+			],
+			"issued": "2019-04-23T16:14:32.000Z",
+			"modified": "2020-10-15T13:20:46.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "{{extent:computeSpatialProperty}}",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/documents/wi-dhs::flood-risk-map"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/dhs/raft/"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=861fc902539e436ebef7a86a10e9337b",
+			"landingPage": "https://data.dhsgis.wi.gov/documents/wi-dhs::immunization-map",
+			"title": "Immunization Map",
+			"description": "This map displays the student immunization information reported from Wisconsin schools for the 2017-2018 school year.",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"Immunization",
+				"Wisconsin",
+				"Public Health Data",
+				"Public Health",
+				"WI",
+				"DHS",
+				"Map",
+				"Mapping Application",
+				"Immunizatin Map"
+			],
+			"issued": "2019-04-23T17:39:08.000Z",
+			"modified": "2020-10-15T13:12:31.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "{{extent:computeSpatialProperty}}",
+			"license": "https://data.dhsgis.wi.gov/pages/gis-data-disclaimer",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/documents/wi-dhs::immunization-map"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/dhs/immunization/schools/"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=43ed2d88cf1348608230572166d76697",
+			"landingPage": "https://data.dhsgis.wi.gov/documents/wi-dhs::radon-map",
+			"title": "Radon Map",
+			"description": "The radon data displayed in the map represent over 100,000 Wisconsin indoor radon test results conducted from 1995 to 2016. The test results are geocoded and aggregated to ZIP code boundaries. The radon values are reported in picocurries per liter (pCi/L).",
+			"keyword": [
+				"Wisconsin Department of Health Services",
+				"Radon",
+				"Public Health Data",
+				"Public Health",
+				"Wisconsin",
+				"WI",
+				"DHS",
+				"Map",
+				"Mapping Application",
+				"Radon Map"
+			],
+			"issued": "2019-04-23T17:21:52.000Z",
+			"modified": "2020-02-11T16:02:03.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "{{extent:computeSpatialProperty}}",
+			"license": "<table border='0' cellpadding='0' cellspacing='0' style='border-collapse:  collapse;width:83pt' width='111'></table><div><a href='https://data.dhsgis.wi.gov/pages/gis-data-disclaimer' target='_blank'>https://data.dhsgis.wi.gov/pages/gis-data-disclaimer</a><br /></div>",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/documents/wi-dhs::radon-map"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://wi-dhs.maps.arcgis.com/apps/webappviewer/index.html?id=68f3a3e068854810b626d002ce47aff4"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=c74097b52b3e47ba9d7e31ac042df9b4&sublayer=0",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-heat-vulnerability-index",
+			"title": "Wisconsin Heat Vulnerability Index",
+			"description": "The Wisconsin Heat Vulnerability Index (HVI) is based on multiple indicators associated with risk for heat related illness and mortality. The index analysis was created as a measure of vulnerability by U.S. Census block groups during an extreme heat-related event. The measure includes health factors, demographic and household characteristics, natural and built environment factors (e.g. air quality, temperature, land cover) and population density. ",
+			"keyword": [
+				"WI DHS",
+				"WI",
+				"WI Department of Health Services",
+				"HVI",
+				"Heat Vulnerability Index",
+				"BEOH",
+				"Climate",
+				"Climate and Health",
+				"Heat",
+				"Index",
+				"Vulnerability",
+				"Bureau of Informational and Occupational Health",
+				"Department of Health Services",
+				"Health Services"
+			],
+			"issued": "2024-02-12T14:57:02.000Z",
+			"modified": "2024-05-09T17:46:20.927Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.8894,42.4919,-86.7641,47.0809",
+			"license": "",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-heat-vulnerability-index"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_HVI/Heat_Vulnerability_Index/MapServer/0"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/c74097b52b3e47ba9d7e31ac042df9b4/csv?layers=0"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/c74097b52b3e47ba9d7e31ac042df9b4/geojson?layers=0"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "Shapefile",
+					"format": "ZIP",
+					"mediaType": "application/zip",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/c74097b52b3e47ba9d7e31ac042df9b4/shapefile?layers=0"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "KML",
+					"format": "KML",
+					"mediaType": "application/vnd.google-earth.kml+xml",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/c74097b52b3e47ba9d7e31ac042df9b4/kml?layers=0"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=b138c2c0ffe74689ae011357f11a4899&sublayer=1",
+			"landingPage": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-childhood-lead-poisoning-data",
+			"title": "Wisconsin Childhood Lead Poisoning Data",
+			"description": "{{description}}",
+			"keyword": [
+				"lead",
+				"childhood lead",
+				"WI DHS",
+				"Wisconsin Department of Health Services"
+			],
+			"issued": "2023-02-15T19:00:09.000Z",
+			"modified": "2023-04-26T13:53:40.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "-92.8894,42.4919,-86.7640,47.0808",
+			"license": "",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/maps/wi-dhs::wisconsin-childhood-lead-poisoning-data"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://dhsgis.wi.gov/server/rest/services/DHS_CLPDE/Childhood_Lead_Data/MapServer/1"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "CSV",
+					"format": "CSV",
+					"mediaType": "text/csv",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/b138c2c0ffe74689ae011357f11a4899/csv?layers=1"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "GeoJSON",
+					"format": "GeoJSON",
+					"mediaType": "application/vnd.geo+json",
+					"accessURL": "https://data.dhsgis.wi.gov/api/download/v1/items/b138c2c0ffe74689ae011357f11a4899/geojson?layers=1"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=00883495714c42a9be53b76b24300c8e",
+			"landingPage": "https://data.dhsgis.wi.gov/pages/wi-dhs::gis-data-disclaimer",
+			"title": "GIS Data Disclaimer",
+			"description": "GIS data disclaimer for the Wisconsin Department of Health Services.",
+			"keyword": [],
+			"issued": "2019-04-24T16:17:04.000Z",
+			"modified": "2019-09-13T19:54:22.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "{{extent:computeSpatialProperty}}",
+			"license": "",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/pages/wi-dhs::gis-data-disclaimer"
+				},
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS GeoService",
+					"format": "ArcGIS GeoServices REST API",
+					"mediaType": "application/json",
+					"accessURL": "https://opendata.arcgis.com/admin/"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		},
+		{
+			"@type": "dcat:Dataset",
+			"identifier": "https://www.arcgis.com/home/item.html?id=200036084844418bb3119d963cd7d98c",
+			"landingPage": "https://data.dhsgis.wi.gov/pages/wi-dhs::osdp-help",
+			"title": "OSDP Help",
+			"description": "Help page for the Open Spatial Data Portal (OSDP).  Link to the page can be found in the OSDP footer.",
+			"keyword": [],
+			"issued": "2019-06-06T19:18:20.000Z",
+			"modified": "2019-09-13T19:54:49.000Z",
+			"publisher": {
+				"name": "Wisconsin Department of Health Services"
+			},
+			"contactPoint": {
+				"@type": "vcard:Contact",
+				"fn": "DHS_GIS",
+				"hasEmail": "mailto:benjaminp.anderson@dhs.wisconsin.gov"
+			},
+			"accessLevel": "public",
+			"spatial": "{{extent:computeSpatialProperty}}",
+			"license": "",
+			"distribution": [
+				{
+					"@type": "dcat:Distribution",
+					"title": "ArcGIS Hub Dataset",
+					"format": "Web Page",
+					"mediaType": "text/html",
+					"accessURL": "https://data.dhsgis.wi.gov/pages/wi-dhs::osdp-help"
+				}
+			],
+			"theme": [
+				"geospatial"
+			]
+		}
+	]
+}

@@ -1,0 +1,731 @@
+# config.yaml
+
+#
+# Check this to identify new sites:
+# https://hub.arcgis.com/search?collection=Site&q=wisconsin
+#
+
+###########################
+# Harvester Configuration #
+###########################
+
+CONFIG:
+  CATALOG: "DCAT_Sites" # TestSites, DCAT_Sites, or CKAN_Sites
+  OUTPUTDIR: "opendataharvest/output_md"
+  LOGDIR: "opendataharvest/log"
+  DEFAULTBBOX: "opendataharvest/default_bbox.csv"
+  MAXRETRY: 3
+  SLEEPTIME: 2
+  SCHEMA: "https://raw.githubusercontent.com/UWM-Libraries/GeoDiscovery/main/schema/geoblacklight-schema-aardvark.json"
+
+################
+# Localization #
+################
+DEFAULT:
+  MEMBEROF:
+    - "AGSLOpenDataHarvest"
+  RESOURCECLASS:
+    - "Datasets"
+  ACCESSRIGHTS: "public"
+  MDVERSION: "Aardvark"
+  LANG:
+    - "English"
+  PROVIDER: "American Geographical Society Library – UWM Libraries"
+  SUPPRESSED: false
+  RIGHTS:
+    - Although this data is being distributed by the American Geographical Society Library at the University of Wisconsin-Milwaukee Libraries, no warranty expressed or implied is made by the University as to the accuracy of the data and related materials. The act of distribution shall not constitute any such warranty, and no responsibility is assumed by the University in the use of this data, or related materials.
+  RESOURCETYPE:
+    - "Digital maps"
+  FORMAT: None
+  DESCRIPTION: This dataset was automatically cataloged from the creator's Open Data Portal. In some cases, publication year and bounding coordinates shown here may be incorrect. Additional download formats may be available on the author's website. Please check the 'More details at' link for additional information.
+
+##############
+# Test Sites #
+##############
+TestSites:
+  TestCatalog:
+    CreatedBy: "sample"
+    SiteURL: "uwm_fixture/sample_dcat_catalog.json"
+    SiteName: "sample"
+    DefaultBbox: "Wisconsin"
+    SkipList: ""
+    Spatial: ["Winnebago County", "Wisconsin", "United States"]
+  MilwaukeeCounty_OpenData:
+    CreatedBy: "Milwaukee County" 
+    SiteURL: "https://data-mclio.hub.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "MilwaukeeCounty"
+    DefaultBbox: "MilwaukeeCounty"
+    SkipList: 
+      - UUID: "d7f707071cd24b83ab3b9adb8a7d10ce"
+      - UUID: "bce9201dd312445b9b4567ee14d8032a" 
+      - UUID: "84c7b8d95af04cdda6b0c2ae26590531"
+      - UUID: "7a1d3d055d4b4457845c721088c132f0" 
+    Spatial: ["Milwaukee County", "Wisconsin", "United States"]
+  DHS_OpenData:
+   CreatedBy: "Wisconsin Department of Health Services"
+   SiteURL: "https://data.dhsgis.wi.gov/data.json"
+   SiteName: "DHS"
+   Spatial: ["Wisconsin", "United States"]
+   DefaultBbox: "Wisconsin"
+   AppList:
+    - UUID: "e1ca38bf16f54fb8ac879b386dbce422" # Flood Risk Map
+    - UUID: "861fc902539e436ebef7a86a10e9337b" # Immunization Map
+    - UUID: "43ed2d88cf1348608230572166d76697" # Radon Map
+   SkipList: 
+    - UUID: "ca921d70bdd84ae8bc84cd09abd822d7" # link to census geography website 
+    - UUID: "00883495714c42a9be53b76b24300c8e" # GIS data disclaimer 
+    - UUID: "200036084844418bb3119d963cd7d98c" # OSDP Help?
+    - UUID: "29c62b7a834944ef8196573c123d7a9d"
+
+########################
+########################
+# DCAT compliant sites #
+########################
+########################
+DCAT_Sites:
+
+############################
+# Wisconsin State Agencies #
+############################
+  DHS_OpenData:
+   CreatedBy: "Wisconsin Department of Health Services"
+   SiteURL: "https://data.dhsgis.wi.gov/data.json"
+   SiteName: "DHS"
+   Spatial: ["Wisconsin", "United States"]
+   DefaultBbox: "Wisconsin"
+   AppList:
+    - UUID: "e1ca38bf16f54fb8ac879b386dbce422" # Flood Risk Map
+    - UUID: "861fc902539e436ebef7a86a10e9337b" # Immunization Map
+    - UUID: "43ed2d88cf1348608230572166d76697" # Radon Map
+   SkipList: 
+    - UUID: "ca921d70bdd84ae8bc84cd09abd822d7" # link to census geography website 
+    - UUID: "00883495714c42a9be53b76b24300c8e" # GIS data disclaimer 
+    - UUID: "200036084844418bb3119d963cd7d98c" # OSDP Help?
+    - UUID: "29c62b7a834944ef8196573c123d7a9d"
+
+  DOT_OpenData:
+    CreatedBy: "Wisconsin Department of Transportation"
+    SiteURL: "https://data-wisdot.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "DOT"
+    Spatial: ["Wisconsin", "United States"]
+    DefaultBbox: "Wisconsin"
+    AppList:
+      - UUID: "e5b648476a8b487b8d778f41fef0936d" # Community Maps
+      - UUID: "d1bd22f9e369402d9b665017d77b0125" # Culvert Inventory
+    SkipList: ""
+
+  LTSB_OpenData: 
+    Collections:
+      - CollectionName: "Wisconsin Open Data Sites"
+      - CollectionName: "Wisconsin State Agencies"
+    CreatedBy: "Wisconsin Legislative Technology Services Bureau"
+    SiteURL: "https://data-ltsb.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "WILTSB"
+    DefaultBbox: "Wisconsin"
+    DatasetPrefix: ""
+    Spatial: ["Wisconsin", "United States"]
+    DatasetPostfix: ", WI LTSB"
+    AppList: ""
+    SkipList:
+      - UUID: "766f969721fd42e38bd543a73b00983a"
+      - UUID: "064f4faea3fb44e887fc14093538174c"
+      - UUID: "fd0ff01a007b49cd8a1ccdd35283f2ec"
+      - UUID: "5a68df5711084d0fbcc2f2fb9ab5bf11"
+      - UUID: "b50132e87b7f4b8cb728ffdf44bb1a1f"
+
+  WiDNR_OpenData: 
+    CreatedBy: "Wisconsin Department of Natural Resources"
+    SiteURL: "http://data-wi-dnr.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "WIDNR"
+    Spatial: ["Wisconsin", "United States"]
+    DefaultBbox: "Wisconsin"
+    SpatialTip: "{{extent:computeSpatialProperty}} is used in the spatial field when it's a non-spatial dataset"
+    AppList:
+      - UUID: "f34ca451d5d14e23a588e8a93dc9417e" # Wetland Monitoring Gallery
+      - UUID: "200c06fc04074ef7ae24c0b74737b187" # Wetland Geodatabase
+      - UUID: "4da3c08881cb4bd880bf9f695840b29b" # Land Patents
+    SkipList: 
+      - UUID: "0542ce7130144fe69705848f8d319ae7"
+      - UUID: "438c9dbdf5374faeba3339253e0c231c"
+      - UUID: "bf33290f978e43d5ab1665d78fab34e0"
+      - UUID: "8d68ad46853d48dcb492318de5c9ebd0"
+      - UUID: "9cff1d04434740dcb468941ae0a70d90"
+      - UUID: "2e5ab17c6ecb443fafa8ac0b1ecc5829"
+      - UUID: "d933fe7d39f04f4bb388e1d1c76e83f3"
+      - UUID: "4506324090d7496da868c4a025c56cf6"
+      - UUID: "96787e926ca34e07b1df3db6e320b340"
+      - UUID: "b5d58851193f4d5188acf643e00c4372"
+
+  WEM_OpenData:
+    CreatedBy: "Wisconsin Emergency Management"
+    SiteURL: "http://data-wem.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "WEM"
+    Spatial: ["Wisconsin", "United States"]
+    DefaultBbox: "Wisconsin"
+    AppList: ""
+    SkipList:
+      - UUID: "4cb259688c6e47d1af82c617069b882e"
+      - UUID: "dc0c9118fd104ad19c8d736fa490591b"
+      - UUID: "a9c12f8e61f147a4b6d59b5e65a9c6c3"
+      - UUID: "55cc45682aba4cf08a8ce5ee43f0a2a6"
+      - UUID: "12535bed0039447fa7df7819c1b3950f"
+
+  DPI_OpenData:
+    CreatedBy: "Wisconsin Department of Public Instruction"
+    SiteURL: "https://data-wi-dpi.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "DPI"
+    Spatial: ["Wisconsin", "United States"]
+    DefaultBbox: "Wisconsin"
+    AppList:
+      - UUID: "24d718b4d3674e7eb8d7230359a5b73c" # Education Boundaries, Wisconsin
+      - UUID: "9b32bb6808894d608055cf7d0300d7c7" # ISPs
+      - UUID: "f73a6de8ce0b4ce8a5376d5966d598d6" # Overlap
+      - UUID: "6936198c3fd347ebac5ccf6a94713656" # Enrollment
+      - UUID: "60474b6a64e74559a51f9993d44e0228"
+      - UUID: "1f679d805760455eab1ab9a41cf2a7c7"
+      - UUID: "269abbd1e18a4bf4ab901d73f13e06a0"
+    SkipList: 
+      - UUID: "WI-DPI-dpi-open-data"
+      - UUID: "WI-DPI-test-layer"
+      - UUID: "39d902cc45294ca8a3d62d1bfd237aa4"
+
+####################
+# Wisconsin Cities #
+####################
+  Fitchburg_OpenData:
+    CreatedBy: "City of Fitchburg"
+    SiteURL: "https://opendata-fitchburgwi.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "Fitchburg"
+    Spatial: ["Fitchburg", "Wisconsin", "United States"]
+    DefaultBbox: "Dane" # For now
+    AppList:
+      - UUID: "4a691e2b13c249e287109fbfe10a76f4"
+      - UUID: "21be1cd4662542198dec32eec45939d2"
+      - UUID: "4b7708c82ef44ffc929d0c5ff72a748a"
+      - UUID: "8853de122f734a16abde5973d58d2c6d"
+      - UUID: "ba6321c4459a440fb12e37f8100e9840"
+    SkipList: 
+      - UUID: "FitchburgWI-open-data-hub"
+      - UUID: "FitchburgWI-city-of-fitchburg-police-department"
+      - UUID: "FitchburgWI-fbpd"
+      - UUID: "FitchburgWI-fitchburg-gisowner-outfallinspections"
+      - UUID: "FitchburgWI-fitchburg-gisowner-outfalls"
+      - UUID: "e087f8f48633429a9192299698bae3c5"
+      - UUID: "99d417989850413c9891d12dc4c989f8"
+      - UUID: "807c1ed9135e4ada932894765475ad4b"
+      - UUID: "bbd8c8834f124420a7709205e7c237a1"
+      - UUID: "0c43abdea8e0477f8e674401340de1f3"
+    MapList:
+      - UUID: "543c2219c737440f8b9b3c69d1c9c63b"
+      - UUID: "6ac890fd500c43648178ef151298967c"
+      - UUID: "5e2fdbf5c2ca42fc9191d494e8b3eedc"
+      - UUID: "9dfb3d23a4dd40ffa7c1c0fba7e42ffa"
+      - UUID: "67632ba96e454e78ad5c43040a18446c"
+      - UUID: "0a6541d50caa4a90b2921a2e8069ed43"
+      - UUID: "5d1da141babe4ca096123c2bb504ad03"
+
+  Madison_OpenData:
+    CreatedBy: "City of Madison"
+    SiteURL: "http://data-cityofmadison.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "Madison"
+    Spatial: ["Madison", "Wisconsin", "United States"]
+    DefaultBbox: "Dane" # For now
+    SkipList: 
+      - UUID: "9707ce85a9554be89e46f9fd2a4fec33"
+      - UUID: "48695c41208b4a9ab6d3fceda27afb0a"
+      - UUID: "c7459351d2b444448b098a6892eeaf5e"
+      - UUID: "365b9d3ba82f40dbbc5594696836b91f"
+      - UUID: "0ae67f0f85e04bebbaac8f91a38c758c"
+
+  WisconsinRapids_OpenData:
+    CreatedBy: "City of Wisconsin Rapids"
+    SiteURL: "http://rapidsdata-wisconsinrapids.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "WisconsinRapids"
+    Spatial: ["Wisconsin Rapids", "Wisconsin", "United States"]
+    DefaultBbox: "Wood" # For now
+    AppList:
+      - UUID: "fb7388fef8974f068f74c71db5f33f59"
+      - UUID: "5b1f0e2b911b45c68abbd81a4cf493f7"
+      - UUID: "04d526725a1e4f13bc5fb734028adc37"
+    SkipList:
+      - UUID: "6489bbea63cc4b5192de3f8d5b043c0c"
+      - UUID: "e9a6aad1be31421e901b0224ca763336"
+      - UUID: "4685e0998b1c427ca57f2ac481b934b1"
+      - UUID: "c902406a9412465094cef0c1ff3e98ad"
+      - UUID: "5b1982485c184267a8a51eedc171a999"
+      - UUID: "68147efce2ba4155aad7bfc887c9e46a"
+      - UUID: "5b1f0e2b911b45c68abbd81a4cf493f7"
+
+  SunPrairie_OpenData:
+    CreatedBy: "City of Sun Prairie"
+    SiteURL: "https://maps-sunprairie.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "SunPrairie"
+    DefaultBbox: "Sun Prairie"
+    Spatial: ["Sun Prairie", "Wisconsin", "United States"]
+    SkipList: ""
+
+############################
+# Regional Planning Comm's #
+############################
+  CapitalRPC_OpenData:
+    CreatedBy: "Capital Area Regional Planning Commission"
+    SiteURL: "https://data-carpc.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "CARPC"
+    Spatial: ["Wisconsin", "United States"]
+    DefaultBbox: "Dane"
+    AppList:
+      - UUID: "e64f06e8d912465a96f9ea9bfdb72676"
+      - UUID: "f513b71dbc7841a298e76af672af441e"
+    SkipList: 
+      - UUID: "459cc334740944d38580455a0a777a24"
+      - UUID: "867895a71a1840399476fc717e76bb43"
+      - UUID: "f35ef07c9ed24020aadd65c8a65d3754"
+      - UUID: "4f2e99ba65e34bb8af49733d9778fb8e"
+      - UUID: "826498a48bd0424f9c9315214f2165d4"
+      - UUID: "d582a9e953c44c09bb998c7d9b66f8d4"
+      - UUID: "6d9fa6d159ae4a1f80b9e296ed300767"
+      - UUID: "75a3ce8990674a5ebd5b9ab66bdab893"
+      - UUID: "8d91bd39e873417ea21673e0fee87604"
+      - UUID: "9e557abc61ce41c9b8ec8b15800c20d3"
+      - UUID: "3582b744bba84668b52a16b0b6942544"
+      - UUID: "f33a34de3a294590ab48f246e99958c9"
+      - UUID: "931d892ac7a843d7ba29d085e0433465"
+      - UUID: "aab054ab883c4a4094c72e949566ad40"  
+      - UUID: "25869b8718c0419db87dad07de5b02d8"    
+      - UUID: "a343955125bf4002987c400ad6d0346c"
+      - UUID: "2ea9c9cf54cb494187b03a5057d1a830"
+      - UUID: "de45b9cad20141ebb82fae0da8b3e2c6" 
+      - UUID: "61ffcf610f314933916e4b2c0e477b29" 
+      - UUID: "620875bf8a1945e799cf8bd5f25784d7" 
+      - UUID: "f81bc478e12c4f1691d0d7ab6361f5a6" 
+      - UUID: "1c8ddaba2ee9498cb0025554351e5475"  
+      - UUID: "1536abe5e5504e5db380ccfaa9b6fd8d"  
+      - UUID: "588f0e0acc514c11bc7c898fed9fc651"
+      - UUID: "c29cfb7875fc4b97b58ba6987c460862" 
+      - UUID: "48b8cec7ebf04b5fbdcaf70d09daff21" 
+      - UUID: "509e2d6b034246d692a461724ae2d62c" 
+      - UUID: "5d2bfa736f8448b3a1708e1f6be23eed"  
+      - UUID: "6e03e8c26aad4b9c92a87c1063ddb0e3" 
+      - UUID: "86de95d4e0244cba80f0fa2c9403a7b2" 
+      - UUID: "8b3b470883a744aeb60e5fff0a319ce7" 
+      - UUID: "d8855ee4d3d74413babfb0f41203b168"  
+      - UUID: "9efc83597840415e8a9237c70102279a" 
+      - UUID: "9d846bd61c7745b78d24520f3ca4e173" 
+      - UUID: "01a9cf952f024a73bd8450e0319d0f47"  
+      - UUID: "00719e989d25460bbbdc6d336e281026"  
+      - UUID: "346c14ea571d4e64bafa47db05964bbd"  
+      - UUID: "4be17af8cb9a46438fb20a44f8d8de12"  
+
+  ECWRPC_OpenData:
+    CreatedBy: "East Central Wisconsin Regional Planning Commission"
+    SiteURL: "http://data-ecwrpc.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "ECWRPC"
+    Spatial: ["Wisconsin", "United States"]
+    DatasetPrefix: ""
+    DatasetPostfix: ", ECWRPC"
+    SkipList:
+      - UUID: "0c465bf2950e4140b05f8bdae7adc9c0" 
+      - UUID: "fbc3bb37905d4dc091a282a17b91e3a1"
+      - UUID: "2f68b9dc2d5d43faa029691a3dec5862"
+      - UUID: "9b6c6ab3dc1b4041937ba174246c96c9"
+      - UUID: "346c14ea571d4e64bafa47db05964bbd"
+      - UUID: "4be17af8cb9a46438fb20a44f8d8de12"
+      
+######################
+# Wisconsin Counties #
+######################
+  AshlandCounty_OpenData:
+    CreatedBy: "Ashland County"
+    SiteURL: "https://data-ashlandcountywi.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "AshlandCounty"
+    Spatial: ["Ashland County", "Wisconsin", "United States"]
+    DefaultBbox: "Ashland"
+    SkipList: ""    
+  
+  ColumbiaCounty_OpenData:
+    CreatedBy: "Columbia County"
+    SiteURL: "http://opendata-cclid.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "ColumbiaCounty"
+    Spatial: ["Columbia County", "Wisconsin", "United States"]
+    DefaultBbox: "Columbia"
+    AppList: 
+      - UUID: "2233871b2d7740998bffcdedffea2818"
+    SkipList: 
+      - UUID: "25869b8718c0419db87dad07de5b02d8"
+      - UUID: "48b8cec7ebf04b5fbdcaf70d09daff21"
+      - UUID: "cclid-opendata-columbia-county-land-information-department"  
+      - UUID: "509e2d6b034246d692a461724ae2d62c"  
+      - UUID: "5d2bfa736f8448b3a1708e1f6be23eed"  
+      - UUID: "6e03e8c26aad4b9c92a87c1063ddb0e3"
+      - UUID: "86de95d4e0244cba80f0fa2c9403a7b2"  
+      - UUID: "8b3b470883a744aeb60e5fff0a319ce7" 
+      - UUID: "d8855ee4d3d74413babfb0f41203b168"
+      - UUID: "64a332c9dd094241b02ff05050117ce2"
+      - UUID: "413fd05bbd7342f5991d5ec96f4f8b18"
+      - UUID: "3d66e986942348698ae68f130ce949f4"
+      - UUID: "e2bf7b46c4a7475a89a6a7b666748408"      
+      - UUID: "9539d56dd6534e949de742e70d44b96a"
+      - UUID: "aab054ab883c4a4094c72e949566ad40"
+      - UUID: "931d892ac7a843d7ba29d085e0433465"
+      - UUID: "6d9fa6d159ae4a1f80b9e296ed300767"
+
+  DaneCounty_OpenData: 
+    CreatedBy: "Dane County"
+    SiteURL: "https://gis-countyofdane.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "DaneCounty"
+    Spatial: ["Dane County", "Wisconsin", "United States"]
+    DefaultBbox: "Dane"
+    SkipList: 
+      - UUID: "countyofdane-parceltest1117"  
+
+  EauClaire_OpenData: 
+    CreatedBy: "Eau Claire County"
+    SiteURL: "https://hub-eccounty.hub.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "EauClaireCounty"
+    DefaultBbox: "Eau Claire"
+    Spatial: ["Eau Claire County", "Wisconsin", "United States"]
+    AppList:
+      - UUID: "cb505290c5e44c6185e83d814e58ed19" # Aiport Zoning
+      - UUID: "d2ba78cd16a74070b4901f38b2e706b4" # Lidar and Air Photo Download App
+      - UUID: "53b6d275fa594bb6ad8a76f612cd7b87" # Historical Air Photo App
+    SkipList: 
+      - UUID: "f2c971b06a4340e1bfb206fe693008af"
+      - UUID: "3cf146ed887e407586413747a2b2c029"
+
+  Kenosha_OpenData: 
+    CreatedBy: "Kenosha County"
+    SiteURL: "https://dataportal.kenoshacounty.org/api/feed/dcat-us/1.1.json"
+    SiteName: "KenoshaCounty"
+    Spatial: ["Kenosha County", "Wisconsin", "United States"]
+    DefaultBbox: "Kenosha"
+    AppList:
+      - UUID: "ffc6ee38a1e04a7ab0f875fff2fb1882" # Parcel Viewer
+    SkipList:
+      - UUID: "2305d040132b4e66a2f62166654e0d32"
+      - UUID: "c8f3263922c94d968d931a4ab714b943"  
+      - UUID: "d79c52a223824107a264b0884f9ab53c"
+      - UUID: "93634028191f4333a0055518d7a05d89"
+
+  MilwaukeeCounty_OpenData:
+    CreatedBy: "Milwaukee County" 
+    SiteURL: "https://data-mclio.hub.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "MilwaukeeCounty"
+    DefaultBbox: "MilwaukeeCounty"
+    SkipList: 
+      - UUID: "d7f707071cd24b83ab3b9adb8a7d10ce"
+      - UUID: "bce9201dd312445b9b4567ee14d8032a" 
+      - UUID: "84c7b8d95af04cdda6b0c2ae26590531"
+      - UUID: "7a1d3d055d4b4457845c721088c132f0" 
+    Spatial: ["Milwaukee County", "Wisconsin", "United States"]
+
+  OutagamieCounty_OpenData:
+    CreatedBy: "Outagamie County"
+    SiteURL: "http://data-ocgis.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "OutagamieCounty"
+    Spatial: ["Outagamie County", "Wisconsin", "United States"]
+    DefaultBbox: "Outagamie"
+    SkipList: ""    
+
+  PierceCounty_OpenData:
+    CreatedBy: "Pierce County"
+    SiteURL: "https://data-piercecounty-wi.hub.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "PierceCounty"
+    Spatial: ["Pierce County", "Wisconsin", "United States"]
+    DefaultBbox: "Pierce"
+    AppList:
+      - UUID: "cb9c65ce9ea34cc09b3e27a2f83c9077" # Tourism StoryMap
+    SkipList: ""   
+
+  RacineCounty_OpenData:
+    CreatedBy: "Racine County"
+    SiteURL: "http://data-racinecounty.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    Spatial: ["Racine County", "Wisconsin", "United States"]
+    DefaultBbox: "Racine"
+    SiteName: "RacineCounty"
+    AppList:
+      - UUID: "d7eb01146699492d9592e62ba63ec705"
+    SkipList: ""
+
+  SheboyganCounty_OpenData:
+    CreatedBy: "Sheboygan County"
+    SiteURL: "https://geospatialhub-shebco.hub.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "SheboyganCounty"
+    Spatial: ["Sheboygan County", "Wisconsin", "United States"]
+    DefaultBbox: "Sheboygan"
+    SkipList: ""    
+
+  StCroixCounty_OpenData:
+    CreatedBy: "St. Croix County"
+    SiteURL: "https://gis-scccdd.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "StCroixCounty"
+    Spatial: ["St. Croix County", "Wisconsin", "United States"]
+    DefaultBbox: "Saint Croix"
+    SkipList:
+      - UUID: "ac5de4ea14c9454e8325fb957225c906"
+
+  SaukCounty_OpenData:
+    CreatedBy: "Sauk County"
+    SiteURL: "https://data-saukgis.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "SaukCounty"
+    Spatial: ["Sauk County", "Wisconsin", "United States"]
+    DatasetPrefix: ""
+    DatasetPostfix: ", Sauk County"
+    DefaultBbox: "Sauk"
+    AppList:
+      - UUID: "f8c8c723ef124d7a9a00452b87f3db80"
+      - UUID: "07db83644cfb47a8a3fb1300b683aade"
+      - UUID: "07db83644cfb47a8a3fb1300b683aade"
+      - UUID: "5770a064a59b4398aeaff698567ad55c"
+      - UUID: "321b1c18cedd4213a2a52a54d730a0b2"
+      - UUID: "38dd5615f1a04d75a36199cf739eea5a"
+      - UUID: "dcd6440ccf0b49feab4cbcd7ae9e3e5d"
+      - UUID: "0460dae891a041eda34c689609336aa3"
+      - UUID: "7562edd0e43941239fbe3aaf02ae4599"
+      - UUID: "4d052fa2d38b4724a61cb041929e8d49"
+      - UUID: "56837c2cb6fd4041affb3be102968cc1"
+      - UUID: "f034ce5347424b19aec83f9f4a2aa7a6"
+      - UUID: "a2c3954d9aa24d50b110897e71fcde86"
+      - UUID: "69764cb4c6f44f30be1069b6099a26ec"
+      - UUID: "a2ce6001eac14574b2a45724476d86de"
+      - UUID: "be7f9fe39222458b8efff167f8c94cba"
+    SkipList:
+      - UUID: "b4b295c1f62840a2ae28c3811ac6bcce"
+
+  TrempealeauCounty_OpenData:
+    CreatedBy: "Trempealeau County"
+    SiteURL: "https://trempealeau-county-information-trempco.hub.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "TrempealeauCounty"
+    Spatial: ["Trempealeau County", "Wisconsin", "United States"]
+    DefaultBbox: "Trempealeau"
+    SkipList:
+      - UUID: "afc1effa8b5c4a98a0f35ca54e61d018"
+
+  VilasCounty_OpenData:
+    CreatedBy: "Vilas County"
+    SiteURL: "https://data-vilas.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "VilasCounty"
+    Spatial: ["Vilas County", "Wisconsin", "United States"]
+    DefaultBbox: "Vilas"
+    SkipList: 
+      - UUID: "81e69aa1029d41a09b8cdb112f221efe"
+      - UUID: "d6e8df34a3034a169073a989123f2086"
+      - UUID: "f37edafef8914e8e9d957ac490ed4f23"
+      - UUID: "1af79a5fca734020a6a41d954ebdb2e1"
+      - UUID: "50d307265f1f435c83b930497339e6d0"
+      - UUID: "08a1bcad6ffc4d6eaacbb5382436986a"
+
+  WalworthCounty_OpenData:
+    CreatedBy: "Walworth County"
+    SiteURL: "https://open-walco.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "WalworthCounty"
+    Spatial: ["Walworth County", "Wisconsin", "United States"]
+    DefaultBbox: "Walworth"
+    SkipList: 
+      - UUID: "walco-wdnr-surface-water-data-viewer"
+      - UUID: "walco-world-topo-map-collector"
+      - UUID: "6e03e8c26aad4b9c92a87c1063ddb0e3" 
+
+  WashingtonCounty_OpenData:
+    CreatedBy: "Washington County"
+    SiteURL: "https://gisdata.washcowisco.gov/api/feed/dcat-us/1.1.json"
+    SiteName: "WashingtonCounty"
+    DefaultBbox: "Washington"
+    Spatial: ["Washington County", "Wisconsin", "United States"]
+    SkipList: 
+      - UUID: "6e03e8c26aad4b9c92a87c1063ddb0e3"
+
+  WaukeshaCounty_OpenData:
+    CreatedBy: "Waukesha County"
+    SiteURL: "http://data-waukeshacounty.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "WaukeshaCounty"
+    Spatial: ["Waukesha County", "Wisconsin", "United States"]
+    DefaultBbox: "Waukesha"
+    AppList:
+      - UUID: "238e325d54fc4ae591bfd5df71574458"
+      - UUID: "5b0c61165b614d3a8cd708a588a24a26"
+    SkipList: ""
+
+  WaupacaCounty_OpenData:
+    CreatedBy: "Waupaca County"
+    SiteURL: "https://data2017-04-05t135915451z-waupacacounty.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "WaupacaCounty"
+    Spatial: ["Waupaca County", "Wisconsin", "United States"]
+    DefaultBbox: "Waupaca"
+    AppList:
+      - UUID: "f231321d9f1d4d77b605dfb9b33046e0"
+    SkipList:
+      - UUID: "b6dd1313a3944c84ad965dbcbac197d3"
+
+  WausharaCounty_OpenData:
+    CreatedBy: "Waushara County"
+    SiteURL: "http://data-waushara.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "WausharaCounty"
+    Spatial: ["Waushara County", "Wisconsin", "United States"]
+    DefaultBbox: "Waushara"
+    SkipList: ""
+
+  WoodCounty_OpenData:
+    CreatedBy: "Wood County"
+    SiteURL: "https://opendata.woodcogis.com/api/feed/dcat-us/1.1.json"
+    SiteName: "WoodCounty"
+    Spatial: ["Wood County", "Wisconsin", "United States"]
+    DefaultBbox: "Wood"
+    AppList:
+      - UUID: "623300abe751422091003f2ba5f4b2e9"
+      - UUID: "dbda3bb2984345f08d1b4de4523031df"
+      - UUID: "ee70f8224c9e47bdb816a4979ca092c4"
+      - UUID: "61dd328dbae5414ca2c2ee46091c7e12"
+      - UUID: "3bf1d03d96d1403588f2f758374cbb2a"
+    SkipList: ""
+
+########################
+########################
+# CKAN compliant sites #
+########################
+########################
+CKAN_Sites:
+  Milwaukee_OpenData:
+    CreatedBy: "City of Milwaukee"
+    SiteURL: "https://data.milwaukee.gov"
+    SiteName: "Milwaukee"
+    DefaultBbox: "Milwaukee"
+    Datasets:
+      liquorlicenses:
+        title: "Active Liquor Licenses Milwaukee, Wisconsin"
+        themes: ["Society", "Economy"]
+        spatial: [-88.069979,-87.825193,43.192568,42.842004] # Default from CSV for Milwaukee, but maybe omit if default?
+      zoning:
+        title: "Zoning Milwaukee, Wisconsin"
+        themes: ["Property"]
+      aldermanic-districts:
+        title: "Alder Districts Milwaukee, Wisconsin"
+        themes: ["Boundaries"]
+      streets:
+        title: "Streets Milwaukee, Wisconsin"
+        themes: ["Transportation"]
+      residential-assessment-neighborhoods:
+        title: "Residential Assessment Neighborhoods Milwaukee, Wisconsin"
+        themes: ["Society", "Economy"]
+      firehouse-locations:
+        title: "Firehouse Locations Milwaukee, Wisconsin"
+        themes: ["Location", "Structures"]
+      voting-wards:
+        title: "Voting Wards Milwaukee, Wisconsin"
+        themes: ["Boundaries", "Society"]
+      libraries:
+        title: "Libraries Milwaukee, Wisconsin"
+        themes: ["Location", "Society"]
+      quarter-sections:
+        title: "PLSS Quarter Sections Milwaukee, Wisconsin"
+        themes: ["Location", "Boundaries"]
+      streetcar-route:
+        title: "Streetcar Route Milwaukee, Wisconsin"
+        themes: ["Transportation"]
+      street-car-stops:
+        title: "Streetcar Stops Milwaukee, Wisconsin"
+        themes: ["Transportation"]
+      milwaukee-public-school-board-districts:
+        title: "Milwaukee Public School Board Districts Milwaukee, Wisconsin"
+        themes: ["Society"]
+      neighborhoods:
+        title: "Neighborhoods Milwaukee, Wisconsin"
+        themes: ["Boundaries", "Society"]
+      neighborhood-strategic-planning-areas-nsp:
+        title: "Neighborhood Strategic Planning Areas Milwaukee, Wisconsin"
+        themes: ["Society"]
+      opportunity-zones:
+        title: "Opportunity Zones Milwaukee, Wisconsin"
+        themes: ["Society", "Economy"]
+      corporate-boundary:
+        title: "Corporate Boundary Milwaukee, Wisconsin"
+        themes: ["Boundaries"]
+      mmsd-geography:
+        title: "Milwaukee Metropolitan Sewerage District Geography Milwaukee, Wisconsin "
+        themes: ["Utilities"]
+        spatial: [-88.0772,-87.859534,42.919571,43.194858] # extends beyond City (and County?) of Milwaukee
+      library-service-areas:
+        title: "Library Service Areas Milwaukee, Wisconsin"
+        themes: ["Society"]
+      milwaukee-police-department-squad-areas:
+        title: "Police Department Squad Areas Milwaukee, Wisconsin"
+        themes: ["Society", "Boundaries"]
+      milwaukee-police-department-reporting-districts:
+        title: "Police Department Reporting Districts Milwaukee, Wisconsin"
+        themes: ["Society", "Boundaries"]
+      milwaukee-police-district:
+        title:  "Police Districts Milwaukee, Wisconsin"
+        themes: ["Society", "Boundaries"]
+      mpd-stations:
+        title: "Police Stations Milwaukee, Wisconsin"
+        themes: ["Society", "Structures", "Location"]
+      sixteenth-sections:
+        title: "PLSS Sixteenth Sections Milwaukee, Wisconsin"
+        themes: ["Location","Boundaries"]
+      dpw-parking:
+        title: "Parking Meters Milwaukee, Wisconsin"
+        themes: ["Transportation"]
+      neighborhood-improvement-districts:
+        title: "Neighborhood Improvement Districts Milwaukee, Wisconsin"
+        themes: ["Society"]
+      community-based-residential-facilities-within-city-of-milwaukee:
+        title: "Community Based Residential Facilities Milwaukee, Wisconsin"
+        themes: ["Society"]
+      neighborhood-revitalization-strategy-areas-nrsa:
+        title: "Neighborhood Revitalization Strategy Areas Milwaukee, Wisconsin"
+        themes: ["Society"]
+      targeted-investment-neighborhoods:
+        title: "Targeted Investment Neighborhoods Milwaukee, Wisconsin"
+        themes: ["Society", "Economy"]
+      tax-incremental-districts-tid:
+        title: "Tax Incremental Districts Milwaukee, Wisconsin"
+        themes: ["Society", "Economy"]
+      business-improvement-districts-bid:
+        title: "Business Improvement Districts Milwaukee, Wisconsin"
+        themes: ["Society", "Economy"]
+      votingward: 
+        title: "Polling Locations Milwaukee, Wisconsin"
+        themes: ["Society"]
+    SpecialDatasets:
+      garbage-recycling-collection:
+        note: "14 rest services by subject"
+        title:
+        themes:
+      dpw-operations:
+        note: "6 rest services by subject"
+        title:
+        themes:
+      dpw-forestry:
+        note: "2 rest services by subject"
+        title:
+        themes:
+      community-living-arrangement-facilities:
+        note: "5 rest services by subject"
+        title:
+        themes:
+      paving-projects:
+        note: "4 rest services by year"
+        title:
+        themes:
+      parcel-outlines:
+        note: "The service has MPROP, the rest of the shapefiles are by year and probably don't need frequent update"
+        title: 
+        themes:  
+      master-address-index-mai-points-mpd:
+        note: "This one is weird. I think MAI is updated more often, but this is 3 years old. Why MPD? see mai"
+      mprop:
+        note: "CSV, JSON, XML"
+      mai:
+        note: "current MAI updated daily. CSV, JSON, XML"
+      legaldescriptions:
+        note: "CSV, JSON, XML"
+      environmentaldcd:
+        note: "CSV, JSON, XML"
+        title: "Tax Delinquent Brownfields Milwaukee, Wisconsin"
+      accelavacantbuilding:
+        note: "CSV, JSON, XML"
+        title: "Vacant Buildings Milwaukee, Wisconsin"
+      delinquent-real-estate-tax-accounts:
+        title: "Delinquent Real Estate Tax Accounts"
+        note: "excel only, includes taxkey and addresses"
+
+  
