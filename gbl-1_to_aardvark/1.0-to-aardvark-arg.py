@@ -4,7 +4,7 @@ import os
 import logging
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Optional
 import argparse
 
 
@@ -24,8 +24,9 @@ class SchemaUpdater:
     PLACE_DEFAULT = None
     CROSSWALK_PATH = Path("/home/srappel/GeoDiscovery-Utils/gbl-1_to_aardvark/crosswalk.csv")
 
-    def __init__(self):
+    def __init__(self, overwrite_values: Optional[Dict[str, str]] = None):
         self.crosswalk = self.load_crosswalk(self.CROSSWALK_PATH)
+        self.overwrite_values = overwrite_values if overwrite_values else {}
 
     @staticmethod
     def load_crosswalk(crosswalk_path: Path) -> Dict[str, str]:
@@ -66,6 +67,10 @@ class SchemaUpdater:
 
             data["gbl_mdVersion_s"] = "Aardvark"
             data.pop("geoblacklight_version", None)
+
+            # Overwrite specified values
+            for key, value in self.overwrite_values.items():
+                data[key] = value
 
             self.check_required(data)
             self.remove_deprecated(data)
@@ -164,8 +169,20 @@ if __name__ == "__main__":
     parser.add_argument("dir_old_schema", type=Path, help="Directory of JSON files in the old schema")
     parser.add_argument("dir_new_schema", type=Path, help="Directory for the new schema JSON files")
 
+    # Optional arguments for overwriting required values
+    parser.add_argument("--dct_publisher_sm", type=str, help="Overwrite dct_publisher_sm")
+    parser.add_argument("--dct_spatial_sm", type=str, help="Overwrite dct_spatial_sm")
+    parser.add_argument("--gbl_mdVersion_s", type=str, help="Overwrite gbl_mdVersion_s")
+    parser.add_argument("--dct_title_s", type=str, help="Overwrite dct_title_s")
+    parser.add_argument("--gbl_resourceClass_sm", type=str, help="Overwrite gbl_resourceClass_sm")
+    parser.add_argument("--id", type=str, help="Overwrite id")
+    parser.add_argument("--gbl_mdModified_dt", type=str, help="Overwrite gbl_mdModified_dt")
+    parser.add_argument("--gbl_resourceType_sm", type=str, help="Overwrite gbl_resourceType_sm")
+
     args = parser.parse_args()
 
-    LoggerConfig.configure_logging("gbl-1_to_aardvark/log/gbl-1_to_aardvark.log")
-    schema_updater = SchemaUpdater()
+    overwrite_values = {k: v for k, v in vars(args).items() if v is not None and k not in ['dir_old_schema', 'dir_new_schema']}
+
+    LoggerConfig.configure_logging("log/gbl-1_to_aardvark.log")
+    schema_updater = SchemaUpdater(overwrite_values)
     schema_updater.update_all_schemas(args.dir_old_schema, args.dir_new_schema)
