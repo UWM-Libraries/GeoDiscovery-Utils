@@ -22,9 +22,10 @@ class LoggerConfig:
 class SchemaUpdater:
     RESOURCE_CLASS_DEFAULT = "Other"
     PLACE_DEFAULT = None
+    CROSSWALK_PATH = Path("/home/srappel/GeoDiscovery-Utils/gbl-1_to_aardvark/crosswalk.csv")
 
-    def __init__(self, crosswalk_path: Path):
-        self.crosswalk = self.load_crosswalk(crosswalk_path)
+    def __init__(self):
+        self.crosswalk = self.load_crosswalk(self.CROSSWALK_PATH)
 
     @staticmethod
     def load_crosswalk(crosswalk_path: Path) -> Dict[str, str]:
@@ -162,10 +163,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Update metadata schema from GBL 1.0 to Aardvark.")
     parser.add_argument("dir_old_schema", type=Path, help="Directory of JSON files in the old schema")
     parser.add_argument("dir_new_schema", type=Path, help="Directory for the new schema JSON files")
-    parser.add_argument("crosswalk_path", type=Path, help="Path to the crosswalk CSV file")
 
     args = parser.parse_args()
 
     LoggerConfig.configure_logging("gbl-1_to_aardvark/log/gbl-1_to_aardvark.log")
-    schema_updater = SchemaUpdater(args.crosswalk_path)
+    schema_updater = SchemaUpdater()
     schema_updater.update_all_schemas(args.dir_old_schema, args.dir_new_schema)
