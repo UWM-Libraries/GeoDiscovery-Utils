@@ -1,0 +1,56 @@
+{
+  "stanford_rights_metadata_s": "<rightsMetadata>\n    <access type=\"discover\">\n      <machine>\n        <world/>\n      </machine>\n    </access>\n    <access type=\"read\">\n      <machine>\n        <world/>\n      </machine>\n    </access>\n    <use>\n      <human type=\"useAndReproduction\">This item is in the public domain.  There are no restrictions on use.</human>\n      <license/>\n    </use>\n    <copyright>\n      <human>This work is in the Public Domain, meaning that it is not subject to copyright.</human>\n    </copyright>\n  </rightsMetadata>",
+  "stanford_use_and_reproduction_s": "This item is in the public domain.  There are no restrictions on use.",
+  "stanford_copyright_s": "This work is in the Public Domain, meaning that it is not subject to copyright.",
+  "dct_title_s": "California Coastal National Monument Boundaries, 2009",
+  "dct_description_sm": [
+    "This polygon shapefile depicts boundaries for the 2,272 acre Califorina Coastal National Monument. This coverage contains boundaries for the California Coastal National Monument, which runs the entire length of the state of California. California Department of Fish and Wildlife Marine Resources Region. (2009). California Coastal National Monument Boundaries, 2009. California Department of Fish and Wildlife. Marine Resources Region. Available at: http://purl.stanford.edu/gq104xc0548. This layer is presented in the WGS84 coordinate system for web display purposes. Downloadable data are provided in native coordinate system or projection."
+  ],
+  "dct_language_sm": [
+    "English"
+  ],
+  "dct_creator_sm": [
+    "California. Department of Fish and Game. Marine Resources Region"
+  ],
+  "dct_publisher_sm": [
+    "California. Department of Fish and Game. Marine Resources Region"
+  ],
+  "schema_provider_s": "Stanford",
+  "dct_subject_sm": [
+    "Coasts",
+    "Marine parks and reserves",
+    "National monuments",
+    "Boundaries",
+    "Environment",
+    "Oceans"
+  ],
+  "dct_temporal_sm": [
+    "2009"
+  ],
+  "dct_issued_s": "2009",
+  "gbl_indexYear_im": [
+    2009
+  ],
+  "dct_spatial_sm": [
+    "California",
+    "Pacific Ocean",
+    "California Coastal National Monument (Calif.)"
+  ],
+  "locn_geometry": "ENVELOPE(-124.670553, -117.041525, 42.00491, 32.513555)",
+  "dct_source_sm": [
+    "stanford-fb282pw3043"
+  ],
+  "dct_accessRights_s": "Public",
+  "dct_format_s": "Shapefile",
+  "gbl_wxsIdentifier_s": "druid:gq104xc0548",
+  "dct_references_s": "{\"http://schema.org/url\":\"https://purl.stanford.edu/gq104xc0548\",\"http://www.loc.gov/mods/v3\":\"https://purl.stanford.edu/gq104xc0548.mods\",\"http://schema.org/downloadUrl\":\"https://stacks.stanford.edu/file/druid:gq104xc0548/data.zip\",\"http://www.opengis.net/def/serviceType/ogc/wms\":\"https://geowebservices.stanford.edu/geoserver/wms\",\"http://www.isotc211.org/schemas/2005/gmd/\":\"https://raw.githubusercontent.com/OpenGeoMetadata/edu.stanford.purl/master/gq/104/xc/0548/iso19139.xml\",\"http://www.opengis.net/def/serviceType/ogc/wfs\":\"https://geowebservices.stanford.edu/geoserver/wfs\"}",
+  "id": "stanford-gq104xc0548",
+  "dct_identifier_sm": [
+    "https://purl.stanford.edu/gq104xc0548"
+  ],
+  "gbl_mdModified_dt": "2023-10-25T20:32:44Z",
+  "gbl_mdVersion_s": "Aardvark",
+  "gbl_resourceClass_sm": [
+    "Datasets"
+  ]
+}

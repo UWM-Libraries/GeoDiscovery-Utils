@@ -1,0 +1,51 @@
+{
+  "stanford_rights_metadata_s": "<rightsMetadata>\n    <access type=\"discover\">\n      <machine>\n        <world/>\n      </machine>\n    </access>\n    <access type=\"read\">\n      <machine>\n        <world/>\n      </machine>\n    </access>\n    <use>\n      <human type=\"useAndReproduction\">Data may be freely downloaded for research, study, or teaching, but must be cited appropriately. Incorporation of the data into a commercial product, is allowed only with explicit permission. If you would like to request permission to use EarthStat data for another purpose, please contact us at earthstat.data@gmail.com.</human>\n      <license/>\n    </use>\n  </rightsMetadata>",
+  "stanford_use_and_reproduction_s": "Data may be freely downloaded for research, study, or teaching, but must be cited appropriately. Incorporation of the data into a commercial product, is allowed only with explicit permission. If you would like to request permission to use EarthStat data for another purpose, please contact us at earthstat.data@gmail.com.",
+  "dct_title_s": "Peanuts, Total Crop Production, 2000",
+  "dct_description_sm": [
+    "This raster dataset represents total peanut (ground nut) crop production in metric tons. Harvested area in hectares was multiplied by yield per hectare to create this data set.  Croplands cover ~15 million km2 of the planet and provide the bulk of the food and fiber essential to human well-being. Most global land cover datasets from satelites group croplands into just a few categories, thereby excluding information that is critical for answering key questions ranging from biodiversity conservation to food security to biogeochemical cycling. Information about agricultural land use practices like crop selection, yield, and fertilizer use is even more limited.Here we present land use data sets created by combining national, state, and county level census statistics with a recently updated global data set of croplands on a 5 minute by 5 minute (~10km x 10 km) latitude/longitude grid. Temporal resolution: Year 2000- based of average of census data between 1997-2003. EarthStat.org serves geographic data sets with the purpose of solving the grand challenge of feeding a growing global population while reducing agriculture\u2019s impact on the environment. The data sets on EarthStat allow users to map the distribution of crops globally, analyze the impact of climate change on crop yields, understand the impacts of fertilizer and manure use and much more. Monfreda, C., N. Ramankutty, and J.A. Foley (2008), Farming the planet 2. Geographic distribution of crop areas, yields, physiological types, and net primary production in the year 2000, Global Biogrochem. Cycles, 22, GB1022, doi: 10.1029/2007/GB002947. This layer is presented in the WGS84 coordinate system for web display purposes. Downloadable data are provided in native coordinate system or projection."
+  ],
+  "dct_language_sm": [
+    "English"
+  ],
+  "dct_creator_sm": [
+    "University of Minnesota. Institute on the Environment"
+  ],
+  "dct_publisher_sm": [
+    "University of Minnesota. Institute on the Environment"
+  ],
+  "schema_provider_s": "Stanford",
+  "dct_subject_sm": [
+    "Peanuts",
+    "Crop yields",
+    "Imagery and Base Maps",
+    "Farming"
+  ],
+  "dct_temporal_sm": [
+    "2000"
+  ],
+  "dct_issued_s": "2008",
+  "gbl_indexYear_im": [
+    2000
+  ],
+  "dct_spatial_sm": [
+    "Earth (Planet)"
+  ],
+  "locn_geometry": "ENVELOPE(-180.0, 180.0, 90.0, -90.0)",
+  "dct_source_sm": [
+    "stanford-tz390fn8810"
+  ],
+  "dct_accessRights_s": "Public",
+  "dct_format_s": "GeoTIFF",
+  "gbl_wxsIdentifier_s": "druid:gp194fr0947",
+  "dct_references_s": "{\"http://schema.org/url\":\"https://purl.stanford.edu/gp194fr0947\",\"http://www.loc.gov/mods/v3\":\"https://purl.stanford.edu/gp194fr0947.mods\",\"http://schema.org/downloadUrl\":\"https://stacks.stanford.edu/file/druid:gp194fr0947/data.zip\",\"http://www.opengis.net/def/serviceType/ogc/wms\":\"https://geowebservices.stanford.edu/geoserver/wms\",\"http://www.isotc211.org/schemas/2005/gmd/\":\"https://raw.githubusercontent.com/OpenGeoMetadata/edu.stanford.purl/master/gp/194/fr/0947/iso19139.xml\",\"http://www.opengis.net/def/serviceType/ogc/wcs\":\"https://geowebservices.stanford.edu/geoserver/wcs\"}",
+  "id": "stanford-gp194fr0947",
+  "dct_identifier_sm": [
+    "https://purl.stanford.edu/gp194fr0947"
+  ],
+  "gbl_mdModified_dt": "2023-10-27T02:27:16Z",
+  "gbl_mdVersion_s": "Aardvark",
+  "gbl_resourceClass_sm": [
+    "Datasets"
+  ]
+}
