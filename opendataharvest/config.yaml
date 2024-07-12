@@ -317,6 +317,7 @@ DCAT_Sites:
       - UUID: "e64f06e8d912465a96f9ea9bfdb72676"
       - UUID: "f513b71dbc7841a298e76af672af441e"
     SkipList: 
+      - UUID: "e2de4f5a82ce43199c1a96491d99fcd8"
       - UUID: "459cc334740944d38580455a0a777a24"
       - UUID: "867895a71a1840399476fc717e76bb43"
       - UUID: "f35ef07c9ed24020aadd65c8a65d3754"
