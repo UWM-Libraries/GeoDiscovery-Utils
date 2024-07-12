@@ -9,14 +9,14 @@ Description: This script is used to harvest open data from data portals who
 expose a DCAT JSON. It reads configuration options from a YAML file, including 
 output directory, default bounding box, which portals to scan (catalog), maximum
 retry attempts, and sleep time for requests.
-A Site object is crated for each website in the defined catalog. Datasets not 
+A Site object is created for each website in the defined catalog. Datasets not 
 in the skip list for the Site will be looped over and a JSON File generated for
 each. The Aardvark class is dictionary-like and defines the structure of a 
-single dataset description. We  dump the Aardvark object to JSON when 
-crosswalking is completeo and write it to a file. A timestamped log file is 
+single dataset description. We dump the Aardvark object to JSON when 
+crosswalking is complete and write it to a file. A timestamped log file is 
 created on each run and contains verbose output for debugging and for maintaining
 the config.yaml file such as datasets to add to the skip list, etc.
-Code is formated according to PEP8 using Black.
+Code is formatted according to PEP8 using Black.
 Care is taken to use functionality from the Python standard library.
 AI was utilized in authoring this script.
 """
@@ -40,7 +40,7 @@ from dateutil import parser
 import jsonschema
 from jsonschema import validate
 
-config_file = r"opendataharvest/config.yaml"
+config_file = r"config/opendataharvest.yaml"
 
 try:
     with open(config_file, "r", encoding="utf-8") as file:
@@ -52,7 +52,8 @@ except FileNotFoundError:
 try:
     CONFIG = config.get("CONFIG")
     OUTPUTDIR = Path(CONFIG.get("OUTPUTDIR"))
-    LOGDIR = Path(CONFIG.get("LOGDIR"))
+    LOGFILE = config["logging"]["logfile"]
+    LOGLEVEL = getattr(logging, config["logging"]["level"].upper(), logging.ERROR)
     DEFAULTBBOX = Path(CONFIG.get("DEFAULTBBOX"))
     CATALOG_KEY = CONFIG.get("CATALOG", "TestSites")
     CATALOG = config.get(CATALOG_KEY, None)
@@ -72,6 +73,7 @@ try:
     RESOURCETYPE = default_config.get("RESOURCETYPE", [])
     FORMAT = default_config.get("FORMAT")
     DESCRIPTION = default_config.get("DESCRIPTION")
+    DISPLAYNOTE = default_config.get("DISPLAYNOTE")
 
     ## Get the JSON schema:
     SCHEMA = CONFIG.get("SCHEMA")
@@ -81,21 +83,13 @@ except AttributeError as e:
     print(e)
     sys.exit()
 
-dt = str(datetime.now().strftime(r"%Y%m%d%H%M%S"))
-logfile_name = f"_{dt}.log"
-LOGFILE = LOGDIR / logfile_name
-
 # Configure the logging module
 logging.basicConfig(
-    filename=LOGFILE, filemode="w", level=logging.INFO, format="%(message)s"
+    filename=LOGFILE, filemode="a", level=LOGLEVEL, format="%(message)s"
 )
 
-# # Add a console handler for debug messages
-# console_handler = logging.StreamHandler()
-# console_handler.setLevel(logging.DEBUG)
-# console_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-# console_handler.setFormatter(console_formatter)
-# logging.getLogger().addHandler(console_handler)
+dt = datetime.now().strftime(r"%Y-%m-%d %H:%M:%S")
+logging.warning(f"Script running at {dt}")
 
 
 class Site:
@@ -294,7 +288,44 @@ class AardvarkDataProcessor:
         return id_value, sublayer_value
 
     @staticmethod
-    def process_dcat_spatial(spatial_string):
+    def default_bbox(website):
+        if "DefaultBbox" not in website.site_details:
+            return {
+                "envelope": None,
+                "west": None,
+                "east": None,
+                "north": None,
+                "south": None,
+            }
+
+        defaultBox = website.site_details["DefaultBbox"]
+        with open(DEFAULTBBOX) as default_csv:
+            bboxreader = csv.DictReader(default_csv)
+            for row in bboxreader:
+                if row["name"] == defaultBox:
+                    west = row["west"]
+                    east = row["east"]
+                    north = row["north"]
+                    south = row["south"]
+                    envelope = f"ENVELOPE({west},{east},{north},{south})"
+                    return {
+                        "envelope": envelope,
+                        "west": float(west),
+                        "east": float(east),
+                        "north": float(north),
+                        "south": float(south),
+                    }
+
+        return {
+            "envelope": None,
+            "west": None,
+            "east": None,
+            "north": None,
+            "south": None,
+        }
+
+    @staticmethod
+    def process_dcat_spatial(spatial_string, defaultBbox):
         def is_in_range(value, range_min, range_max):
             return range_min <= value <= range_max
 
@@ -303,7 +334,7 @@ class AardvarkDataProcessor:
         matches = re.findall(pattern, spatial_string)
 
         if len(matches) != 4:
-            raise ValueError("Non-conforming spatial bounding box")
+            raise ValueError(f"Non-conforming spatial bounding box:\n{spatial_string}")
 
         # Convert to floats and validate coordinates
         coordinates = [float(coord) for coord in matches]
@@ -311,30 +342,42 @@ class AardvarkDataProcessor:
         latitudes = coordinates[1::2]
 
         if not all(is_in_range(lon, -180, 180) for lon in longitudes):
-            raise ValueError("Longitude coordinates must be between -180 and 180")
+            raise ValueError(
+                f"Longitude coordinates must be between -180 and 180:\n{spatial_string}"
+            )
 
         if not all(is_in_range(lat, -90, 90) for lat in latitudes):
-            raise ValueError("Latitude coordinates must be between -90 and 90")
+            raise ValueError(
+                f"Latitude coordinates must be between -90 and 90:\n{spatial_string}"
+            )
 
         # Ensure North is greater than South and East is greater than West
         coordinates[1], coordinates[3] = sorted(latitudes, reverse=True)
         coordinates[0], coordinates[2] = sorted(longitudes)
 
+        # Ensure West and East OR North and South are not the same:
+        if (coordinates[1] == coordinates[3]) or (coordinates[0] == coordinates[2]):
+            raise ValueError(
+                f"The bounding box has matching NS or EW coordinates:\n{spatial_string}"
+            )
+
+        # Check to see if it's within the site's default bbox plus a 1 degree buffer
+        defaultBbox = defaultBbox
+        if any(
+            [
+                coordinates[0] < defaultBbox["west"] - 1.0,
+                coordinates[2] > defaultBbox["east"] + 1.0,
+                coordinates[1] > defaultBbox["north"] + 1.0,
+                coordinates[3] < defaultBbox["south"] - 1.0,
+            ]
+        ):
+            raise ValueError(
+                f"Bounding box falls outside of default bounding box:\n{spatial_string}"
+            )
+
         # Convert to ENVELOPE format
         envelope = f"ENVELOPE({coordinates[0]},{coordinates[2]},{coordinates[1]},{coordinates[3]})"
 
-        return envelope
-
-    @staticmethod
-    def defaultBbox(website):
-        envelope = None
-        if "DefaultBbox" in website.site_details:
-            default_bbox = website.site_details["DefaultBbox"]
-            with open(DEFAULTBBOX) as default_csv:
-                bboxreader = csv.DictReader(default_csv)
-                for row in bboxreader:
-                    if row["name"] == default_bbox:
-                        envelope = f"ENVELOPE({row['west']},{row['east']},{row['north']},{row['south']})"
         return envelope
 
     @staticmethod
@@ -467,6 +510,7 @@ class Aardvark:
         self.schema_provider_s = PROVIDER
         self.gbl_suppressed_b = SUPPRESSED
         self.dct_rights_sm = RIGHTS
+        self.gbl_displayNote_sm = DISPLAYNOTE
 
     def _process_id(self, dataset_dict, website):
         uuid, sublayer = AardvarkDataProcessor.extract_id_sublayer(
@@ -559,9 +603,11 @@ class Aardvark:
             logging.warning(f"No spatial information found for: {self.id}")
             return
 
+        defaultBbox = AardvarkDataProcessor.default_bbox(website)
+
         try:
             processed_spatial = AardvarkDataProcessor.process_dcat_spatial(
-                dataset_dict["spatial"]
+                dataset_dict["spatial"], defaultBbox
             )
             self.locn_geometry = self.dcat_bbox = processed_spatial
         except ValueError as e:
@@ -570,9 +616,8 @@ class Aardvark:
                 f"\t - at {dataset_dict['landingPage']}\n"
                 f"\t Warning: {e}\n"
             )
-            default_bbox = AardvarkDataProcessor.defaultBbox(website)
-            if default_bbox is not None:
-                self.locn_geometry = self.dcat_bbox = default_bbox
+            if defaultBbox is not None:
+                self.locn_geometry = self.dcat_bbox = defaultBbox["envelope"]
                 logging.warning("Using default envelope for the website.\n")
             else:
                 logging.warning(f"No default bounding box set for {website}")
@@ -693,6 +738,15 @@ class Aardvark:
 def main():
     list_of_sites = harvest_sites()
 
+    # Create output dir if it doesn't exist:
+    if not OUTPUTDIR.is_dir():
+        try:
+            logging.warning(f"Creating directory {str(OUTPUTDIR)}")
+            OUTPUTDIR.mkdir()
+        except Exception as e:
+            logging.warning("Unable to create output directory")
+            return
+
     for website in list_of_sites:
         new_aardvark_objects = []
         for dataset in website.site_json["dataset"]:
@@ -701,7 +755,6 @@ def main():
                 new_aardvark_objects.append(new_aardvark_object)
                 newfile = f"{new_aardvark_object.id}.json"
                 newfilePath = OUTPUTDIR / newfile
-                json_data = new_aardvark_object.toJSON()
                 with open(newfilePath, "w", encoding="utf-8") as f:
                     f.write(new_aardvark_object.toJSON())
             except InitializationError as e:
@@ -709,7 +762,10 @@ def main():
 
 
 if __name__ == "__main__":
+    dt = datetime.now().strftime(r"%Y-%m-%d %H:%M:%S")
     try:
         main()
+        logging.warning(f"Script finished at {dt}")
     except Exception as e:
         logging.error(str(e))
+        logging.warning(f"Script finished with errors at {dt}")
