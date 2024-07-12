@@ -760,7 +760,6 @@ def main():
             except InitializationError as e:
                 logging.info(str(e))
 
-
 if __name__ == "__main__":
     dt = datetime.now().strftime(r"%Y-%m-%d %H:%M:%S")
     try:
