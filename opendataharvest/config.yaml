@@ -137,6 +137,7 @@ DCAT_Sites:
       - UUID: "f34ca451d5d14e23a588e8a93dc9417e" # Wetland Monitoring Gallery
       - UUID: "200c06fc04074ef7ae24c0b74737b187" # Wetland Geodatabase
       - UUID: "4da3c08881cb4bd880bf9f695840b29b" # Land Patents
+      - UUID: "f2e49a42f5e14dd5845536408279da9d" # Wisconsin DEM and Hillshade from LiDAR
     SkipList: 
       - UUID: "0542ce7130144fe69705848f8d319ae7"
       - UUID: "438c9dbdf5374faeba3339253e0c231c"
@@ -251,11 +252,50 @@ DCAT_Sites:
 
   SunPrairie_OpenData:
     CreatedBy: "City of Sun Prairie"
-    SiteURL: "https://maps-sunprairie.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
+    SiteURL: "https://city-of-sun-prairie-hub-site-sunprairie.hub.arcgis.com/api/feed/dcat-us/1.1.json"
     SiteName: "SunPrairie"
     DefaultBbox: "Sun Prairie"
     Spatial: ["Sun Prairie", "Wisconsin", "United States"]
-    SkipList: ""
+    AppList:
+      - UUID: "9c601fd99f4144a89b9b7d1964868b83" # Bike & Ped App
+      - UUID: "e536943d903946088aa488db5f8a05be"
+      - UUID: "6d282fe4583041a59c84afc15a0b2e36"
+      - UUID: "99cf480470dc4f3a9192ea11ee1f4943"
+      - UUID: "28efe9758206439ebb604fccd1dc7ed0"
+      - UUID: "8837da1c5ab2406b9650cd149356e8b0"
+      - UUID: "8b12f3b66e304437bc953afc8c5f42ec"
+      - UUID: "167c1114b195485da1bb99310a2f9d57"
+      - UUID: "9e27746810d44f09b50498044d4211c1"
+      - UUID: "3f1c4e128b5740c79fa7d561fe40f9a6"
+      - UUID: "f9d2f85fa5594e2d94825593625e1150"
+      - UUID: "b85d192195c14894b9345c8d468c73d2"
+    MapList:
+      - UUID: "4d768ac2fd4c4bc888aaeea26bd75565"
+      - UUID: "f2516b36645f48a6bd9a56f2f98e7692"
+      - UUID: "fb079743a108472f9995dfe59f76976b"
+      - UUID: "0dc2d77338394ae39a294cab1af381c8"
+      - UUID: "96ba33655e3641d19c1b6e002d7d0730"
+    SkipList:
+      - UUID: "68f0e2cc418f466daaf451782595c250"
+      - UUID: "cba4365251c14f75addedd6a405eb575"
+      - UUID: "fc3461b52e52468f818f2e832b6bfd17"
+      - UUID: "fc3461b52e52468f818f2e832b6bfd17"
+      - UUID: "667cf7abbbae4124adb3e682d0439bfa"
+      - UUID: "44005dbb653e46b7b2ee99c60b76836e"
+      - UUID: "d0afce693f1d4165a750d1099459a1df"
+      - UUID: "47b28c7ae56846c8b83182e75e989452"
+      - UUID: "a0a34f73e6d94780bc154bb8f557a906"
+      - UUID: "2eecd0d36f7542b08a83dda4a3f9ab90"
+      - UUID: "3e9f327b20ee46feaa6abb36eed5e9c0"
+      - UUID: "849955db72e047de8d5ac1a483408363"
+      - UUID: "83f96186dd494f5aadef9c87d1d42570"
+      - UUID: "953304a199184d80aacb5a4b0d07c96f"
+      - UUID: "fa8952a5e21b44d1bdafc8fb8f3a5b6d"
+      - UUID: "6552c98ea7724f1a94df4d842b872d2d"
+      - UUID: "bf89cec6cef04c97a511c52710e48f90"
+      - UUID: "92e35fdfe6c846828e4ea4916e2b1ad7"
+      - UUID: "d60258cbc1374420ade86bba3f17cc07"
+   
 
 ############################
 # Regional Planning Comm's #
@@ -270,6 +310,7 @@ DCAT_Sites:
       - UUID: "e64f06e8d912465a96f9ea9bfdb72676"
       - UUID: "f513b71dbc7841a298e76af672af441e"
     SkipList: 
+      - UUID: "e2de4f5a82ce43199c1a96491d99fcd8"
       - UUID: "459cc334740944d38580455a0a777a24"
       - UUID: "867895a71a1840399476fc717e76bb43"
       - UUID: "f35ef07c9ed24020aadd65c8a65d3754"
@@ -445,7 +486,17 @@ DCAT_Sites:
     SiteName: "SheboyganCounty"
     Spatial: ["Sheboygan County", "Wisconsin", "United States"]
     DefaultBbox: "Sheboygan"
-    SkipList: ""    
+    SkipList:  
+      - UUID: "5c46afb16574469880656438923bce8d"
+      - UUID: "36ddd9860cdc4e9a8b1c7d0161b4c8aa"
+      - UUID: "6c0a6b2b1b0f47a69055d2da08eb700c"
+    AppList:
+      - UUID: "e52ed4bdd26d40c89a482fab7a249aaf"
+      - UUID: "ff751a4250824a0aa65a29d1ac3add43"
+      - UUID: "eec04509bf8c45d4b493b841aa5908e7"
+      - UUID: "7fe9c7d5d1724b879b92fc5938e8cbcc"
+      - UUID: "9ef5e1efc66c488291a0b009aa5a5019"
+      
 
   StCroixCounty_OpenData:
     CreatedBy: "St. Croix County"
@@ -492,6 +543,10 @@ DCAT_Sites:
     DefaultBbox: "Trempealeau"
     SkipList:
       - UUID: "afc1effa8b5c4a98a0f35ca54e61d018"
+      - UUID: "1fde0029367c4bc1b8da3687eac27b09" # BeamGuard collection
+    Override:
+      - UUID: "1fde0029367c4bc1b8da3687eac27b091"
+        - dct_title_s: "Trempealeau County Boundary"
 
   VilasCounty_OpenData:
     CreatedBy: "Vilas County"
@@ -499,14 +554,18 @@ DCAT_Sites:
     SiteName: "VilasCounty"
     Spatial: ["Vilas County", "Wisconsin", "United States"]
     DefaultBbox: "Vilas"
+    AppList:
+      - UUID: "2640080de8374ac1b532ad0a2e3b622c"
+      - UUID: "ae6fc96ad7714a20afcfbd4e48c22ef6"
+      - UUID: "fb3691c2030449f79fdd622fd1f7a14b" # link to data hub
     SkipList: 
       - UUID: "81e69aa1029d41a09b8cdb112f221efe"
       - UUID: "d6e8df34a3034a169073a989123f2086"
       - UUID: "f37edafef8914e8e9d957ac490ed4f23"
       - UUID: "1af79a5fca734020a6a41d954ebdb2e1"
       - UUID: "50d307265f1f435c83b930497339e6d0"
-      - UUID: "08a1bcad6ffc4d6eaacbb5382436986a"
-
+      - UUID: "08a1bcad6ffc4d6eaacbb5382436986a" # lidar/imagery data order site
+      
   WalworthCounty_OpenData:
     CreatedBy: "Walworth County"
     SiteURL: "https://open-walco.opendata.arcgis.com/api/feed/dcat-us/1.1.json"
@@ -526,6 +585,9 @@ DCAT_Sites:
     Spatial: ["Washington County", "Wisconsin", "United States"]
     SkipList: 
       - UUID: "6e03e8c26aad4b9c92a87c1063ddb0e3"
+      - UUID: "7b7f30e35da34fa7b0b719dc9e2cb9e2" # Bikeway and Trail Plan never loads, but if it's fixed it should be in applist
+      - UUID: "fe03e00f6ad74391b5062f8492d29d2f" # points to multiple layers related to political districts and census
+            
 
   WaukeshaCounty_OpenData:
     CreatedBy: "Waukesha County"
@@ -564,12 +626,14 @@ DCAT_Sites:
     Spatial: ["Wood County", "Wisconsin", "United States"]
     DefaultBbox: "Wood"
     AppList:
-      - UUID: "623300abe751422091003f2ba5f4b2e9"
       - UUID: "dbda3bb2984345f08d1b4de4523031df"
       - UUID: "ee70f8224c9e47bdb816a4979ca092c4"
-      - UUID: "61dd328dbae5414ca2c2ee46091c7e12"
       - UUID: "3bf1d03d96d1403588f2f758374cbb2a"
-    SkipList: ""
+    SkipList:
+      - UUID: "077a745d8dfe471d8b00ff6e1c9c1729"
+      - UUID: "623300abe751422091003f2ba5f4b2e9" # dead link
+      - UUID: "61dd328dbae5414ca2c2ee46091c7e12" # dead link
+
 
 ########################
 ########################
