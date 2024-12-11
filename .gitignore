@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+csv2json/csv2JSON/json_output/*
+!csv2json/csv2JSON/json_output/.keep
