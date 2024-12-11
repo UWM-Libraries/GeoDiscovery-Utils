@@ -1,0 +1,26 @@
+LABEL,URI
+MapServer,urn:x-esri:serviceType:ArcGIS#DynamicMapLayer
+FeatureServer,urn:x-esri:serviceType:ArcGIS#FeatureLayer
+ImageServer,urn:x-esri:serviceType:ArcGIS#ImageMapLayer
+TileServer,urn:x-esri:serviceType:ArcGIS#TiledMapLayer
+COG,https://github.com/cogeotiff/cog-spec
+Documentation,http://lccn.loc.gov/sh85035852
+Download,http://schema.org/downloadUrl
+GeoJSON,http://geojson.org/geojson-spec.html
+Information,http://schema.org/url
+IIIF,http://iiif.io/api/image
+Manifest,http://iiif.io/api/presentation#manifest
+FGDC,http://www.opengis.net/cat/csw/csdgm
+HTML,http://www.w3.org/1999/xhtml
+ISO19139,http://www.isotc211.org/schemas/2005/gmd/
+MODS,http://www.loc.gov/mods/v3
+oEmbed,https://oembed.com
+Index Map,https://openindexmaps.org
+PMTiles,https://github.com/protomaps/PMTiles
+Tile Map Service,https://wiki.osgeo.org/wiki/Tile_Map_Service_Specification
+TileJSON,https://github.com/mapbox/tilejson-spec
+WCS,http://www.opengis.net/def/serviceType/ogc/wcs
+WFS,http://www.opengis.net/def/serviceType/ogc/wfs
+WMS,http://www.opengis.net/def/serviceType/ogc/wms
+WMTS,http://www.opengis.net/def/serviceType/ogc/wmts
+XYZ Tiles,https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames
