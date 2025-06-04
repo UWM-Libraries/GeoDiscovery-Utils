@@ -480,6 +480,25 @@ DCAT_Sites:
       - UUID: "d7eb01146699492d9592e62ba63ec705"
     SkipList: ""
 
+  RockCounty_OpenData:
+    CreatedBy: "Rock County"
+    SiteURL: "https://share-open-data-rock-county-rockcountylio.hub.arcgis.com/api/feed/dcat-us/1.1.json"
+    Spatial: ["Rock County", "Wisconsin", "United States"]
+    DefaultBbox: "Rock"
+    SiteName: "RockCounty"
+    AppList:
+      - UUID: "4b84defc7c0549a4a2c397fee6631b93" # Addressing in Focus
+      - UUID: "0a6615ff66ba45af8474c40eacdb2932" # Parcels in Focus
+      - UUID: "ad9b910802594895ba98fe1a9a07576e" # Roads in Focus
+      - UUID: "b555e7f27d1f4a02af93e83abb149f84" # Farmland Preservation Eligibility
+      - UUID: "185b707148164ac78cec0c87805f3a2f" # Land Records
+      - UUID: "cca0f50ff3fa41088974835c21fe6b5d" # Town and County Zoning
+    SkipList:
+      - UUID: "dd9c149e1c1f4c1fbc9b7d4d766d65f0"
+      - UUID: "2e104e866a204deb8c460bfcb2e189f5" # Open Data Policy
+      - UUID: "3aeff49ec7cc4e13b2c40d973b9ba872" # FAQs
+      - UUID: "0eff8746e3474d7e86a18ee4b784f630" # Public Notification App
+      
   SheboyganCounty_OpenData:
     CreatedBy: "Sheboygan County"
     SiteURL: "https://geospatialhub-shebco.hub.arcgis.com/api/feed/dcat-us/1.1.json"
