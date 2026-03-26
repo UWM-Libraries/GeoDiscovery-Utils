@@ -1,0 +1,40 @@
+{
+  "id": "agsl-opendata-harvest",
+  "dct_title_s": "AGSL Wisconsin Open Data Harvest",
+  "dct_description_sm": [
+    "A collection of datasets and web resources harvested from external open data portals into AGSL GeoDiscovery.",
+    "This collection groups records harvested by the AGSL DCAT harvester from Wisconsin state and local open data providers and related public geospatial portals.",
+    "Included data providers: Ashland County; Capital Area Regional Planning Commission; City of Fitchburg; City of Madison; City of Sun Prairie; City of Wisconsin Rapids; Columbia County; Dane County; East Central Wisconsin Regional Planning Commission; Eau Claire County; Kenosha County; Milwaukee County; Outagamie County; Pierce County; Racine County; Sauk County; Sheboygan County; St. Croix County; Trempealeau County; Vilas County; Walworth County; Washington County; Waukesha County; Waupaca County; Waushara County; Wisconsin Department of Health Services; Wisconsin Department of Natural Resources; Wisconsin Department of Public Instruction; Wisconsin Department of Transportation; Wisconsin Emergency Management; Wisconsin Legislative Technology Services Bureau; Wood County."
+  ],
+  "dct_publisher_sm": [
+    "American Geographical Society Library – UWM Libraries"
+  ],
+  "schema_provider_s": "American Geographical Society Library – UWM Libraries",
+  "gbl_resourceClass_sm": [
+    "Collections"
+  ],
+  "locn_geometry": "ENVELOPE(-86.640471, -93.088218, 47.128269, 42.366441)",
+  "dcat_bbox": "ENVELOPE(-93.088218, -86.640471, 47.128269, 42.366441)",
+  "dct_rights_sm": [
+    "<a href=\"https://uwm.edu/libraries/digital-collections/copyright-digcoll/\">Please see the UWM Libraries statement on Copyright and Digital Collections</a>.",
+    "Although this data is being distributed by the American Geographical Society Library at the University of Wisconsin-Milwaukee Libraries, no warranty expressed or implied is made by the University as to the accuracy of the data and related materials. The act of distribution shall not constitute any such warranty, and no responsibility is assumed by the University in the use of this data, or related materials."
+  ],
+  "dct_accessRights_s": "Public",
+  "dct_spatial_sm": [
+    "Wisconsin",
+    "United States"
+  ],
+  "dcat_keyword_sm": [
+    "Open data",
+    "Harvested metadata",
+    "Wisconsin",
+    "AGSL"
+  ],
+  "gbl_displayNote_sm": [
+    "Info: These resources were automatically cataloged from the creators' Open Data Portals and Hub sites that use DCAT. See the Resource Link to view the original resource."
+  ],
+  "dct_references_s": "{\"http://schema.org/url\":\"https://geodiscovery.uwm.edu/catalog?f[pcdm_memberOf_sm][]=agsl-opendata-harvest\"}",
+  "gbl_mdModified_dt": "2026-03-26T00:00:00Z",
+  "gbl_mdVersion_s": "Aardvark",
+  "gbl_suppressed_b": false
+}
