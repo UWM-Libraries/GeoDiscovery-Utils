@@ -5,7 +5,7 @@ logging:
 
 paths:
   crosswalk: "data/crosswalk.csv"
-  ogm_path: "output_md"
+  ogm_path: "tmp/opengeometadata"
   defaultbbox: "data/default_bbox.csv"
 
 requirements:
@@ -43,7 +43,7 @@ string2array_suffixes:
 # DCAT Harvester specific configuration
 CONFIG:
   CATALOG: "DCAT_Sites" # TestSites, DCAT_Sites, or CKAN_Sites
-  OUTPUTDIR: "."
+  OUTPUTDIR: "opendataharvest"
   COLLECTION_RECORD: "data/agsl-opendata-harvest.json"
   DEFAULTBBOX: "data/default_bbox.csv"
   MAXRETRY: 3

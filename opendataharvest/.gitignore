@@ -1,3 +1,5 @@
 OpenDataSites.txt
 /output_md/*
 !/output_md/.keep
+/tmp/opengeometadata/*
+!/tmp/opengeometadata/.keep

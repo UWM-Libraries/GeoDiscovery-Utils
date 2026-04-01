@@ -1,8 +1,11 @@
-import os
-import subprocess
+import json
 import logging
-import yaml
+import os
 from pathlib import Path
+import subprocess
+import sys
+
+import yaml
 
 CONFIG_DIR = Path(__file__).resolve().parent
 
@@ -27,53 +30,105 @@ logging.basicConfig(
     format="%(asctime)s:%(levelname)s:%(message)s",
 )
 
-commands = [
-    # [
-    #     "lib/opendataharvest/venv/bin/python3",
-    #     "lib/opendataharvest/src/opendataharvest/convert.py",
-    #     f"{ogm_path}/edu.berkeley/",
-    #     f"{ogm_path}/edu.berkeley/aardvark",
-    # ],
-    [
-        "lib/opendataharvest/venv/bin/python3",
-        "lib/opendataharvest/src/opendataharvest/convert.py",
-        f"{ogm_path}/edu.princeton.arks/",
-        f"{ogm_path}/edu.princeton.arks/aardvark",
-    ],
-    [
-        "lib/opendataharvest/venv/bin/python3",
-        "lib/opendataharvest/src/opendataharvest/convert.py",
-        f"{ogm_path}/edu.stanford.purl/",
-        f"{ogm_path}/edu.stanford.purl/aardvark",
-    ],
-    [
-        "lib/opendataharvest/venv/bin/python3",
-        "lib/opendataharvest/src/opendataharvest/convert.py",
-        f"{ogm_path}/edu.cornell/",
-        f"{ogm_path}/edu.cornell/aardvark",
-    ],
-    [
-        "lib/opendataharvest/venv/bin/python3",
-        "lib/opendataharvest/src/opendataharvest/convert.py",
-        f"{ogm_path}/edu.columbia/",
-        f"{ogm_path}/edu.columbia/aardvark",
-    ],
-    [
-        "lib/opendataharvest/venv/bin/python3",
-        "lib/opendataharvest/src/opendataharvest/convert.py",
-        f"{ogm_path}/edu.wisc/",
-        f"{ogm_path}/edu.wisc/aardvark",
-        "--place_default",
-        "Wisconsin",
-    ],
+REPOS = [
+    # {"name": "edu.berkeley"},
+    {"name": "edu.princeton.arks"},
+    {"name": "edu.stanford.purl"},
+    {"name": "edu.cornell"},
+    {"name": "edu.columbia"},
+    {"name": "edu.wisc", "extra_args": ["--place_default", "Wisconsin"]},
 ]
 
-for command in commands:
-    try:
-        result = subprocess.run(command, check=True) #, capture_output=True, text=True) (This fails in production)
-        logging.info(f"Command {' '.join(command)} executed successfully.")
-    except subprocess.CalledProcessError as e:
-        logging.error(
-            f"Command {' '.join(command)} failed with return code {e.returncode}."
-        )
-        logging.error(f"Error message: {e.stderr}")
+
+def iter_json_records(root: Path):
+    for path in root.rglob("*.json"):
+        if path.name == "layers.json":
+            continue
+
+        try:
+            with open(path, encoding="utf8") as file:
+                payload = json.load(file)
+        except (OSError, json.JSONDecodeError):
+            continue
+
+        if isinstance(payload, dict):
+            yield path, payload
+        elif isinstance(payload, list):
+            for record in payload:
+                if isinstance(record, dict):
+                    yield path, record
+
+
+def has_aardvark_metadata(repo_path: Path) -> bool:
+    aardvark_dirs = [repo_path / "metadata-aardvark", repo_path / "aardvark"]
+    for aardvark_dir in aardvark_dirs:
+        if not aardvark_dir.is_dir():
+            continue
+        for _path, record in iter_json_records(aardvark_dir):
+            version = record.get("gbl_mdVersion_s") or record.get(
+                "geoblacklight_version"
+            )
+            if version == "Aardvark":
+                return True
+    return False
+
+
+def legacy_source_dir(repo_path: Path) -> Path:
+    metadata_1 = repo_path / "metadata-1.0"
+    return metadata_1 if metadata_1.is_dir() else repo_path
+
+
+def has_legacy_metadata(repo_path: Path) -> bool:
+    for _path, record in iter_json_records(repo_path):
+        if record.get("geoblacklight_version") == "1.0":
+            return True
+    return False
+
+
+def main() -> None:
+    python_bin = Path(sys.executable)
+    convert_script = CONFIG_DIR / "convert.py"
+
+    for repo in REPOS:
+        repo_path = Path(ogm_path) / repo["name"]
+
+        if not repo_path.is_dir():
+            logging.info(
+                f"Skipping conversion for {repo['name']}: local repository path does not exist."
+            )
+            continue
+
+        if has_aardvark_metadata(repo_path):
+            logging.info(
+                f"Skipping conversion for {repo['name']}: populated Aardvark metadata already exists."
+            )
+            continue
+
+        source_dir = legacy_source_dir(repo_path)
+        if not has_legacy_metadata(source_dir):
+            logging.warning(
+                f"Skipping conversion for {repo['name']}: no legacy GeoBlacklight 1.0 JSON files were found."
+            )
+            continue
+
+        target_dir = repo_path / "aardvark"
+        command = [
+            str(python_bin),
+            str(convert_script),
+            str(source_dir),
+            str(target_dir),
+        ] + repo.get("extra_args", [])
+
+        try:
+            subprocess.run(command, check=True)
+            logging.info(f"Command {' '.join(command)} executed successfully.")
+        except subprocess.CalledProcessError as e:
+            logging.error(
+                f"Command {' '.join(command)} failed with return code {e.returncode}."
+            )
+            if e.stderr:
+                logging.error(f"Error message: {e.stderr}")
+
+
+if __name__ == "__main__":
+    main()
