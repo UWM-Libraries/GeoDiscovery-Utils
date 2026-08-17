@@ -187,8 +187,12 @@ class ResourceClassificationNormalizer:
     @staticmethod
     def normalize(data_dict: Dict) -> bool:
         """Fill missing resource class/type using shared classification rules."""
-        if data_dict.get("gbl_resourceClass_sm") and data_dict.get(
-            "gbl_resourceType_sm"
+        resource_class = data_dict.get("gbl_resourceClass_sm") or []
+        resource_type = data_dict.get("gbl_resourceType_sm") or []
+
+        classes_without_types = {"Collections", "Websites"}
+        if resource_class and (
+            resource_type or classes_without_types.intersection(resource_class)
         ):
             return False
 
@@ -290,6 +294,7 @@ class TitleTransliterationNormalizer:
 
     @classmethod
     def trim_cache(cls) -> None:
+        # Drop cached titles in bulk instead of letting a long run grow without bound.
         if len(cls._cache) >= cls.MAX_CACHE_SIZE:
             cls._cache.clear()
 

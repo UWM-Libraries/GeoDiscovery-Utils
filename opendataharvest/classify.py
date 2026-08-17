@@ -19,11 +19,12 @@ class ResourceClassifier:
             return any(term in text for term in terms)
 
         def map_related(title: str, description: str, subject: str) -> bool:
+            # Do not use "plan" as a title signal: it also matches organization
+            # names such as "Capital Area Regional Planning Commission."
             return (
                 "relief" in description
                 or "map" in description
                 or "maps" in subject
-                or "plan" in title
                 or "map" in title
                 or "topographic" in title
             )

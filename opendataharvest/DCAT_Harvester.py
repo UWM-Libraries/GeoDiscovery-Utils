@@ -5,15 +5,15 @@ Created: May 14, 2024
 Version: 0.1
 Dependencies: requests, yaml, and dateutil are not part of the standard library.
 Credit: UW-Madison - State Cartographer's Office for some code. Some code refactored and edited by CoPilot.
-Description: This script is used to harvest open data from data portals who 
-expose a DCAT JSON. It reads configuration options from a YAML file, including 
+Description: This script is used to harvest open data from data portals who
+expose a DCAT JSON. It reads configuration options from a YAML file, including
 output directory, default bounding box, which portals to scan (catalog), maximum
 retry attempts, and sleep time for requests.
-A Site object is created for each website in the defined catalog. Datasets not 
+A Site object is created for each website in the defined catalog. Datasets not
 in the skip list for the Site will be looped over and a JSON File generated for
-each. The Aardvark class is dictionary-like and defines the structure of a 
-single dataset description. We dump the Aardvark object to JSON when 
-crosswalking is complete and write it to a file. A timestamped log file is 
+each. The Aardvark class is dictionary-like and defines the structure of a
+single dataset description. We dump the Aardvark object to JSON when
+crosswalking is complete and write it to a file. A timestamped log file is
 created on each run and contains verbose output for debugging and for maintaining
 the config.yaml file such as datasets to add to the skip list, etc.
 Code is formatted according to PEP8 using Black.
@@ -108,7 +108,12 @@ logging.basicConfig(
 )
 
 dt = datetime.now().strftime(r"%Y-%m-%d %H:%M:%S")
-logging.warning(f"Script running at {dt}")
+logging.info(f"DCAT harvest started at {dt}")
+
+
+def contains_unresolved_template(value) -> bool:
+    """Return whether a string contains an unresolved ArcGIS template value."""
+    return isinstance(value, str) and re.search(r"\{\{[^{}]+\}\}", value) is not None
 
 
 def ensure_collection_record(output_dir: Path):
@@ -227,23 +232,22 @@ def get_site_data(site: str, details: dict) -> dict:
             response.raise_for_status()
             return response.json()
         except requests.exceptions.MissingSchema:
-            logging.warning(f"trying SitURL for {site} as a filepath")
+            logging.info(f"Trying SiteURL for {site} as a local filepath.")
             response_file = json.load(open(Path(details["SiteURL"]), "r"))
             return response_file
         except json.JSONDecodeError:
             logging.warning(f"The content from {site} is not a valid JSON document.")
             return None
         except (requests.HTTPError, requests.exceptions.Timeout) as e:
-            logging.info(
-                f"Received bad response from {site}. Retrying after {SLEEPTIME} seconds..."
+            logging.debug(
+                f"Received bad response from {site}. Retrying after {SLEEPTIME} seconds."
             )
             time.sleep(SLEEPTIME)
             if i == (MAXRETRY - 1):
                 logging.warning(
                     f"Failed to connect to {site} after {MAXRETRY + 1} attempts."
                 )
-                error = str(e) + "\n"
-                logging.warning(error)
+                logging.warning(str(e))
                 return None
 
 
@@ -282,18 +286,30 @@ class AardvarkDataProcessor:
     @staticmethod
     def extract_data(dataset_dict):
         # Extract data from dataset_dict
-        title = dataset_dict.get("title", "Untitled Dataset")
         identifier = dataset_dict["identifier"]
+        title = dataset_dict.get("title")
+        if not title or contains_unresolved_template(title):
+            logging.warning(
+                f'Assigned "Untitled Dataset" to {identifier}: '
+                f"title is missing or unresolved ({title!r})."
+            )
+            title = "Untitled Dataset"
         description = re.sub("<[^<]+?>", "", dataset_dict.get("description", []))
-        creator = (
-            [dataset_dict["publisher"]["name"]] if "publisher" in dataset_dict else []
+        publisher = (
+            dataset_dict.get("publisher", {})
+            if isinstance(dataset_dict.get("publisher"), dict)
+            else {}
         )
+        publisher_name = publisher.get("name")
+        if contains_unresolved_template(publisher_name):
+            publisher = {}
+            publisher_name = None
+        creator = [publisher_name] if publisher_name else []
         issued = dataset_dict.get("issued", "")
         modified = dataset_dict.get("modified", "")
         keyword = dataset_dict.get("keyword", [])
         spatial = dataset_dict.get("spatial", None)
         distribution = dataset_dict.get("distribution", None)
-        publisher = dataset_dict.get("publisher", [])
         landingPage = dataset_dict.get("landingPage", "")
 
         return {
@@ -402,9 +418,13 @@ class AardvarkDataProcessor:
                 f"The bounding box has matching NS or EW coordinates:\n{spatial_string}"
             )
 
-        # Check to see if it's within the site's default bbox plus a 1 degree buffer
-        defaultBbox = defaultBbox
-        if any(
+        # Check whether it is within the site's default bbox plus a 1 degree
+        # buffer when a usable default bbox is configured.
+        has_default_bbox = all(
+            defaultBbox.get(key) is not None
+            for key in ("west", "east", "north", "south")
+        )
+        if has_default_bbox and any(
             [
                 coordinates[0] < defaultBbox["west"] - 1.0,
                 coordinates[2] > defaultBbox["east"] + 1.0,
@@ -425,7 +445,7 @@ class AardvarkDataProcessor:
     def getURL(distribution):
         url = distribution.get("accessURL", None)
         if url is None:
-            logging.info("There is no accessURL, looking for downloadURL instead.")
+            logging.debug("Distribution has no accessURL; falling back to downloadURL.")
             url = distribution.get("downloadURL", None)
         return quote(url, safe=":/?=")
 
@@ -460,8 +480,8 @@ class AardvarkDataProcessor:
 
         result = {
             "dct_format_s": None,
-            "gbl_resourceClass_sm": RESOURCECLASS,
-            "gbl_resourceType_sm": RESOURCETYPE,
+            "gbl_resourceClass_sm": list(RESOURCECLASS),
+            "gbl_resourceType_sm": list(RESOURCETYPE),
         }
 
         shapefile_found = False
@@ -474,15 +494,15 @@ class AardvarkDataProcessor:
 
         if not shapefile_found:
             title = dataset.get("title", "").lower()
-            logging.info(
-                f"Processing title: {title} ({dataset.get('identifier', 'no id')})\n"
+            logging.debug(
+                f"Processing title: {title} ({dataset.get('identifier', 'no id')})"
             )
             matched_keywords = [
                 keyword for keyword in aerial_keywords if keyword in title
             ]
             is_aerial = bool(matched_keywords)
-            logging.info(
-                f"Keywords matched: {is_aerial}, Matched keywords: {matched_keywords}\n"
+            logging.debug(
+                f"Keywords matched: {is_aerial}, matched keywords: {matched_keywords}"
             )
 
             if is_aerial:
@@ -497,6 +517,9 @@ class AardvarkDataProcessor:
     @staticmethod
     def issue_date_parser(dataset_dict):
         dt_string = dataset_dict["issued"]
+        if not dt_string or contains_unresolved_template(dt_string):
+            return None
+
         try:
             parsed_date = parser.parse(dt_string)
             dct_issued_s = parsed_date.strftime(r"%Y-%m-%d")
@@ -557,7 +580,8 @@ class Aardvark:
         uuid, sublayer = AardvarkDataProcessor.extract_id_sublayer(
             dataset_dict["identifier"]
         )
-        self.id = f"{website.site_name}-{uuid}{sublayer if sublayer else ''}"
+        record_uuid = f"{uuid}{sublayer if sublayer else ''}"
+        self.id = f"{website.site_name}-{record_uuid}"
         self.uuid = uuid
 
         if not self.id:
@@ -565,8 +589,16 @@ class Aardvark:
             return False
 
         # Stop processing if in skiplist
-        if self.uuid in website.site_skiplist:
-            logging.info(f"{self.uuid} is on the skiplist...\n")
+        skiplist_match = next(
+            (
+                candidate
+                for candidate in (self.uuid, record_uuid)
+                if candidate in website.site_skiplist
+            ),
+            None,
+        )
+        if skiplist_match:
+            logging.debug(f"{skiplist_match} is on the skiplist.")
             return False
 
         self.dct_identifier_sm = [dataset_dict["identifier"]]
@@ -584,20 +616,24 @@ class Aardvark:
         )
 
         description = dataset_dict.get("description", "No description provided.")
-        if "{{description}}" not in description:
+        if not contains_unresolved_template(description):
             cleaned_description = re.sub("<[^<]+?>", "", description)
             unescaped_description = html.unescape(cleaned_description)
             self.dct_description_sm = [DESCRIPTION, unescaped_description]
         else:
             self.dct_description_sm = [DESCRIPTION]
 
-        self.dct_creator_sm = (
-            [dataset_dict["publisher"]["name"]] if "publisher" in dataset_dict else []
+        publisher_name = (
+            dataset_dict.get("publisher", {}).get("name")
+            if isinstance(dataset_dict.get("publisher"), dict)
+            else None
         )
+        if contains_unresolved_template(publisher_name):
+            publisher_name = None
+
+        self.dct_creator_sm = [publisher_name] if publisher_name else []
         self.dct_publisher_sm = (
-            [dataset_dict["publisher"]["name"]]
-            if "publisher" in dataset_dict
-            else [website.site_details["CreatedBy"]]
+            [publisher_name] if publisher_name else [website.site_details["CreatedBy"]]
         )
 
         # dct_issued_s
@@ -630,15 +666,15 @@ class Aardvark:
             self.gbl_resourceType_sm = result["gbl_resourceType_sm"]
         else:
             if self.uuid in website.site_applist:
-                logging.info(
-                    f"UUID {self.uuid} is in site_applist, setting gbl_resourceClass_sm to ['Websites']\n"
+                logging.debug(
+                    f"UUID {self.uuid} is in site_applist; setting gbl_resourceClass_sm to ['Websites']."
                 )
                 self.gbl_resourceClass_sm = ["Websites"]
                 self.dct_format_s = None
                 self.gbl_resourceType_sm = None
             elif self.uuid in website.site_maplist:
-                logging.info(
-                    f"UUID {self.uuid} is in site_maplist, setting gbl_resourceClass_sm to ['Maps']\n"
+                logging.debug(
+                    f"UUID {self.uuid} is in site_maplist; setting gbl_resourceClass_sm to ['Maps']."
                 )
                 self.gbl_resourceClass_sm = ["Maps"]
                 self.dct_format_s = None
@@ -660,11 +696,11 @@ class Aardvark:
             logging.warning(
                 f"There was a problem interpreting the bbox information for: {self.id}\n"
                 f"\t - at {dataset_dict['landingPage']}\n"
-                f"\t Warning: {e}\n"
+                f"\t Warning: {e}"
             )
             if defaultBbox is not None:
                 self.locn_geometry = self.dcat_bbox = defaultBbox["envelope"]
-                logging.warning("Using default envelope for the website.\n")
+                logging.debug("Using default envelope for the website.")
             else:
                 logging.warning(f"No default bounding box set for {website}")
 
@@ -680,35 +716,48 @@ class Aardvark:
 
         self.dct_references_s = json.dumps(references).replace(" ", "")
 
+    def _parse_index_year(self, value, field_name):
+        if not value or contains_unresolved_template(value):
+            return None
+
+        try:
+            index_date = parser.parse(value)
+            return int(index_date.year)
+        except ImportError:
+            try:
+                return int(str(value)[:4])
+            except (TypeError, ValueError) as exc:
+                logging.warning(
+                    f'Unable to derive {field_name} year from "{value}" for {self.id}: {exc}'
+                )
+                return None
+        except Exception as exc:
+            logging.warning(
+                f'Unable to parse {field_name} year from "{value}" for {self.id}: {exc}'
+            )
+            return None
+
     def _process_temporal_coverage(self, dataset_dict):
         if "modified" in dataset_dict:
-            try:
-                index_date = parser.parse(dataset_dict["modified"])
-                index_year = int(index_date.year)
-            except ImportError:
-                index_year = int(dataset_dict["modified"][:4])
-            except Exception as e:
-                logging.error(f"An error occurred: {e}")
-
-            self.gbl_indexYear_im = [index_year]
-            self.dct_temporal_sm = [f"Modified {index_year}"]
+            index_year = self._parse_index_year(dataset_dict["modified"], "modified")
+            if index_year is not None:
+                self.gbl_indexYear_im = [index_year]
+                self.dct_temporal_sm = [f"Modified {index_year}"]
+            else:
+                self.gbl_indexYear_im = []
+                self.dct_temporal_sm = []
         else:
             self.gbl_indexYear_im = []
+            self.dct_temporal_sm = []
 
         if "issued" in dataset_dict:
-            try:
-                index_date = parser.parse(dataset_dict["issued"])
-                index_year = int(index_date.year)
-            except ImportError:
-                index_year = int(dataset_dict["issued"][:4])
-            except Exception as e:
-                logging.error("Problem processing the issued date.")
-
-            self.gbl_indexYear_im.append(index_year)
-            if self.dct_temporal_sm:
-                self.dct_temporal_sm[0] = f"Issued {index_year}"
-            else:
-                self.dct_temporal_sm = [f"Issued {index_year}"]
+            index_year = self._parse_index_year(dataset_dict["issued"], "issued")
+            if index_year is not None:
+                self.gbl_indexYear_im.append(index_year)
+                if self.dct_temporal_sm:
+                    self.dct_temporal_sm[0] = f"Issued {index_year}"
+                else:
+                    self.dct_temporal_sm = [f"Issued {index_year}"]
 
     def to_dict(self):
         """
@@ -764,7 +813,7 @@ class Aardvark:
             return json_dump
         else:
             logging.warning(f"Failed JSON Validation:\n{error}")
-            logging.info(str(json_dump))
+            logging.debug(str(json_dump))
             return None
 
     def is_valid(self):
@@ -790,7 +839,7 @@ def main():
     # Create output dir if it doesn't exist:
     if not OUTPUTDIR.is_dir():
         try:
-            logging.warning(f"Creating directory {str(OUTPUTDIR)}")
+            logging.info(f"Creating output directory {str(OUTPUTDIR)}")
             OUTPUTDIR.mkdir(parents=True, exist_ok=True)
         except Exception as e:
             logging.warning("Unable to create output directory")
@@ -810,14 +859,14 @@ def main():
                 with open(newfilePath, "w", encoding="utf-8") as f:
                     f.write(new_aardvark_object.toJSON())
             except InitializationError as e:
-                logging.info(str(e))
+                logging.debug(str(e))
 
 
 if __name__ == "__main__":
     dt = datetime.now().strftime(r"%Y-%m-%d %H:%M:%S")
     try:
         main()
-        logging.warning(f"Script finished at {dt}")
+        logging.info(f"DCAT harvest finished at {dt}")
     except Exception as e:
         logging.error(str(e))
-        logging.warning(f"Script finished with errors at {dt}")
+        logging.warning(f"DCAT harvest finished with errors at {dt}")
